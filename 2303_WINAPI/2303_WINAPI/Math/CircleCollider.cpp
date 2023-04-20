@@ -1,23 +1,25 @@
 #include "framework.h"
 #include "CircleCollider.h"
 
-CircleCollider::CircleCollider(float radius, Vector2 center)
-	: _radius(radius)
-	, _center(center)
+CircleCollider::CircleCollider()
 {
 }
 
+CircleCollider::CircleCollider(float radius, Vector2 center)
+{
+}
+
+CircleCollider::~CircleCollider()
+{
+}
 
 void CircleCollider::Update()
 {
+	
 }
 
-void CircleCollider::Render(HDC hdc)
+void CircleCollider::Render(HDC)
 {
-	float left = _center.x - _radius;
+	float left = _center.x = _radius;
 	float right = _center.x + _radius;
-	float top = _center.y - _radius;
-	float bottom = _center.y + _radius;
-
-	Ellipse(hdc, left, top, right, bottom);
 }

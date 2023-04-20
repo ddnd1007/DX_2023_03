@@ -13,3 +13,22 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+#include <math.h>
+#include <memory>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+//math
+#include "Math/Vector2.h"
+#include "Math/CircleCollider.h"
+
+//Scene
+#include "Program/Scene/Scene.h"
+
+//program
+#include "Program/Program.h"
+
+extern Vector2 moustPos;

@@ -1,8 +1,6 @@
 ﻿// 2303_WINAPI.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
-//프로젝트 속성 -> VC++ 디렉터리 -> 포함 디렉터리에 $(ProjectDir) 추가
-// : 외부에 있는 헤더 파일을 수작업 없이 사용 가능하다.
 
 
 #include "framework.h"
@@ -126,10 +124,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
+float mousePosX = 0.0f;
+float mousePosY = 0.0f;
 
-Vector2 mousePos;
+HPEN bluePen;
+HPEN redPen;
 
-shared_ptr<Program> program;
+HBRUSH blueBrush;
+HBRUSH redBrush;
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -138,19 +140,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
     {
-        program = make_shared<Program>();
-        SetTimer(hWnd, 1, 1, nullptr); // 0.01초마다 한번씪 WM_TIMER 메시지 함수가 호출된다.
-        break;
-    }
+        bluePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
+        redPen = CreatePen(PS_SOLID, 3, RGB(255, 0, 0));
 
-    case WM_TIMER:
-    {
-        // 타이머 마다 호출되는 얘
-        program->Update();
-        InvalidateRect(hWnd, nullptr, true);
+        blueBrush = CreateSolidBrush(RGB(0, 0, 255));
+        redBrush = CreateSolidBrush(RGB(255, 0, 0));
 
         break;
-         
     }
     case WM_COMMAND:
         {
@@ -171,9 +167,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_MOUSEMOVE:
     {
-        mousePos.x = static_cast<float>(LOWORD(lParam));
-        mousePos.y = static_cast<float>(HIWORD(lParam));
-   
+        mousePosX = static_cast<float>(LOWORD(lParam));
+        mousePosY = static_cast<float>(HIWORD(lParam));
+        InvalidateRect(hWnd, nullptr, true);
+
         break;
     }
     case WM_PAINT:
@@ -181,15 +178,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            program->Render(hdc);
 
+            SelectObject(hdc, redBrush);
+            SelectObject(hdc, bluePen);
+            Rectangle(hdc, 100, 100, 300, 300); // 사각형 그리기
+
+            SelectObject(hdc, blueBrush);
+            SelectObject(hdc, redPen);
+            Ellipse(hdc, 100, 100, 300, 300); // 원 그리기
+
+            // 선그리기
+            MoveToEx(hdc, 0, 0, nullptr); // 시작점
+            LineTo(hdc, mousePosX, mousePosY);         // 끝점
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
     {
-     
-  
+        DeleteObject(redBrush);
+        DeleteObject(blueBrush);
+        DeleteObject(bluePen);
+        DeleteObject(redPen);
+        PostQuitMessage(0);
         PostQuitMessage(0);
     }
         break;

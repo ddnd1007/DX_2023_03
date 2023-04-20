@@ -2,20 +2,15 @@
 class CircleCollider
 {
 public:
-	CircleCollider() {}
+	CircleCollider();
 	CircleCollider(float radius, Vector2 center);
-	~CircleCollider() {}
+	~CircleCollider();
 
 	void Update();
-	void Render(HDC hdc);
-
-	void SetCenter(Vector2 pos) { _center = pos; }
-	const Vector2& GetCenter() { return _center; }
-
-	void SetRadius(float radius) { _radius = radius; }
-	float GetRadius() { return _radius; }
+	void Render(HDC);
 
 private:
+	// ¸â¹öº¯¼ö?
 	float _radius = 0.0f;
 	Vector2 _center = { 0.0f,0.0f };
 };
