@@ -22,9 +22,13 @@
 
 using namespace std;
 
+#include "Types.h"
+
 // Math
 #include "Math/Vector2.h"
+#include "Math/Line.h"
 #include "Math/CircleCollider.h"
+#include "Math/RectCollider.h"
 
 // Scene
 #include "Scene/Scene.h"

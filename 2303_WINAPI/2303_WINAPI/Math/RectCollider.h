@@ -2,26 +2,34 @@
 class RectCollider
 {
 public:
-	RectCollider() {}
-	RectCollider(Vector2 center, float height, float width);
-	~RectCollider() {}
+	RectCollider();
+	RectCollider(Vector2 center, Vector2 size);
 
 	void Update();
 	void Render(HDC hdc);
 
-	void SetCenter(Vector2 center) { _center = center; }
-	const Vector2& GetCenter() { return _center; }
+	float Left() const { return _center.x - _size.x * 0.5f; }
+	float Right() const { return _center.x + _size.x * 0.5f; }
+	float Bottom() const { return _center.y + _size.y * 0.5f; }
+	float Top() const { return _center.y - _size.y * 0.5f; }
 
-	void SetWidth(float width) { _width = width; }
-	const float& GetWidth() { return _width; }
+	bool IsCollision(const Vector2& pos);
+	bool IsCollision(shared_ptr<RectCollider> other);
+	bool IsCollision(shared_ptr<class CircleCollider> other);
 
-	void SetHeight(float height) { _height = height; }
-	const float& GetHeight() { return _height; }
+	void SetCenter(const Vector2& center);
+	Vector2 GetCenter() { return _center; }
 
+	void SetGreen() { _curPenIdex = 0; }
+	void SetRed() { _curPenIdex = 1; }
 
 private:
-	Vector2 _center = { 0.0f, 0.0f };
-	float _width = 0.0f;
-	float _height = 0.0f;
+	void CreatePens();
+
+	int _curPenIdex;
+	vector<HPEN> _pens;
+
+	Vector2 _center = { 0,0 };
+	Vector2 _size = { 0,0 };
 };
 

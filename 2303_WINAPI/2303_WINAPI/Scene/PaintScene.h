@@ -8,9 +8,12 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-	void SetCenter(Vector2 pos) { _center = pos; }
-
 private:
-	shared_ptr<CircleCollider> circlecollider;
+	shared_ptr<CircleCollider> _mouseCircle;
+	shared_ptr<CircleCollider> _circle;
+
+	shared_ptr<RectCollider> _mouseRect;
+	shared_ptr<RectCollider> _rect;
+
 };
 
