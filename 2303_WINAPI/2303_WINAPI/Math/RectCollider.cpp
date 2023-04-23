@@ -2,15 +2,20 @@
 #include "RectCollider.h"
 
 RectCollider::RectCollider()
+: Collider(Vector2(0,0))
 {
-	CreatePens();
+	_type = Collider::Type::RECT;
 }
 
 RectCollider::RectCollider(Vector2 center, Vector2 size)
-	: _center(center)
-	, _size(size)
+: Collider(center)
+, _size(size)
 {
-	CreatePens();
+	_type = Collider::Type::RECT;
+}
+
+RectCollider::~RectCollider()
+{
 }
 
 void RectCollider::Update()
@@ -26,14 +31,14 @@ void RectCollider::Render(HDC hdc)
 	float top = _center.y - _size.y * 0.5f;
 	float bottom = _center.y + _size.y * 0.5f;
 
-	Rectangle(hdc, left, top, right, bottom);
+	Rectangle(hdc,left, top, right, bottom);
 }
 
 bool RectCollider::IsCollision(const Vector2& pos)
 {
 	if (pos.x < Right() && pos.x > Left())
 	{
-		if (pos.y < Bottom() && pos.y > Top())
+		if(pos.y < Bottom() && pos.y > Top())
 			return true;
 	}
 
@@ -42,10 +47,10 @@ bool RectCollider::IsCollision(const Vector2& pos)
 
 bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
 {
-	if (Left() > other->Right() || Right() < other->Left())
+	if(Left() > other->Right() || Right() < other->Left())
 		return false;
 
-	if (Top() > other->Bottom() || Bottom() < other->Top())
+	if(Top() > other->Bottom() || Bottom() < other->Top())
 		return false;
 
 	return true;
@@ -53,40 +58,34 @@ bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
 
 bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
-	Vector2 leftTop = Vector2(Left(), Top());
-	Vector2 leftBottom = Vector2(Left(), Bottom());
-	Vector2 rightTop = Vector2(Right(), Top());
-	Vector2 rightBottom = Vector2(Right(), Bottom());
+	float circleBottom = other->GetCenter().y + other->GetRadius();
+	float circleTop = other->GetCenter().y - other->GetRadius();
+	float circleLeft = other->GetCenter().x - other->GetRadius();
+	float circleRight = other->GetCenter().x + other->GetRadius();
 
-	if (other->IsCollision(leftTop) || other->IsCollision(leftBottom)
-		|| other->IsCollision(rightTop) || other->IsCollision(rightBottom))
-		return true;
-
-	if (Right() > other->GetCenter().x && Left() < other->GetCenter().x)
+	if (other->GetCenter().x < Right() && other->GetCenter().x > Left())
 	{
-		if (Top() - other->GetRadius() < other->GetCenter().y
-			&& Bottom() + other->GetRadius() > other->GetCenter().y)
+		if (circleBottom > Top() && circleTop < Bottom())
+		{
 			return true;
+		}
 	}
 
-	if (Bottom() > other->GetCenter().y && Top() < other->GetCenter().y)
+	if (other->GetCenter().y < Bottom() && other->GetCenter().y > Top())
 	{
-		if (Left() - other->GetRadius() < other->GetCenter().x
-			&& Right() + other->GetRadius() > other->GetCenter().x)
+		if (circleLeft < Right() && circleRight > Left())
+		{
 			return true;
+		}
+	}
+
+	if (other->IsCollision(Vector2(Left(), Top()))
+		|| other->IsCollision(Vector2(Right(), Top()))
+		|| other->IsCollision(Vector2(Left(), Bottom()))
+		|| other->IsCollision(Vector2(Right(), Bottom())))
+	{
+		return true;
 	}
 
 	return false;
-}
-
-void RectCollider::SetCenter(const Vector2& center)
-{
-	_center = center;
-}
-
-void RectCollider::CreatePens()
-{
-	_curPenIdex = 0;
-	_pens.emplace_back(CreatePen(PS_SOLID, 3, GREEN)); // 0
-	_pens.emplace_back(CreatePen(PS_SOLID, 3, RED));   // 1
 }

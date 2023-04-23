@@ -32,7 +32,7 @@ public:
 		return result;
 	}
 
-	Vector2 operator-(const Vector2& other) const
+	Vector2 operator-(const Vector2& other) const 
 	{
 		Vector2 result;
 		result.x = (*this).x - other.x;
@@ -41,7 +41,7 @@ public:
 		return result;
 	}
 
-	Vector2 operator*(const float& value)const
+	Vector2 operator*(const float& value)const 
 	{
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);
@@ -88,10 +88,31 @@ public:
 		return result;
 	}
 
-	bool IsBetween(Vector2 v1, Vector2 v2);
-	Vector2 Normallize();
-	
-		
+	Vector2 NorMalVector2() const
+	{
+		Vector2 result;
+		result.x = x / Length();
+		result.y = y / Length();
+
+		return result;
+	}
+
+	void Normalize()
+	{
+		x /= Length();
+		y /= Length();
+	}
+
+	bool IsBetween(Vector2 v1, Vector2 v2)
+	{
+		float cross1 = v1.Cross(*this);
+		float cross2 = v2.Cross(*this);
+
+		if ((cross1 * cross2) < 0.0f)
+			return true;
+
+		return false;
+	}
 
 public:
 	float x = 0.0f;

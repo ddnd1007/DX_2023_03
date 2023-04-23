@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -153,6 +153,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2303_WINAPI.h" />
+    <ClInclude Include="Scene\LineCollisionScene.h" />
+    <ClInclude Include="Math\Collider.h" />
     <ClInclude Include="Math\Line.h" />
     <ClInclude Include="Scene\LineScene.h" />
     <ClInclude Include="Math\CircleCollider.h" />
@@ -168,6 +170,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2303_WINAPI.cpp" />
+    <ClCompile Include="Scene\LineCollisionScene.cpp" />
+    <ClCompile Include="Math\Collider.cpp" />
     <ClCompile Include="Math\Line.cpp" />
     <ClCompile Include="Scene\LineScene.cpp" />
     <ClCompile Include="Math\CircleCollider.cpp" />

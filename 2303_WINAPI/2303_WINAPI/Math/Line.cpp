@@ -7,51 +7,40 @@ Line::~Line()
 
 void Line::Update()
 {
+	for(auto pen : _pens)
+		DeleteObject(pen);
 }
 
 void Line::Render(HDC hdc)
 {
+	SelectObject(hdc,_pens[_curPenIdex]);
+
 	MoveToEx(hdc, _startPos.x, _startPos.y, nullptr);
 	LineTo(hdc, _endPos.x, _endPos.y);
 }
 
-Line::Result Line::IsCollision(shared_ptr<Line> other)
+bool Line::IsCollision(shared_ptr<Line> other)
 {
-    Result myresult;
+	Vector2 lineVector1 = _endPos - _startPos;
+	Vector2 startVector1 = other->_startPos - _startPos;
+	Vector2 endVector1 = other->_endPos - _startPos;
 
-    Vector2 floorLineVec = _endPos - _startPos;
-    Vector2 floorLineToEnd = other->_endPos - _startPos;
-    Vector2 floorLineToStart = other->_startPos - _startPos;
+	Vector2 lineVector2 = other->_endPos - other->_startPos;
+	Vector2 startVector2 = _startPos - other->_startPos;
+	Vector2 endVector2 = _endPos - other->_startPos;
 
-    bool between1 = floorLineVec.IsBetween(floorLineToEnd, floorLineToStart);
+	float result1 = lineVector1.Cross(startVector1) * lineVector1.Cross(endVector1);
+	float result2 = lineVector2.Cross(startVector2) * lineVector2.Cross(endVector2);
 
-    Vector2 mouseLineVec = other->_endPos - other->_startPos;
-    Vector2 mouseLineToEnd = _endPos - other->_startPos;
-    Vector2 mouseLineToStart = _startPos - other->_startPos;
-
-    bool between2 = mouseLineVec.IsBetween(mouseLineToEnd, mouseLineToStart);
-
-    if (between1 == true && between2 == true)
-    {
-        myresult.collision = true;
-
-         
-        float leftTriangle = abs(mouseLineVec.Cross(floorLineToStart));
-        float rightTriangle = abs(mouseLineVec.Cross(mouseLineToEnd));
-
-        float t = (leftTriangle) / (rightTriangle + leftTriangle);
-        Vector2 conflict = LERP(_startPos, _endPos, t);
-        myresult.conflict = conflict;
-    }
-    else
-    {
-        myresult.collision = false;
-    }
-
-    return myresult;
+	if (result1 <= 0 && result2 <= 0)
+		return true;
+	else
+		return false;
 }
 
-
-
-
-
+void Line::CreatePens()
+{
+	_curPenIdex = 0;
+	_pens.emplace_back(CreatePen(PS_SOLID, 3, GREEN)); // 0
+	_pens.emplace_back(CreatePen(PS_SOLID, 3, RED));   // 1
+}

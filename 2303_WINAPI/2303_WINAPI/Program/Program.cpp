@@ -2,12 +2,14 @@
 
 #include "Scene/PaintScene.h"
 #include "Scene/LineScene.h"
+#include "Scene/LineCollisionScene.h"
 
 #include "Program.h"
 
 Program::Program()
 {
-	_scene = make_shared<LineScene>();
+	// ¾À ¹Ù²Ù±â
+	_scene = make_shared<LineCollisionScene>();
 }
 
 Program::~Program()
