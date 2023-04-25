@@ -16,15 +16,13 @@ void LineScene::Update()
 {
 	_mouseLine->_endPos = mousePos;
 
-	Vector2 mouseLineVec = _mouseLine->_endPos - _mouseLine->_startPos;
-	Vector2 floorLineVec = _floorLine->_endPos - _floorLine->_startPos;
-	floorLineVec = floorLineVec.NorMalVector2();
+	Vector2 mouseLineVector = _mouseLine->_endPos - _mouseLine->_startPos;
+	Vector2 floorVector = _floorLine->_endPos - _floorLine->_startPos;
+	Vector2 floorNormal = floorVector.NorMalVector2();
 
-	float dot = (mouseLineVec.x * floorLineVec.x) + (mouseLineVec.y * floorLineVec.y);
+	float length = mouseLineVector.Dot(floorNormal);
 
-	_shadowLine->_endPos = { _shadowLine->_startPos + floorLineVec * dot };
-
-	
+	_shadowLine->_endPos = floorNormal * length + _shadowLine->_startPos;
 }
 
 void LineScene::Render(HDC hdc)

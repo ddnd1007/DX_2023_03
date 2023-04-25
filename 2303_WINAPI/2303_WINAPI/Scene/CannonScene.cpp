@@ -16,14 +16,15 @@ void CannonScene::Update()
 {
 	for (auto bullet : _cannon->GetBullets())
 	{
-		if (bullet->IsActive() == false)
+		if(bullet->IsActive() == false)
 			continue;
 
 		if (bullet->AttackCannon(_cannon2))
 		{
 			_cannon2->TakeDamage();
-		}    
+		}
 	}
+
 	_cannon->Update();
 	_cannon2->Update();
 }

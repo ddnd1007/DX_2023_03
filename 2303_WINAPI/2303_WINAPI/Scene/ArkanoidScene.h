@@ -1,14 +1,13 @@
 #pragma once
-class PaintScene : public Scene
+class ArkanoidScene : public Scene
 {
 public:
-	PaintScene();
-	virtual ~PaintScene() {}
+	ArkanoidScene();
+	virtual ~ArkanoidScene();
 
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
 private:
-
 };
 

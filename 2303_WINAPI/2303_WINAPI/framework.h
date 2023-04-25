@@ -22,14 +22,19 @@
 
 using namespace std;
 
-#include "Types.h"
-
 // Math
 #include "Math/Vector2.h"
 #include "Math/Line.h"
 #include "Math/Collider.h"
 #include "Math/CircleCollider.h"
 #include "Math/RectCollider.h"
+
+#include "Types.h"
+
+// Object
+#include "Object/Bullet.h"
+#include "Object/Cannon.h"
+#include "Object/Block.h"
 
 // Scene
 #include "Scene/Scene.h"
@@ -38,3 +43,4 @@ using namespace std;
 #include "Program/Program.h"
 
 extern Vector2 mousePos;
+extern HWND hWnd;
