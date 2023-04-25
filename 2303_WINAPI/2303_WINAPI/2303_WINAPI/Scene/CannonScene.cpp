@@ -22,7 +22,7 @@ void CannonScene::Update()
 		if (bullet->AttackCannon(_cannon2))
 		{
 			_cannon2->TakeDamage();
-		}
+		}    
 	}
 	_cannon->Update();
 	_cannon2->Update();
