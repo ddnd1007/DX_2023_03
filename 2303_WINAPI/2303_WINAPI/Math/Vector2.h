@@ -54,6 +54,13 @@ public:
 
 		return *this;
 	}
+	Vector2& operator+=(const Vector2& other)
+	{
+		x += other.x;
+		y += other.y;
+
+		return *this;
+	}
 
 
 	float Length()const
@@ -103,16 +110,7 @@ public:
 		y /= Length();
 	}
 
-	bool IsBetween(Vector2 v1, Vector2 v2)
-	{
-		float cross1 = v1.Cross(*this);
-		float cross2 = v2.Cross(*this);
-
-		if ((cross1 * cross2) < 0.0f)
-			return true;
-
-		return false;
-	}
+	bool IsBetween(Vector2 a, Vector2 b);
 
 public:
 	float x = 0.0f;

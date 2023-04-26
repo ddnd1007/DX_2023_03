@@ -7,6 +7,7 @@
 #define CENTER Vector2(WIN_WIDTH * 0.5f, WIN_HEIGHT * 0.5f)
 
 #define PI 3.141592
+#define GRAVITY 0.01f
 
 #define LERP(s,e,t) s + (e - s)*t
 

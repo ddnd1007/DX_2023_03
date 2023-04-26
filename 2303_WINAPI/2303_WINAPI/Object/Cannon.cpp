@@ -3,18 +3,17 @@
 
 Cannon::Cannon()
 {
-	_body1 = make_shared<CircleCollider>(50, _pos);
-	Vector2 barrelEnd = _body1->GetCenter() + Vector2(_barrelLength, 0.0f);
-	_barrel1 = make_shared<Line>(_body1->GetCenter(), barrelEnd);
-	_direction = (_barrel1->_endPos - _barrel1->_startPos).NorMalVector2();
-
+	_body = make_shared<CircleCollider>(50, _pos);
+	Vector2 barrelEnd = _body->GetCenter() + Vector2(_barrelLength, 0.0f);
+	_barrel = make_shared<Line>(_body->GetCenter(), barrelEnd);
+	_direction = (_barrel->_endPos - _barrel->_startPos).NorMalVector2();
 
 	for (int i = 0; i < 30; i++)
 	{
 		shared_ptr<Bullet> bullet = make_shared<Bullet>();
 		bullet->SetActive(false);
 		_bullets.push_back(bullet);
- }
+	}
 }
 
 Cannon::~Cannon()
@@ -23,6 +22,9 @@ Cannon::~Cannon()
 
 void Cannon::Update()
 {
+	if(IsDead())
+		return;
+
 	if (_isControll)
 	{
 		MoveByInput();
@@ -33,10 +35,8 @@ void Cannon::Update()
 	_barrel->_startPos = _pos;
 	_barrel->_endPos = _pos + _direction * _barrelLength;
 
-
 	_body->Update();
 	_barrel->Update();
-
 
 	for (auto bullet : _bullets)
 	{
@@ -46,9 +46,9 @@ void Cannon::Update()
 
 void Cannon::Render(HDC hdc)
 {
-	_barrel->Render(hdc);
-	_body->Render(hdc);
-	
+	if (IsDead())
+		return;
+
 	_barrel->Render(hdc);
 	_body->Render(hdc);
 
@@ -57,7 +57,6 @@ void Cannon::Render(HDC hdc)
 		bullet->Render(hdc);
 	}
 }
-
 
 void Cannon::MoveByInput()
 {
@@ -94,7 +93,7 @@ void Cannon::Fire()
 		_spaceUp = true;
 	}
 
-	if (_spacePress == true && _spaceUp ==true)
+	if (_spacePress == true && _spaceUp == true)
 	{
 		Vector2 muzzle = _barrel->_endPos;
 
@@ -107,7 +106,7 @@ void Cannon::Fire()
 		curBullet->SetDirection(_direction);
 		curBullet->SetActive(true);
 
-		_spacePress = true;
+		_spacePress = false;
 		_spaceUp = false;
 	}
 }
@@ -116,10 +115,9 @@ shared_ptr<Bullet> Cannon::SetBullet()
 {
 	for (auto bullet : _bullets)
 	{
-		if (bullet->IsActive() == false)
+		if(bullet->IsActive() == false)
 			return bullet;
 	}
 
 	return nullptr;
 }
-

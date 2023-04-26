@@ -3,12 +3,12 @@
 
 Line::~Line()
 {
+	for (auto pen : _pens)
+		DeleteObject(pen);
 }
 
 void Line::Update()
 {
-	for(auto pen : _pens)
-		DeleteObject(pen);
 }
 
 void Line::Render(HDC hdc)
@@ -19,23 +19,33 @@ void Line::Render(HDC hdc)
 	LineTo(hdc, _endPos.x, _endPos.y);
 }
 
-bool Line::IsCollision(shared_ptr<Line> other)
+HitResult Line::IsCollision(shared_ptr<Line> other)
 {
-	Vector2 lineVector1 = _endPos - _startPos;
-	Vector2 startVector1 = other->_startPos - _startPos;
-	Vector2 endVector1 = other->_endPos - _startPos;
+	HitResult result;
+	result.col = nullptr;
+	result.contact = Vector2(-10000, -10000);
+	result.isCollision = false;
 
-	Vector2 lineVector2 = other->_endPos - other->_startPos;
-	Vector2 startVector2 = _startPos - other->_startPos;
-	Vector2 endVector2 = _endPos - other->_startPos;
+	Vector2 a = _endPos - _startPos;
+	Vector2 b = other->_endPos - other->_startPos;
 
-	float result1 = lineVector1.Cross(startVector1) * lineVector1.Cross(endVector1);
-	float result2 = lineVector2.Cross(startVector2) * lineVector2.Cross(endVector2);
+	Vector2 aTobStart = other->_startPos - _startPos;
+	Vector2 aTobEnd = other->_endPos - _startPos;
 
-	if (result1 <= 0 && result2 <= 0)
-		return true;
-	else
-		return false;
+	Vector2 bToaStart = _startPos - other->_startPos;
+	Vector2 bToaEnd = _endPos - other->_endPos;
+
+	float leftTriangle = abs(a.Cross(aTobStart));
+	float rightTriangle = abs(a.Cross(aTobEnd));
+
+	float t = (leftTriangle / (leftTriangle + rightTriangle));
+
+	Vector2 contact = other->_startPos + (other->_endPos - other->_startPos) * t;
+
+	result.isCollision = a.IsBetween(aTobStart, aTobEnd) && b.IsBetween(bToaStart, bToaEnd);
+	result.contact = contact;
+
+	return result;
 }
 
 void Line::CreatePens()
