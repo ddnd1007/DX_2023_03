@@ -2,14 +2,13 @@
 class MazeBlock
 {
 public:
-
 	enum class BlockType
 	{
 		ABLE,
 		DISABLE,
 		PLAYER,
 		END,
-		NONE,
+		NONE
 	};
 
 	MazeBlock();
@@ -18,7 +17,7 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
-	void SetPosition(Vector2 pos) { _rect->SetCenter(pos); }
+	void SetPostion(Vector2 pos) { _rect->SetCenter(pos); }
 	void SetType(MazeBlock::BlockType type) { _type = type; }
 
 private:

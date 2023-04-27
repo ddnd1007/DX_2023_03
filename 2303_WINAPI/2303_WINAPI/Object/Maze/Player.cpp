@@ -2,7 +2,7 @@
 #include "Player.h"
 
 Player::Player(shared_ptr<Maze> maze)
-	:_maze(maze)
+: _maze(maze)
 {
 	if (_maze.expired() == false)
 	{
@@ -10,7 +10,6 @@ Player::Player(shared_ptr<Maze> maze)
 		_endPos = _maze.lock()->EndPos();
 		_maze.lock()->Block(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
 	}
-	
 }
 
 Player::~Player()

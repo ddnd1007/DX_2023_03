@@ -3,12 +3,12 @@
 
 MazeBlock::MazeBlock()
 {
-	_rect = make_shared<RectCollider>(Vector2(), Vector2(14, 14));
+	_rect =make_shared<RectCollider>(Vector2(), Vector2(14,14));
 
 	_brushes.reserve(2);
 	HBRUSH able = CreateSolidBrush(GREEN);
 	HBRUSH disable = CreateSolidBrush(RED);
-	HBRUSH player = CreateSolidBrush(GRAY);
+	HBRUSH player = CreateSolidBrush(GREY);
 	HBRUSH end = CreateSolidBrush(BLUE);
 
 	_brushes.push_back(able);
@@ -32,7 +32,7 @@ void MazeBlock::Update()
 
 void MazeBlock::Render(HDC hdc)
 {
-	if (_type == BlockType::NONE)
+	if(_type == BlockType::NONE)
 		return;
 
 	SelectObject(hdc, _brushes[static_cast<unsigned int>(_type)]);
