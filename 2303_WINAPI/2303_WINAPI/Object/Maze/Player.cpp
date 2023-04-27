@@ -1,9 +1,15 @@
 #include "framework.h"
 #include "Player.h"
+<<<<<<< HEAD
 #include <stack>
 
 Player::Player(shared_ptr<Maze> maze)
 	: _maze(maze)
+=======
+
+Player::Player(shared_ptr<Maze> maze)
+	:_maze(maze)
+>>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 {
 	if (_maze.expired() == false)
 	{
@@ -11,8 +17,12 @@ Player::Player(shared_ptr<Maze> maze)
 		_endPos = _maze.lock()->EndPos();
 		_maze.lock()->Block(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
 	}
+<<<<<<< HEAD
 
 	RightHand();
+=======
+	
+>>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }
 
 Player::~Player()
@@ -21,6 +31,7 @@ Player::~Player()
 
 void Player::Update()
 {
+<<<<<<< HEAD
 	_time += 0.4f;
 	
 	if (_time > 1.0f)
@@ -45,10 +56,13 @@ void Player::Update()
 	Vector2 temp2 = _path[_pathIndex - 1];
 	_maze.lock()->Block(temp2.x, temp2.y)->SetType(MazeBlock::BlockType::FOOTPRINT);
 	_maze.lock()->Block(temp.x, temp.y)->SetType(MazeBlock::BlockType::PLAYER);
+=======
+>>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }
 
 void Player::RightHand()
 {
+<<<<<<< HEAD
 	Vector2 pos = _startPos;
 	_path.push_back(pos);
 	Dir curDir = Dir::DIR_UP;
@@ -131,4 +145,6 @@ bool Player::Cango(Vector2 pos)
 		return false;
 
 	return true;
+=======
+>>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }

@@ -5,6 +5,10 @@ MazeScene::MazeScene()
 {
 	_maze = make_shared<Maze>();
 	_player = make_shared<Player>(_maze);
+<<<<<<< HEAD
+=======
+
+>>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }
 
 MazeScene::~MazeScene()

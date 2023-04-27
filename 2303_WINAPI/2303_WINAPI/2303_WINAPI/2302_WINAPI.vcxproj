@@ -153,15 +153,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2303_WINAPI.h" />
-    <ClInclude Include="Object\Maze\Maze.h" />
-    <ClInclude Include="Object\Maze\MazeBlock.h" />
-    <ClInclude Include="Object\Maze\Player.h" />
-    <ClInclude Include="Scene\MazeScene.h" />
-<<<<<<< HEAD
-=======
-    <ClInclude Include="Scene\ArkanoidScene.h" />
-    <ClInclude Include="Object\Block.h" />
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
     <ClInclude Include="Object\Bullet.h" />
     <ClInclude Include="Object\Cannon.h" />
     <ClInclude Include="Scene\CannonScene.h" />
@@ -182,15 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2303_WINAPI.cpp" />
-    <ClCompile Include="Object\Maze\Maze.cpp" />
-    <ClCompile Include="Object\Maze\MazeBlock.cpp" />
-    <ClCompile Include="Object\Maze\Player.cpp" />
-    <ClCompile Include="Scene\MazeScene.cpp" />
-<<<<<<< HEAD
-=======
-    <ClCompile Include="Scene\ArkanoidScene.cpp" />
-    <ClCompile Include="Object\Block.cpp" />
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
     <ClCompile Include="Object\Bullet.cpp" />
     <ClCompile Include="Object\Cannon.cpp" />
     <ClCompile Include="Scene\CannonScene.cpp" />

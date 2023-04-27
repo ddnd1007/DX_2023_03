@@ -19,7 +19,6 @@
 #include <unordered_map>
 #include <string>
 #include <algorithm>
-#include <time.h>
 
 using namespace std;
 
@@ -36,18 +35,6 @@ using namespace std;
 #include "Object/Bullet.h"
 #include "Object/Cannon.h"
 
-<<<<<<< HEAD
-#include "Object/Maze/MazeBlock.h"
-#include "Object/Maze/Maze.h"
-#include "Object/Maze/Player.h"
-=======
-#include "Object/Block.h"
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
-
-#include "Object/Maze/MazeBlock.h"
-#include "Object/Maze/Maze.h"
-#include "Object/Maze/Player.h"
-
 // Scene
 #include "Scene/Scene.h"
 
@@ -55,4 +42,3 @@ using namespace std;
 #include "Program/Program.h"
 
 extern Vector2 mousePos;
-extern HWND hWnd;
