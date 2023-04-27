@@ -13,10 +13,23 @@
 
 #define RED		 RGB(255,0,0)
 #define GREEN	 RGB(0,255,0)
+#define GREY	 RGB(100,100,100)
+#define BLUE	 RGB(0,0,255)
+#define WHITE	 RGB(255,255,255)
 
 struct HitResult
 {
 	shared_ptr<class Collider> col;
 	class Vector2 contact;
 	bool isCollision;
+};
+
+enum Dir
+{
+	DIR_UP,
+	DIR_LEFT,
+	DIR_DOWN,
+	DIR_RIGHT,
+
+	DIR_COUNT
 };

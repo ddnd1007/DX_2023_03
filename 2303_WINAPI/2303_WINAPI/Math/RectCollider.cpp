@@ -24,7 +24,7 @@ void RectCollider::Update()
 
 void RectCollider::Render(HDC hdc)
 {
-	SelectObject(hdc, _pens[_curPenIdex]);
+	// SelectObject(hdc, _pens[_curPenIdex]);
 
 	float left = _center.x - _size.x * 0.5f;
 	float right = _center.x + _size.x * 0.5f;

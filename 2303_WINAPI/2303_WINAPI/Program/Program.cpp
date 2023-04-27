@@ -4,14 +4,15 @@
 #include "Scene/LineScene.h"
 #include "Scene/LineCollisionScene.h"
 #include "Scene/CannonScene.h"
-#include "Scene/ArkanoidScene.h"
+#include "Scene/MazeScene.h"
 
 #include "Program.h"
 
 HDC Program::_backBuffer = nullptr; 
-
 Program::Program()
 {
+	srand(static_cast<unsigned int>(time(nullptr)));
+
 	HDC hdc = GetDC(hWnd);
 
 	_backBuffer = CreateCompatibleDC(hdc);
@@ -19,7 +20,7 @@ Program::Program()
 	SelectObject(_backBuffer, _hBit);
 
 	// ¾À ¹Ù²Ù±â
-	_scene = make_shared<CannonScene>();
+	_scene = make_shared<MazeScene>();
 }
 
 Program::~Program()
