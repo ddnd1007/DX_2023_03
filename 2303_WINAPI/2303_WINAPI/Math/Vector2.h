@@ -61,13 +61,6 @@ public:
 
 		return *this;
 	}
-	Vector2& operator-=(const Vector2& other)
-	{
-		this->x -= other.x;
-		this->y -= other.y;
-
-		return *this;
-	}
 
 	bool operator==(const Vector2& other) const;
 	bool operator!=(const Vector2& other) const;

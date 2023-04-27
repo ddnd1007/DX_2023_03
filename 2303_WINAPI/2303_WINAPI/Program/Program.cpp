@@ -4,10 +4,6 @@
 #include "Scene/LineScene.h"
 #include "Scene/LineCollisionScene.h"
 #include "Scene/CannonScene.h"
-<<<<<<< HEAD
-=======
-#include "Scene/ArkanoidScene.h"
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 #include "Scene/MazeScene.h"
 
 #include "Program.h"
@@ -15,10 +11,6 @@
 HDC Program::_backBuffer = nullptr; 
 Program::Program()
 {
-<<<<<<< HEAD
-=======
-
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 	HDC hdc = GetDC(hWnd);

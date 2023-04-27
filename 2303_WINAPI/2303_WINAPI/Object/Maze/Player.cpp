@@ -1,15 +1,9 @@
 #include "framework.h"
 #include "Player.h"
-<<<<<<< HEAD
 #include <stack>
 
 Player::Player(shared_ptr<Maze> maze)
-	: _maze(maze)
-=======
-
-Player::Player(shared_ptr<Maze> maze)
-	:_maze(maze)
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
+: _maze(maze)
 {
 	if (_maze.expired() == false)
 	{
@@ -17,12 +11,8 @@ Player::Player(shared_ptr<Maze> maze)
 		_endPos = _maze.lock()->EndPos();
 		_maze.lock()->Block(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
 	}
-<<<<<<< HEAD
 
 	RightHand();
-=======
-	
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }
 
 Player::~Player()
@@ -31,43 +21,35 @@ Player::~Player()
 
 void Player::Update()
 {
-<<<<<<< HEAD
 	_time += 0.4f;
-	
 	if (_time > 1.0f)
 	{
 		_time = 0.0f;
 		_pathIndex++;
-		
-		
 	}
 
 	if (_pathIndex >= _path.size())
 	{
 		return;
 	}
-
-
 	if (_pathIndex <= 0)
 	{
 		return;
 	}
 	Vector2 temp = _path[_pathIndex];
 	Vector2 temp2 = _path[_pathIndex - 1];
+
 	_maze.lock()->Block(temp2.x, temp2.y)->SetType(MazeBlock::BlockType::FOOTPRINT);
 	_maze.lock()->Block(temp.x, temp.y)->SetType(MazeBlock::BlockType::PLAYER);
-=======
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }
 
 void Player::RightHand()
 {
-<<<<<<< HEAD
 	Vector2 pos = _startPos;
 	_path.push_back(pos);
 	Dir curDir = Dir::DIR_UP;
 
-	Vector2 frontPos[4] =
+	Vector2 frontPos[4] = 
 	{
 		Vector2 {0, -1}, // UP
 		Vector2 {-1, 0}, // LEFT
@@ -77,7 +59,7 @@ void Player::RightHand()
 
 	while (true)
 	{
-		if (pos == _endPos)
+		if(pos == _endPos)
 			break;
 
 		int newDir = (curDir - 1 + Dir::DIR_COUNT) % Dir::DIR_COUNT;
@@ -124,7 +106,7 @@ void Player::RightHand()
 
 	while (true)
 	{
-		if (s.empty())
+		if(s.empty())
 			break;
 		_path.push_back(s.top());
 		s.pop();
@@ -139,12 +121,10 @@ bool Player::Cango(Vector2 pos)
 {
 	Vector2 temp = pos;
 	MazeBlock::BlockType type = _maze.lock()->Block(temp.x, temp.y)->GetType();
-	if (type == MazeBlock::BlockType::DISABLE)
+	if(type == MazeBlock::BlockType::DISABLE)
 		return false;
 	if (type == MazeBlock::BlockType::NONE)
 		return false;
 
 	return true;
-=======
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 }

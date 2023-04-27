@@ -13,15 +13,9 @@
 
 #define RED		 RGB(255,0,0)
 #define GREEN	 RGB(0,255,0)
-<<<<<<< HEAD
 #define GREY	 RGB(100,100,100)
-#define BLUE	 RGB(0,0,255)
 #define WHITE	 RGB(255,255,255)
-=======
-#define GRAY	 RGB(100,100,100)
 #define BLUE	 RGB(0,0,255)
-
->>>>>>> d92ff9ebef6a2ffa38ef1fccfa5049f6a7da8cc1
 
 struct HitResult
 {
