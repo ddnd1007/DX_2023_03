@@ -17,16 +17,15 @@ void Bullet::Update()
 		return;
 
 	_pos += _direction * _speed;
-	_direction.y += GRAVITY;
+	//_direction.y += GRAVITY;
 
 	_circle->SetCenter(_pos);
 	_circle->Update();
 
-	// Àü¹Ý»ç
-	/*if(_pos.x > WIN_WIDTH || _pos.x < 0)
+	if(_pos.x > WIN_WIDTH || _pos.x < 0)
 		_direction.x = -_direction.x;
 	if(_pos.y > WIN_HEIGHT || _pos.y < 0)
-		_direction.y = -_direction.y;*/
+		_direction.y = -_direction.y;
 }
 
 void Bullet::Render(HDC hdc)
@@ -44,6 +43,6 @@ bool Bullet::AttackCannon(shared_ptr<Cannon> cannon)
 		_isActive = false;
 		return true;
 	}
-	
+
 	return false;
 }

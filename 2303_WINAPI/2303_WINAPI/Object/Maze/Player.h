@@ -8,14 +8,22 @@ public:
 	void Update();
 
 	void RightHand();
+	void BFS();
+
+	bool Cango(Vector2 pos);
 
 private:
 	Vector2 _startPos = {1,1};
 	Vector2 _endPos = {1,1};
 
+	float _time = 0.0f;
+
 	int _pathIndex = 0;
 	vector<Vector2> _path;
 
 	weak_ptr<Maze> _maze;
+
+	vector<vector<bool>> _discorvered;
+	vector<vector<Vector2>> _parent;
 };
 

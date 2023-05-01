@@ -15,6 +15,8 @@ public:
 
 	shared_ptr<MazeBlock> Block(int x, int y) { return _blocks[y][x]; }
 
+	Vector2 PoolCount() { return Vector2((int)_poolCountX,(int)_poolCountY); }
+
 private:
 	UINT _poolCountX = 25;
 	UINT _poolCountY = 25;
