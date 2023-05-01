@@ -13,7 +13,7 @@ Player::Player(shared_ptr<Maze> maze)
 		_maze.lock()->Block(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
 	}
 
-	RightHand();
+	BFS();
 }
 
 Player::~Player()
@@ -51,12 +51,17 @@ void Player::RightHand()
 	_path.push_back(pos);
 	Dir curDir = Dir::DIR_UP;
 
-	Vector2 frontPos[4] = 
+	Vector2 frontPos[8] = 
 	{
-		Vector2 {0, -1}, // UP
-		Vector2 {-1, 0}, // LEFT
+		Vector2 {1, 1}, // DOWNRIGHT
 		Vector2 {0, 1}, // DOWN
-		Vector2 {1, 0} // RIGHT
+		Vector2 {1, 0}, // RIGHT
+		Vector2 {1,-1}, // UPRIGHT
+		Vector2 {0, -1}, // UP
+		Vector2 {-1,-1}, // DOWNLEFT
+		Vector2 {-1, 1},// UPLEFT
+		Vector2 {-1, 0}, // LEFT
+		
 	};
 
 	while (true)
