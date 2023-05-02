@@ -16,7 +16,7 @@
 #define GRAY		 RGB(100,100,100)
 #define BLUE		 RGB(0,0,255)
 #define WHITE		 RGB(255,255,255)
-#define DARKGREY	 RGB(50,50,50)
+#define DARKGRAY	 RGB(50,50,50)
 
 struct HitResult
 {
