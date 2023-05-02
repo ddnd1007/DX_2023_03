@@ -8,13 +8,12 @@
 #include <queue>
 #include <deque>
 
-
 using namespace std;
 
 // priority_queue
-// 힙트리 // 힙 영역과는 다름
-// - 완전이진트리
-// - 힙이론을 더한 것
+// - 힙 트리
+// -- 완전이진트리
+// -- 힙이론을 더한 것
 
 template <typename T, typename Container, typename Pred>
 class Priority_Queue
@@ -33,10 +32,9 @@ public:
 			if (now <= 0)
 				break;
 
-			//부모를 찾는 것
 			int parent = (now - 1) / 2;
 
-			if ((Pred()v[now], v[parent]))
+			if (Pred()(v[now], v[parent]))
 				break;
 
 			std::swap(v[now], v[parent]);
@@ -46,26 +44,27 @@ public:
 
 	void pop()
 	{
-		 // 완전 이진트리 규칙
+		// 완전 이진트리 규칙
 		v[0] = v.back();
 		v.pop_back();
 
+		// 힙이론 규칙
 		int now = 0;
 		while (true)
 		{
-
 			int leftChild = now * 2 + 1;
 			int rightChild = now * 2 + 2;
-			//왼쪽자식이 없다-> 리프노드이다. break;
+
+			// 왼쪽자식이 없다...=> 리프노드이니 break
 			if (leftChild >= v.size())
 				break;
 
 			int change = now;
 
-			if ((Pred)v[change], v[leftChild]))
+			if (Pred()(v[change], v[leftChild]))
 				change = leftChild;
-			
-			if (rightChild < v.size() && v[rightChild] > v[change])
+
+			if (rightChild < v.size() && Pred()(v[change], v[rightChild]))
 				change = rightChild;
 
 			if (change == now)
@@ -81,37 +80,34 @@ public:
 		return v[0];
 	}
 
-
 	bool empty()
 	{
 		return v.empty();
 	}
 
 private:
-	Container<int> v;
+	Container v;
 };
-
-
 
 int main()
 {
-
-	struct myless
+	struct myLess
 	{
 		bool operator()(const int& value1, const int& value2)
 		{
 			return value1 < value2;
 		}
 	};
-	Priority_Queue<int, vector<int>, less<int>> pq; // 내림차순 정렬
+
+	Priority_Queue<int, vector<int>, myLess> pq;
 
 	pq.push(15);
-	pq.push(6);
+	pq.push(10);
+	pq.push(11);
+	pq.push(1);
 	pq.push(300);
-	pq.push(54);
-	pq.push(79);
-	pq.push(31);
-	pq.push(2);
+	pq.push(30);
+	pq.push(3);
 
 	while (true)
 	{

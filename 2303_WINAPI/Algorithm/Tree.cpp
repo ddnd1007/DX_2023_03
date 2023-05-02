@@ -24,7 +24,7 @@ using namespace std;
 
 struct Node
 {
-	Node();
+	Node() {}
 	Node(const string& data) : _data(data) {}
 
 	vector<Node*> _children;
@@ -36,62 +36,60 @@ Node* CreateTree()
 {
 	Node* root = new Node("°³¹ßÆÀ");
 	{
-
 		Node* children_1 = new Node("ÇÁ·Î±×·¡¹ÖÆÀ");
 		root->_children.push_back(children_1);
+
 		{
-			{
-				Node* children_2 = new Node("¼­¹öÆÀ");
-				root->_children.push_back(children_2);
-			}
-
-			{
-				Node* children_2 = new Node("Å¬¶óÀÌ¾ðÆ®ÆÀ");
-				root->_children.push_back(children_2);
-			}
-
-			{
-				Node* children_2 = new Node("¿£ÁøÆÀ");
-				root->_children.push_back(children_2);
-			}
+			Node* children_2 = new Node("Å¬¶óÀÌ¾ðÆ®");
+			children_1->_children.push_back(children_2);
 		}
 
-		Node* children_1 = new Node("±âÈ¹");
+		{
+			Node* children_2 = new Node("¼­¹ö");
+			children_1->_children.push_back(children_2);
+		}
+
+		{
+			Node* children_2 = new Node("¿£Áø");
+			children_1->_children.push_back(children_2);
+		}
+	}
+	{
+		Node* children_1 = new Node("±âÈ¹ÆÀ");
 		root->_children.push_back(children_1);
+
 		{
-			{
-				Node* children_2 = new Node("½ºÅä¸®");
-				root->_children.push_back(children_2);
-			}
-
-			{
-				Node* children_2 = new Node("·¹º§µðÀÚÀÎ");
-				root->_children.push_back(children_2);
-			}
-
-			{
-				Node* children_2 = new Node("¹ë·±½º");
-				root->_children.push_back(children_2);
-			}
+			Node* children_2 = new Node("½ºÅä¸®");
+			children_1->_children.push_back(children_2);
 		}
 
+		{
+			Node* children_2 = new Node("·¹¹ëµðÀÚÀÎ");
+			children_1->_children.push_back(children_2);
+		}
+
+		{
+			Node* children_2 = new Node("¹ë·±½º");
+			children_1->_children.push_back(children_2);
+		}
+	}
+	{
 		Node* children_1 = new Node("¾ÆÆ®ÆÀ");
 		root->_children.push_back(children_1);
+
 		{
-			{
-				Node* children_2 = new Node("¹è°æ");
-				root->_children.push_back(children_2);
-			}
+			Node* children_2 = new Node("¹è°æ");
+			children_1->_children.push_back(children_2);
+		}
 
-			{
-				Node* children_2 = new Node("¿øÈ­");
-				root->_children.push_back(children_2);
-			}
+		{
+			Node* children_2 = new Node("¿øÈ­");
+			children_1->_children.push_back(children_2);
+		}
 
-			{
-				Node* children_2 = new Node("¸ðµ¨¸µ");
-				root->_children.push_back(children_2);
-			}
+		{
+			Node* children_2 = new Node("¸ðµ¨¸µ");
+			children_1->_children.push_back(children_2);
 		}
 	}
 	return root;
@@ -104,12 +102,12 @@ void PrintTree(Node* root, int depth)
 		cout << "-";
 	}
 
-	cout << root->_data << endl;
 
 	for (auto node : root->_children)
 	{
 		PrintTree(node, depth + 1);
 	}
+	cout << root->_data << endl;
 }
 
 int main()
