@@ -21,7 +21,7 @@ Program::Program()
 	SelectObject(_backBuffer, _hBit);
 
 	// ¾À ¹Ù²Ù±â
-	_scene = make_shared<ArkanoidScene>();
+	_scene = make_shared<MazeScene>();
 }
 
 Program::~Program()
