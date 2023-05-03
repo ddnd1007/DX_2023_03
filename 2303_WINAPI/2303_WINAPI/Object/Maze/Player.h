@@ -11,8 +11,25 @@ public:
 	void BFS();
 	void DFS();
 	void DFS(Vector2 here);
+	void Dijkstra(Vector2 startIndex);
 
 	bool Cango(Vector2 pos);
+
+	struct Vertex
+	{
+		int _vertexNum;
+		int _cost;
+
+		bool operator<(const Vertex& other) const
+		{
+			return _cost < other._cost;
+		}
+
+		bool operator>(const Vertex& other) const
+		{
+			return _cost > other._cost;
+		}
+	};
 
 private:
 	Vector2 _startPos = { 1,1 };
@@ -22,6 +39,9 @@ private:
 
 	int _pathIndex = 0;
 	int _visitedIndex = 0;
+
+
+	
 	vector<Vector2> _path;
 	vector<Vector2> _visited;
 
@@ -29,5 +49,7 @@ private:
 
 	vector<vector<bool>> _discovered;
 	vector<vector<Vector2>> _parent;
+	vector<vector<int>> _best;
+
 };
 

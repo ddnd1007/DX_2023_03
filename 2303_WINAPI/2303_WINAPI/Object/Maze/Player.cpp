@@ -13,7 +13,7 @@ Player::Player(shared_ptr<Maze> maze)
 		_maze.lock()->Block(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
 	}
 
-	DFS();
+	BFS();
 }
 
 Player::~Player()
@@ -258,6 +258,88 @@ void Player::DFS(Vector2 here)
 	{
 		_path.push_back(here);
 	}
+}
+
+void Player::Dijkstra(Vector2 startIndex)
+{
+	Vector2 frontPos[8] =
+	{
+		Vector2 {1, 1}, // DOWNRIGHT
+		Vector2 {0, 1}, // DOWN
+		Vector2 {1, 0}, // RIGHT
+		Vector2 {1,-1}, // UPRIGHT
+		Vector2 {0, -1}, // UP
+		Vector2 {-1,-1}, // DOWNLEFT
+		Vector2 {-1, 1},// UPLEFT
+		Vector2 {-1, 0}, // LEFT
+	};
+
+	Vector2 startPos = _maze.lock()->StartPos();
+	Vector2 endPos = _maze.lock()->EndPos();
+
+	Vector2 poolCount = _maze.lock()->PoolCount();
+	int poolCountX = (int)poolCount.x;
+	int poolCountY = (int)poolCount.y;
+	priority_queue<Vertex, vector<Vertex>, greater<Vertex>> pq;
+	_best = vector<vector<int>>(poolCountY, vector<int>(poolCountX, INT_MAX));
+	_discovered = vector<vector<bool>>(poolCountY, vector<bool>(poolCountX, false));
+	_parent = vector<vector<Vector2>>(poolCountY, vector<Vector2>(poolCountX, Vector2(-1, -1)));
+
+	Vertex start;
+	pq.push(start);
+	_discovered[_startPos.y][_startPos.x] = true;
+	_parent[_startPos.y][_startPos.x] = _startPos;
+	
+	pq.push(start);
+	_best[start._vertexNum] = start._cost;
+	_discovered[start._vertexNum] = true;
+	_parent[start._vertexNum] = start._vertexNum;
+
+	while (true)
+	{
+		if (pq.empty() == true)
+			break;
+
+		Vector2 here = pq.top();
+		if (_discovered[_endPos.y][_endPos.x])
+			break;
+
+		pq.pop();
+
+		if (_best[here] < _cost)
+
+		for (int i = 0; i < 8; i++)
+		{
+			Vector2 temp = here + frontPos[i];
+
+			if (_maze.lock()->Block(temp.y, temp.x)->GetType() == MazeBlock::BlockType::DISABLE)
+				continue;
+
+			if (_discovered[temp.y][temp.x] == true)
+				continue;
+
+
+			pq.push(temp);
+			_discovered[temp.y][temp.x] = true;
+			_parent[temp.y][temp.x] = here;
+
+			_maze.lock()->Block(temp.y, temp.x)->SetType(MazeBlock::BlockType::VISITED);
+		}
+
+	}
+
+	Vector2 pos = endPos;
+	_path.push_back(endPos);
+	_path.push_back(endPos);
+	while (true)
+	{
+		if (pos == startPos)
+			break;
+
+		pos = _parent[pos.y][pos.x];
+		_path.push_back(pos);
+	}
+	std::reverse(_path.begin(), _path.end());
 }
 
 
