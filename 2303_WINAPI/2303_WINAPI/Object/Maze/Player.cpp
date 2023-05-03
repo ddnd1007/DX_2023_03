@@ -3,6 +3,8 @@
 #include <stack>
 #include <queue>
 
+
+
 Player::Player(shared_ptr<Maze> maze)
 : _maze(maze)
 {
@@ -13,7 +15,7 @@ Player::Player(shared_ptr<Maze> maze)
 		_maze.lock()->Block(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
 	}
 
-	BFS();
+	Dijkstra();
 }
 
 Player::~Player()
@@ -22,8 +24,8 @@ Player::~Player()
 
 void Player::Update()
 {
-	_time += 0.4f;
-	if (_time > 1.0f)
+	_time += 0.1f;
+	if (_time > 0.7f)
 	{
 		_time = 0.0f;
 		_visitedIndex++;
@@ -260,86 +262,118 @@ void Player::DFS(Vector2 here)
 	}
 }
 
-void Player::Dijkstra(Vector2 startIndex)
+void Player::Dijkstra()
 {
-	Vector2 frontPos[8] =
+	struct Vertex
 	{
-		Vector2 {1, 1}, // DOWNRIGHT
-		Vector2 {0, 1}, // DOWN
-		Vector2 {1, 0}, // RIGHT
-		Vector2 {1,-1}, // UPRIGHT
-		Vector2 {0, -1}, // UP
-		Vector2 {-1,-1}, // DOWNLEFT
-		Vector2 {-1, 1},// UPLEFT
-		Vector2 {-1, 0}, // LEFT
+		Vector2 vertexVector;
+		int cost;
+
+		bool operator<(const Vertex& other) const
+		{
+			return cost < other.cost;
+		}
+
+		bool operator>(const Vertex& other) const
+		{
+			return cost > other.cost;
+		}
 	};
 
-	Vector2 startPos = _maze.lock()->StartPos();
-	Vector2 endPos = _maze.lock()->EndPos();
+	Vector2 frontPos[8] =
+	{
+		Vector2 {0, 1}, // DOWN
+		Vector2 {1, 0}, // RIGHT
+		Vector2 {0, -1}, // UP
+		Vector2 {-1, 0}, // LEFT
+		Vector2 {1, 1}, // DOWNRIGHT
+		Vector2 {1,-1}, // UPRIGHT
+		Vector2 {-1,-1}, // DOWNLEFT
+		Vector2 {-1, 1},// UPLEFT
+
+	};
+
+	int Dijkstra_Dij[8]
+	{
+		10,
+		10,
+		10,
+		10,
+		14,
+		14,
+		14,
+		14,
+	};
 
 	Vector2 poolCount = _maze.lock()->PoolCount();
 	int poolCountX = (int)poolCount.x;
 	int poolCountY = (int)poolCount.y;
+
 	priority_queue<Vertex, vector<Vertex>, greater<Vertex>> pq;
-	_best = vector<vector<int>>(poolCountY, vector<int>(poolCountX, INT_MAX));
-	_discovered = vector<vector<bool>>(poolCountY, vector<bool>(poolCountX, false));
+	vector<vector<int>> _best = vector<vector<int>>(poolCountY, vector<int>(poolCountX, INT_MAX));
 	_parent = vector<vector<Vector2>>(poolCountY, vector<Vector2>(poolCountX, Vector2(-1, -1)));
 
 	Vertex start;
+	start.vertexVector = _startPos;
+	start.cost = 0;
+
 	pq.push(start);
-	_discovered[_startPos.y][_startPos.x] = true;
-	_parent[_startPos.y][_startPos.x] = _startPos;
-	
-	pq.push(start);
-	_best[start._vertexNum] = start._cost;
-	_discovered[start._vertexNum] = true;
-	_parent[start._vertexNum] = start._vertexNum;
+	_best[start.vertexVector.y][start.vertexVector.x] = start.cost;
+	_parent[start.vertexVector.y][start.vertexVector.x] = start.vertexVector;
 
 	while (true)
 	{
-		if (pq.empty() == true)
+		if (pq.empty())
 			break;
 
-		Vector2 here = pq.top();
-		if (_discovered[_endPos.y][_endPos.x])
-			break;
-
+		int cost = pq.top().cost;
+		Vector2 here = pq.top().vertexVector;
 		pq.pop();
+		
 
-		if (_best[here] < _cost)
+		if (here == _endPos)
+			break;
+
+		if (_best[here.y][here.x] < cost)
+			continue;
 
 		for (int i = 0; i < 8; i++)
 		{
-			Vector2 temp = here + frontPos[i];
+			Vector2 there = here + frontPos[i];
 
-			if (_maze.lock()->Block(temp.y, temp.x)->GetType() == MazeBlock::BlockType::DISABLE)
+			if (here == there)
 				continue;
 
-			if (_discovered[temp.y][temp.x] == true)
+			if (Cango(there) == false)
 				continue;
 
+			int nextCost = _best[here.y][here.x] + Dijkstra_Dij[i];
 
-			pq.push(temp);
-			_discovered[temp.y][temp.x] = true;
-			_parent[temp.y][temp.x] = here;
-
-			_maze.lock()->Block(temp.y, temp.x)->SetType(MazeBlock::BlockType::VISITED);
+			if (nextCost >= _best[there.y][there.x])
+				continue;
+			
+			
+			Vertex v;
+			v.vertexVector = there;
+			v.cost = nextCost;
+			pq.push(v);
+			_best[there.y][there.x] = nextCost;
+			_parent[there.y][there.x] = here;
 		}
-
 	}
 
-	Vector2 pos = endPos;
-	_path.push_back(endPos);
-	_path.push_back(endPos);
+	Vector2 pos = _endPos;
+	_path.push_back(_endPos);
+	_path.push_back(_endPos);
 	while (true)
 	{
-		if (pos == startPos)
+		if (pos == _startPos)
 			break;
 
 		pos = _parent[pos.y][pos.x];
 		_path.push_back(pos);
 	}
-	std::reverse(_path.begin(), _path.end());
+	std::reverse(_path.begin(), _path.end());;
 }
 
 

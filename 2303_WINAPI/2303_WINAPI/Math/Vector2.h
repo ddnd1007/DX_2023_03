@@ -47,7 +47,7 @@ public:
 		return result = Vector2(this->x * value, this->y * value);
 	}
 
-	Vector2& operator=(const Vector2& other)
+	Vector2& operator=(const Vector2& other) 
 	{
 		x = other.x;
 		y = other.y;
