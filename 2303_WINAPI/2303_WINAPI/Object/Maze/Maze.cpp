@@ -13,7 +13,7 @@ Maze::Maze()
 		{
 			shared_ptr<MazeBlock> block = make_shared<MazeBlock>();
 			block->SetPostion(offset + Vector2(18 * x, 18 * y));
-			block->SetType(MazeBlock::BlockType::DISABLE);
+			
 
 			_blocks[y].push_back(block);
 		}
@@ -21,7 +21,7 @@ Maze::Maze()
 
 	CreateMaze();
 
-	_blocks[_poolCountY - 2][_poolCountX - 2]->SetType(MazeBlock::BlockType::END);
+	
 }
 
 Maze::~Maze()
@@ -49,6 +49,13 @@ void Maze::Render(HDC hdc)
 // Maze for Programmer
 void Maze::CreateMaze()
 {
+	for (int y = 0; y < _poolCountY; y++)
+	{
+		for (int x = 0; x < _poolCountX; x++)
+		{
+			_blocks[y][x]->SetType(MazeBlock::BlockType::DISABLE);
+		}
+	}
 	// ³ëµå ¶Õ±â
 	for (int y = 0; y < _poolCountY; y++)
 	{
@@ -94,4 +101,5 @@ void Maze::CreateMaze()
 				_blocks[y + 1][x]->SetType(MazeBlock::BlockType::ABLE);
 		}
 	}
+	_blocks[_poolCountY - 2][_poolCountX - 2]->SetType(MazeBlock::BlockType::END);
 }

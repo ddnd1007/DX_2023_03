@@ -2,6 +2,24 @@
 class Player
 {
 public:
+	struct Vertex
+	{
+		Vector2 pos;
+		int g; // Dijkstra ... cost
+		int h; 
+		int f;
+
+		bool operator < (const Vertex& other) const
+		{
+			return f < other.f;
+		}
+		bool operator > (const Vertex& other) const
+		{
+			return f > other.f;
+		}
+
+	};
+
 	Player(shared_ptr<Maze> maze);
 	~Player();
 
@@ -12,6 +30,7 @@ public:
 	void DFS();
 	void DFS(Vector2 here);
 	void Dijkstra();
+	void Astar();
 
 	bool Cango(Vector2 pos);
 
@@ -35,6 +54,7 @@ private:
 	vector<vector<bool>> _discovered;
 	vector<vector<Vector2>> _parent;
 	vector<vector<int>> _best;
+	
 
 };
 
