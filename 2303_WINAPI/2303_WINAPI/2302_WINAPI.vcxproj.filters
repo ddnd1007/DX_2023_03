@@ -99,6 +99,9 @@
     <ClInclude Include="Object\Arkanoid\Ball.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Math\DisJointSet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2303_WINAPI.cpp">

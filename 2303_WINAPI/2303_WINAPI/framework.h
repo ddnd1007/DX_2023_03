@@ -29,6 +29,7 @@ using namespace std;
 #include "Math/Collider.h"
 #include "Math/CircleCollider.h"
 #include "Math/RectCollider.h"
+#include "Math/DisJointSet.h"
 
 #include "Types.h"
 

@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2303_WINAPI.h" />
+    <ClInclude Include="Math\DisJointSet.h" />
     <ClInclude Include="Object\Arkanoid\Ball.h" />
     <ClInclude Include="Object\Arkanoid\Frame.h" />
     <ClInclude Include="Object\Arkanoid\ArkanoidBrick.h" />

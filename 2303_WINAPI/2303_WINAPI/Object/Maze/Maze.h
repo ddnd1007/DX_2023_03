@@ -5,10 +5,18 @@ public:
 	Maze();
 	~Maze();
 
+	struct Edge
+	{
+		Vector2 u;
+		Vector2 v;
+		int cost;
+	};
+
 	void Update();
 	void Render(HDC hdc);
 
 	void CreateMaze();
+	void CreateMaze_Kruskal();
 
 	Vector2 StartPos() { return {1,1}; }
 	Vector2 EndPos() { return Vector2((int)_poolCountX - 2, (int)_poolCountY -2 ); }
@@ -22,5 +30,8 @@ private:
 	UINT _poolCountY = 25;
 
 	vector<vector<shared_ptr<MazeBlock>>> _blocks;
+
+	// Kruskal
+	vector<Edge> edges;
 };
 

@@ -19,9 +19,7 @@ Maze::Maze()
 		}
 	}
 
-	CreateMaze();
-
-	
+	CreateMaze_Kruskal();
 }
 
 Maze::~Maze()
@@ -102,4 +100,73 @@ void Maze::CreateMaze()
 		}
 	}
 	_blocks[_poolCountY - 2][_poolCountX - 2]->SetType(MazeBlock::BlockType::END);
+}
+
+void Maze::CreateMaze_Kruskal()
+{
+	for (int y = 0; y < _poolCountY; y++)
+	{
+		for (int x = 0; x < _poolCountX; x++)
+		{
+			_blocks[y][x]->SetType(MazeBlock::BlockType::DISABLE);
+		}
+	}
+	// ³ëµå ¶Õ±â
+	for (int y = 0; y < _poolCountY; y++)
+	{
+		for (int x = 0; x < _poolCountX; x++)
+		{
+			if (x % 2 == 0 || y % 2 == 0)
+				continue;
+
+			_blocks[y][x]->SetType(MazeBlock::BlockType::ABLE);
+		}
+	}
+
+	for (int y = 0; y < _poolCountY; y++)
+	{
+		for (int x = 0; x < _poolCountX; x++)
+		{
+			if (x % 2 == 0 || y % 2 == 0)
+				continue;
+
+			if (x < _poolCountX - 2)
+			{
+				const int randValue = rand() % 100;
+				Edge edge;
+				edge.u = Vector2(x, y);
+				edge.v = Vector2(x + 2, y);
+				edge.cost = randValue;
+				edges.push_back(edge);
+			}
+			if (y < _poolCountX - 2)
+			{
+				const int randValue = rand() % 100;
+				Edge edge;
+				edge.u = Vector2(x, y);
+				edge.v = Vector2(x, y + 2);
+				edge.cost = randValue;
+				edges.push_back(edge);
+			}
+		}
+
+		std::sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) ->  bool
+			{
+				return a.cost < b.cost;
+			});
+	}
+	DisJointSet sets(_poolCountX * _poolCountY);
+
+	for (const auto edge : edges)
+	{
+		int u = edge.u.y * _poolCountX + edge.u.x;
+		int v = edge.v.y * _poolCountX + edge.v.x;
+
+		if (sets.FindLeader(u) == sets.FindLeader(v))
+			continue;
+		sets.Merge(u, v);
+		int yIndex = (edge.u.y + edge.v.y) / 2;
+		int xIndex = (edge.u.x + edge.v.x) / 2;
+		_blocks[yIndex][xIndex]->SetType(MazeBlock::BlockType::ABLE);
+	}
 }
