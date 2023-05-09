@@ -61,37 +61,105 @@ void BST::PrintTree(Node* node)
 
 Node* BST::Search(Node* node, int key)
 {
-	Node* node = _root;
-	Node* parent = nullptr;
-	while (true)
-	{
-		if (node->key == key)
-			return node;
-		else if (node->key > key)
-			node = node->left;
-		else
-			node = node->right;
-	}
-	return node;
+	if (node == nullptr)
+		return node;
 
+	if (node->key == key)
+		return node;
+
+	if (key < node->key)
+		return  Search(node->left, key);
+	else
+		return  Search(node->right, key);
+
+	return nullptr;
 }
 
 Node* BST::Min(Node* node)
 {
-	return nullptr;
+	if (node == nullptr)
+		return nullptr;
+
+	if (node->left != nullptr)
+		return Min(node->left);
+
+	return node;
 }
 
 Node* BST::Max(Node* node)
 {
-	return nullptr;
+	if (node == nullptr)
+		return nullptr;
+
+	if (node->left != nullptr)
+		return Max(node->right);
+
+	return node;
 }
 
-Node* BST::Previous(Node* node)
+Node* BST::Previous(Node* node, int key)
 {
-	return nullptr;
+	Node* current = Search(node, key);
+	if (current == nullptr) {
+		return nullptr;
+	}
+
+	if (current->left != nullptr) {
+		Node* temp = current->left;
+		while (temp->right != nullptr) {
+			temp = temp->right;
+		}
+		return temp;
+	}
+	else {
+		Node* parent = nullptr;
+		Node* root = node;
+		while (root != current) {
+			if (current->key > root->key) {
+				parent = root;
+				root = root->right;
+			}
+			else {
+				root = root->left;
+			}
+		}
+		return parent;
+	}
 }
 
-Node* BST::Next(Node* node)
+
+Node* BST::Next(Node* node, int key)
 {
-	return nullptr;
+	Node* current = Search(node, key);
+	if (current == nullptr)
+	{
+		return nullptr;
+	}
+
+	if (current->right != nullptr)
+	{
+		Node* temp = current->right;
+		while (temp->left != nullptr) 
+		{
+			temp = temp->left;
+		}
+		return temp;
+	}
+	else 
+	{
+		Node* parent = nullptr;
+		Node* root = node;
+		while (root != current) {
+			if (current->key < root->key)
+			{
+				parent = root;
+				root = root->left;
+			}
+			else 
+			{
+				root = root->right;
+			}
+		}
+		return parent;
+	}
 }
