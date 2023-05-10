@@ -28,8 +28,9 @@ int main()
 	//bst.PrintTree(bst._root);
 	
 	Node* newRoot = bst.Search(bst._root, 7);
-	Node* prevRoot = bst.Previous(bst._root, 7);
-	Node* nextRoot = bst.Next(bst._root, 3);
+	Node* nextRoot = bst.Next(bst._root);
+	Node* prevRoot = bst.Previous(bst._root);
+	Node* minRoot = bst.Min(bst._root);
 
 	return 0;
 }

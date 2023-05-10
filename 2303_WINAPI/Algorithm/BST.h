@@ -25,8 +25,12 @@ public:
 	Node* Min(Node* node);
 	Node* Max(Node* node);
 
-	Node* Previous(Node* node, int key);
-	Node* Next(Node* node, int key);
+	Node* Previous(Node* node);
+	Node* Next(Node* node);
+	void Delete(Node* node);
+
+private:
+	void Replace(Node* node1, Node* node2);
 
 public:
 	Node* _root = nullptr;
