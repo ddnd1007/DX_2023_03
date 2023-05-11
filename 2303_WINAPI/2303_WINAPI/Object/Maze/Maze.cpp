@@ -290,5 +290,4 @@ void Maze::CreateMaze_Prim()
 			pq.push(edge);
 		}
 	}
-
 }
