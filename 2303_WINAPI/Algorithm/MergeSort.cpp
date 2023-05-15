@@ -4,14 +4,14 @@
 
 using namespace std;
 
-// Merge Sort : 병합 정렬
+// Merge Sort 병합 정렬
 // - 폰 노이만 정렬
 // - 안정 정렬
-// -> 분할 정복 패러다임
+// => 분할 정복 패러다임
 
 // Divide : 제일 작은 문제로 쪼개기
 // Conquer : 해결하기
-// Merge : 해결된 문제를 합치기
+// Merge : 해결된 문제들 합치기
 
 void MergeResult(vector<int>& v, int left, int mid, int right)
 {
@@ -47,12 +47,12 @@ void MergeResult(vector<int>& v, int left, int mid, int right)
 		}
 	}
 
-	// 오른쪽이 먼저 끝났다. 
-	else (rightIndex > right)
+	// 오른쪽이 먼저 끝났다.
+	else
 	{
 		while (leftIndex <= mid)
 		{
-			temp.push.back(v[leftIndex]);
+			temp.push_back(v[leftIndex]);
 			leftIndex++;
 		}
 	}
@@ -62,7 +62,6 @@ void MergeResult(vector<int>& v, int left, int mid, int right)
 		v[left + i] = temp[i];
 	}
 }
-
 
 void MergeSort(vector<int>& v, int left, int right)
 {
@@ -80,9 +79,17 @@ void MergeSort(vector<int>& v, int left, int right)
 
 int main()
 {
+	// Quick Sort
+	// -> std::sort
+	// Merge Sort
+	// -> std::stable_sort
+	// Heap Sort
+	// -> std::partial_sort : nlog (m: mid)
+
 	vector<int> v = { 55, 30, 15, 100, 1, 5, 70, 30 };
-	MergeSort(v, 0, 7);
+
+
+	std::partial_sort(v.begin(), v.begin() + 3, v.end());
 
 	return 0;
-
 }
