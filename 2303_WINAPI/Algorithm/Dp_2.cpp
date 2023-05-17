@@ -13,6 +13,13 @@ using namespace std;
 
 // n강을 할 때 강화하는 모든 경우의 수
 
+// 1
+// 1
+
+// 2
+// 1 + 1
+// 2
+
 // 예 : 3강을 하고 싶다. -> 4가지
 // 1 + 1 + 1 
 // 1 + 2 
@@ -28,56 +35,30 @@ using namespace std;
 // 2 + 2
 // 3 + 1
 
-vector<vector<int>> dp;
-int  Enchant(int n, int m)
-{
-    
-    if (n == 0)
-       return 1;
+vector<int> cache = vector<int>(100, -1);
 
-    if (n < 0 || m == 0)
+int targetNum = 6;
+
+int Enchant(int n)
+{
+    if (n > targetNum)
         return 0;
-    
 
-    if (dp[n][m] != -1)
-        return dp[n][m];
+    if (n == targetNum)
+        return 1;
 
-    return dp[n][m] = Enchant(n, m - 1) + Enchant(n - m, m);
+    //메모이제이션
+    if (cache[n] != -1)
+        return cache[n];
 
+    // 구하기
+    return cache[n] =  Enchant(n + 1) + Enchant(n + 2) + Enchant(n + 3);
 }
 
-void printPermutations(vector<int>& permutation)
-{
-    while (true)
-    {
-        if (std::next_permutation(permutation.begin(), permutation.end()))
-        {
-            for (int value : permutation)
-            {
-                cout << value << " ";
-            }
-            cout << endl;
-        }
-        else
-            break;
-    }
-    return;
-}
+
 int main()
 {
-    int n = 6; // 강화 횟수
-    int m = 3; // 최대 강화 옵션
-   
-    dp = vector<vector<int>>(n + 1, vector<int>(m + 1, -1));
+    cout << Enchant(0) << endl;
 
-    vector<int> options;
-    for (int i = 0; i <= m; i++)
-    {
-        options.push_back(i);
-    }
-     
-    printPermutations(options);
-   
-        
     return 0;
 }
