@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 
+
 using namespace std;
 
 // ENCHANT
@@ -28,56 +29,65 @@ using namespace std;
 // 2 + 2
 // 3 + 1
 
-vector<vector<int>> dp;
-int  Enchant(int n, int m)
+vector<int> cache = vector<int>(100, -1);
+
+int  Enchant(int n)
 {
     
-    if (n == 0)
+    if (n == 1)
        return 1;
 
-    if (n < 0 || m == 0)
-        return 0;
+    if (n == 2)
+        return 2;
     
+    if (n == 3)
+        return 4;
 
-    if (dp[n][m] != -1)
-        return dp[n][m];
+    if (cache[n] != -1)
+        return cache[n];
 
-    return dp[n][m] = Enchant(n, m - 1) + Enchant(n - m, m);
+    return cache[n] = Enchant(n - 1) + Enchant(n -2) + Enchant(n - 3);
 
 }
 
-void printPermutations(vector<int>& permutation)
+void printPermutations(vector<int> permutation)
 {
     while (true)
     {
-        if (std::next_permutation(permutation.begin(), permutation.end()))
+        if (next_permutation(permutation.begin(), permutation.end()))
         {
-            for (int value : permutation)
-            {
-                cout << value << " ";
-            }
-            cout << endl;
+           int sum = 0;
+           for (auto value : permutation)
+           {
+               sum += value;
+           }
+           if (sum == Enchant(permutation.size()))
+           {
+               for (auto value : permutation)
+               {
+                   cout << value << " ";
+               }
+                   cout << endl;
+           }
         }
-        else
-            break;
+           else
+               break;
     }
-    return;
 }
 int main()
 {
-    int n = 6; // 강화 횟수
-    int m = 3; // 최대 강화 옵션
+    int n = 8;
+    
+    cout << Enchant(n) << endl;
    
-    dp = vector<vector<int>>(n + 1, vector<int>(m + 1, -1));
-
     vector<int> options;
-    for (int i = 0; i <= m; i++)
+    for (int i = 1; i <= n; i++)
     {
         options.push_back(i);
     }
-     
+    sort(options.begin(), options.end());
+
     printPermutations(options);
-   
-        
+
     return 0;
 }
