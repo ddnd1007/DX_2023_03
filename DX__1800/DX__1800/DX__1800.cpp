@@ -54,13 +54,14 @@ ComPtr<ID3D11RenderTargetView> renderTargetView;
 ComPtr<ID3D11Buffer> vertexBuffer;
 ComPtr<ID3D11InputLayout> inputLayOut; // 입력배치
 ComPtr<ID3D11VertexShader> vertexShader;
-ComPtr<ID3D11PixelShader> pixerShader;
+ComPtr<ID3D11PixelShader> pixelShader;
 
 HWND hWnd;
 
-struct Vectex
+struct Vertex
 {
     XMFLOAT3 pos;
+    XMFLOAT4 color;
 };
 
 void InitDevice();
@@ -135,83 +136,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 
-void InitDevice()
-{
-    RECT rc;
-    GetClientRect(hWnd, &rc);
-    UINT width = rc.right - rc.left;
-    UINT height = rc.bottom - rc.top;
 
-
-    D3D_FEATURE_LEVEL featureLevels[] =
-    {
-        D3D_FEATURE_LEVEL_11_0,
-        D3D_FEATURE_LEVEL_10_1,
-        D3D_FEATURE_LEVEL_10_0,
-    };
-
-    UINT featureSize = ARRAYSIZE(featureLevels);
-
-    DXGI_SWAP_CHAIN_DESC sd = {};
-    sd.BufferCount = 1;
-    sd.BufferDesc.Width = width;
-    sd.BufferDesc.Height = height;
-    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    sd.BufferDesc.RefreshRate.Numerator = 60;
-    sd.BufferDesc.RefreshRate.Denominator = 1;
-    // Numerator / Denominator => 화면 프레임 갱신 속도
-    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.OutputWindow = hWnd;
-    sd.SampleDesc.Count = 1;
-    sd.SampleDesc.Quality = 0;
-    sd.Windowed = true; // 창모드
-
-    D3D11CreateDeviceAndSwapChain(
-        nullptr,
-        D3D_DRIVER_TYPE_HARDWARE,
-        0,
-        D3D11_CREATE_DEVICE_DEBUG,
-        featureLevels,
-        featureSize,
-        D3D11_SDK_VERSION,
-        &sd,
-        IN swapChain.GetAddressOf(),
-        IN device.GetAddressOf(),
-        nullptr,
-        IN deviceContext.GetAddressOf()
-    );
-
-    ComPtr<ID3D11Texture2D> backBuffer;
-
-    swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
-    device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf());
-
-    deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), nullptr);
-
-    D3D11_VIEWPORT vp;
-    vp.Width = width;
-    vp.Height = height;
-    vp.MinDepth = 0.0f;
-    vp.MaxDepth = 1.0f;
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
-    deviceContext->RSSetViewports(1, &vp);
-
-    D3D11_INPUT_ELEMENT_DESC layOut[] =
-    {
-        {
-            "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,0,0,
-            D3D11_INPUT_PER_VERTEX_DATA,0
-        }
-    };
-
-    UINT layOutSize = ARRAYSIZE(layOut);
-
-}
-void Render()
-{
-
-}
 
 //
 //  함수: MyRegisterClass()
@@ -333,4 +258,164 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+void InitDevice()
+{
+    RECT rc;
+    GetClientRect(hWnd, &rc);
+    UINT width = rc.right - rc.left;
+    UINT height = rc.bottom - rc.top;
+
+
+    D3D_FEATURE_LEVEL featureLevels[] =
+    {
+        D3D_FEATURE_LEVEL_11_0,
+        D3D_FEATURE_LEVEL_10_1,
+        D3D_FEATURE_LEVEL_10_0,
+    };
+
+    UINT featureSize = ARRAYSIZE(featureLevels);
+
+    DXGI_SWAP_CHAIN_DESC sd = {};
+    sd.BufferCount = 1;
+    sd.BufferDesc.Width = width;
+    sd.BufferDesc.Height = height;
+    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    sd.BufferDesc.RefreshRate.Numerator = 60;
+    sd.BufferDesc.RefreshRate.Denominator = 1;
+    // Numerator / Denominator => 화면 프레임 갱신 속도
+    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    sd.OutputWindow = hWnd;
+    sd.SampleDesc.Count = 1;
+    sd.SampleDesc.Quality = 0;
+    sd.Windowed = true; // 창모드
+
+    D3D11CreateDeviceAndSwapChain(
+        nullptr,
+        D3D_DRIVER_TYPE_HARDWARE,
+        0,
+        D3D11_CREATE_DEVICE_DEBUG,
+        featureLevels,
+        featureSize,
+        D3D11_SDK_VERSION,
+        &sd,
+        IN swapChain.GetAddressOf(),
+        IN device.GetAddressOf(),
+        nullptr,
+        IN deviceContext.GetAddressOf()
+    );
+
+    ComPtr<ID3D11Texture2D> backBuffer;
+
+    swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
+    device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf());
+
+    deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), nullptr);
+
+    D3D11_VIEWPORT vp;
+    vp.Width = width;
+    vp.Height = height;
+    vp.MinDepth = 0.0f;
+    vp.MaxDepth = 1.0f;
+    vp.TopLeftX = 0;
+    vp.TopLeftY = 0;
+    deviceContext->RSSetViewports(1, &vp);
+
+    D3D11_INPUT_ELEMENT_DESC layOut[] =
+    {
+        {
+            "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,0,0,
+            D3D11_INPUT_PER_VERTEX_DATA,0
+        },
+        {
+            "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT,0,12,
+                D3D11_INPUT_PER_VERTEX_DATA,0
+        }
+    };
+
+    UINT layOutSize = ARRAYSIZE(layOut);
+
+    DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
+
+    // VertexShader
+    ComPtr<ID3DBlob> vertexBlob; // VertexShader 만들 때 필요한 얘
+
+    D3DCompileFromFile(L"Shader/TutorialShader.hlsl",
+    nullptr, nullptr,"VS", "vs_5_0", flags, 0, vertexBlob.GetAddressOf(), nullptr);
+
+    device->CreateVertexShader(vertexBlob->GetBufferPointer(), 
+    vertexBlob->GetBufferSize(), nullptr, IN vertexShader.GetAddressOf());
+
+    device->CreateInputLayout(layOut, layOutSize, vertexBlob->GetBufferPointer(), vertexBlob->GetBufferSize(), IN inputLayOut.GetAddressOf());
+
+    // PixelShader
+    ComPtr<ID3DBlob> pixelBlob;
+
+    D3DCompileFromFile(L"Shader/TutorialShader.hlsl",
+        nullptr, nullptr, "PS", "ps_5_0", flags, 0, pixelBlob.GetAddressOf(), nullptr);
+
+    device->CreatePixelShader(pixelBlob->GetBufferPointer(),
+        pixelBlob->GetBufferSize(), nullptr, IN pixelShader.GetAddressOf());
+
+
+    vector<Vertex> vertices;
+
+    Vertex v;
+
+    v.pos = { 0.5f, 0.5f, 0.0f }; // 위
+    v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
+    vertices.push_back(v);
+    v.pos = { 0.5f, -0.5f, 0.0f }; // 오른쪽 아래
+    v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+    vertices.push_back(v);
+    v.pos = { -0.5f, -0.5f, 0.0f }; // 왼쪽 아래
+    v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+    vertices.push_back(v);
+    v.pos = { -0.5f, -0.5f, 0.0f }; // 아래
+    v.color = { 1.0f, 1.0f, 0.0f, 1.0f };
+    vertices.push_back(v);
+    v.pos = { -0.5f, +0.5f, 0.0f }; // 오른쪽 위
+    v.color = { 0.0f, 2.0f, 0.0f, 1.0f };
+    vertices.push_back(v);
+    v.pos = { +0.5f, +0.5f, 0.0f }; // 왼쪽 위
+    v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
+    vertices.push_back(v);
+
+    D3D11_BUFFER_DESC bd = {};
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(Vertex) * vertices.size();
+    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = &vertices[0];
+
+    device->CreateBuffer(&bd, &initData, IN vertexBuffer.GetAddressOf());
+
+}
+void Render()
+{
+    FLOAT myColorR = 0.0f;
+    FLOAT myColorG = 0.0f;
+    FLOAT myColorB = 0.0f;
+
+    FLOAT clearColor[4] = { myColorR, myColorG, myColorB, 1.0f };
+
+    deviceContext->ClearRenderTargetView(renderTargetView.Get(), clearColor);
+
+    deviceContext->IASetInputLayout(inputLayOut.Get());
+    UINT stride = sizeof(Vertex);
+    UINT offset = 0;
+    deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
+
+    deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    deviceContext->VSSetShader(vertexShader.Get(), nullptr, 0);
+    deviceContext->PSSetShader(pixelShader.Get(), nullptr, 0);
+
+    deviceContext->Draw(6, 0);
+
+    swapChain->Present(0, 0);
+
+
 }
