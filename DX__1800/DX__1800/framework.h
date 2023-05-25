@@ -13,8 +13,8 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-#include <vector>
 #include <memory>
+#include <vector>
 #include <string>
 #include <unordered_map>
 #include <algorithm>
@@ -24,9 +24,37 @@
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 
-#pragma comment (lib, "d3d11.lib")
-#pragma comment (lib, "d3dcompiler.lib")
+#pragma comment(lib,"d3d11.lib")
+#pragma comment(lib,"d3dcompiler.lib")
+
+#include "../DXTex/DirectXTex.h"
 
 using namespace std;
 using namespace DirectX;
 using namespace Microsoft::WRL;
+
+// Framework
+#include "Framework/Device/Device.h"
+
+// Render
+#include "Framework/Render/VertexLayout.h"
+#include "Framework/Render/VertexBuffer.h"
+#include "Framework/Render/VertexShader.h"
+#include "Framework/Render/PixelShader.h"
+
+// TextureMapping
+#include "Framework/TextureMapping/SRV.h"
+#include "Framework/TextureMapping/SamplerState.h"
+
+// Obj
+#include "Object/BagicObject/Quad.h"
+
+// Scene
+#include "Scene/Scene.h"
+
+// Program
+#include "Program/Program.h"
+
+#include "Types.h"
+
+extern HWND hWnd;

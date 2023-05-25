@@ -1,4 +1,4 @@
-﻿// DX__1800.cpp : 애플리케이션에 대한 진입점을 정의합니다.
+﻿// DX_1800.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
 #include "framework.h"
@@ -6,68 +6,7 @@
 
 #define MAX_LOADSTRING 100
 
-// DX: Direct Access....
-// 1980 x 1080 등의 작은 계산들을 GPU한테 외주 맡기는 스토리
-
-// CPU : 어려운 계산 작업을 직렬처리
-// GPU : 단순 계산을 병렬처리하는데 특화되어있다.
-
-// DX 그래픽스 
-// 영화 촬영 / 게임
-// 카메라  / 카메라
-// 세트장  / World
-// 총감독  / 프로그래머
-// 조명    /  Light
-// 영화사  / 엔진
-
-// DX 20
-// 컴퓨터 그래픽스
-// 랜더링 파이프라인
-// -> 3D 공간의 어떤 좌표를 모니터에 표시하기까기 걸리는 일련의 과정
-
-// 인력사무소장
-// 외주를 맡기고 실질적인 노가다 대표 뽑기
-// 컴퓨터의 하드웨어 기능 점검, 리소스 할당 하는 애들을 뽑아주는 얘
-// 컴객체
-ComPtr<ID3D11Device> device; // 인력 사무소장
-
-// 연출감독
-// 세트장을 실질적으로 꾸며주는 연출가
-// 렌더링 대상 결정(어따 그릴지 결정)
-// -> 리소스 그래픽 파이프라인에 바인딩. 리소스 할당
-ComPtr<ID3D11DeviceContext> deviceContext; // DC // windows HDC와 유사
-
-// DX의 인터페이스로써 1개 이상의 표면을 포함할 수 있다.
-// 각각의 표면(버퍼, 텍스쳐)를 출력하기 전에 데이터를 보관한다. // 이중버퍼
-// 버퍼는 누구에게 보낸다, 임시 저장소
-
-ComPtr<IDXGISwapChain> swapChain;
-
-// 후면 버퍼를 가리키는 포인터
-// 후면버퍼(지금 당장 그릴 곳)
-// view ..... 포인터랑 유사
-ComPtr<ID3D11RenderTargetView> renderTargetView;
-
-
-// 랜더링 파이프 라인 단계
-// CPU -> GPU
-ComPtr<ID3D11Buffer> vertexBuffer;
-ComPtr<ID3D11InputLayout> inputLayOut; // 입력배치
-ComPtr<ID3D11VertexShader> vertexShader;
-ComPtr<ID3D11PixelShader> pixelShader;
-
 HWND hWnd;
-
-struct Vertex
-{
-    XMFLOAT3 pos;
-    XMFLOAT4 color;
-};
-
-void InitDevice();
-void Render();
-
-
 
 
 // 전역 변수:
@@ -82,9 +21,9 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -97,7 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MyRegisterClass(hInstance);
 
     // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance (hInstance, nCmdShow))
+    if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
     }
@@ -105,12 +44,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX1800));
 
     // 생성
-    InitDevice();
+    Device::Create();
 
+    shared_ptr<Program> program = make_shared<Program>();
 
     MSG msg = {};
 
-    // 기본 메시지 루프입니다: // 최적화
+    // 기본 메시지 루프입니다:
     while (msg.message != WM_QUIT)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -124,18 +64,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             // 메인 루프
-            Render();
+            program->Update();
+            program->Render();
+
         }
     }
 
-
     // 삭제
+    Device::Delete();
 
-    return (int) msg.wParam;
+    return (int)msg.wParam;
 }
-
-
-
 
 
 //
@@ -149,17 +88,17 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_DX1800));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_DX1800);
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.style = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc = WndProc;
+    wcex.cbClsExtra = 0;
+    wcex.cbWndExtra = 0;
+    wcex.hInstance = hInstance;
+    wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_DX1800));
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_DX1800);
+    wcex.lpszClassName = szWindowClass;
+    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
 }
@@ -176,20 +115,22 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
+    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+        0, 0, // 윈도우 창 시작 지점
+        WIN_WIDTH, WIN_HEIGHT,
+        nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
-   {
-      return FALSE;
-   }
+    if (!hWnd)
+    {
+        return FALSE;
+    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
 
-   return TRUE;
+    return TRUE;
 }
 
 //
@@ -207,30 +148,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_COMMAND:
+    {
+        int wmId = LOWORD(wParam);
+        // 메뉴 선택을 구문 분석합니다:
+        switch (wmId)
         {
-            int wmId = LOWORD(wParam);
-            // 메뉴 선택을 구문 분석합니다:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
+        case IDM_ABOUT:
+            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+            break;
+        case IDM_EXIT:
+            DestroyWindow(hWnd);
+            break;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
         }
-        break;
+    }
+    break;
     case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            EndPaint(hWnd, &ps);
-        }
-        break;
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+        EndPaint(hWnd, &ps);
+    }
+    break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
@@ -258,164 +199,4 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
-}
-
-void InitDevice()
-{
-    RECT rc;
-    GetClientRect(hWnd, &rc);
-    UINT width = rc.right - rc.left;
-    UINT height = rc.bottom - rc.top;
-
-
-    D3D_FEATURE_LEVEL featureLevels[] =
-    {
-        D3D_FEATURE_LEVEL_11_0,
-        D3D_FEATURE_LEVEL_10_1,
-        D3D_FEATURE_LEVEL_10_0,
-    };
-
-    UINT featureSize = ARRAYSIZE(featureLevels);
-
-    DXGI_SWAP_CHAIN_DESC sd = {};
-    sd.BufferCount = 1;
-    sd.BufferDesc.Width = width;
-    sd.BufferDesc.Height = height;
-    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    sd.BufferDesc.RefreshRate.Numerator = 60;
-    sd.BufferDesc.RefreshRate.Denominator = 1;
-    // Numerator / Denominator => 화면 프레임 갱신 속도
-    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.OutputWindow = hWnd;
-    sd.SampleDesc.Count = 1;
-    sd.SampleDesc.Quality = 0;
-    sd.Windowed = true; // 창모드
-
-    D3D11CreateDeviceAndSwapChain(
-        nullptr,
-        D3D_DRIVER_TYPE_HARDWARE,
-        0,
-        D3D11_CREATE_DEVICE_DEBUG,
-        featureLevels,
-        featureSize,
-        D3D11_SDK_VERSION,
-        &sd,
-        IN swapChain.GetAddressOf(),
-        IN device.GetAddressOf(),
-        nullptr,
-        IN deviceContext.GetAddressOf()
-    );
-
-    ComPtr<ID3D11Texture2D> backBuffer;
-
-    swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
-    device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf());
-
-    deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), nullptr);
-
-    D3D11_VIEWPORT vp;
-    vp.Width = width;
-    vp.Height = height;
-    vp.MinDepth = 0.0f;
-    vp.MaxDepth = 1.0f;
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
-    deviceContext->RSSetViewports(1, &vp);
-
-    D3D11_INPUT_ELEMENT_DESC layOut[] =
-    {
-        {
-            "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,0,0,
-            D3D11_INPUT_PER_VERTEX_DATA,0
-        },
-        {
-            "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT,0,12,
-                D3D11_INPUT_PER_VERTEX_DATA,0
-        }
-    };
-
-    UINT layOutSize = ARRAYSIZE(layOut);
-
-    DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
-
-    // VertexShader
-    ComPtr<ID3DBlob> vertexBlob; // VertexShader 만들 때 필요한 얘
-
-    D3DCompileFromFile(L"Shader/TutorialShader.hlsl",
-    nullptr, nullptr,"VS", "vs_5_0", flags, 0, vertexBlob.GetAddressOf(), nullptr);
-
-    device->CreateVertexShader(vertexBlob->GetBufferPointer(), 
-    vertexBlob->GetBufferSize(), nullptr, IN vertexShader.GetAddressOf());
-
-    device->CreateInputLayout(layOut, layOutSize, vertexBlob->GetBufferPointer(), vertexBlob->GetBufferSize(), IN inputLayOut.GetAddressOf());
-
-    // PixelShader
-    ComPtr<ID3DBlob> pixelBlob;
-
-    D3DCompileFromFile(L"Shader/TutorialShader.hlsl",
-        nullptr, nullptr, "PS", "ps_5_0", flags, 0, pixelBlob.GetAddressOf(), nullptr);
-
-    device->CreatePixelShader(pixelBlob->GetBufferPointer(),
-        pixelBlob->GetBufferSize(), nullptr, IN pixelShader.GetAddressOf());
-
-
-    vector<Vertex> vertices;
-
-    Vertex v;
-
-    v.pos = { 0.5f, 0.5f, 0.0f }; // 위
-    v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
-    vertices.push_back(v);
-    v.pos = { 0.5f, -0.5f, 0.0f }; // 오른쪽 아래
-    v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
-    vertices.push_back(v);
-    v.pos = { -0.5f, -0.5f, 0.0f }; // 왼쪽 아래
-    v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
-    vertices.push_back(v);
-    v.pos = { -0.5f, -0.5f, 0.0f }; // 아래
-    v.color = { 1.0f, 1.0f, 0.0f, 1.0f };
-    vertices.push_back(v);
-    v.pos = { -0.5f, +0.5f, 0.0f }; // 오른쪽 위
-    v.color = { 0.0f, 2.0f, 0.0f, 1.0f };
-    vertices.push_back(v);
-    v.pos = { +0.5f, +0.5f, 0.0f }; // 왼쪽 위
-    v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
-    vertices.push_back(v);
-
-    D3D11_BUFFER_DESC bd = {};
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(Vertex) * vertices.size();
-    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-
-    D3D11_SUBRESOURCE_DATA initData = {};
-    initData.pSysMem = &vertices[0];
-
-    device->CreateBuffer(&bd, &initData, IN vertexBuffer.GetAddressOf());
-
-}
-void Render()
-{
-    FLOAT myColorR = 0.0f;
-    FLOAT myColorG = 0.0f;
-    FLOAT myColorB = 0.0f;
-
-    FLOAT clearColor[4] = { myColorR, myColorG, myColorB, 1.0f };
-
-    deviceContext->ClearRenderTargetView(renderTargetView.Get(), clearColor);
-
-    deviceContext->IASetInputLayout(inputLayOut.Get());
-    UINT stride = sizeof(Vertex);
-    UINT offset = 0;
-    deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
-
-    deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    deviceContext->VSSetShader(vertexShader.Get(), nullptr, 0);
-    deviceContext->PSSetShader(pixelShader.Get(), nullptr, 0);
-
-    deviceContext->Draw(6, 0);
-
-    swapChain->Present(0, 0);
-
-
 }
