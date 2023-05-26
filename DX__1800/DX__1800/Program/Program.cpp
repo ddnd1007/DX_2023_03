@@ -10,6 +10,7 @@ Program::Program()
 
 Program::~Program()
 {
+	_curScene->Update();
 }
 
 void Program::Update()

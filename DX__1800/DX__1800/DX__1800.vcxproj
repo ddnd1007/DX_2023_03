@@ -148,10 +148,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Render\ConstantBuffer.h" />
     <ClInclude Include="Framework\Device\Device.h" />
     <ClInclude Include="DX__1800.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Framework\Render\GlobalBuffer.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
+    <ClInclude Include="Framework\Render\IndexBuffer.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Object\BagicObject\Quad.h" />
     <ClInclude Include="Resource.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="Framework\Render\VertexLayout.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Framework\Device\Device.cpp" />
     <ClCompile Include="DX__1800.cpp" />
     <ClCompile Include="framework.cpp">
@@ -175,6 +179,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
+    <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Object\BagicObject\Quad.cpp" />
     <ClCompile Include="Framework\TextureMapping\SamplerState.cpp" />

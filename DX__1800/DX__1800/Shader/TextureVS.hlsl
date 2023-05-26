@@ -1,6 +1,22 @@
 
 // Symentic Name
 // SY = SystemValue
+// 행렬 만들기
+cbuffer World : register(b0) //b : constant slot 받는 곳
+{
+	matrix world;
+}
+
+cbuffer View : register(b0) //b : constant slot 받는 곳
+{
+	matrix view;
+}
+
+cbuffer Projection : register(b0) //b : constant slot 받는 곳
+{
+	matrix proj;
+}
+
 
 struct VertexInput
 {
@@ -20,7 +36,9 @@ struct VertexOutput
 VertexOutput VS(VertexInput input)
 {
 	VertexOutput result;
-	result.pos = input.pos;
+	result.pos = mul(input.pos, world);
+	result.pos = mul(input.pos, view);
+	result.pos = mul(input.pos, proj);
 	result.color = input.color;
 	result.uv = input.uv;
 

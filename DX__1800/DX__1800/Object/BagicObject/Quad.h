@@ -2,7 +2,6 @@
 class Quad
 {
 public:
-	Quad();
 	Quad(wstring path);
 
 	void Update();
@@ -13,8 +12,10 @@ public:
 
 private:
 	vector<Vertex> _vertices;
+	vector<UINT> _indices;
 
 	shared_ptr<VertexBuffer> _vertexBuffer;
+	shared_ptr<IndexBuffer> _indexBuffer;
 	shared_ptr<VertexShader> _vs;
 	shared_ptr<PixelShader> _ps;
 
