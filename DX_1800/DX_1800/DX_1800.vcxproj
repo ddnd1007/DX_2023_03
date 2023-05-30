@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
     <ClInclude Include="Framework\Device\Device.h" />
     <ClInclude Include="DX_1800.h" />
@@ -164,14 +165,17 @@
     <ClInclude Include="Framework\TextureMapping\SamplerState.h" />
     <ClInclude Include="Framework\TextureMapping\SRV.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\BagicScene\SolarSystem.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Scene\BagicScene\TutorialScene.h" />
+    <ClInclude Include="Framework\Math\Transform.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Framework\Render\VertexLayout.h" />
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Math\Vector2.cpp" />
     <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Framework\Device\Device.cpp" />
     <ClCompile Include="DX_1800.cpp" />
@@ -195,12 +199,17 @@
     <ClCompile Include="Object\BagicObject\Quad.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\BagicScene\TutorialScene.cpp" />
+    <ClCompile Include="Framework\Math\Transform.cpp" />
+    <ClCompile Include="Scene\BagicScene\SolarSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="DX_1800.ico" />
+    <Image Include="Resource\Texture\earth.png" />
+    <Image Include="Resource\Texture\moon.png" />
+    <Image Include="Resource\Texture\sun.png" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -5,16 +5,22 @@ Quad::Quad(wstring path)
 {
 	CreateVertices();
 	CreateData(path);
+
+    _transform = make_shared<Transform>();
 }
 
 void Quad::Update()
 {
+    _transform->Update();
 }
 
 void Quad::Render()
 {
+
+    _transform->SetIA_VertexBuffer(0);
     _vertexBuffer->SetIA_VertexBuffer();
     _indexBuffer->SetIA_IndexBuffer();
+
     _vs->SetIA_InputLayOut();
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 

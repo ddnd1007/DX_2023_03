@@ -36,6 +36,10 @@ using namespace Microsoft::WRL;
 // Framework
 #include "Framework/Device/Device.h"
 
+// Math
+#include "Framework/Math/Vector2.h"
+#include "Framework/Math/Transform.h"
+
 // Render
 #include "Framework/Render/ConstantBuffer.h"
 #include "Framework/Render/GlobalBuffer.h"

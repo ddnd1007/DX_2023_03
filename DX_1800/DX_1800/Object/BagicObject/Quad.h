@@ -10,6 +10,8 @@ public:
 	void CreateVertices();
 	void CreateData(wstring path);
 
+	shared_ptr<Transform> GetTransform() {}
+
 private:
 	vector<Vertex> _vertices;
 	vector<UINT> _indices;
@@ -21,5 +23,8 @@ private:
 
 	shared_ptr<SRV> _srv;
 	shared_ptr<SamplerState> _sampler;
+
+	// 컴포넌트 패턴
+	shared_ptr<Transform> _transform;
 };
 
