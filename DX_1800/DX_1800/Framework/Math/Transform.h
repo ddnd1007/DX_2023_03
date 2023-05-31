@@ -11,7 +11,7 @@ public:
 	void SetWorldBuffer(UINT slot);
 
 	void SetPosition(Vector2 pos) { _pos = pos; }
-	void SetScale(Vector2 scale) { _scale = scale; }
+	void SetScale(Vector2 scale) { _scale = scale;}
 	void SetAngle(float angle) { _angle = angle; }
 
 	void AddVector2(Vector2 pos) { _pos += pos; }
@@ -30,7 +30,7 @@ public:
 
 private:
 	Vector2 _pos;
-	Vector2 _scale = { 1.0f, 1.0f };
+	Vector2 _scale = {1.0f, 1.0f};
 	float _angle = 0.0f;
 
 	XMMATRIX _srtMatrix = XMMatrixIdentity();
@@ -38,3 +38,4 @@ private:
 	shared_ptr<class MatrixBuffer> _world;
 	weak_ptr<Transform> _parent;
 };
+

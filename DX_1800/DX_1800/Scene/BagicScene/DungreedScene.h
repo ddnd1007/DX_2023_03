@@ -10,7 +10,5 @@ public:
 
 private:
 	shared_ptr<DunPlayer> _player;
-	shared_ptr<DunPlayer> _arrow;
-	shared_ptr<DunBullet> _bullet;
 };
 

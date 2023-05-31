@@ -57,10 +57,10 @@
     <ClInclude Include="Scene\Scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\BasicScene\TutorialScene.h">
+    <ClInclude Include="Scene\BagicScene\TutorialScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BasicObject\Quad.h">
+    <ClInclude Include="Object\BagicObject\Quad.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Render\IndexBuffer.h">
@@ -78,19 +78,25 @@
     <ClInclude Include="Framework\Math\Transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\BasicScene\SolarSystem.h">
+    <ClInclude Include="Scene\BagicScene\SolarSystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Obj\Planet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\Dungreed\DunPlayer.h">
+    <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\Dungreed\DunBullet.h">
+    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\BasicScene\DungreedScene.h">
+    <ClInclude Include="Scene\BagicScene\TutorialScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BagicScene\SolarSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BagicScene\DungreedScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -125,10 +131,10 @@
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\BasicScene\TutorialScene.cpp">
+    <ClCompile Include="Scene\BagicScene\TutorialScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BasicObject\Quad.cpp">
+    <ClCompile Include="Object\BagicObject\Quad.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Render\IndexBuffer.cpp">
@@ -143,19 +149,25 @@
     <ClCompile Include="Framework\Math\Transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\BasicScene\SolarSystem.cpp">
+    <ClCompile Include="Scene\BagicScene\SolarSystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Obj\Planet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\Dungreed\DunPlayer.cpp">
+    <ClCompile Include="Object\Obj\DunGreed\DunPlayer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\Dungreed\DunBullet.cpp">
+    <ClCompile Include="Object\Obj\DunGreed\DunBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\BasicScene\DungreedScene.cpp">
+    <ClCompile Include="Scene\BagicScene\TutorialScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BagicScene\SolarSystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BagicScene\DungreedScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -180,13 +192,7 @@
     <Image Include="Resource\Texture\sun.png">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Resource\Texture\Bullet.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Resource\Texture\Item_11x5.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Resource\Texture\Player.png">
+    <Image Include="Resource\Texture\bow.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

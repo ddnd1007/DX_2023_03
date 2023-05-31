@@ -1,16 +1,16 @@
 #include "framework.h"
 #include "Program.h"
 
-#include "../Scene/BasicScene/TutorialScene.h"
-#include "../Scene/BasicScene/SolarSystem.h"
+#include "../Scene/BagicScene/TutorialScene.h"
+#include "../Scene/BagicScene/SolarSystem.h"
+#include "../Scene/BagicScene/DungreedScene.h"
 
 Program::Program()
 {
-	_curScene = make_shared<SolarSystem>();
+	_curScene = make_shared<DungreedScene>();
 
 	_view = make_shared<MatrixBuffer>();
 	_proj = make_shared<MatrixBuffer>();
-
 
 	_view->Update_Resource();
 
@@ -35,6 +35,7 @@ void Program::Render()
 
 	_view->SetVS_Buffer(1);
 	_proj->SetVS_Buffer(2);
+
 	_curScene->Render();
 
 	Device::GetInstance()->Present();

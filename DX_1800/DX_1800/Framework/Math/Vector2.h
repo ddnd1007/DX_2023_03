@@ -32,7 +32,7 @@ public:
 		return result;
 	}
 
-	Vector2 operator-(const Vector2& other) const
+	Vector2 operator-(const Vector2& other) const 
 	{
 		Vector2 result;
 		result.x = (*this).x - other.x;
@@ -41,13 +41,13 @@ public:
 		return result;
 	}
 
-	Vector2 operator*(const float& value)const
+	Vector2 operator*(const float& value)const 
 	{
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);
 	}
 
-	Vector2& operator=(const Vector2& other) 
+	Vector2& operator=(const Vector2& other)
 	{
 		x = other.x;
 		y = other.y;
@@ -62,10 +62,8 @@ public:
 		return *this;
 	}
 
-
 	bool operator==(const Vector2& other) const;
 	bool operator!=(const Vector2& other) const;
-
 	bool operator<(const Vector2& other) const;
 
 	float Length()const

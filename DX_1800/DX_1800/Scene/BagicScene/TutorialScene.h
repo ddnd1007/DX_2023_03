@@ -12,5 +12,5 @@ private:
 	shared_ptr<Quad> _quad;
 
 
-};
 
+};

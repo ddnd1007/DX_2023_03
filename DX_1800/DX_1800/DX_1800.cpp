@@ -173,8 +173,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         mousePos.x = static_cast<float>(LOWORD(lParam));
         mousePos.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
-    }
 
+        break;
+    }
     case WM_PAINT:
         {
             PAINTSTRUCT ps;

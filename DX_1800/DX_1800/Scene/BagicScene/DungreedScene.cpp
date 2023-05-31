@@ -3,9 +3,8 @@
 
 DungreedScene::DungreedScene()
 {
-	_player = make_shared<DunPlayer>(L"Player.png");
-	_arrow = make_shared<DunPlayer>(L"item11x5.jpg");
-	_bullet = make_shared<DunBullet>(L"Bullet.png");
+	
+	_player = make_shared<DunPlayer>();
 
 }
 
@@ -13,10 +12,14 @@ DungreedScene::~DungreedScene()
 {
 }
 
+
 void DungreedScene::Update()
 {
+	_player->Update();
 }
 
 void DungreedScene::Render()
 {
+	_player->Render();
 }
+

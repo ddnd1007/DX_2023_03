@@ -34,8 +34,6 @@ void SolarSystem::Update()
 	_sun->Update();
 	_earth->Update();
 	_moon->Update();
-
-	
 }
 
 void SolarSystem::Render()
