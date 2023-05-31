@@ -3,6 +3,9 @@
 
 Quad::Quad(wstring path)
 {
+    _srv = make_shared<SRV>(path);
+    _sampler = make_shared<SamplerState>();
+
 	CreateVertices();
 	CreateData(path);
 
@@ -17,10 +20,9 @@ void Quad::Update()
 void Quad::Render()
 {
 
-    _transform->SetIA_VertexBuffer(0);
+    _transform->SetWorldBuffer(0);
     _vertexBuffer->SetIA_VertexBuffer();
     _indexBuffer->SetIA_IndexBuffer();
-
     _vs->SetIA_InputLayOut();
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -37,22 +39,25 @@ void Quad::CreateVertices()
 {
 
     Vertex v;
-    v.pos = { -250.0f, 250.0f, 0.0f }; // 왼쪽 위
+
+    Vector2 halfSize = _srv->GetImageSize() * 0.5f;
+
+    v.pos = { -halfSize.x, halfSize.y, 0.0f }; // 왼쪽 위
     v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
     v.uv = { 0.0f, 0.0f };
     _vertices.push_back(v);
 
-    v.pos = { 250.0f, 250.0f, 0.0f }; // 오른쪽 위
+    v.pos = { halfSize.x, halfSize.y, 0.0f }; // 오른쪽 위
     v.color = { 0.0f, 1.0f, 0.0f, 1.0f };
     v.uv = { 1.0f, 0.0f };
     _vertices.push_back(v);
 
-    v.pos = { 250.0f, -250.0f, 0.0f }; // 오른쪽 아래
+    v.pos = { halfSize.x, -halfSize.y, 0.0f }; // 오른쪽 아래
     v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
     v.uv = { 1.0, 1.0f };
     _vertices.push_back(v);
 
-    v.pos = { -250.0f, -250.0f, 0.0f }; // 왼쪽 아래
+    v.pos = { -halfSize.x, -halfSize.y, 0.0f }; // 왼쪽 아래
     v.color = { 0.0f, 0.0f, 0.0f, 1.0f };
     v.uv = { 0.0f, 1.0f };
     _vertices.push_back(v);
@@ -73,6 +78,4 @@ void Quad::CreateData(wstring path)
 	_vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
 	_ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
 
-	_srv = make_shared<SRV>(path);
-	_sampler = make_shared<SamplerState>();
 }

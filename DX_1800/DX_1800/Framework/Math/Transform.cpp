@@ -19,11 +19,11 @@ void Transform::Update()
 void Transform::Update_SRT()
 {
 	// 월드 행렬
+	XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
+	XMMATRIX rotate = XMMatrixRotationZ(_angle);
 	XMMATRIX translate = XMMatrixTranslation(_pos.x, _pos.y, 0);
-	XMMATRIX scaling = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
-	XMMATRIX rotation = XMMatrixRotationZ(_angle);
 
-	_srtMatrix = scaling * rotation * translate;
+	_srtMatrix = scale * rotate * translate;
 
 	if (_parent.expired() == false)
 	{
@@ -39,5 +39,5 @@ void Transform::Update_WorldBuffer()
 
 void Transform::SetWorldBuffer(UINT slot)
 {
-	_world->SetVS_Buffer(slot);
+	_world->SetVS_Buffer(0);
 }

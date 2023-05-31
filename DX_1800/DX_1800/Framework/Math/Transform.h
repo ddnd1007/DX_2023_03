@@ -8,8 +8,8 @@ public:
 	void Update();
 	void Update_SRT();
 	void Update_WorldBuffer();
-	void SetWorldBuffer(UINT slot);
 
+	void SetWorldBuffer(UINT slot);
 	void SetPosition(Vector2 pos) { _pos = pos; }
 	void SetScale(Vector2 scale) { _scale = scale; }
 	void SetAngle(float angle) { _angle = angle; }
@@ -20,10 +20,11 @@ public:
 
 	void SetParent(shared_ptr<Transform> parent) { _parent = parent; }
 
-	const XMMATRIX GetSRT() { return _srtMatrix; }
+	const XMMATRIX& GetSRT() { return _srtMatrix; }
+
+	Vector2 GetScale() { return _scale; }
 
 private:
-
 	Vector2 _pos;
 	Vector2 _scale = { 1.0f, 1.0f };
 

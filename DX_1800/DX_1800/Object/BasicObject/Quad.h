@@ -10,7 +10,7 @@ public:
 	void CreateVertices();
 	void CreateData(wstring path);
 
-	shared_ptr<Transform> GetTransform() {}
+	shared_ptr<Transform> GetTransform() { return _transform; }
 
 private:
 	vector<Vertex> _vertices;
