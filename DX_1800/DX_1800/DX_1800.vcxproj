@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\BasicScene\DungreedScene.h" />
+    <ClInclude Include="Object\Obj\Dungreed\DunBullet.h" />
+    <ClInclude Include="Object\Obj\Dungreed\DunPlayer.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
     <ClInclude Include="Framework\Device\Device.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="Framework\Render\GlobalBuffer.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
+    <ClInclude Include="Object\Obj\Planet.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Object\BasicObject\Quad.h" />
     <ClInclude Include="Resource.h" />
@@ -175,6 +179,9 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\BasicScene\DungreedScene.cpp" />
+    <ClCompile Include="Object\Obj\Dungreed\DunBullet.cpp" />
+    <ClCompile Include="Object\Obj\Dungreed\DunPlayer.cpp" />
     <ClCompile Include="Framework\Math\Vector2.cpp" />
     <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Framework\Device\Device.cpp" />
@@ -191,6 +198,7 @@
     </ClCompile>
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
+    <ClCompile Include="Object\Obj\Planet.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
@@ -207,8 +215,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DX_1800.ico" />
+    <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />
+    <Image Include="Resource\Texture\Item_11x5.jpg" />
     <Image Include="Resource\Texture\moon.png" />
+    <Image Include="Resource\Texture\Player.png" />
     <Image Include="Resource\Texture\sun.png" />
     <Image Include="small.ico" />
   </ItemGroup>

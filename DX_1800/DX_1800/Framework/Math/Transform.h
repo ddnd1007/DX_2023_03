@@ -8,8 +8,8 @@ public:
 	void Update();
 	void Update_SRT();
 	void Update_WorldBuffer();
-
 	void SetWorldBuffer(UINT slot);
+
 	void SetPosition(Vector2 pos) { _pos = pos; }
 	void SetScale(Vector2 scale) { _scale = scale; }
 	void SetAngle(float angle) { _angle = angle; }
@@ -18,16 +18,19 @@ public:
 	void AddScale(Vector2 scale) { _scale += scale; }
 	void AddAngle(float angle) { _angle += angle; }
 
+	const Vector2& GetPos() { return _pos; }
+	const Vector2& GetScale() { return _scale; }
+	const float& GetAngle() { return _angle; }
+
+	Vector2 GetWorldPos() const;
+
 	void SetParent(shared_ptr<Transform> parent) { _parent = parent; }
 
 	const XMMATRIX& GetSRT() { return _srtMatrix; }
 
-	Vector2 GetScale() { return _scale; }
-
 private:
 	Vector2 _pos;
 	Vector2 _scale = { 1.0f, 1.0f };
-
 	float _angle = 0.0f;
 
 	XMMATRIX _srtMatrix = XMMatrixIdentity();
@@ -35,4 +38,3 @@ private:
 	shared_ptr<class MatrixBuffer> _world;
 	weak_ptr<Transform> _parent;
 };
-

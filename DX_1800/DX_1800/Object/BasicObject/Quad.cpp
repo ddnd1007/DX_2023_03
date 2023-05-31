@@ -19,7 +19,6 @@ void Quad::Update()
 
 void Quad::Render()
 {
-
     _transform->SetWorldBuffer(0);
     _vertexBuffer->SetIA_VertexBuffer();
     _indexBuffer->SetIA_IndexBuffer();
