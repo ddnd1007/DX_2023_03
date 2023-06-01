@@ -153,8 +153,12 @@
   <ItemGroup>
     <ClInclude Include="Framework\TextureMapping\BlendState.h" />
     <ClInclude Include="Framework\Utility\InputManager.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h" />
+    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
     <ClInclude Include="Framework\Device\Device.h" />
@@ -163,7 +167,9 @@
     <ClInclude Include="Framework\Render\GlobalBuffer.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
-    <ClInclude Include="Object\Obj\Planet.h" />
+    <ClInclude Include="Object\Obj\Planet.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Object\BagicObject\Quad.h" />
     <ClInclude Include="Resource.h" />
@@ -184,8 +190,12 @@
   <ItemGroup>
     <ClCompile Include="Framework\TextureMapping\BlendState.cpp" />
     <ClCompile Include="Framework\Utility\InputManager.cpp" />
-    <ClCompile Include="Object\Obj\DunGreed\DunBullet.cpp" />
-    <ClCompile Include="Object\Obj\DunGreed\DunPlayer.cpp" />
+    <ClCompile Include="Object\Obj\DunGreed\DunBullet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\DunGreed\DunPlayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Framework\Math\Vector2.cpp" />
     <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Framework\Device\Device.cpp" />
@@ -202,7 +212,9 @@
     </ClCompile>
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
-    <ClCompile Include="Object\Obj\Planet.cpp" />
+    <ClCompile Include="Object\Obj\Planet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
