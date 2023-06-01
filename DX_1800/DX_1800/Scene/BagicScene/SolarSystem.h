@@ -13,3 +13,4 @@ private:
 	shared_ptr<Planet> _earth;
 	shared_ptr<Planet> _moon;
 };
+

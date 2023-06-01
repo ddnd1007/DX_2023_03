@@ -55,11 +55,11 @@ using namespace Microsoft::WRL;
 
 // Obj
 #include "Object/BagicObject/Quad.h"
-#include "Object/Obj/Dungreed/DunPlayer.h"
-#include "Object/Obj/Dungreed/DunBullet.h"
 
 // GameObj
 #include "Object/Obj/Planet.h"
+#include "Object/Obj/Dungreed/DunBullet.h"
+#include "Object/Obj/Dungreed/DunPlayer.h"
 
 // Scene
 #include "Scene/Scene.h"
