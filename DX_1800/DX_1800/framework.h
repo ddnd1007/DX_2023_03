@@ -40,6 +40,9 @@ using namespace Microsoft::WRL;
 #include "Framework/Math/Vector2.h"
 #include "Framework/Math/Transform.h"
 
+//Utility
+#include "Framework/Utility/InputManager.h"
+
 // Render
 #include "Framework/Render/ConstantBuffer.h"
 #include "Framework/Render/GlobalBuffer.h"
@@ -52,6 +55,8 @@ using namespace Microsoft::WRL;
 // TextureMapping
 #include "Framework/TextureMapping/SRV.h"
 #include "Framework/TextureMapping/SamplerState.h"
+#include "Framework/TextureMapping/BlendState.h"
+#include "Framework/TextureMapping/StateManager.h"
 
 // Obj
 #include "Object/BagicObject/Quad.h"
@@ -70,4 +75,3 @@ using namespace Microsoft::WRL;
 #include "Types.h"
 
 extern HWND hWnd;
-extern Vector2 mousePos;

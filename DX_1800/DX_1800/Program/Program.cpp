@@ -26,6 +26,7 @@ Program::~Program()
 
 void Program::Update()
 {
+	InputManager::GetInstance()->Update();
 	_curScene->Update();
 }
 
@@ -36,6 +37,7 @@ void Program::Render()
 	_view->SetVS_Buffer(1);
 	_proj->SetVS_Buffer(2);
 
+	ALPHA->SetState();
 	_curScene->Render();
 
 	Device::GetInstance()->Present();

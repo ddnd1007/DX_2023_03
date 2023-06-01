@@ -4,10 +4,10 @@
 Quad::Quad(wstring path)
 {
     _srv = make_shared<SRV>(path);
-    _sampler = make_shared<SamplerState>();
 
-	CreateVertices();
-	CreateData(path);
+
+    CreateVertices();
+    CreateData(path);
 
     _transform = make_shared<Transform>();
 }
@@ -27,12 +27,12 @@ void Quad::Render()
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     _srv->SetSRV(0);
-    _sampler->SetSampler();
+    SAMPLER->SetSampler();
 
     _vs->Set_VS();
     _ps->Set_PS();
 
-    DC->DrawIndexed(_indices.size(),0,0);
+    DC->DrawIndexed(_indices.size(), 0, 0);
 }
 
 void Quad::CreateVertices()
@@ -72,8 +72,8 @@ void Quad::CreateVertices()
 
 void Quad::CreateData(wstring path)
 {
-	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
+    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
-	_vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
-	_ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
+    _vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
+    _ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
 }
