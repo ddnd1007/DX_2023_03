@@ -9,8 +9,8 @@ public:
 	virtual void Render() override;
 
 private:
-	shared_ptr<Collider> _mouseRect;
-	shared_ptr<Collider> _circleCollider;
-
-	vector<shared_ptr<Collider>> _colliders;
+	shared_ptr<CircleCollider> _circleCollider;
+	shared_ptr<RectCollider> _rectCollider;
+	shared_ptr<RectCollider> _rectCollider2;
 };
+

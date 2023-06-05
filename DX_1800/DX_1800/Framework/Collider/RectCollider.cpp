@@ -2,10 +2,10 @@
 #include "RectCollider.h"
 
 RectCollider::RectCollider(Vector2 size)
-	:_size(size)
+    : _size(size)
 {
-	CreateVertices();
-	CreateData();
+    CreateVertices();
+    CreateData();
 
     _type = Type::RECT;
 }
@@ -16,9 +16,10 @@ RectCollider::~RectCollider()
 
 void RectCollider::Update()
 {
-    _colorBuffer->Update_Resource();
-    _colorBuffer->SetColor(_color);
     _transform->Update();
+
+    _colorBuffer->SetColor(_color);
+    _colorBuffer->Update_Resource();
 }
 
 void RectCollider::Render()
@@ -29,21 +30,19 @@ void RectCollider::Render()
     _vertexBuffer->SetIA_VertexBuffer();
     _vs->SetIA_InputLayOut();
 
- 
-    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP); // 선으로 만드는 작업
+    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
     _vs->Set_VS();
     _ps->Set_PS();
 
-    DC->Draw(_vertices.size(),0);
-
+    DC->Draw(_vertices.size(), 0);
 }
 
 void RectCollider::CreateVertices()
 {
     Vertex v;
 
-    Vector2 halfSize = _size * 0.5f; // 선으로 만드는 작업은 사각형이면 정점이 5개 필요함
+    Vector2 halfSize = _size * 0.5f;
 
     v.pos = { -halfSize.x, halfSize.y, 0.0f }; // 왼쪽 위
     _vertices.push_back(v);
@@ -68,40 +67,42 @@ void RectCollider::CreateData()
 
     _vs = make_shared<VertexShader>(L"Shader/ColliderVS.hlsl");
     _ps = make_shared<PixelShader>(L"Shader/ColliderPS.hlsl");
-
 }
 
-bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
+bool RectCollider::IsCollision(shared_ptr<CircleCollider> col)
 {
-    AABB_info info = GetAABB_Info();
+    AABB_Info info = GetAABB_Info();
 
-    Vector2 circleWorldPos = other->GetWorldPos();
+    Vector2 circleWorldPos = col->GetWorldPos();
 
-    float circleLeft =      GetWorldPos().x - other->GetWorldRadius();
-    float circleRight =     GetWorldPos().x + other->GetWorldRadius();
-    float circleTop =       GetWorldPos().y + other->GetWorldRadius();
-    float circleBottom =    GetWorldPos().y - other->GetWorldRadius();
+    float circleLeft = circleWorldPos.x - col->GetWorldRadius();
+    float circleRight = circleWorldPos.x + col->GetWorldRadius();
+    float circleTop = circleWorldPos.y + col->GetWorldRadius();
+    float circleBottom = circleWorldPos.y - col->GetWorldRadius();
 
-    if (other->GetWorldPos().x < info.right && other->GetWorldPos().x > info.left)
+    if (circleWorldPos.x < info.right && circleWorldPos.x > info.left)
     {
-        if (circleBottom < info.bottom && circleTop > info.bottom)
+        if (circleBottom < info.top && circleTop > info.bottom)
         {
             return true;
         }
     }
 
-    if (other->GetWorldPos().y > Bottom() && other->GetWorldPos().y < Top())
+    //_rectCollider = make_shared<RectCollider>(Vector2(90, 150));
+    //_rectCollider2 = make_shared<RectCollider>(Vector2(40, 70));
+
+    if (circleWorldPos.y > info.bottom && circleWorldPos.y < info.top)
     {
-        if (other->Left() < Right() && other->Right() > Left())
+        if (circleLeft < info.right && circleRight > info.left)
         {
             return true;
         }
     }
 
-    if (other->IsCollision(Vector2(Left(), Top()))
-        || other->IsCollision(Vector2(Right(), Top()))
-        || other->IsCollision(Vector2(Left(), Bottom()))
-        || other->IsCollision(Vector2(Right(), Bottom())))
+    if (col->IsCollision(Vector2(info.left, info.top))
+        || col->IsCollision(Vector2(info.right, info.top))
+        || col->IsCollision(Vector2(info.left, info.bottom))
+        || col->IsCollision(Vector2(info.right, info.bottom)))
     {
         return true;
     }
@@ -109,20 +110,10 @@ bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
     return false;
 }
 
-RectCollider::AABB_info RectCollider::GetAABB_Info()
+bool RectCollider::IsCollision(shared_ptr<RectCollider> col)
 {
-    AABB_info info;
-    info.left =     _transform->GetWorldPos().x - _size.x * _transform->GetWorldScale().x;
-    info.right =    _transform->GetWorldPos().x + _size.x * _transform->GetWorldScale().x;
-    info.top =      _transform->GetWorldPos().y + _size.x * _transform->GetWorldScale().y;
-    info.bottom =   _transform->GetWorldPos().y - _size.x * _transform->GetWorldScale().y;
-    return info;
-}
-
-bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
-{
-    AABB_info aInfo = GetAABB_Info();
-    AABB_info bInfo = other->GetAABB_Info();
+    AABB_Info aInfo = GetAABB_Info();
+    AABB_Info bInfo = col->GetAABB_Info();
 
     if (aInfo.left > bInfo.right || aInfo.right < bInfo.left
         || aInfo.top < bInfo.bottom || aInfo.bottom > bInfo.top)
@@ -131,10 +122,31 @@ bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
     return true;
 }
 
+void RectCollider::SetScale(Vector2 scale)
+{
+    _transform->SetScale(scale);
+    _size.x *= scale.x;
+    _size.y *= scale.y;
+}
+
+RectCollider::AABB_Info RectCollider::GetAABB_Info()
+{
+    AABB_Info info;
+    Vector2 worldPos = _transform->GetWorldPos();
+    Vector2 worldScale = _transform->GetWorldScale();
+
+    info.left = _transform->GetWorldPos().x - _size.x * worldScale.x * 0.5f;
+    info.right = _transform->GetWorldPos().x + _size.x * worldScale.x * 0.5f;
+    info.top = _transform->GetWorldPos().y + _size.y * worldScale.y * 0.5f;
+    info.bottom = _transform->GetWorldPos().y - _size.y * worldScale.y * 0.5f;
+
+    return info;
+}
 
 bool RectCollider::IsCollision(const Vector2& pos)
 {
-    AABB_info info;
+    AABB_Info info = GetAABB_Info();
+
     if (pos.x > info.left && pos.x < info.right)
     {
         if (pos.y > info.bottom && pos.y < info.top)
@@ -142,6 +154,3 @@ bool RectCollider::IsCollision(const Vector2& pos)
     }
     return false;
 }
-
-
-

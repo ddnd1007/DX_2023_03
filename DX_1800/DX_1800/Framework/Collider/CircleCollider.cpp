@@ -41,11 +41,9 @@ void CircleCollider::CreateVertices()
 {
 	Vertex v;
 
-	float theta = PI * (1.0f / 18.0f);
-
 	for (int i = 0; i < 37; i++)
 	{
-		v.pos = XMFLOAT3(_radius * cos(i * theta), _radius * sin(i * theta), 0.0f);
+		v.pos = { _radius * cosf(i * PI / 18.0f), _radius * sinf(i * PI / 18.0f), 0.0f };
 		_vertices.push_back(v);
 	}
 }
@@ -62,19 +60,23 @@ void CircleCollider::CreateData()
 
 bool CircleCollider::IsCollision(const Vector2& pos)
 {
-	float distance = _transform->GetWorldPos().Distance(pos);
-
-	return distance < GetWorldRadius();
-}
-bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
-{
-	float distance = _transform->GetWorldPos().Distance(other->GetWorldPos());
-	return distance < (GetWorldRadius + other->GetWorldRadius);
+	float distance = GetWorldPos().Distance(pos);
+	if (distance < GetWorldRadius())
+		return true;
+	return false;
 }
 
-bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
+bool CircleCollider::IsCollision(shared_ptr<CircleCollider> col)
 {
-	return other->IsCollision(shared_from_this());
+	float distance = GetWorldPos().Distance(col->GetWorldPos());
+	if (distance < GetWorldRadius() + col->GetWorldRadius())
+		return true;
+	return false;
+}
+
+bool CircleCollider::IsCollision(shared_ptr<RectCollider> col)
+{
+	return col->IsCollision(shared_from_this());
 }
 
 float CircleCollider::GetWorldRadius()
@@ -85,8 +87,5 @@ float CircleCollider::GetWorldRadius()
 
 	return _radius * temp;
 }
-
-
-
 
 

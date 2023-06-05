@@ -1,18 +1,16 @@
 #include "framework.h"
 #include "ColliderScene.h"
-#include "../../Types.h"
 
 ColliderScene::ColliderScene()
 {
-	_mouseRect = make_shared<RectCollider>(Vector2(80.0f, 80.0f));
-	_circleCollider = make_shared<CircleCollider>(100.0f);
-
-	_colliders.push_back(_mouseRect);
-	_colliders.push_back(_circleCollider);
-
-	_mouseRect->GetTransform()->SetPosition(CENTER + Vector2(-100.0f, 0.0f));
+	_circleCollider = make_shared<CircleCollider>(50);
 	_circleCollider->GetTransform()->SetPosition(CENTER);
-	
+
+	_rectCollider = make_shared<RectCollider>(Vector2(90, 150));
+	_rectCollider2 = make_shared<RectCollider>(Vector2(40, 70));
+
+	_rectCollider2->GetTransform()->SetParent(_rectCollider->GetTransform());
+	_rectCollider2->GetTransform()->SetPosition({ 100.0f,0.0f });
 }
 
 ColliderScene::~ColliderScene()
@@ -21,32 +19,23 @@ ColliderScene::~ColliderScene()
 
 void ColliderScene::Update()
 {
-	_mouseRect->GetTransform()->SetPosition(MOUSE_POS);
+	_rectCollider->GetTransform()->SetPosition(MOUSE_POS);
 
-	for (int i = 0; i < _colliders.size(); i++)
+	_circleCollider->Update();
+	_rectCollider->Update();
+	_rectCollider2->Update();
+
+	if (_rectCollider2->IsCollision(_circleCollider))
 	{
-		bool isCollision = false;
-		for (int j = 0; j < _colliders.size(); j++)
-		{
-			if (i == j)
-				continue;
-
-			if (_colliders[i]->IsCollision(_colliders[j]))
-				isCollision = true;
-		}
-
-		if (isCollision)
-			_colliders[i]->SetColorRed();
-		else
-			_colliders[i]->SetColorGreen();
+		_rectCollider2->SetColorRed();
 	}
-
-	for (auto col : _colliders)
-		col->Update();
+	else
+		_rectCollider2->SetColorGreen();
 }
 
 void ColliderScene::Render()
 {
-	for (auto col : _colliders)
-		col->Render();
+	_circleCollider->Render();
+	_rectCollider->Render();
+	_rectCollider2->Render();
 }
