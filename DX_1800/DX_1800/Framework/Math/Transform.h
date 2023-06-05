@@ -23,6 +23,7 @@ public:
 	const float& GetAngle() { return _angle; }
 
 	Vector2 GetWorldPos() const;
+	Vector2 GetWorldScale() const;
 
 	void SetParent(shared_ptr<Transform> parent) { _parent = parent; }
 
@@ -32,6 +33,10 @@ private:
 	Vector2 _pos;
 	Vector2 _scale = {1.0f, 1.0f};
 	float _angle = 0.0f;
+
+	XMMATRIX _scaleM = XMMatrixIdentity();
+	XMMATRIX _rotateM = XMMatrixIdentity();
+	XMMATRIX _translateM = XMMatrixIdentity();
 
 	XMMATRIX _srtMatrix = XMMatrixIdentity();
 

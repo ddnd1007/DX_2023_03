@@ -3,6 +3,13 @@
 class RectCollider : public Collider
 {
 public:
+	struct AABB_info
+	{
+		float left = 0;
+		float top = 0;
+		float right = 0;
+		float bottom = 0;
+	};
 	RectCollider(Vector2 size);
 	~RectCollider();
 
@@ -16,12 +23,10 @@ public:
 	virtual bool IsCollision(shared_ptr<RectCollider> other) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
 
-	float Left() { return _transform->GetWorldPos().x - (_size * 0.5f).x; }
-	float Right() { return _transform->GetWorldPos().x + (_size * 0.5f).x; }
-	float Bottom() { return _transform->GetWorldPos().y - (_size * 0.5f).y; }
-	float Top() { return _transform->GetWorldPos().y + (_size * 0.5f).y; }
+	AABB_info GetAABB_Info();
+	
 
-	shared_ptr<Transform> GetTransform() { return _transform; }
+
 
 
 private:

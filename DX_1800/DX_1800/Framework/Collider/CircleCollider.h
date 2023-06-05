@@ -16,11 +16,7 @@ public:
 	virtual bool IsCollision(shared_ptr<RectCollider> other) override;
 
 	float GetRadius() { return _radius; }
-
-	float Left() { return _transform->GetWorldPos().x - _radius; }
-	float Right() { return _transform->GetWorldPos().x + _radius; }
-	float Bottom() { return _transform->GetWorldPos().y - _radius; }
-	float Top() { return _transform->GetWorldPos().y + _radius; }
+	float GetWorldRadius();
 
 private:
 	float _radius;

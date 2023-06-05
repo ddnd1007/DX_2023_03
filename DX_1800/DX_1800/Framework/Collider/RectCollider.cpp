@@ -73,9 +73,18 @@ void RectCollider::CreateData()
 
 bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
-    if (other->GetWorldPos().x < Right() && other->GetWorldPos().x > Left())
+    AABB_info info = GetAABB_Info();
+
+    Vector2 circleWorldPos = other->GetWorldPos();
+
+    float circleLeft =      GetWorldPos().x - other->GetWorldRadius();
+    float circleRight =     GetWorldPos().x + other->GetWorldRadius();
+    float circleTop =       GetWorldPos().y + other->GetWorldRadius();
+    float circleBottom =    GetWorldPos().y - other->GetWorldRadius();
+
+    if (other->GetWorldPos().x < info.right && other->GetWorldPos().x > info.left)
     {
-        if (other->Bottom() < Top() && other->Top() > Bottom())
+        if (circleBottom < info.bottom && circleTop > info.bottom)
         {
             return true;
         }
@@ -100,10 +109,23 @@ bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
     return false;
 }
 
+RectCollider::AABB_info RectCollider::GetAABB_Info()
+{
+    AABB_info info;
+    info.left =     _transform->GetWorldPos().x - _size.x * _transform->GetWorldScale().x;
+    info.right =    _transform->GetWorldPos().x + _size.x * _transform->GetWorldScale().x;
+    info.top =      _transform->GetWorldPos().y + _size.x * _transform->GetWorldScale().y;
+    info.bottom =   _transform->GetWorldPos().y - _size.x * _transform->GetWorldScale().y;
+    return info;
+}
+
 bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
 {
-    if (Left() > other->Right() || Right() < other->Left()
-        || Top() < other->Bottom() || Bottom() > other->Top())
+    AABB_info aInfo = GetAABB_Info();
+    AABB_info bInfo = other->GetAABB_Info();
+
+    if (aInfo.left > bInfo.right || aInfo.right < bInfo.left
+        || aInfo.top < bInfo.bottom || aInfo.bottom > bInfo.top)
         return false;
 
     return true;
@@ -112,9 +134,10 @@ bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
 
 bool RectCollider::IsCollision(const Vector2& pos)
 {
-    if (pos.x > Left() && pos.x < Right())
+    AABB_info info;
+    if (pos.x > info.left && pos.x < info.right)
     {
-        if (pos.y > Bottom() && pos.y < Top())
+        if (pos.y > info.bottom && pos.y < info.top)
             return true;
     }
     return false;

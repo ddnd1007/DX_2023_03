@@ -18,11 +18,11 @@ void Transform::Update()
 
 void Transform::Update_SRT()
 {
-	XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
-	XMMATRIX rotate = XMMatrixRotationZ(_angle);
-	XMMATRIX translate = XMMatrixTranslation(_pos.x, _pos.y, 0);
+	XMMATRIX scaleM = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
+	XMMATRIX rotateM = XMMatrixRotationZ(_angle);
+	XMMATRIX translateM = XMMatrixTranslation(_pos.x, _pos.y, 0);
 
-	_srtMatrix = scale * rotate * translate;
+	_srtMatrix = scaleM * rotateM * translateM;
 
 	if (_parent.expired() == false)
 	{
@@ -48,4 +48,20 @@ Vector2 Transform::GetWorldPos() const
 	XMStoreFloat4x4(&temp, _srtMatrix);
 	
 	return Vector2(temp._41,temp._42);
+}
+
+Vector2 Transform::GetWorldScale() const
+{
+	XMFLOAT4X4 temp;
+
+	XMStoreFloat4x4(&temp, _srtMatrix);
+
+	if (_parent.expired() == false)
+	{
+		Vector2 parentScale = _parent.lock()->GetWorldScale();
+
+		return Vector2(temp._11 * parentScale.x, temp._22 * parentScale.y);
+	}
+
+	return Vector2(temp._11,temp._22);
 }

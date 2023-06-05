@@ -17,10 +17,8 @@ CircleCollider::~CircleCollider()
 void CircleCollider::Update()
 {
 	_transform->Update();
-
 	_colorBuffer->SetColor(_color);
 	_colorBuffer->Update_Resource();
-
 }
 
 void CircleCollider::Render()
@@ -66,17 +64,26 @@ bool CircleCollider::IsCollision(const Vector2& pos)
 {
 	float distance = _transform->GetWorldPos().Distance(pos);
 
-	return distance < _radius;
+	return distance < GetWorldRadius();
 }
 bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
 	float distance = _transform->GetWorldPos().Distance(other->GetWorldPos());
-	return distance < (_radius + other->_radius);
+	return distance < (GetWorldRadius + other->GetWorldRadius);
 }
 
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
 {
 	return other->IsCollision(shared_from_this());
+}
+
+float CircleCollider::GetWorldRadius()
+{
+	Vector2 worldScale = _transform->GetWorldScale();
+
+	float temp = (worldScale.x + worldScale.y) / 2;
+
+	return _radius * temp;
 }
 
 
