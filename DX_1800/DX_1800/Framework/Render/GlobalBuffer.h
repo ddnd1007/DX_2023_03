@@ -43,6 +43,11 @@ public:
 
 	virtual ~ColorBuffer() {}
 
+	void SetColor(XMFLOAT4 color)
+	{
+		_data.color = color;
+	}
+
 	
 
 	Data _data;

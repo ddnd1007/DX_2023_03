@@ -1,13 +1,13 @@
 #include "framework.h"
 #include "CircleCollider.h"
 
-CircleCollider::CircleCollider(Vector2 size)
-	:_size(size)
+CircleCollider::CircleCollider(float radius)
+	: _radius(radius)
 {
 	CreateVertices();
 	CreateData();
 
-	_transform = make_shared<Transform>();
+	_type = Type::CIRCLE;
 }
 
 CircleCollider::~CircleCollider()
@@ -17,13 +17,19 @@ CircleCollider::~CircleCollider()
 void CircleCollider::Update()
 {
 	_transform->Update();
+
+	_colorBuffer->SetColor(_color);
+	_colorBuffer->Update_Resource();
+
 }
 
 void CircleCollider::Render()
 {
 	_transform->SetWorldBuffer(0);
+	_colorBuffer->SetPS_Buffer(0);
 
 	_vertexBuffer->SetIA_VertexBuffer();
+	_vs->SetIA_InputLayOut();
 
 	DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
@@ -37,36 +43,43 @@ void CircleCollider::CreateVertices()
 {
 	Vertex v;
 
-	Vector2 halfSize = _size * 0.5f; // 선으로 만드는 작업은 사각형이면 정점이 5개 필요함
+	float theta = PI * (1.0f / 18.0f);
 
-	v.pos = { -halfSize.x, halfSize.y, 0.0f }; // 왼쪽 위
-	_vertices.push_back(v);
-
-	v.pos = { halfSize.x, halfSize.y, 0.0f }; // 오른쪽 위
-	_vertices.push_back(v);
-
-	v.pos = { halfSize.x, -halfSize.y, 0.0f }; // 오른쪽 아래
-	_vertices.push_back(v);
-
-	v.pos = { -halfSize.x, -halfSize.y, 0.0f }; // 왼쪽 아래
-	_vertices.push_back(v);
-
-	v.pos = { -halfSize.x, halfSize.y, 0.0f }; // 왼쪽 위
-	_vertices.push_back(v);
-
-	v.pos = { -halfSize.x, halfSize.y, 0.0f }; // 왼쪽 위
-	_vertices.push_back(v)
-
-		v.pos = { -halfSize.x, halfSize.y, 0.0f }; // 왼쪽 위
-	_vertices.push_back(v)
+	for (int i = 0; i < 37; i++)
+	{
+		v.pos = XMFLOAT3(_radius * cos(i * theta), _radius * sin(i * theta), 0.0f);
+		_vertices.push_back(v);
+	}
 }
 
 void CircleCollider::CreateData()
 {
 	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
+	_colorBuffer = make_shared<ColorBuffer>();
 
 	_vs = make_shared<VertexShader>(L"Shader/ColliderVS.hlsl");
 	_ps = make_shared<PixelShader>(L"Shader/ColliderPS.hlsl");
 
-	_color = make_shared<ColorBuffer>();
 }
+
+bool CircleCollider::IsCollision(const Vector2& pos)
+{
+	float distance = _transform->GetWorldPos().Distance(pos);
+
+	return distance < _radius;
+}
+bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
+{
+	float distance = _transform->GetWorldPos().Distance(other->GetWorldPos());
+	return distance < (_radius + other->_radius);
+}
+
+bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
+{
+	return other->IsCollision(shared_from_this());
+}
+
+
+
+
+
