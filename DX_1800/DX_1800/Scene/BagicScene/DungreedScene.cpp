@@ -4,7 +4,7 @@
 DungreedScene::DungreedScene()
 {
 	
-	_player = make_shared<DunPlayer>();
+	//_player = make_shared<DunPlayer>();
 
 }
 
@@ -15,11 +15,11 @@ DungreedScene::~DungreedScene()
 
 void DungreedScene::Update()
 {
-	_player->Update();
+	//_player->Update();
 }
 
 void DungreedScene::Render()
 {
-	_player->Render();
+	//_player->Render();
 }
 

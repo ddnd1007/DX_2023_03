@@ -54,7 +54,7 @@ Vector2 Transform::GetWorldScale() const
 {
 	XMFLOAT4X4 temp;
 
-	XMStoreFloat4x4(&temp, _srtMatrix);
+	XMStoreFloat4x4(&temp, _scaleM);
 
 	if (_parent.expired() == false)
 	{
