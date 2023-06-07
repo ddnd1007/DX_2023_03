@@ -45,7 +45,7 @@ void Program::Render()
 	ALPHA->SetState();
 	_curScene->Render();
 
-	ImGui::Text("Test ImGui");
+	ImGui::Text("Test ImGui!");
 	_curScene->PostRender();
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
