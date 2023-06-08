@@ -11,7 +11,7 @@ public:
 
 private:
 	shared_ptr<CircleCollider> _circleCollider;
-	shared_ptr<RectCollider> _rectCollider_Mouse;
+	shared_ptr<RectCollider> _rectColliderMouse;
 	shared_ptr<RectCollider> _rectCollider2;
 
 	Vector2 _pos = { 1.0f, 1.0f };
