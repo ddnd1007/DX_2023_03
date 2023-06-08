@@ -46,6 +46,11 @@ public:
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);
 	}
+	Vector2 operator*(const double& value)const
+	{
+		Vector2 result;
+		return result = Vector2((float(this->x * value), (float(this->y * value))));
+	}
 
 	Vector2& operator=(const Vector2& other)
 	{
@@ -109,8 +114,9 @@ public:
 
 	void Normalize()
 	{
-		x /= Length();
-		y /= Length();
+		float length = Length();
+		x /= length;
+		y /= length;
 	}
 
 	bool IsBetween(Vector2 a, Vector2 b);

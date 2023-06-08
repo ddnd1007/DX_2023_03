@@ -34,8 +34,8 @@ void Device::CreateDeviceAndSwapChain()
 {
     RECT rc;
     GetClientRect(hWnd, &rc);
-    UINT width = WIN_WIDTH;
-    UINT height = WIN_HEIGHT;
+    UINT width = rc.right = rc.left;
+    UINT height = rc.bottom = rc.top;
 
     D3D_FEATURE_LEVEL featureLevels[] =
     {

@@ -27,6 +27,7 @@ Program::~Program()
 
 void Program::Update()
 {
+	Timer::GetInstance()->Update();
 	InputManager::GetInstance()->Update();
 	_curScene->Update();
 }
@@ -45,7 +46,9 @@ void Program::Render()
 	ALPHA->SetState();
 	_curScene->Render();
 
-	ImGui::Text("Test ImGui!");
+	ImGui::Text("FPS : %d", FPS);
+	ImGui::Text("DeltaTime : %1f", DELTA_TIME);
+	ImGui::Text("RunTime : %1f", RUN_TIME);
 	_curScene->PostRender();
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

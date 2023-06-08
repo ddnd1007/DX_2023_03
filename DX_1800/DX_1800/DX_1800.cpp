@@ -52,6 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ImGui_ImplWin32_Init(hWnd);
     ImGui_ImplDX11_Init(DEVICE.Get(), DC.Get());
 
+    Timer::Create();
     InputManager::Create();
     StateManager::Create();
 
@@ -82,6 +83,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 삭제
     StateManager::Delete();
     InputManager::Delete();
+    Timer::Delete();
 
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
