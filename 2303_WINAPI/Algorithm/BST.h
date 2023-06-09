@@ -12,6 +12,7 @@ struct Node
 	Node* right = nullptr;
 	Node* parent = nullptr;
 };
+
 class BST
 {
 public:
@@ -31,7 +32,6 @@ public:
 
 private:
 	void Replace(Node* node1, Node* node2);
-
 public:
 	Node* _root = nullptr;
 };

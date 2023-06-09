@@ -18,11 +18,6 @@ void Collider::SetCenter(const Vector2& center)
 	_center = center;
 }
 
-void Collider::MoveCenter(const Vector2& value)
-{
-	_center += value;
-}
-
 bool Collider::IsCollision(shared_ptr<Collider> col)
 {
 	switch (col->_type)

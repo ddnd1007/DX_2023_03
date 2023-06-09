@@ -10,26 +10,21 @@
 
 using namespace std;
 
-//tree // list의 진화된 형태
+// Tree
 // - root
-// - leaf : 자식이 없는 애들 맨 마지막 애들
-// - defth
+// - leaf
+// - depth
 
-// 1. 계층적 구조를 나타내기에 가장 적합한 구조. ★★
-// 2. 서브트리가 존재하며, 트리는 재귀적 속성을 갖는다. ★★
-
-// 완전이진트리 : 벡터로 대체 가능
-// 무조건 왼쪽부터 추가됨
-// 뺄 때는 오른쪽 부터
+// 1. 계층적 구조를 나타내기에 가장 적합한 구조.
+// 2. 서브트리가 존재하며, 트리는 재귀적 속성을 갖는다.
 
 struct Node
 {
 	Node() {}
 	Node(const string& data) : _data(data) {}
-
+	
 	vector<Node*> _children;
 	string _data;
-
 };
 
 Node* CreateTree()
@@ -54,8 +49,9 @@ Node* CreateTree()
 			children_1->_children.push_back(children_2);
 		}
 	}
+
 	{
-		Node* children_1 = new Node("기획팀");
+		Node* children_1 = new Node("기획");
 		root->_children.push_back(children_1);
 
 		{
@@ -64,7 +60,7 @@ Node* CreateTree()
 		}
 
 		{
-			Node* children_2 = new Node("레밸디자인");
+			Node* children_2 = new Node("레벨디자인");
 			children_1->_children.push_back(children_2);
 		}
 
@@ -73,8 +69,9 @@ Node* CreateTree()
 			children_1->_children.push_back(children_2);
 		}
 	}
+
 	{
-		Node* children_1 = new Node("아트팀");
+		Node* children_1 = new Node("아트");
 		root->_children.push_back(children_1);
 
 		{
@@ -92,6 +89,7 @@ Node* CreateTree()
 			children_1->_children.push_back(children_2);
 		}
 	}
+
 	return root;
 }
 
@@ -99,23 +97,22 @@ void PrintTree(Node* root, int depth)
 {
 	for (int i = 0; i < depth; i++)
 	{
-		cout << "-";
+		cout<< "-";
 	}
 
 
+	cout << root->_data << endl;
 	for (auto node : root->_children)
 	{
 		PrintTree(node, depth + 1);
 	}
-	cout << root->_data << endl;
 }
 
 int main()
 {
-
 	Node* root = CreateTree();
 
-	PrintTree(root, 0);
-	
+	PrintTree(root,0);
+
 	return 0;
 }

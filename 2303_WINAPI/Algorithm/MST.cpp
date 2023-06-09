@@ -9,21 +9,20 @@
 #include <deque>
 
 using namespace std;
-// 탐욕법을 사용할 떄 좋다.
 
 // Spanning Tree
 // 1. 모든 노드를 방문할 수 있는 간선들의 집합
-// 2. 이 떄 간선의 수는 노드가 N개일 때 N-1개이다. (사이클 포함X)
+// 2. 이 때 간선의 수는 노드가 N개일 때 N-1개 이다. (사이클 포함X)
 
 // Minimum Spanning Tree
 // 1. 스패닝 트리
-// 2. 모든 간선의 합이 최소한 스패닝 트리
-// 3. 사이클을 절대 포함 X
+// 2. 모든 간선의 합이 최소인 스패닝 트리
+// 3. 사이클을 절대 돌지 않는다.
 
 // 탐욕법
-// -> 현재 최선의 선택을 했을 때 나중 결과도 최선인 경우
+// => 현재 최선의 선택을 했을 때 나중 결과도 최선인 경우
 
-// Kruskal Algorithm 을 이용하여 최소 스패닝 트리 찾기.
+// Kruskal Algorithm을 이용하여 최소 스패닝 트리 찾기
 
 class DisJointSet
 {
@@ -66,12 +65,10 @@ public:
 			_rank[uLeader]++;
 	}
 
-
 private:
 	vector<int> _parent;
 	vector<int> _rank;
 };
-
 
 struct Edge
 {
@@ -85,15 +82,6 @@ vector<Edge> edges;
 
 void CreateGraph()
 {
-	//	  0  1  2  3  4  5  6
-	// 0  1  1  1  0  0  0  0
-	// 1  1  1  0  0  0  0  1
-	// 2  1  0  1  1  0  1  0
-	// 3  0  0  1  1  0  0  0
-	// 4  1  0  0  0  1  0  0
-	// 5  0  0  1  0  0  1  0
-	// 6  0  1  0  0  0  0  1
-
 	adjacent = vector<vector<int>>(7, vector<int>(7, -1));
 
 	adjacent[0][0] = 0;
@@ -103,8 +91,8 @@ void CreateGraph()
 
 	adjacent[1][0] = 4;
 	adjacent[1][1] = 0;
-	adjacent[1][2] = 2;
 	adjacent[1][6] = 7;
+	adjacent[1][2] = 2;
 
 	adjacent[2][0] = 1;
 	adjacent[2][1] = 2;
@@ -123,10 +111,10 @@ void CreateGraph()
 	adjacent[5][6] = 80;
 
 	adjacent[6][1] = 7;
-	adjacent[6][6] = 0;
 	adjacent[6][5] = 80;
+	adjacent[6][6] = 0;
 
-	//모든 간선들을 담기
+	// 모든 간선들을 담기
 	for (int u = 0; u < adjacent.size(); u++)
 	{
 		for (int v = 0; v < adjacent[u].size(); v++)
@@ -142,11 +130,9 @@ void CreateGraph()
 			edge.vertexV = v;
 			edge.cost = adjacent[u][v];
 			edges.push_back(edge);
-
 		}
 	}
 }
-
 
 vector<Edge> Kruskal()
 {
@@ -154,31 +140,28 @@ vector<Edge> Kruskal()
 
 	// edges 정렬하기
 	std::sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) -> bool 
-		{
-			return a.cost < b.cost;
-		});
+	{
+		return a.cost < b.cost;
+	});
 
 	DisJointSet sets(adjacent.size());
 
 	for (auto edge : edges)
 	{
-		// 같은 집합이면 다음꺼 보겠다
-		if (sets.FindLeader(edge.vertexU) == sets.FindLeader(edge.vertexV))
+		if(sets.FindLeader(edge.vertexU) == sets.FindLeader(edge.vertexV))
 			continue;
 
-		sets.Merge(edge.vertexU, edge.vertexV);
+		sets.Merge(edge.vertexU,edge.vertexV);
 		result.push_back(edge);
 	}
 
 	return result;
-
 }
 
 int main()
 {
 	CreateGraph();
 	auto result = Kruskal();
-	
 
 	return 0;
 }

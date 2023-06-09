@@ -14,23 +14,22 @@ using namespace std;
 
 // BST (Binary Search Tree) => 이진 탐색 트리
 
+
 int main()
 {
 	BST bst;
-	bst.Insert(15);
-	bst.Insert(7);
-	bst.Insert(30);
 	bst.Insert(3);
+	bst.Insert(7);
 	bst.Insert(10);
+	bst.Insert(15);
 	bst.Insert(25);
+	bst.Insert(30);
+	
+	bst.PrintTree(bst._root);
 
-	
-	//bst.PrintTree(bst._root);
-	
 	Node* newRoot = bst.Search(bst._root, 7);
-	Node* nextRoot = bst.Next(bst._root);
-	Node* prevRoot = bst.Previous(bst._root);
-	Node* minRoot = bst.Min(bst._root);
+
+	Node* findNode = bst.Next(newRoot);
 
 	return 0;
 }

@@ -14,5 +14,7 @@ float4 PS(PixelInput input) : SV_TARGET
 	resultUV.x = input.uv.x;
 	resultUV.y = input.uv.y;
 
-	return resource.Sample(samp, resultUV);
+	float4 color = resource.Sample(samp, resultUV);
+
+	return color;
 }

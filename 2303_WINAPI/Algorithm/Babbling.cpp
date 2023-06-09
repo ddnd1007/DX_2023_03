@@ -4,14 +4,16 @@
 
 using namespace std;
 
-string babbling[4] = { "aya", "ye", "woo", "ma" };
+// 완전 탐색
+// => 재귀 호출, 반복문
+
+string babbling[4] = {"aya", "ye", "woo", "ma"};
 vector<string> result;
 vector<bool> visited;
 
-
 void DFS(int start, string word)
 {
-	if (word.size() >= 10)
+	if(word.size() >= 10)
 		return;
 
 	string makeWord = word + babbling[start];
@@ -20,23 +22,25 @@ void DFS(int start, string word)
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (start == i)
+		if(start == i)
+			continue;
+		if(visited[i] == true)
 			continue;
 
-		if (visited[i] == true)
-			continue;
 		DFS(i, makeWord);
 	}
 
-	visited[start] = false; //visited 끄고 다시 올라가기
+	visited[start] = false;
 }
 
 int main()
 {
+
 	for (int i = 0; i < 4; i++)
 	{
 		visited = vector<bool>(4, false);
-		DFS(0, "");
+		DFS(i, "");
 	}
+
 	return 0;
 }

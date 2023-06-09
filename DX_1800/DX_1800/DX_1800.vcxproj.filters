@@ -90,16 +90,16 @@
     <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\BagicScene\DungreedScene.h">
+    <ClInclude Include="Framework\TextureMapping\BlendState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TextureMapping\StateManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Utility\InputManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\TextureMapping\BlendState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\TextureMapping\StateManager.h">
+    <ClInclude Include="Scene\BagicScene\DunGreedScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Collider\RectCollider.h">
@@ -179,16 +179,16 @@
     <ClCompile Include="Object\Obj\DunGreed\DunBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\BagicScene\DungreedScene.cpp">
+    <ClCompile Include="Framework\TextureMapping\BlendState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TextureMapping\StateManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Utility\InputManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\TextureMapping\BlendState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\TextureMapping\StateManager.cpp">
+    <ClCompile Include="Scene\BagicScene\DunGreedScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Collider\RectCollider.cpp">
@@ -228,6 +228,9 @@
     <Image Include="Resource\Texture\sun.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\Texture\Bow.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
     <Image Include="Resource\Texture\Bullet.png">
       <Filter>리소스 파일</Filter>
     </Image>
@@ -241,8 +244,5 @@
     <FxCompile Include="Shader\TexturePS.hlsl" />
     <FxCompile Include="Shader\ColliderVS.hlsl" />
     <FxCompile Include="Shader\ColliderPS.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="imgui.ini" />
   </ItemGroup>
 </Project>

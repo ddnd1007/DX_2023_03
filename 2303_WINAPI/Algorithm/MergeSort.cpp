@@ -22,7 +22,7 @@ void MergeResult(vector<int>& v, int left, int mid, int right)
 
 	while (true)
 	{
-		if (leftIndex > mid || rightIndex > right)
+		if(leftIndex > mid || rightIndex > right)
 			break;
 
 		if (v[leftIndex] <= v[rightIndex])
@@ -65,16 +65,16 @@ void MergeResult(vector<int>& v, int left, int mid, int right)
 
 void MergeSort(vector<int>& v, int left, int right)
 {
-	if (left >= right)
+	if(left >= right)
 		return;
 
 	// Divide
 	int mid = (left + right) / 2;
-	MergeSort(v, left, mid);
-	MergeSort(v, mid + 1, right);
+	MergeSort(v,left, mid);
+	MergeSort(v,mid + 1, right);
 
 	// Merge
-	MergeResult(v, left, mid, right);
+	MergeResult(v, left, mid ,right);
 }
 
 int main()
@@ -88,7 +88,7 @@ int main()
 
 	vector<int> v = { 55, 30, 15, 100, 1, 5, 70, 30 };
 
-
+	
 	std::partial_sort(v.begin(), v.begin() + 3, v.end());
 
 	return 0;

@@ -18,19 +18,19 @@ private:
 public:
 	static void Create()
 	{
-		if (_instance == nullptr)
+		if(_instance == nullptr)
 			_instance = new InputManager();
 	}
 
 	static void Delete()
 	{
-		if (_instance != nullptr)
+		if(_instance != nullptr)
 			delete _instance;
 	}
 
 	static InputManager* GetInstance()
 	{
-		if (_instance != nullptr)
+		if(_instance != nullptr)
 			return _instance;
 		return nullptr;
 	}
@@ -53,3 +53,4 @@ private:
 
 	Vector2 _mousePos;
 };
+

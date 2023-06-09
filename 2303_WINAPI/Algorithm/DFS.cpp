@@ -12,7 +12,6 @@ using namespace std;
 vector<vector<bool>> adjacent;
 vector<bool> visited;
 
-
 // 인접행렬
 void CreateGraph()
 {
@@ -57,30 +56,80 @@ void CreateGraph()
 void DFS(int here)
 {
 	visited[here] = true;
-	cout << here << "를 방문했습니다." << endl;
+	cout << here << "를 방문 했습니다." << endl;
 
 	for (int there = 0; there < adjacent.size(); there++)
 	{
-		//본인인지 확인
-		if (here == there)
+		if(here == there)
 			continue;
-		//인접해 있는지 확인
-		if (adjacent[here][there] == false)
+
+		if(adjacent[here][there] == false)
 			continue;
-		//방문했는지 확인
-		if (visited[there] == true)
+
+		if(visited[there] == true)
 			continue;
 
 		DFS(there);
 	}
-
 }
 
 int main()
 {
 	CreateGraph(); // 인접행렬
+
 	visited = vector<bool>(adjacent.size(), false);
+
 	DFS(0);
-	
+
 	return 0;
 }
+
+
+// 프로그래머스 DFS/BFS 네트워크 연결
+/*
+* #include <string>
+#include <vector>
+
+using namespace std;
+
+int answer = 0;
+vector<bool> visited;
+
+void DFS(int here, vector<vector<int>>& adjacent)
+{
+    // 기저사례
+    // 마지막까지 타고 들어가거나, 잘게 잘게 쪼갰을 때 나오는 최하의 경우의 수
+    
+    visited[here] = true;
+    
+    for(int there = 0; there < adjacent.size(); there++)
+    {
+        if(here == there)
+            continue;
+        if(visited[there] == true)
+            continue;
+        if(adjacent[here][there] == false)
+            continue;
+        DFS(there, adjacent);
+    }
+}
+
+void DFS_ALL(vector<vector<int>>& computers)
+{
+    for(int here = 0; here < computers.size(); here++)
+    {
+        if(visited[here] == false)
+        {
+            answer++;
+            DFS(here,computers);
+        }
+    }
+}
+
+int solution(int n, vector<vector<int>> computers) {
+    visited = vector<bool>(n, false);
+    DFS_ALL(computers);
+
+    return answer;
+}
+*/

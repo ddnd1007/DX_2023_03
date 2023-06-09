@@ -1,25 +1,24 @@
 #include "framework.h"
-#include "DungreedScene.h"
+#include "DunGreedScene.h"
 
-DungreedScene::DungreedScene()
+#include "../../Object/Obj/DunGreed/DunPlayer.h"
+
+DunGreedScene::DunGreedScene()
 {
-	
-	//_player = make_shared<DunPlayer>();
-
+	_player = make_shared<DunPlayer>();
+	_player->SetPosition(CENTER);
 }
 
-DungreedScene::~DungreedScene()
+DunGreedScene::~DunGreedScene()
 {
 }
 
-
-void DungreedScene::Update()
+void DunGreedScene::Update()
 {
-	//_player->Update();
+	_player->Update();
 }
 
-void DungreedScene::Render()
+void DunGreedScene::Render()
 {
-	//_player->Render();
+	_player->Render();
 }
-

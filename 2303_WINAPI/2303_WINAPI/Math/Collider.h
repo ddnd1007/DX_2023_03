@@ -20,7 +20,6 @@ public:
 	virtual void Render(HDC hdc) abstract;
 
 	void SetCenter(const Vector2& center);
-	void MoveCenter(const Vector2& value);
 	Vector2 GetCenter() { return _center; }
 
 	bool IsCollision(shared_ptr<Collider> col);

@@ -46,14 +46,14 @@ int targetNum = 5;
 int Enchant(int n)
 {
 	// 기저사례
-	if (n > targetNum)
+	if(n > targetNum)
 		return 0;
 
-	if (n == targetNum)
+	if(n == targetNum)
 		return 1;
 
 	// 메모이제이션
-	if (cache[n] != -1)
+	if(cache[n] != -1)
 		return cache[n];
 
 	// 구하기

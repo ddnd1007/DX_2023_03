@@ -5,8 +5,8 @@ Device* Device::_instance = nullptr;
 
 Device::Device()
 {
-    CreateDeviceAndSwapChain();
-    CreateDoubleBuffer();
+	CreateDeviceAndSwapChain();
+	CreateDoubleBuffer();
 }
 
 Device::~Device()
@@ -15,7 +15,6 @@ Device::~Device()
 
 void Device::Clear()
 {
-    // ¹è°æ»ö
     FLOAT myColorR = 0.0f;
     FLOAT myColorG = 0.0f;
     FLOAT myColorB = 0.0f;
@@ -34,8 +33,8 @@ void Device::CreateDeviceAndSwapChain()
 {
     RECT rc;
     GetClientRect(hWnd, &rc);
-    UINT width = rc.right = rc.left;
-    UINT height = rc.bottom = rc.top;
+    UINT width = rc.right - rc.left;
+    UINT height = rc.bottom - rc.top;
 
     D3D_FEATURE_LEVEL featureLevels[] =
     {

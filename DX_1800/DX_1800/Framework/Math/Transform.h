@@ -11,7 +11,7 @@ public:
 	void SetWorldBuffer(UINT slot);
 
 	void SetPosition(Vector2 pos) { _pos = pos; }
-	void SetScale(Vector2 scale) { _scale = scale;}
+	void SetScale(Vector2 scale) { _scale = scale; }
 	void SetAngle(float angle) { _angle = angle; }
 
 	void AddVector2(Vector2 pos) { _pos += pos; }

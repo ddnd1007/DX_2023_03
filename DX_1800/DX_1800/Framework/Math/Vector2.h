@@ -41,15 +41,17 @@ public:
 		return result;
 	}
 
-	Vector2 operator*(const float& value)const 
+	Vector2 operator*(const float& value) const 
 	{
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);
 	}
-	Vector2 operator*(const double& value)const
+
+	Vector2 operator*(const double& value) const
 	{
 		Vector2 result;
-		return result = Vector2((float(this->x * value), (float(this->y * value))));
+
+		return result = Vector2(float(this->x * value), float(this->y * value));
 	}
 
 	Vector2& operator=(const Vector2& other)
@@ -106,8 +108,9 @@ public:
 	Vector2 NorMalVector2() const
 	{
 		Vector2 result;
-		result.x = x / Length();
-		result.y = y / Length();
+		float length = Length();
+		result.x = x / length;
+		result.y = y / length;
 
 		return result;
 	}

@@ -13,10 +13,10 @@
 
 #define RED			 RGB(255,0,0)
 #define GREEN		 RGB(0,255,0)
-#define GRAY		 RGB(100,100,100)
+#define GREY		 RGB(100,100,100)
 #define BLUE		 RGB(0,0,255)
 #define WHITE		 RGB(255,255,255)
-#define DARKGRAY	 RGB(50,50,50)
+#define DARKGREY	 RGB(50,50,50)
 
 struct HitResult
 {

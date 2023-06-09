@@ -10,8 +10,8 @@ MazeBlock::MazeBlock()
 	HBRUSH disable = CreateSolidBrush(RED);
 	HBRUSH player = CreateSolidBrush(WHITE);
 	HBRUSH end = CreateSolidBrush(BLUE);
-	HBRUSH footPrint = CreateSolidBrush(GRAY);
-	HBRUSH visited = CreateSolidBrush(DARKGRAY);
+	HBRUSH footPrint = CreateSolidBrush(GREY);
+	HBRUSH visited = CreateSolidBrush(DARKGREY);
 
 	_brushes.push_back(able);
 	_brushes.push_back(disable);

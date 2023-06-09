@@ -5,7 +5,7 @@ public:
 	Maze();
 	~Maze();
 
-	struct Edge_kruskal
+	struct Edge_Kruskal
 	{
 		Vector2 u;
 		Vector2 v;
@@ -27,7 +27,6 @@ public:
 			return cost > other.cost;
 		}
 	};
-	
 
 	void Update();
 	void Render(HDC hdc);
@@ -50,6 +49,6 @@ private:
 	vector<vector<shared_ptr<MazeBlock>>> _blocks;
 
 	// Kruskal
-	vector<Edge_kruskal> edges;
+	vector<Edge_Kruskal> edges;
 };
 

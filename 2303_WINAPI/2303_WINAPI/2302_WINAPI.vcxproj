@@ -154,12 +154,6 @@
   <ItemGroup>
     <ClInclude Include="2303_WINAPI.h" />
     <ClInclude Include="Math\DisJointSet.h" />
-    <ClInclude Include="Object\Arkanoid\Ball.h" />
-    <ClInclude Include="Object\Arkanoid\Frame.h" />
-    <ClInclude Include="Object\Arkanoid\ArkanoidBrick.h" />
-    <ClInclude Include="Object\Arkanoid\Bar.h" />
-    <ClInclude Include="Object\Arkanoid\ArkanoidBricks.h" />
-    <ClInclude Include="Scene\ArkanoidScene.h" />
     <ClInclude Include="Object\Maze\Maze.h" />
     <ClInclude Include="Object\Maze\MazeBlock.h" />
     <ClInclude Include="Object\Maze\Player.h" />
@@ -184,12 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2303_WINAPI.cpp" />
-    <ClCompile Include="Object\Arkanoid\Ball.cpp" />
-    <ClCompile Include="Object\Arkanoid\Frame.cpp" />
-    <ClCompile Include="Object\Arkanoid\ArkanoidBrick.cpp" />
-    <ClCompile Include="Object\Arkanoid\Bar.cpp" />
-    <ClCompile Include="Object\Arkanoid\ArkanoidBricks.cpp" />
-    <ClCompile Include="Scene\ArkanoidScene.cpp" />
     <ClCompile Include="Object\Maze\Maze.cpp" />
     <ClCompile Include="Object\Maze\MazeBlock.cpp" />
     <ClCompile Include="Object\Maze\Player.cpp" />

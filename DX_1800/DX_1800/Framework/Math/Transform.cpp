@@ -18,11 +18,11 @@ void Transform::Update()
 
 void Transform::Update_SRT()
 {
-	XMMATRIX scaleM = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
-	XMMATRIX rotateM = XMMatrixRotationZ(_angle);
-	XMMATRIX translateM = XMMatrixTranslation(_pos.x, _pos.y, 0);
+	_scaleM = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
+	_rotateM = XMMatrixRotationZ(_angle);
+	_translateM = XMMatrixTranslation(_pos.x, _pos.y, 0);
 
-	_srtMatrix = scaleM * rotateM * translateM;
+	_srtMatrix = _scaleM * _rotateM * _translateM;
 
 	if (_parent.expired() == false)
 	{

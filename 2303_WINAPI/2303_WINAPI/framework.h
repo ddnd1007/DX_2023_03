@@ -29,7 +29,6 @@ using namespace std;
 #include "Math/Collider.h"
 #include "Math/CircleCollider.h"
 #include "Math/RectCollider.h"
-#include "Math/DisJointSet.h"
 
 #include "Types.h"
 
@@ -40,12 +39,6 @@ using namespace std;
 #include "Object/Maze/MazeBlock.h"
 #include "Object/Maze/Maze.h"
 #include "Object/Maze/Player.h"
-
-#include "Object/Arkanoid/ArkanoidBrick.h"
-#include "Object/Arkanoid/ArkanoidBricks.h"
-#include "Object/Arkanoid/Ball.h"
-#include "Object/Arkanoid/Bar.h"
-#include "Object/Arkanoid/Frame.h"
 
 // Scene
 #include "Scene/Scene.h"

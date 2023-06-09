@@ -3,7 +3,7 @@
 
 #include "../Scene/BagicScene/TutorialScene.h"
 #include "../Scene/BagicScene/SolarSystem.h"
-#include "../Scene/BagicScene/DungreedScene.h"
+#include "../Scene/BagicScene/DunGreedScene.h"
 #include "../Scene/BagicScene/ColliderScene.h"
 
 Program::Program()

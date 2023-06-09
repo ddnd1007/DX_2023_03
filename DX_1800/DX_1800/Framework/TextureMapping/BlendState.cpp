@@ -17,6 +17,7 @@ BlendState::BlendState()
 
 	_desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
+	Change();
 }
 
 BlendState::~BlendState()
@@ -25,7 +26,7 @@ BlendState::~BlendState()
 
 void BlendState::SetState()
 {
-	float blendFactor[] = { 0.0f,0.0f,0.0f,0.0f };
+	float blendFactor[] = {0.0f,0.0f,0.0f,0.0f};
 
 	DC->OMSetBlendState(_blendState.Get(), blendFactor, 0xffffffff);
 }
@@ -52,7 +53,7 @@ void BlendState::Additive()
 
 void BlendState::Change()
 {
-	if (_blendState != nullptr)
+	if(_blendState != nullptr)
 		_blendState->Release();
 
 	DEVICE->CreateBlendState(&_desc, _blendState.GetAddressOf());

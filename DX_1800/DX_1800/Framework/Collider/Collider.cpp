@@ -8,30 +8,18 @@ Collider::Collider()
 
 Collider::~Collider()
 {
-
 }
 
-void Collider::Update()
+bool Collider::IsCollision(shared_ptr<Collider> col)
 {
-
-}
-
-void Collider::Render()
-{
-
-}
-
-
-bool Collider::IsCollision(shared_ptr<Collider> other)
-{
-	switch (other->_type)
+	switch (col->_type)
 	{
 	case Collider::Type::NONE:
 		return false;
 	case Collider::Type::CIRCLE:
-		return IsCollision(dynamic_pointer_cast<CircleCollider>(other));
+		return IsCollision(dynamic_pointer_cast<CircleCollider>(col));
 	case Collider::Type::RECT:
-		return IsCollision(dynamic_pointer_cast<RectCollider>(other));
+		return IsCollision(dynamic_pointer_cast<RectCollider>(col));
 	default:
 		return false;
 	}

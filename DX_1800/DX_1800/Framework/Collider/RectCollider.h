@@ -11,12 +11,12 @@ public:
 		float right = 0;
 		float bottom = 0;
 	};
+
 	struct OBB_Info
 	{
-		Vector2 pos; // 월드포스
+		Vector2 pos;
 		Vector2 direction[2];
 		float length[2];
-
 	};
 
 	RectCollider(Vector2 size);
@@ -42,7 +42,6 @@ public:
 
 	AABB_Info GetAABB_Info();
 	OBB_Info GetOBB_info();
-
 
 private:
 	Vector2 _size;

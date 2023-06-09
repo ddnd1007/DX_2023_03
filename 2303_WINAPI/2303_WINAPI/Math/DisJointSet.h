@@ -42,7 +42,6 @@ public:
 			_rank[uLeader]++;
 	}
 
-
 private:
 	vector<int> _parent;
 	vector<int> _rank;

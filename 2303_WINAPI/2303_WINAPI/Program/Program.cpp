@@ -5,7 +5,6 @@
 #include "Scene/LineCollisionScene.h"
 #include "Scene/CannonScene.h"
 #include "Scene/MazeScene.h"
-#include "Scene/ArkanoidScene.h"
 
 #include "Program.h"
 

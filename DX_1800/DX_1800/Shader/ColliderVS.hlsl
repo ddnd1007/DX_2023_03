@@ -1,3 +1,7 @@
+
+// Symentic Name 
+// SV : SystemValue
+
 cbuffer World : register(b0)
 {
 	matrix world;

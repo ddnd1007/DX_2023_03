@@ -29,7 +29,6 @@ public:
 class ColorBuffer : public ConstantBuffer
 {
 public:
-
 	struct Data
 	{
 		XMFLOAT4 color;
@@ -47,8 +46,6 @@ public:
 	{
 		_data.color = color;
 	}
-
-	
 
 	Data _data;
 };

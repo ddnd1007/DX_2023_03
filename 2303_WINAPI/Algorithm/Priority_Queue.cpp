@@ -29,12 +29,12 @@ public:
 
 		while (true)
 		{
-			if (now <= 0)
+			if(now <= 0)
 				break;
 
 			int parent = (now - 1) / 2;
 
-			if (Pred()(v[now], v[parent]))
+			if(Pred()(v[now], v[parent]))
 				break;
 
 			std::swap(v[now], v[parent]);
@@ -56,18 +56,18 @@ public:
 			int rightChild = now * 2 + 2;
 
 			// 왼쪽자식이 없다...=> 리프노드이니 break
-			if (leftChild >= v.size())
+			if(leftChild >= v.size())
 				break;
 
 			int change = now;
 
-			if (Pred()(v[change], v[leftChild]))
+			if(Pred()(v[change] , v[leftChild]))
 				change = leftChild;
 
-			if (rightChild < v.size() && Pred()(v[change], v[rightChild]))
+			if(rightChild < v.size() && Pred()(v[change] , v[rightChild]))
 				change = rightChild;
 
-			if (change == now)
+			if(change == now)
 				break;
 
 			std::swap(v[now], v[change]);
@@ -111,7 +111,7 @@ int main()
 
 	while (true)
 	{
-		if (pq.empty())
+		if(pq.empty())
 			break;
 		cout << pq.top() << endl;
 		pq.pop();

@@ -1,14 +1,13 @@
 #pragma once
-class DungreedScene : public Scene
+class DunGreedScene : public Scene
 {
 public:
-	DungreedScene();
-	virtual ~DungreedScene();
+	DunGreedScene();
+	virtual ~DunGreedScene();
 
 	virtual void Update() override;
 	virtual void Render() override;
-
 private:
-	shared_ptr<DunPlayer> _player;
+	shared_ptr<class DunPlayer> _player;
 };
 

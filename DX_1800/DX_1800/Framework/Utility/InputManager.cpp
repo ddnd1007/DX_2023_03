@@ -22,11 +22,11 @@ void InputManager::Update()
 		byte key = _curState[i] & 0x80;
 
 		// key가 true 하면 1반환
-		// key가 false면 0 반환
+		// key가 false 하면 0 반환
 		_curState[i] = (key ? 1 : 0);
 
 		byte old = _oldState[i];
-		byte cur = _oldState[i];
+		byte cur = _curState[i];
 
 		if (old == 0 && cur == 1)
 		{

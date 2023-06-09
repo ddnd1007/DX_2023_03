@@ -27,13 +27,13 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-//DirextX Tex
+// DirectX Tex
 #include "../DXTex/DirectXTex.h"
 
-//Imgui
-#include "../imGUI/imgui.h"
-#include "../imGUI/imgui_impl_dx11.h"
-#include "../imGUI/imgui_impl_win32.h"
+// Imgui
+#include "../ImGUI/imgui.h"
+#include "../ImGUI/imgui_impl_dx11.h"
+#include "../ImGUI/imgui_impl_win32.h"
 
 using namespace std;
 using namespace DirectX;
@@ -46,7 +46,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Math/Vector2.h"
 #include "Framework/Math/Transform.h"
 
-//Utility
+// Utility
 #include "Framework/Utility/Timer.h"
 #include "Framework/Utility/InputManager.h"
 
@@ -65,18 +65,16 @@ using namespace Microsoft::WRL;
 #include "Framework/TextureMapping/BlendState.h"
 #include "Framework/TextureMapping/StateManager.h"
 
-//Collider
+// Collider
 #include "Framework/Collider/Collider.h"
-#include "Framework/Collider/RectCollider.h"
 #include "Framework/Collider/CircleCollider.h"
+#include "Framework/Collider/RectCollider.h"
 
 // Obj
 #include "Object/BagicObject/Quad.h"
 
 // GameObj
 #include "Object/Obj/Planet.h"
-#include "Object/Obj/Dungreed/DunBullet.h"
-#include "Object/Obj/Dungreed/DunPlayer.h"
 
 // Scene
 #include "Scene/Scene.h"
