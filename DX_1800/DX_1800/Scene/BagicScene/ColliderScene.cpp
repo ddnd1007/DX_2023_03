@@ -7,7 +7,10 @@ ColliderScene::ColliderScene()
 	_circleCollider->GetTransform()->SetPosition(CENTER);
 
 	_rectColliderMouse = make_shared<RectCollider>(Vector2(90, 150));
+<<<<<<< HEAD
 	_circleColliderMouse = make_shared<CircleCollider>(100);
+=======
+>>>>>>> a27384b77adc5a66fba97ad6d8794dd805460d14
 	_rectCollider2 = make_shared<RectCollider>(Vector2(200, 120));
 
 	_rectCollider2->GetTransform()->SetPosition(CENTER);
@@ -21,7 +24,10 @@ ColliderScene::~ColliderScene()
 
 void ColliderScene::Update()
 {
+<<<<<<< HEAD
 	_circleColliderMouse->GetTransform()->SetPosition(MOUSE_POS);
+=======
+>>>>>>> a27384b77adc5a66fba97ad6d8794dd805460d14
 	if (KEY_PRESS('W'))
 		_rectColliderMouse->GetTransform()->AddVector2({ 0.0f,1.0f } * DELTA_TIME);
 	if (KEY_PRESS('S'))
@@ -31,14 +37,21 @@ void ColliderScene::Update()
 	if (KEY_PRESS('D'))
 		_rectColliderMouse->GetTransform()->AddVector2({ -1.0f,1.0f } * DELTA_TIME);
 
+<<<<<<< HEAD
 	_circleColliderMouse->Update();
+=======
+
+>>>>>>> a27384b77adc5a66fba97ad6d8794dd805460d14
 	_circleCollider->Update();
 	_rectColliderMouse->Update();
 	_rectCollider2->Update();
 
+<<<<<<< HEAD
 	_circleColliderMouse->Block(_circleCollider);
 	_rectColliderMouse->Block(_rectCollider2);
 
+=======
+>>>>>>> a27384b77adc5a66fba97ad6d8794dd805460d14
 	if (_rectColliderMouse->IsOBB(_circleCollider))
 	{
 		_circleCollider->SetColorRed();

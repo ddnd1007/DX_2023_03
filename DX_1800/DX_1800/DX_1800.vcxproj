@@ -329,6 +329,12 @@
     <ProjectReference Include="..\imGUI\imGUI.vcxproj">
       <Project>{f01f5406-0a1a-4fbf-9a80-d6efe6b5ee9f}</Project>
     </ProjectReference>
+<<<<<<< HEAD
+=======
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini" />
+>>>>>>> a27384b77adc5a66fba97ad6d8794dd805460d14
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -77,6 +77,7 @@ bool CircleCollider::IsCollision(shared_ptr<CircleCollider> col)
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> col)
 {
     return col->IsCollision(shared_from_this());
+<<<<<<< HEAD
 }
 
 bool CircleCollider::Block(shared_ptr<CircleCollider> col)
@@ -102,6 +103,8 @@ bool CircleCollider::Block(shared_ptr<CircleCollider> col)
     col->GetTransform()->SetPosition(bPos);
 
     return false;
+=======
+>>>>>>> a27384b77adc5a66fba97ad6d8794dd805460d14
 }
 
 float CircleCollider::GetWorldRadius()
