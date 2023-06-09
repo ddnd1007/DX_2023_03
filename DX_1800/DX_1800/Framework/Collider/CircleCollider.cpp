@@ -79,6 +79,31 @@ bool CircleCollider::IsCollision(shared_ptr<RectCollider> col)
     return col->IsCollision(shared_from_this());
 }
 
+bool CircleCollider::Block(shared_ptr<CircleCollider> col)
+{
+    if (IsCollision(col))
+        return false;
+
+    Vector2 aPos = GetWorldPos();
+    Vector2 bPos = col->GetWorldPos();
+
+    float aRadius = GetWorldRadius();
+    float bRadius = col->GetWorldRadius();
+
+    Vector2 dir = bPos - aPos;
+
+    float scalar = (aRadius + bRadius) - dir.Length();
+
+    dir.Normalize();
+
+    Vector2 pushVector = dir * scalar;
+
+    bPos = bPos + pushVector;
+    col->GetTransform()->SetPosition(bPos);
+
+    return false;
+}
+
 float CircleCollider::GetWorldRadius()
 {
     Vector2 worldScale = _transform->GetWorldScale();

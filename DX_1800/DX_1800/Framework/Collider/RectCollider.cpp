@@ -228,6 +228,47 @@ float RectCollider::SeperateAxis(Vector2 separate, Vector2 e1, Vector2 e2)
     return r1 + r2;
 }
 
+bool RectCollider::Block(shared_ptr<RectCollider> col)
+{
+    if (!IsCollision(col))
+        return false;
+
+    AABB_Info infoA = GetAABB_Info();
+    AABB_Info infoB = col->GetAABB_Info();
+
+    Vector2 halfSizeA = Vector2(infoA.right - infoA.left, infoA.top - infoA.bottom) * 0.5f;
+    Vector2 halfSizeB = Vector2(infoB.right - infoB.left, infoB.top - infoB.bottom) * 0.5f;
+
+    Vector2 dir = col->GetWorldPos() - GetWorldPos();
+
+    Vector2 overLap;
+    overLap.x = (halfSizeA.x + halfSizeB.x) - abs(dir.x);
+    overLap.x = (halfSizeA.y + halfSizeB.y) - abs(dir.y);
+
+    
+
+    if (overLap.y > overLap.x)
+    {
+        Vector2 temp = col->GetWorldPos();
+        dir.y = 0;
+        dir.Normalize();
+        temp.x += dir.x * overLap.x;
+
+        col->GetTransform()->SetPosition(temp);
+    }
+    else
+    {
+        Vector2 temp = col->GetWorldPos();
+        dir.x = 0;
+        dir.Normalize();
+        temp.y += dir.y * overLap.y;
+
+        col->GetTransform()->SetPosition(temp);
+    }
+
+    return true;
+}
+
 RectCollider::AABB_Info RectCollider::GetAABB_Info()
 {
     AABB_Info info;

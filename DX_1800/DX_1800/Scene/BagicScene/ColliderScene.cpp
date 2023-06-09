@@ -7,10 +7,13 @@ ColliderScene::ColliderScene()
 	_circleCollider->GetTransform()->SetPosition(CENTER);
 
 	_rectColliderMouse = make_shared<RectCollider>(Vector2(90, 150));
+	_circleColliderMouse = make_shared<CircleCollider>(100);
 	_rectCollider2 = make_shared<RectCollider>(Vector2(200, 120));
 
 	_rectCollider2->GetTransform()->SetPosition(CENTER);
 }
+
+// 오류 발생할 시 setposition에 updatesrt 추가
 
 ColliderScene::~ColliderScene()
 {
@@ -18,6 +21,7 @@ ColliderScene::~ColliderScene()
 
 void ColliderScene::Update()
 {
+	_circleColliderMouse->GetTransform()->SetPosition(MOUSE_POS);
 	if (KEY_PRESS('W'))
 		_rectColliderMouse->GetTransform()->AddVector2({ 0.0f,1.0f } * DELTA_TIME);
 	if (KEY_PRESS('S'))
@@ -27,10 +31,13 @@ void ColliderScene::Update()
 	if (KEY_PRESS('D'))
 		_rectColliderMouse->GetTransform()->AddVector2({ -1.0f,1.0f } * DELTA_TIME);
 
-
+	_circleColliderMouse->Update();
 	_circleCollider->Update();
 	_rectColliderMouse->Update();
 	_rectCollider2->Update();
+
+	_circleColliderMouse->Block(_circleCollider);
+	_rectColliderMouse->Block(_rectCollider2);
 
 	if (_rectColliderMouse->IsOBB(_circleCollider))
 	{
@@ -50,6 +57,7 @@ void ColliderScene::Update()
 
 void ColliderScene::Render()
 {
+	_circleColliderMouse->Render();
 	_circleCollider->Render();
 	_rectColliderMouse->Render();
 	_rectCollider2->Render();

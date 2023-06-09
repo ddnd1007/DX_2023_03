@@ -24,7 +24,6 @@ DunPlayer::DunPlayer()
 
 	_muzzle->SetParent(_bowAngle);
 	_muzzle->SetPosition(Vector2(120.0f, 0.0f));
-
 }
 DunPlayer::~DunPlayer()
 {
