@@ -1,14 +1,16 @@
 #include "framework.h"
 #include "DunPlayer.h"
+#include "DunBullet.h"
 
 DunPlayer::DunPlayer()
 {
 	_player = make_shared<Quad>(L"Resource/Texture/Player.png");
 	_bowTrans = make_shared<Transform>();
+
 	_bow = make_shared<Quad>(L"Resource/Texture/Bow.png");
 	_bulletTrans = make_shared<Transform>();
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 30; i++)
 	{
 		shared_ptr<DunBullet> bullet = make_shared<DunBullet>();
 		_bullets.push_back(bullet);

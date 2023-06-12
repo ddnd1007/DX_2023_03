@@ -3,6 +3,8 @@ class Quad
 {
 public:
 	Quad(wstring path);
+	Quad(wstring path, Vector2 size);
+	~Quad();
 
 	void Update();
 	void Render();
@@ -27,5 +29,7 @@ private:
 
 	// 컴포넌트 패턴
 	shared_ptr<Transform> _transform;
+
+	Vector2 _size;
 };
 

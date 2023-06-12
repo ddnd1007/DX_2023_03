@@ -3,12 +3,28 @@
 
 Quad::Quad(wstring path)
 {
-    _srv = make_shared<SRV>(path);
+    _srv = ADD_SRV(path);
+    _size = _srv->GetImageSize();
 
 	CreateVertices();
 	CreateData(path);
 
     _transform = make_shared<Transform>();
+}
+
+Quad::Quad(wstring path, Vector2 size)
+    :_size(size)
+{
+    _srv = make_shared<SRV>(path);
+
+    CreateVertices();
+    CreateData(path);
+
+    _transform = make_shared<Transform>();
+}
+
+Quad::~Quad()
+{
 }
 
 void Quad::Update()
@@ -38,7 +54,7 @@ void Quad::CreateVertices()
 {
     Vertex_Texture v;
 
-    Vector2 halfSize = _srv->GetImageSize() * 0.5f;
+    Vector2 halfSize = _size * 0.5f;
 
     v.pos = { -halfSize.x, halfSize.y, 0.0f }; // ¿ÞÂÊ À§
     v.color = { 1.0f, 0.0f, 0.0f, 1.0f };

@@ -3,10 +3,10 @@
 
 DunBullet::DunBullet()
 {
-	_quad = make_shared<Quad>(L"Resource/Texture/Bullet.png");
-	_collider = make_shared<CircleCollider>(0.1f);
+	_col = make_shared<CircleCollider>(15.0f); // 루트 컴포넌트로 통일
+	_quad = make_shared<Quad>(L"Resource/Texture/Bullet.png", Vector2(30,30));
 
-	_quad->GetTransform()->SetParent(_collider->GetTransform());
+	_quad->GetTransform()->SetParent(_col->GetTransform());
 	_quad->GetTransform()->SetScale(Vector2(0.1f, 0.1f));
 	_quad->GetTransform()->SetPosition(Vector2(-100.0f, -100.0f));
 }
@@ -21,15 +21,10 @@ void DunBullet::Update()
 	if (_isActive == false)
 		return;
 
-	if (_pos.x > WIN_WIDTH || _pos.x < 0.0f)
-		_isActive = false;
-	if (_pos.y > WIN_HEIGHT || _pos.y < 0.0f)
-		_isActive = false;
+	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
 
-	_pos += _dir * _speed * DELTA_TIME;
-	_collider->GetTransform()->SetPosition(_pos);
-	_quad->GetTransform()->SetAngle(_dir.Angle());
-	_collider->Update();
+	_col->Update();
+	_quad->Update();
 
 }
 
@@ -38,18 +33,27 @@ void DunBullet::Render()
 	if (_isActive == false)
 		return;
 
+	_col->Render();
 	_quad->Render();
-	_collider->Render();
 }
 
-void DunBullet::Attack(shared_ptr<DunBoss> victim)
+void DunBullet::Fire(Vector2 stratPos, Vector2 dir)
 {
-	if (_isActive == false)
-		return;
-	if (_collider->Block(victim->GetCollider()) == false || victim->_isActive == false)
-		return;
+	_isActive = true;
+	_dir = dir;
 
-	victim->TakeDamage(_damage);
-	_isActive = false;
+	_col->GetTransform()->SetAngle(dir.Angle());
+	_col->GetTransform()->SetPosition(stratPos);
 }
+
+void DunBullet::InPut()
+{
+	if (KEY_DOWN(VK_LBUTTON))
+	{
+		Vector2 start = bowQuad->GetTransform()->GetWorldPos();
+
+		Vector2 direction
+	}
+}
+
 

@@ -21,7 +21,7 @@ private:
 	shared_ptr<Transform> _bowTrans;
 	shared_ptr<Quad> _bow;
 	shared_ptr<Transform> _bulletTrans;
-	vector<shared_ptr<DunBullet>> _bullets;
+	vector<shared_ptr<class DunBullet>> _bullets;
 
 	Vector2 _pos = Vector2();
 	float _speed = 0.03f;
