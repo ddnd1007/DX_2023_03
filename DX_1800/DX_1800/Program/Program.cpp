@@ -8,6 +8,7 @@
 
 Program::Program()
 {
+	
 	_curScene = make_shared<DunGreedScene>();
 
 	_view = make_shared<MatrixBuffer>();

@@ -8,23 +8,20 @@ public:
 	void Update();
 	void Render();
 
-	void SetPos(Vector2 pos) { _pos = pos; }
-	void SetDir(Vector2 dir) { _dir = dir.NorMalVector2(); }
+	void Fire(Vector2 startPos, Vector2 dir);
 
-	void Fire(Vector2 stratPos, Vector2 dir);
+	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
-	void InPut();
-
-	bool IsActive = false;
-
+	bool _isActive = false;
 private:
-	shared_ptr<Quad> _quad;
 	shared_ptr<CircleCollider> _col;
 
-	Vector2 _pos = Vector2();
-	Vector2 _dir = Vector2();
+	shared_ptr<Quad> _quad;
+
+	Vector2 _direction;
 	float _speed = 500.0f;
-	int _damage = 1;
-	bool _isActive = false;
+
+	float _curTime = 0.0f;
+	float _lifeTime = 3.0f;
 };
 

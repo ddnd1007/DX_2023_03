@@ -87,9 +87,6 @@
     <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\TextureMapping\BlendState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -117,10 +114,16 @@
     <ClInclude Include="Framework\Utility\Timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\DunGreed\DunBoss.h">
+    <ClInclude Include="Framework\TextureMapping\SRVManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\TextureMapping\SRVManager.h">
+    <ClInclude Include="Object\Obj\DunGreed\DunMonster.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\DunGreed\DunBoss.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -212,10 +215,13 @@
     <ClCompile Include="Framework\Utility\Timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\DunGreed\DunBoss.cpp">
+    <ClCompile Include="Framework\TextureMapping\SRVManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\TextureMapping\SRVManager.cpp">
+    <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\DunGreed\DunBoss.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

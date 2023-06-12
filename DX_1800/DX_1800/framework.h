@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
+#include <time.h>
 #include <tchar.h>
 #include <memory>
 #include <vector>
@@ -27,13 +28,13 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-//DirectXTex
+// DirectX Tex
 #include "../DXTex/DirectXTex.h"
 
-//ImGui
-#include "../imGUI/imgui.h"
-#include "../imGUI/imgui_impl_dx11.h"
-#include "../imGUI/imgui_impl_win32.h"
+// Imgui
+#include "../ImGUI/imgui.h"
+#include "../ImGUI/imgui_impl_dx11.h"
+#include "../ImGUI/imgui_impl_win32.h"
 
 using namespace std;
 using namespace DirectX;
@@ -59,23 +60,23 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
 
-//TextureMapping
+// TextureMapping
 #include "Framework/TextureMapping/SRV.h"
+#include "Framework/TextureMapping/SRVManager.h"
 #include "Framework/TextureMapping/SamplerState.h"
 #include "Framework/TextureMapping/BlendState.h"
 #include "Framework/TextureMapping/StateManager.h"
 
 // Collider
 #include "Framework/Collider/Collider.h"
-#include "Framework/Collider/RectCollider.h"
 #include "Framework/Collider/CircleCollider.h"
+#include "Framework/Collider/RectCollider.h"
 
 // Obj
 #include "Object/BagicObject/Quad.h"
+
+// GameObj
 #include "Object/Obj/Planet.h"
-#include "Object/Obj/DunGreed/DunBoss.h"
-#include "Object/Obj/DunGreed/DunBullet.h"
-#include "Object/Obj/DunGreed/DunPlayer.h"
 
 // Scene
 #include "Scene/Scene.h"

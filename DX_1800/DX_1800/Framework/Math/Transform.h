@@ -10,9 +10,9 @@ public:
 	void Update_WorldBuffer();
 	void SetWorldBuffer(UINT slot);
 
-	void SetPosition(Vector2 pos) { _pos = pos; }
-	void SetScale(Vector2 scale) { _scale = scale; }
-	void SetAngle(float angle) { _angle = angle; }
+	void SetPosition(Vector2 pos) { _pos = pos; Update_SRT(); }
+	void SetScale(Vector2 scale) { _scale = scale; Update_SRT(); }
+	void SetAngle(float angle) { _angle = angle; Update_SRT(); }
 
 	void AddVector2(Vector2 pos) { _pos += pos; }
 	void AddScale(Vector2 scale) { _scale += scale; }
@@ -31,7 +31,7 @@ public:
 
 private:
 	Vector2 _pos;
-	Vector2 _scale = {1.0f, 1.0f};
+	Vector2 _scale = { 1.0f, 1.0f };
 	float _angle = 0.0f;
 
 	XMMATRIX _scaleM = XMMatrixIdentity();

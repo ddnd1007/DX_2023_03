@@ -1,29 +1,44 @@
 #include "framework.h"
 #include "DunPlayer.h"
 #include "DunBullet.h"
+#include "DunMonster.h"
 
 DunPlayer::DunPlayer()
 {
-	_player = make_shared<Quad>(L"Resource/Texture/Player.png");
-	_bowTrans = make_shared<Transform>();
+	_quad = make_shared<Quad>(L"Resource/Texture/Player.png");
+	_bowSlot = make_shared<Transform>();
+	_trans = make_shared<Transform>();
+	_trans->SetParent(_quad->GetTransform());
+	_bowQuad = make_shared<Quad>(L"Resource/Texture/Bow.png");
+	_bowQuad->GetTransform()->SetParent(_bowSlot);
 
-	_bow = make_shared<Quad>(L"Resource/Texture/Bow.png");
-	_bulletTrans = make_shared<Transform>();
+	_bible1 = make_shared<CircleCollider>(500.0f);
+	_bible1->GetTransform()->SetParent(_trans);
+	_bible1->GetTransform()->SetScale(Vector2(0.05f, 0.05f));
+	_bible1->GetTransform()->SetPosition(Vector2(70.0f, 70.0f));
+
+
+	_bible2 = make_shared<CircleCollider>(500.0f);
+	_bible2->GetTransform()->SetParent(_trans);
+	_bible2->GetTransform()->SetScale(Vector2(0.05f, 0.05f));
+	_bible2->GetTransform()->SetPosition(Vector2(-70.0f, 70.0f));
+
+
+	_bible3 = make_shared<CircleCollider>(500.0f);
+	_bible3->GetTransform()->SetParent(_trans);
+	_bible3->GetTransform()->SetScale(Vector2(0.05f, 0.05f));
+	_bible3->GetTransform()->SetPosition(Vector2(-35.0f, -70.0f));
+
+
+
+	_bowQuad->GetTransform()->SetPosition(Vector2(100.0f, 0.0f));
+	_bowQuad->GetTransform()->SetAngle(-PI * 0.75f);
 
 	for (int i = 0; i < 30; i++)
 	{
 		shared_ptr<DunBullet> bullet = make_shared<DunBullet>();
 		_bullets.push_back(bullet);
 	}
-
-	_bowTrans->SetParent(_player->GetTransform());
-
-	_bow->GetTransform()->SetAngle(-PI * 0.75f);
-	_bow->GetTransform()->SetPosition(Vector2(80.0f, 0.0f));
-	_bow->GetTransform()->SetParent(_bowTrans);
-
-	_bulletTrans->SetParent(_bow->GetTransform());
-	_bulletTrans->SetPosition(Vector2(-20.0f, 20.0f));
 }
 
 DunPlayer::~DunPlayer()
@@ -32,21 +47,26 @@ DunPlayer::~DunPlayer()
 
 void DunPlayer::Update()
 {
-	_bowTrans->SetAngle((MOUSE_POS - _bowTrans->GetWorldPos()).Angle());
 
-	for (auto bullet : _bullets)
-	{
-		if (bullet->IsActive() == false)
-			bullet->GetColliderTransform()->SetPosition(_bulletTrans->GetWorldPos());
-	}
+	Vector2 slotToMousePos = MOUSE_POS - _bowSlot->GetPos();
+	float angle = slotToMousePos.Angle();
 
 	Move();
-	Fire();
+	InPut();
 
-	_player->Update();
-	_bowTrans->Update();
-	_bow->Update();
-	_bulletTrans->Update();
+	_quad->Update();
+	_bowSlot->SetPosition(_quad->GetTransform()->GetPos());
+	_bowSlot->Update();
+
+	_trans->AddAngle(_rotationSpeed * 15.0f);
+
+	_trans->Update();
+	_bible1->Update();
+	_bible2->Update();
+	_bible3->Update();
+
+	_bowQuad->Update();
+	_bowSlot->SetAngle(angle);
 
 	for (auto bullet : _bullets)
 		bullet->Update();
@@ -54,10 +74,15 @@ void DunPlayer::Update()
 
 void DunPlayer::Render()
 {
+	_quad->Render();
+	_bowQuad->Render();
+
+	_bible1->Render();
+	_bible2->Render();
+	_bible3->Render();
+
 	for (auto bullet : _bullets)
 		bullet->Render();
-	_bow->Render();
-	_player->Render();
 }
 
 void DunPlayer::Move()
@@ -79,32 +104,27 @@ void DunPlayer::Move()
 		_pos.y -= _speed * DELTA_TIME;
 	}
 
-	_player->GetTransform()->SetPosition(_pos);
+	_quad->GetTransform()->SetPosition(CENTER);
 }
 
-void DunPlayer::Fire()
+void DunPlayer::InPut()
 {
 	if (KEY_DOWN(VK_LBUTTON))
 	{
-		shared_ptr<DunBullet> bullet = SetBullet();
+		Vector2 start = _bowQuad->GetTransform()->GetWorldPos();
+		Vector2 direction = (MOUSE_POS - start).NorMalVector2();
 
-		if (bullet == nullptr)
-			return;
+		auto iter = std::find_if(_bullets.begin(), _bullets.end(), [](shared_ptr<DunBullet> bullet)-> bool
+			{
+				if (bullet->_isActive == false)
+					return true;
 
-		bullet->SetPos(_bulletTrans->GetWorldPos());
-		bullet->SetDir((MOUSE_POS - _bowTrans->GetWorldPos()));
-		bullet->SetActive(true);
+				return false;
+			});
+
+		if (iter != _bullets.end())
+			(*iter)->Fire(start, direction);
 	}
 }
 
-shared_ptr<DunBullet> DunPlayer::SetBullet()
-{
-	for (auto bullet : _bullets)
-	{
-		if (bullet->IsActive() == true)
-			continue;
-		else
-			return bullet;
-	}
-	return nullptr;
-}
+
