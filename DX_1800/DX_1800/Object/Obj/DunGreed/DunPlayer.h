@@ -8,13 +8,23 @@ public:
 	void Update();
 	void Render();
 
-	void SetPosition(Vector2 pos) { _quad->GetTransform()->SetPosition(pos); }
-	void AddVector2(Vector2 pos) { _quad->GetTransform()->AddVector2(pos); }
+	void Move();
+
+	void Fire();
+	shared_ptr<DunBullet> SetBullet();
+
+	vector<shared_ptr<DunBullet>>& GetBullets() { return _bullets; }
+	shared_ptr<Transform> GetTransform() { return _player->GetTransform(); }
 
 private:
-	shared_ptr<Quad> _quad;
-	shared_ptr<Transform> _bowSlot;
+	shared_ptr<Quad> _player;
+	shared_ptr<Transform> _bowTrans;
+	shared_ptr<Quad> _bow;
+	shared_ptr<Transform> _bulletTrans;
+	vector<shared_ptr<DunBullet>> _bullets;
 
-	shared_ptr<Quad> _bowQuad;
+	Vector2 _pos = Vector2();
+	float _speed = 0.03f;
+	
 };
 

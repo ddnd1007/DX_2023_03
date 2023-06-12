@@ -23,35 +23,6 @@ ColliderScene::~ColliderScene()
 
 void ColliderScene::Update()
 {
-	//// 충돌처리
-	//if (_isActive)
-	//{
-	//	if (_circleColliderMouse->IsCollision(_circleCollider))
-	//	{
-	//		_isActive = false;
-	//		_circleCollider->SetColorRed();
-	//	}
-	//	else
-	//	{
-	//		_circleCollider->SetColorGreen();
-	//	}
-	//}
-	////123
-	//if (KEY_DOWN(VK_SPACE))
-	//{
-	//	_isActive = true;
-	//	_circleColliderMouse->GetTransform()->SetPosition(Vector2(0,0));
-	//	_dir = MOUSE_POS - Vector2(0,0);
-	//	_dir.Normalize();
-	//}
-
-	//_circleColliderMouse->GetTransform()->AddVector2(_dir * 300.0f * DELTA_TIME);
-
-	//_circleCollider->Update();
-
-	//if(_isActive)
-	//	_circleColliderMouse->Update();
-
 	_circleColliderMouse->GetTransform()->SetPosition(MOUSE_POS);
 
 	if (KEY_PRESS('W'))
@@ -100,9 +71,9 @@ void ColliderScene::Render()
 	//_circleCollider->Render();
 	//if (_isActive)
 		//_circleColliderMouse->Render();
-	_circleColliderMouse->Render();
+	//_circleColliderMouse->Render();
 	_circleCollider->Render();
-	_rectCollider2->Render();
+	//_rectCollider2->Render();
 	_rectColliderKeyBoard->Render();
 }
 

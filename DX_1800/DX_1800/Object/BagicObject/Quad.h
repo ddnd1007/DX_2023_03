@@ -11,8 +11,10 @@ public:
 	void CreateData(wstring path);
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
+	Vector2 GetImageSize() { return _halfSize; }
 
 private:
+	Vector2 _halfSize;
 	vector<Vertex_Texture> _vertices;
 	vector<UINT> _indices;
 
