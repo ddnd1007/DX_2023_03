@@ -13,6 +13,7 @@ public:
 	void SetPosition(Vector2 pos);
 
 	void SetParent(shared_ptr<Transform> trans) { _quad->GetTransform()->SetParent(trans); _orbit->SetParent(trans); }
+	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
 	shared_ptr<Transform> GetTransform() { return _quad->GetTransform(); }
 	shared_ptr<Transform> GetOrbit() { return _orbit; }
@@ -22,5 +23,6 @@ private:
 
 	shared_ptr<Transform> _orbit;
 	shared_ptr<Quad> _quad;
+	shared_ptr<CircleCollider> _col;
 };
 

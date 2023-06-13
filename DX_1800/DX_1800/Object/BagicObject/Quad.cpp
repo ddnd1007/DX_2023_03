@@ -6,16 +6,16 @@ Quad::Quad(wstring path)
     _srv = ADD_SRV(path);
     _size = _srv->GetImageSize();
 
-	CreateVertices();
-	CreateData(path);
+    CreateVertices();
+    CreateData(path);
 
     _transform = make_shared<Transform>();
 }
 
-Quad::Quad(wstring path, Vector2 size)
-    :_size(size)
+Quad::Quad(Vector2 size, wstring path)
+    : _size(size)
 {
-    _srv = make_shared<SRV>(path);
+    _srv = ADD_SRV(path);
 
     CreateVertices();
     CreateData(path);
@@ -35,7 +35,6 @@ void Quad::Update()
 void Quad::Render()
 {
     _transform->SetWorldBuffer(0);
-
     _vertexBuffer->SetIA_VertexBuffer();
     _indexBuffer->SetIA_IndexBuffer();
     _vs->SetIA_InputLayOut();
@@ -47,11 +46,12 @@ void Quad::Render()
     _vs->Set_VS();
     _ps->Set_PS();
 
-    DC->DrawIndexed(_indices.size(),0,0);
+    DC->DrawIndexed(_indices.size(), 0, 0);
 }
 
 void Quad::CreateVertices()
 {
+
     Vertex_Texture v;
 
     Vector2 halfSize = _size * 0.5f;
@@ -87,8 +87,8 @@ void Quad::CreateVertices()
 
 void Quad::CreateData(wstring path)
 {
-	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size());
+    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size());
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
-	_vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
-	_ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
+    _vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
+    _ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
 }

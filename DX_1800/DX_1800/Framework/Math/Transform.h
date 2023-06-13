@@ -18,6 +18,7 @@ public:
 	void AddScale(Vector2 scale) { _scale += scale; }
 	void AddAngle(float angle) { _angle += angle; }
 
+
 	const Vector2& GetPos() { return _pos; }
 	const Vector2& GetScale() { return _scale; }
 	const float& GetAngle() { return _angle; }

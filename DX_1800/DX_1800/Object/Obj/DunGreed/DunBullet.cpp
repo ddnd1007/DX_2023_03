@@ -1,10 +1,11 @@
 #include "framework.h"
 #include "DunBullet.h"
+#include "DunMonster.h"
 
 DunBullet::DunBullet()
 {
+	_quad = make_shared<Quad>(Vector2(30, 30), L"Resource/Texture/Bullet.png");
 	_col = make_shared<CircleCollider>(15.0f);
-	_quad = make_shared<Quad>(L"Resource/Texture/Bullet.png", Vector2(100, 100));
 
 	_quad->GetTransform()->SetParent(_col->GetTransform());
 }
@@ -18,18 +19,16 @@ void DunBullet::Update()
 	if (_isActive == false)
 		return;
 
-	_curTime += DELTA_TIME;
-
-	if (_curTime > _lifeTime)
-	{
+	if (_pos.x > WIN_WIDTH || _pos.x < 0.0f)
 		_isActive = false;
-		_curTime = 0.0f;
-	}
+	if (_pos.y > WIN_HEIGHT || _pos.y < 0.0f)
+		_isActive = false;
 
-	_col->GetTransform()->AddVector2(_direction * _speed * DELTA_TIME);
-
-	_col->Update();
+	_pos += _dir * _speed * DELTA_TIME;
+	_col->GetTransform()->SetPosition(_pos);
+	_col->GetTransform()->SetAngle(_dir.Angle());
 	_quad->Update();
+	_col->Update();
 }
 
 void DunBullet::Render()
@@ -37,15 +36,17 @@ void DunBullet::Render()
 	if (_isActive == false)
 		return;
 
-	_col->Render();
 	_quad->Render();
+	_col->Render();
 }
 
-void DunBullet::Fire(Vector2 startPos, Vector2 dir)
+void DunBullet::Attack(shared_ptr<DunMonster> victim)
 {
-	_isActive = true;
-	_direction = dir;
+	if (_isActive == false)
+		return;
+	if (_col->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
+		return;
 
-	_col->GetTransform()->SetAngle(dir.Angle());
-	_col->GetTransform()->SetPosition(startPos);
+	victim->TakeDamage(_damage);
+	_isActive = false;
 }

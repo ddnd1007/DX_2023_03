@@ -8,20 +8,27 @@ public:
 	void Update();
 	void Render();
 
-	void Fire(Vector2 startPos, Vector2 dir);
+	void Attack(shared_ptr<class DunMonster> victim);
 
-	shared_ptr<CircleCollider> GetCollider() { return _col; }
+	void SetPos(Vector2 pos) { _pos = pos; }
+	void SetDir(Vector2 dir) { _dir = dir.NorMalVector2(); }
 
-	bool _isActive = false;
+	void SetActive(bool active) { _isActive = active; }
+	bool IsActive() { return _isActive; }
+
+	shared_ptr<Transform> GetQuadTransform() { return _quad->GetTransform(); }
+	shared_ptr<Transform> GetTransform() { return _col->GetTransform(); }
+
 private:
 	shared_ptr<CircleCollider> _col;
-
 	shared_ptr<Quad> _quad;
 
-	Vector2 _direction;
-	float _speed = 500.0f;
+	Vector2 _pos = Vector2();
+	Vector2 _dir = Vector2();
+	float _speed = 550.0f;
+	int _damage = 1;
 
-	float _curTime = 0.0f;
-	float _lifeTime = 3.0f;
+	bool _isActive = false;
+
 };
 

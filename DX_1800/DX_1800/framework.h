@@ -28,13 +28,13 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-// DirectX Tex
+//DirectXTex
 #include "../DXTex/DirectXTex.h"
 
-// Imgui
-#include "../ImGUI/imgui.h"
-#include "../ImGUI/imgui_impl_dx11.h"
-#include "../ImGUI/imgui_impl_win32.h"
+//ImGui
+#include "../imGUI/imgui.h"
+#include "../imGUI/imgui_impl_dx11.h"
+#include "../imGUI/imgui_impl_win32.h"
 
 using namespace std;
 using namespace DirectX;
@@ -60,7 +60,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
 
-// TextureMapping
+//TextureMapping
 #include "Framework/TextureMapping/SRV.h"
 #include "Framework/TextureMapping/SRVManager.h"
 #include "Framework/TextureMapping/SamplerState.h"
@@ -69,13 +69,11 @@ using namespace Microsoft::WRL;
 
 // Collider
 #include "Framework/Collider/Collider.h"
-#include "Framework/Collider/CircleCollider.h"
 #include "Framework/Collider/RectCollider.h"
+#include "Framework/Collider/CircleCollider.h"
 
 // Obj
 #include "Object/BagicObject/Quad.h"
-
-// GameObj
 #include "Object/Obj/Planet.h"
 
 // Scene

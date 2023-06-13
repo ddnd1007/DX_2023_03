@@ -8,12 +8,17 @@
 DunGreedScene::DunGreedScene()
 {
 	_player = make_shared<DunPlayer>();
-	_player->SetPosition(CENTER);
+	_player->SetPosition(CENTER + Vector2(-200.0f, 0.0f));
 
 	for (int i = 0; i < 10; i++)
 	{
-		_monster = make_shared<DunMonster>();
-		_monster->SetPosition(Vector2(rand() % (WIN_WIDTH), rand() % (WIN_HEIGHT)));
+		shared_ptr<DunMonster> monster = make_shared<DunMonster>();
+
+		float xPos = rand() % WIN_WIDTH;
+		float yPos = rand() % WIN_HEIGHT;
+
+		monster->GetTransform()->SetPosition(Vector2(xPos, yPos));
+		_monsters.push_back(monster);
 	}
 }
 
@@ -24,45 +29,47 @@ DunGreedScene::~DunGreedScene()
 void DunGreedScene::Update()
 {
 	_player->Update();
-	for (int i = 0; i < 10; i++)
-	{
-		if (_monster->IsActive() == false)
-			return;
 
-		_monster->Update();
-	}
-
-	if (_monster->IsActive() == true)
+	for (auto monster : _monsters)
 	{
+		monster->Update();
+		monster->SetDir(_player->GetTransform()->GetWorldPos());
+		_player->GetCollider()->Block(monster->GetCollider());
 		for (auto bullet : _player->GetBullets())
 		{
-			if (bullet->_isActive == false)
-				continue;
+			bullet->Attack(monster);
+		}
 
-			if (bullet->GetCollider()->IsCollision(_monster->GetCollider()))
+		for (auto bible : _player->GetBibles())
+		{
+			if (bible->IsCollision(monster->GetCollider()))
 			{
-				_monster->TakeDamage(1);
-				bullet->_isActive = false;
+				if (monster->IsDamaged() == false)
+				{
+					Vector2 temp = monster->GetTransform()->GetWorldPos() - _player->GetTransform()->GetWorldPos();
+					temp.Normalize();
+					monster->GetTransform()->AddVector2(temp * 20.0f);
+					monster->TakeDamage(1);
+				}
 			}
 		}
 	}
+
 }
 
 void DunGreedScene::Render()
 {
 	_player->Render();
-
-	_player->Update();
-	for (int i = 0; i < 10; i++)
+	for (auto monster : _monsters)
 	{
-		if (_monster->IsActive() == false)
-			return;
-
-		_monster->Render();
+		monster->Render();
 	}
 }
 
 void DunGreedScene::PostRender()
 {
-	ImGui::Text("Monster HP : %d", _monster->_hp);
+	for (int i = 0; i < _monsters.size(); i++)
+	{
+		ImGui::Text("Monster%d HP : %d", i + 1, _monsters[i]->GetHp());
+	}
 }
