@@ -2,31 +2,13 @@
 #include "Sprite.h"
 
 Sprite::Sprite(wstring path, Vector2 maxFrame)
-	:Quad()
-	, _maxFrame(maxFrame)
-	
+    : Quad()
+    , _maxFrame(maxFrame)
 {
     _srv = ADD_SRV(path);
     _size = _srv->GetImageSize();
     _size.x /= _maxFrame.x;
     _size.y /= _maxFrame.y;
-
-	
-    CreateVertices();
-    CreateData(path);
-
-	_frameBuffer = make_shared<FrameBuffer>();
-	_frameBuffer->_data.maxFrame = maxFrame;
-	_frameBuffer->_data.curFrame = { 0,0 };
-
-}
-
-Sprite::Sprite(wstring path, Vector2 maxFrame, Vector2 size)
-    :Quad()
-    , _maxFrame(maxFrame)
-{
-    _srv = ADD_SRV(path);
-    _size = _size;
 
     CreateVertices();
     CreateData(path);
@@ -34,7 +16,21 @@ Sprite::Sprite(wstring path, Vector2 maxFrame, Vector2 size)
     _frameBuffer = make_shared<FrameBuffer>();
     _frameBuffer->_data.maxFrame = maxFrame;
     _frameBuffer->_data.curFrame = { 0,0 };
+}
 
+Sprite::Sprite(wstring path, Vector2 maxFrame, Vector2 size)
+    : Quad()
+    , _maxFrame(maxFrame)
+{
+    _srv = ADD_SRV(path);
+    _size = size;
+
+    CreateVertices();
+    CreateData(path);
+
+    _frameBuffer = make_shared<FrameBuffer>();
+    _frameBuffer->_data.maxFrame = maxFrame;
+    _frameBuffer->_data.curFrame = { 0,0 };
 }
 
 Sprite::~Sprite()
@@ -43,14 +39,14 @@ Sprite::~Sprite()
 
 void Sprite::Update()
 {
-	_frameBuffer->Update_Resource();
-	Quad::Update();
+    _frameBuffer->Update_Resource();
+    Quad::Update();
 }
 
 void Sprite::Render()
 {
-	_frameBuffer->SetPS_Buffer(0);
-	Quad::Render();
+    _frameBuffer->SetPS_Buffer(0);
+    Quad::Render();
 }
 
 void Sprite::CreateVertices()
@@ -94,6 +90,4 @@ void Sprite::CreateData(wstring path)
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
     _vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
     _ps = make_shared<PixelShader>(L"Shader/SpritePS.hlsl");
-
-
 }

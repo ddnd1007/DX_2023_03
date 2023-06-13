@@ -155,6 +155,7 @@
     <ClInclude Include="Framework\Collider\Collider.h" />
     <ClInclude Include="Object\Obj\DunGreed\DunBullet.h" />
     <ClInclude Include="Object\Obj\DunGreed\DunMonster.h" />
+    <ClInclude Include="Object\Obj\Zelda\Zelda.h" />
     <ClInclude Include="Scene\BagicScene\ColliderScene.h" />
     <ClInclude Include="Framework\Collider\RectCollider.h" />
     <ClInclude Include="Scene\BagicScene\DunGreedScene.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
     <ClCompile Include="Framework\Collider\Collider.cpp" />
     <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp" />
+    <ClCompile Include="Object\Obj\Zelda\Zelda.cpp" />
     <ClCompile Include="Scene\BagicScene\ColliderScene.cpp" />
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
     <ClCompile Include="Scene\BagicScene\DunGreedScene.cpp" />

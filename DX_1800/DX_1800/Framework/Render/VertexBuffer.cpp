@@ -1,13 +1,13 @@
 #include "framework.h"
 #include "VertexBuffer.h"
 
-VertexBuffer::VertexBuffer(void* data,UINT stride,UINT count ,UINT offset)
-: _stride(stride)
-, _count(count)
-, _offset(offset)
-, _data(data)
+VertexBuffer::VertexBuffer(void* data, UINT stride, UINT count, UINT offset)
+    : _stride(stride)
+    , _count(count)
+    , _offset(offset)
+    , _data(data)
 {
-	CreateVertexBuffer();
+    CreateVertexBuffer();
 }
 
 VertexBuffer::~VertexBuffer()

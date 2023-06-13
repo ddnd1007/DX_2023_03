@@ -7,12 +7,12 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
-
-	
+	//virtual void PostRender() override;
 
 private:
 	shared_ptr<Transform> _transform;
-	shared_ptr<Sprite> _sprite;
+	shared_ptr<Zelda> _zelda;
 
+	Vector2 _curFrame;
 };
 

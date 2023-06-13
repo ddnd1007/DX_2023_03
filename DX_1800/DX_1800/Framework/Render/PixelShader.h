@@ -11,7 +11,6 @@ public:
 	virtual void Set() override;
 
 private:
-
 	ComPtr<ID3D11PixelShader> _ps;
 };
 

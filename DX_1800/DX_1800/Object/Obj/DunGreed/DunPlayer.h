@@ -20,20 +20,22 @@ public:
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
 private:
-	shared_ptr<Transform> _playerTrans;
 	shared_ptr<Quad> _player;
-
+	shared_ptr<Transform> _playerTrans;
 	shared_ptr<CircleCollider> _col;
 
-	shared_ptr<Transform> _bowTrans;
+
 	shared_ptr<Quad> _bow;
+	shared_ptr<Transform> _bowTrans;
+	shared_ptr<Transform> _bowSlot;
 
 	shared_ptr<Transform> _bulletTrans;
 	vector<shared_ptr<class DunBullet>> _bullets;
 
 	vector<shared_ptr<CircleCollider>> _bibles;
 	vector<shared_ptr<Quad>> _bibleQuads;
-	shared_ptr<Transform> _bibleTrans;
+	vector<shared_ptr<Transform>> _bibleTrans;
+	shared_ptr<Transform> _bibleSlot;
 
 	Vector2 _pos = CENTER;
 	float _speed = 400.0f;

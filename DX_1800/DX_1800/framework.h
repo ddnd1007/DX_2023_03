@@ -77,6 +77,10 @@ using namespace Microsoft::WRL;
 #include "Object/BagicObject/Quad.h"
 #include "Object/BagicObject/Sprite.h"
 
+//GameObj
+#include "Object/Obj/Planet.h"
+#include "Object/Obj/Zelda/Zelda.h"
+
 // Scene
 #include "Scene/Scene.h"
 

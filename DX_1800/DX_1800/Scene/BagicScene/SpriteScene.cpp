@@ -3,11 +3,7 @@
 
 SpriteScene::SpriteScene()
 {
-	_sprite = make_shared<Sprite>(L"Resource/Texture/zelda.png", Vector2(10, 8), Vector2(50,50));
-	_transform = make_shared<Transform>();
-	_transform->SetPosition(CENTER);
-
-	_sprite->SetCurFrame(Vector2(0, 0));
+	_zelda = make_shared<Zelda>(L"Resource/Texture/zelda.png", Vector2(10, 8), Vector2(200, 200));
 }
 
 SpriteScene::~SpriteScene()
@@ -16,12 +12,17 @@ SpriteScene::~SpriteScene()
 
 void SpriteScene::Update()
 {
-	_transform->Update();
-	_sprite->Update();
+	_zelda->Update();
 }
 
 void SpriteScene::Render()
 {
-	_transform->SetWorldBuffer(0);
-	_sprite->Render();
+	_zelda->Render();
 }
+
+//void SpriteScene::PostRender()
+//{
+//	ImGui::SliderFloat2("CurFrame", (float*)&_curFrame.x, 0, 10, "%.0f");
+//
+//	_sprite->SetCurFrame(_curFrame);
+//}

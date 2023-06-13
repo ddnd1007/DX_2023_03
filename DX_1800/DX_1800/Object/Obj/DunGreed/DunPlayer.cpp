@@ -5,32 +5,33 @@
 DunPlayer::DunPlayer()
 {
 	_col = make_shared<CircleCollider>(0.0f);
-	_quadTrans = make_shared<Transform>();
 	_player = make_shared<Quad>(L"Resource/Texture/Player.png");
-	_bowTrans = make_shared<Transform>();
+	_playerTrans = make_shared<Transform>();
+
+	_bowSlot = make_shared<Transform>();
 	_bow = make_shared<Quad>(L"Resource/Texture/Bow.png");
+	_bowTrans = make_shared<Transform>();
+
 	_bulletTrans = make_shared<Transform>();
 
-	_bibleTrans = make_shared<Transform>();
-
+	_bibleSlot = make_shared<Transform>();
 	for (int i = 0; i < 10; i++)
 	{
 		shared_ptr<DunBullet> bullet = make_shared<DunBullet>();
 		_bullets.push_back(bullet);
 	}
 
-	_quadTrans->SetParent(_col->GetTransform());
+	_playerTrans->SetParent(_col->GetTransform());
 
-	_bowTrans->SetParent(_quadTrans->GetTransform());
+	_bowSlot->SetParent(_playerTrans);
 
-	_bow->GetTransform()->SetAngle(-PI * 0.75f);
-	_bow->GetTransform()->SetPosition(Vector2(80.0f, 0.0f));
-	_bow->GetTransform()->SetParent(_bowTrans);
+	_bowTrans->SetAngle(-PI * 0.75f);
+	_bowTrans->SetPosition(Vector2(80.0f, 0.0f));
 
-	_bulletTrans->SetParent(_bow);
+	_bulletTrans->SetParent(_bowTrans);
 	_bulletTrans->SetPosition(Vector2(-20.0f, 20.0f));
 
-	_bibleTrans->SetPosition(_col->GetWorldPos());
+	_bibleSlot->SetPosition(_col->GetWorldPos());
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -38,8 +39,13 @@ DunPlayer::DunPlayer()
 		float xPos = cos(2 * PI / 3 * i) * 120.0f;
 		float yPos = sin(2 * PI / 3 * i) * 120.0f;
 		bible->GetTransform()->SetPosition(Vector2(xPos, yPos));
-		bible->GetTransform()->SetParent(_bibleTrans);
+		bible->GetTransform()->SetParent(_bibleSlot);
 		_bibles.push_back(bible);
+
+		shared_ptr<Transform> trans = make_shared<Transform>();
+		trans->SetParent(bible->GetTransform());
+		_bibleQuads.push_back(_player);
+		_bibleTrans.push_back(trans);
 	}
 }
 
@@ -49,7 +55,7 @@ DunPlayer::~DunPlayer()
 
 void DunPlayer::Update()
 {
-	_bowTrans->SetAngle((MOUSE_POS - _bowTrans->GetWorldPos()).Angle());
+	_bowSlot->SetAngle((MOUSE_POS - _bowTrans->GetWorldPos()).Angle());
 
 	for (auto bullet : _bullets)
 	{
@@ -57,20 +63,21 @@ void DunPlayer::Update()
 			bullet->GetTransform()->SetPosition(_bulletTrans->GetWorldPos());
 	}
 
-	_bibleTrans->SetPosition(_col->GetWorldPos());
-	_bibleTrans->AddAngle(3.0f * DELTA_TIME);
+	_bibleSlot->SetPosition(_col->GetWorldPos());
+	_bibleSlot->AddAngle(3.0f * DELTA_TIME);
 
 	Move();
 	Fire();
 
-	_player->Update();
-	_quadTrans->Update();
 	_col->Update();
+	_player->Update();
+	_playerTrans->Update();
+	_bowSlot->Update();
 	_bowTrans->Update();
 	_bow->Update();
 	_bulletTrans->Update();
 
-	_bibleTrans->Update();
+	_bibleSlot->Update();
 
 	for (auto bullet : _bullets)
 		bullet->Update();
@@ -92,8 +99,9 @@ void DunPlayer::Render()
 
 	for (auto bible : _bibles)
 		bible->Render();
-
+	_bowTrans->SetWorldBuffer(0);
 	_bow->Render();
+	_playerTrans->SetWorldBuffer(0);
 	_player->Render();
 	_col->Render();
 }

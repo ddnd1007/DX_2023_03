@@ -10,6 +10,7 @@ public:
 
 private:
 	shared_ptr<Quad> _quad;
+	shared_ptr<Transform> _trans;
 
 
 

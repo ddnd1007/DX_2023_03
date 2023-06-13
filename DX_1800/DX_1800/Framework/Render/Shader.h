@@ -2,10 +2,10 @@
 class Shader
 {
 public:
-	Shader();
+	Shader() {}
 	virtual ~Shader() {}
 
-	virtual void Set();
+	virtual void Set() abstract;
 
 protected:
 	wstring _file;
