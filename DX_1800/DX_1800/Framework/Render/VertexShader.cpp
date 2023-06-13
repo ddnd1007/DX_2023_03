@@ -17,7 +17,7 @@ void VertexShader::CreateBlob(wstring path)
 	DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
 
 	D3DCompileFromFile(path.c_str(),
-		nullptr, nullptr, "VS", "vs_5_0", flags, 0, vertexBlob.GetAddressOf(), nullptr);
+		nullptr, nullptr, "VS", "vs_5_0", flags, 0, _blob.GetAddressOf(), nullptr);
 }
 
 void VertexShader::CreateInputLayout()
@@ -41,21 +41,21 @@ void VertexShader::CreateInputLayout()
     UINT layOutSize = ARRAYSIZE(layOut);
 
     DEVICE->CreateInputLayout(layOut, layOutSize,
-        vertexBlob->GetBufferPointer(), vertexBlob->GetBufferSize(), IN inputLayOut.GetAddressOf());
+        _blob->GetBufferPointer(), _blob->GetBufferSize(), IN _inputLayOut.GetAddressOf());
 }
 
 void VertexShader::CreateVertexShader()
 {
-    DEVICE->CreateVertexShader(vertexBlob->GetBufferPointer(),
-        vertexBlob->GetBufferSize(), nullptr, IN vertexShader.GetAddressOf());
+    DEVICE->CreateVertexShader(_blob->GetBufferPointer(),
+        _blob->GetBufferSize(), nullptr, IN _vs.GetAddressOf());
 }
 
 void VertexShader::SetIA_InputLayOut()
 {
-    DC->IASetInputLayout(inputLayOut.Get());
+    DC->IASetInputLayout(_inputLayOut.Get());
 }
 
-void VertexShader::Set_VS()
+void VertexShader::Set()
 {
-    DC->VSSetShader(vertexShader.Get(), nullptr, 0);
+    DC->VSSetShader(_vs.Get(), nullptr, 0);
 }

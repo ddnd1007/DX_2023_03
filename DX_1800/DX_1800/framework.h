@@ -57,6 +57,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/VertexLayout.h"
 #include "Framework/Render/VertexBuffer.h"
 #include "Framework/Render/IndexBuffer.h"
+#include "Framework/Render/Shader.h"
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
 
@@ -74,7 +75,7 @@ using namespace Microsoft::WRL;
 
 // Obj
 #include "Object/BagicObject/Quad.h"
-#include "Object/Obj/Planet.h"
+#include "Object/BagicObject/Sprite.h"
 
 // Scene
 #include "Scene/Scene.h"

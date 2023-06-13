@@ -123,7 +123,13 @@
     <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\DunGreed\DunBoss.h">
+    <ClInclude Include="Scene\BagicScene\SpriteScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BagicObject\Sprite.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Render\Shader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -221,7 +227,13 @@
     <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\DunGreed\DunBoss.cpp">
+    <ClCompile Include="Scene\BagicScene\SpriteScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BagicObject\Sprite.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Render\Shader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -255,6 +267,9 @@
     <Image Include="Resource\Texture\Player.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\Texture\zelda.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -262,5 +277,6 @@
     <FxCompile Include="Shader\TexturePS.hlsl" />
     <FxCompile Include="Shader\ColliderVS.hlsl" />
     <FxCompile Include="Shader\ColliderPS.hlsl" />
+    <FxCompile Include="Shader\SpritePS.hlsl" />
   </ItemGroup>
 </Project>

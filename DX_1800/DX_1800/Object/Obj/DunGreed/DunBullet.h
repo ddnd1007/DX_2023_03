@@ -16,11 +16,12 @@ public:
 	void SetActive(bool active) { _isActive = active; }
 	bool IsActive() { return _isActive; }
 
-	shared_ptr<Transform> GetQuadTransform() { return _quad->GetTransform(); }
+	shared_ptr<Transform> GetQuadTransform() { return _trans; }
 	shared_ptr<Transform> GetTransform() { return _col->GetTransform(); }
 
 private:
 	shared_ptr<CircleCollider> _col;
+	shared_ptr < Transform> _trans;
 	shared_ptr<Quad> _quad;
 
 	Vector2 _pos = Vector2();

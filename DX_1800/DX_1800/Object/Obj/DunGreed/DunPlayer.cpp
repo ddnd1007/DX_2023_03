@@ -5,6 +5,7 @@
 DunPlayer::DunPlayer()
 {
 	_col = make_shared<CircleCollider>(0.0f);
+	_quadTrans = make_shared<Transform>();
 	_player = make_shared<Quad>(L"Resource/Texture/Player.png");
 	_bowTrans = make_shared<Transform>();
 	_bow = make_shared<Quad>(L"Resource/Texture/Bow.png");
@@ -18,15 +19,15 @@ DunPlayer::DunPlayer()
 		_bullets.push_back(bullet);
 	}
 
-	_player->GetTransform()->SetParent(_col->GetTransform());
+	_quadTrans->SetParent(_col->GetTransform());
 
-	_bowTrans->SetParent(_player->GetTransform());
+	_bowTrans->SetParent(_quadTrans->GetTransform());
 
 	_bow->GetTransform()->SetAngle(-PI * 0.75f);
 	_bow->GetTransform()->SetPosition(Vector2(80.0f, 0.0f));
 	_bow->GetTransform()->SetParent(_bowTrans);
 
-	_bulletTrans->SetParent(_bow->GetTransform());
+	_bulletTrans->SetParent(_bow);
 	_bulletTrans->SetPosition(Vector2(-20.0f, 20.0f));
 
 	_bibleTrans->SetPosition(_col->GetWorldPos());
@@ -62,8 +63,9 @@ void DunPlayer::Update()
 	Move();
 	Fire();
 
-	_col->Update();
 	_player->Update();
+	_quadTrans->Update();
+	_col->Update();
 	_bowTrans->Update();
 	_bow->Update();
 	_bulletTrans->Update();

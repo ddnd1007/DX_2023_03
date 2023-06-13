@@ -1,5 +1,5 @@
 #pragma once
-class PixelShader
+class PixelShader : public Shader
 {
 public:
 	PixelShader(wstring path);
@@ -8,10 +8,10 @@ public:
 	void CreateBlob(wstring path);
 	void CreatePixelShader();
 
-	void Set_PS();
+	virtual void Set() override;
 
 private:
-	ComPtr<ID3DBlob> pixelBlob;
-	ComPtr<ID3D11PixelShader> ps;
+
+	ComPtr<ID3D11PixelShader> _ps;
 };
 

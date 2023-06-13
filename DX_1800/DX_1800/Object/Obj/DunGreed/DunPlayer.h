@@ -20,10 +20,14 @@ public:
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
 private:
-	shared_ptr<CircleCollider> _col;
+	shared_ptr<Transform> _playerTrans;
 	shared_ptr<Quad> _player;
+
+	shared_ptr<CircleCollider> _col;
+
 	shared_ptr<Transform> _bowTrans;
 	shared_ptr<Quad> _bow;
+
 	shared_ptr<Transform> _bulletTrans;
 	vector<shared_ptr<class DunBullet>> _bullets;
 

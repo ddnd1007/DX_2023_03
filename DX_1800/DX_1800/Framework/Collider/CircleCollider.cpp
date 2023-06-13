@@ -32,8 +32,8 @@ void CircleCollider::Render()
 
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
-    _vs->Set_VS();
-    _ps->Set_PS();
+    _vs->Set();
+    _ps->Set();
 
     DC->Draw(_vertices.size(), 0);
 }

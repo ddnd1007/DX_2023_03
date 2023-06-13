@@ -1,28 +1,24 @@
 #pragma once
-class Vector2
+class Vector2 : public XMFLOAT2
 {
 public:
 	Vector2()
-		: x(0), y(0)
+		:XMFLOAT2()
 	{
 	}
 
 	Vector2(int x, int y)
-		: x((float)x), y((float)y)
+		:XMFLOAT2(x,y)
 	{
 	}
 
 	Vector2(float x, float y)
-		: x(x), y(y)
-	{
-
-	}
-
-	Vector2(const Vector2& other)
-		: x(other.x), y(other.y)
+		:XMFLOAT2(x, y)
 	{
 	}
 
+	Vector2(const Vector2& other) = default;
+	
 	Vector2 operator+(const Vector2& other) const
 	{
 		Vector2 result;
@@ -127,6 +123,5 @@ public:
 	int ManhattenDistance(const Vector2& other) const;
 
 public:
-	float x = 0.0f;
-	float y = 0.0f;
+
 };
