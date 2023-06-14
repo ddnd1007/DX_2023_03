@@ -10,7 +10,7 @@ public:
 	};
 
 	MatrixBuffer()
-	: ConstantBuffer(&_data, sizeof(_data))
+		: ConstantBuffer(&_data, sizeof(_data))
 	{
 		_data.matrix = XMMatrixIdentity();
 	}
@@ -68,3 +68,26 @@ public:
 
 	Data _data;
 };
+
+class ActionBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		Vector2 startPos;
+		Vector2 size;
+		Vector2 imageSize;
+		int padding[2];
+	};
+
+	ActionBuffer()
+		: ConstantBuffer(&_data, sizeof(_data))
+	{
+	}
+
+	virtual ~ActionBuffer() {}
+
+	Data _data;
+};
+
+

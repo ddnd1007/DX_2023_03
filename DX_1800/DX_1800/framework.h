@@ -20,6 +20,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <wrl/client.h>
+#include <functional>
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
@@ -73,13 +74,16 @@ using namespace Microsoft::WRL;
 #include "Framework/Collider/RectCollider.h"
 #include "Framework/Collider/CircleCollider.h"
 
+//Action
+#include "Framework/Animation/Action.h"
+
 // Obj
 #include "Object/BagicObject/Quad.h"
 #include "Object/BagicObject/Sprite.h"
 
 //GameObj
 #include "Object/Obj/Planet.h"
-#include "Object/Obj/Zelda/Zelda.h"
+//#include "Object/Obj/Zelda/Zelda.h"
 
 // Scene
 #include "Scene/Scene.h"

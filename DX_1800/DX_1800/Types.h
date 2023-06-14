@@ -32,4 +32,7 @@
 #define RUN_TIME			Timer::GetInstance()->GetRunTime()
 #define FPS					Timer::GetInstance()->GetFPS()
 
+using CallBack = function<void()>;
+using CallBackInt = function<void(int)>;
+
 #define LERP(s,e,t)			 s + (e - s) * t
