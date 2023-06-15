@@ -21,6 +21,8 @@ void Zelda::Update()
 	for (auto action : _actions)
 		action->Update();
 
+	Input();
+
 	_transform->Update();
 	_sprite->SetCurClip(_actions[_state]->GetCurClip());
 	_sprite->Update();
@@ -36,24 +38,62 @@ void Zelda::Input()
 {
 	if (KEY_PRESS('A'))
 	{
-		_actions[State::RUN_L]->Play();
-		_pos.x -= _speed * DELTA_TIME;
+		if (_state != State::RUN_L)
+		{
+			_state = State::RUN_L;
+			_actions[_state]->Play();
+
+		}
+		_transform->AddVector2(Vector2(-1.0f, 0.0f) * 100.0f * DELTA_TIME);
 	}
 	if (KEY_PRESS('D'))
 	{
-		_actions[State::RUN_R]->Play();
-		_pos.x += _speed * DELTA_TIME;
+		if (_state != State::RUN_R)
+		{
+			_state = State::RUN_R;
+			_actions[_state]->Play();
+		}
+		_transform->AddVector2(Vector2(1.0f, 0.0f) * 100.0f * DELTA_TIME);
 	}
 	if (KEY_PRESS('W'))
 	{
-		_actions[State::RUN_B]->Play();
-		_pos.y += _speed * DELTA_TIME;
+		if (_state != State::RUN_B)
+		{
+			_state = State::RUN_B;
+			_actions[_state]->Play();
+		}
+		_transform->AddVector2(Vector2(0.0f, 1.0f) * 100.0f * DELTA_TIME);
 	}
 	if (KEY_PRESS('S'))
 	{
-		_actions[State::RUN_F]->Play();
-		_pos.y -= _speed * DELTA_TIME;
+		if (_state != State::RUN_F)
+		{
+			_state = State::RUN_F;
+			_actions[_state]->Play();
+		}
+		_transform->AddVector2(Vector2(0.0f, -1.0f) * 100.0f * DELTA_TIME);
 	}
+	if (KEY_UP('S'))
+	{
+		_state = State::IDLE_F;
+		_actions[_state]->Play();
+	}
+	if (KEY_UP('W'))
+	{
+		_state = State::IDLE_B;
+		_actions[_state]->Play();
+	}
+	if (KEY_UP('A'))
+	{
+		_state = State::IDLE_L;
+		_actions[_state]->Play();
+	}
+	if (KEY_UP('D'))
+	{
+		_state = State::IDLE_R;
+		_actions[_state]->Play();
+	}
+
 }
 
 void Zelda::CreateActions()
