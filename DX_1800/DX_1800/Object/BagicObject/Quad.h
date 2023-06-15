@@ -23,10 +23,11 @@ protected:
 
 	shared_ptr<VertexBuffer> _vertexBuffer;
 	shared_ptr<IndexBuffer> _indexBuffer;
-	shared_ptr<VertexShader> _vs;
-	shared_ptr<PixelShader> _ps;
 
-	shared_ptr<SRV> _srv;
+	weak_ptr<VertexShader> _vs;
+	weak_ptr<PixelShader> _ps;
+
+	weak_ptr<SRV> _srv;
 
 };
 

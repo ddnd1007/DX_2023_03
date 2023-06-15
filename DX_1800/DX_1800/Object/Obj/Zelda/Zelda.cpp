@@ -1,15 +1,15 @@
 #include "framework.h"
 #include "Zelda.h"
 
-Zelda::Zelda(wstring path, Vector2 maxFrame, Vector2 size)
+Zelda::Zelda()
 {
-	_sprite = make_shared<Sprite>(path, maxFrame, size);
-	_spriteTrans = make_shared<Transform>();
-	_spriteTrans->SetPosition(CENTER);
+	_transform = make_shared<Transform>();
+	_sprite = make_shared<Sprite_Clip>(L"Resource/Texture/zelda.png", Vector2(50, 50));
 
-	_sprite->CreateVertices();
-	_sprite->CreateData(path);
-	//asdfasdfasdf
+	_transform->SetPosition(Vector2(50, 50));
+
+	CreateActions();
+	_actions[State::IDLE_F]->Play();
 }
 
 Zelda::~Zelda()
@@ -18,47 +18,163 @@ Zelda::~Zelda()
 
 void Zelda::Update()
 {
-	if (KEY_PRESS('A'))
-	{
-		_sprite->SetCurClip(Vector2(0, 1));
-	}
-	if (KEY_PRESS('D'))
-	{
-		_sprite->SetCurClip(Vector2(0, 3));
-	}
-	if (KEY_PRESS('W'))
-	{
-		_sprite->SetCurClip(Vector2(0, 2));
-	}
-	if (KEY_PRESS('S'))
-	{
-		_sprite->SetCurClip(Vector2(0, 0));
-	}
+	for (auto action : _actions)
+		action->Update();
 
-	_actionBuffer->Update_Resource();
-	_spriteTrans->Update();
+	_transform->Update();
+	_sprite->SetCurClip(_actions[_state]->GetCurClip());
 	_sprite->Update();
 }
 
 void Zelda::Render()
 {
-	_actionBuffer->SetPS_Buffer(0);
-	_spriteTrans->SetWorldBuffer(0);
+	_transform->SetWorldBuffer(0);
 	_sprite->Render();
 }
 
-void Zelda::CreateVertices()
+void Zelda::Input()
 {
-	_sprite->CreateVertices();
+	if (KEY_PRESS('A'))
+	{
+		_actions[State::RUN_L]->Play();
+		_pos.x -= _speed * DELTA_TIME;
+	}
+	if (KEY_PRESS('D'))
+	{
+		_actions[State::RUN_R]->Play();
+		_pos.x += _speed * DELTA_TIME;
+	}
+	if (KEY_PRESS('W'))
+	{
+		_actions[State::RUN_B]->Play();
+		_pos.y += _speed * DELTA_TIME;
+	}
+	if (KEY_PRESS('S'))
+	{
+		_actions[State::RUN_F]->Play();
+		_pos.y -= _speed * DELTA_TIME;
+	}
 }
 
-void Zelda::CreateData(wstring path)
+void Zelda::CreateActions()
 {
-	_sprite->CreateData(path);
+	shared_ptr<SRV> srv = ADD_SRV(L"Resource/Texture/zelda.png");
+	Vector2 imageSize = srv->GetImageSize();
+	Vector2 maxFrame = Vector2(10, 8);
+	Vector2 size;
+	size.x = imageSize.x / maxFrame.x;
+	size.y = imageSize.y / maxFrame.y;
+
+
+	// IDLE_F
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 3; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 0.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "IDLE_F", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// IDLE_L
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 3; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 1.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "IDLE_L", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// IDLE_B
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 1; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 2.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "IDLE_B", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// IDLE_R
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 3; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 3.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "IDLE_R", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// RUN_F
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 10; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 4.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "RUN_F", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// RUN_L
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 10; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 5.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "RUN_L", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// RUN_B
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 10; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 6.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "RUN_B", Action::LOOP);
+		_actions.push_back(action);
+	}
+
+	// RUN_R
+	{
+		vector<Action::Clip> clips;
+		for (int i = 0; i < 10; i++)
+		{
+			Vector2 startPos = Vector2((i * imageSize.x) / maxFrame.x, imageSize.y * 7.0f / maxFrame.y);
+			Action::Clip clip = Action::Clip(startPos.x, startPos.y, size.x, size.y, srv);
+			clips.push_back(clip);
+		}
+
+		shared_ptr<Action> action = make_shared<Action>(clips, "RUN_R", Action::LOOP);
+		_actions.push_back(action);
+	}
 }
-
-
-
-
-
-

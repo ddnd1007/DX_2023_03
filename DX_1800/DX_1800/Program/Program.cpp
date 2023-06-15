@@ -6,11 +6,12 @@
 #include "../Scene/BagicScene/DunGreedScene.h"
 #include "../Scene/BagicScene/ColliderScene.h"
 #include "../Scene/BagicScene/SpriteScene.h"
+#include "../Scene/BagicScene/ZeldaScene.h"
 
 Program::Program()
 {
 	
-	_curScene = make_shared<DunGreedScene>();
+	_curScene = make_shared<ZeldaScene>();
 
 	_view = make_shared<MatrixBuffer>();
 	_proj = make_shared<MatrixBuffer>();

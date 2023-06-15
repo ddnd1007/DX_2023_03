@@ -51,6 +51,7 @@ using namespace Microsoft::WRL;
 // Utility
 #include "Framework/Utility/Timer.h"
 #include "Framework/Utility/InputManager.h"
+#include "framework/Utility/tinyxml2.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"
@@ -61,6 +62,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/Shader.h"
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
+#include "Framework/Render/ShaderManager.h"
 
 //TextureMapping
 #include "Framework/TextureMapping/SRV.h"
@@ -80,10 +82,12 @@ using namespace Microsoft::WRL;
 // Obj
 #include "Object/BagicObject/Quad.h"
 #include "Object/BagicObject/Sprite.h"
+#include "Object/BagicObject/Sprite_Clip.h"
+#include "Object/BagicObject/Sprite_Frame.h"
 
 //GameObj
 #include "Object/Obj/Planet.h"
-//#include "Object/Obj/Zelda/Zelda.h"
+
 
 // Scene
 #include "Scene/Scene.h"

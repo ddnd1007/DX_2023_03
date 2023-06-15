@@ -22,7 +22,7 @@ private:
 	int _eventNumber = 0;
 
 	shared_ptr<Transform> _transform;
-	shared_ptr<Sprite> _sprite;
+	shared_ptr<Sprite_Clip> _sprite;
 	shared_ptr<Action> _action;
 
 	Vector2 _curFrame;
