@@ -7,11 +7,12 @@
 #include "../Scene/BagicScene/ColliderScene.h"
 #include "../Scene/BagicScene/SpriteScene.h"
 #include "../Scene/BagicScene/ZeldaScene.h"
+#include "../Scene/BagicScene/CupHeadScene.h"
 
 Program::Program()
 {
 	
-	_curScene = make_shared<ZeldaScene>();
+	_curScene = make_shared<CupHeadScene>();
 
 	_view = make_shared<MatrixBuffer>();
 	_proj = make_shared<MatrixBuffer>();
