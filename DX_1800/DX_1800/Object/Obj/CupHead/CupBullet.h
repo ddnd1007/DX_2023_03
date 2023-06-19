@@ -1,5 +1,5 @@
 #pragma once
-class CupHeadBullet
+class CupBullet
 {
 public:
 	enum State
@@ -7,16 +7,17 @@ public:
 		INTRO,
 		LOOP
 	};
-	CupHeadBullet();
-	~CupHeadBullet();
+
+	CupBullet();
+	~CupBullet();
 
 	void Update();
 	void Render();
 
-	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
-
 	void Fire(Vector2 startPos, Vector2 dir);
 	void EndEvent();
+
+	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
 	void SetLeft()
 	{
@@ -30,19 +31,19 @@ public:
 			sprite->SetRight();
 	}
 
-
 private:
+	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
+	shared_ptr<CircleCollider> _col;
+	shared_ptr<Transform> _transform;
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
-	shared_ptr < Transform> _spriteTrans;
-	shared_ptr<CircleCollider> _col;
 
-	State _state = State::INTRO;
+	State _curState = State::INTRO;
+	State _oldState = State::INTRO;
 
 	Vector2 _dir;
-
-	float _speed = 550.0f;
-	bool _isActive = false;
-
+	bool _isActive;
+	float _speed = 500.0f;
 };
+
 

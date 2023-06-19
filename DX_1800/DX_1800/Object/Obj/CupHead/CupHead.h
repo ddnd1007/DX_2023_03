@@ -39,8 +39,8 @@ public:
 
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
-	void SetisFalling(bool value) { _isFalling = value; }
-
+	bool IsFalling() { return _isFalling; }
+	void SetIsFalling(bool value) { _isFalling = value; }
 	void Grounded() { _isFalling = false; }
 
 private:
@@ -52,15 +52,15 @@ private:
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	
 	State _curState = State::IDLE;
-	State _oldState =
+	State _oldState = State::IDLE;
 
 	bool _isFalling;
 	bool _isAttack;
 
 	float _jumpPower = 0.0f;
-	float _maxFalling = 500.0f;
+	float _maxFalling = 800.0f;
 	float _speed = 300.0f;
 
-	shared_ptr<class CupHeadBullet> bullet;
+	shared_ptr<class CupBullet> _bullets;
 };
 

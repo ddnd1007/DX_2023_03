@@ -159,10 +159,16 @@
     <ClInclude Include="Object\Obj\CupHead\CupHead.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\CupHead\CupHeadBullet.h">
+    <ClInclude Include="Object\Obj\CupHead\CupBG.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Obj\CupHead\CupBG.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\CupHead\CupBullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\CupHead\CupMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -296,10 +302,19 @@
     <ClCompile Include="Object\Obj\CupHead\CupHead.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\CupHead\CupHeadBullet.cpp">
+    <ClCompile Include="Object\Obj\CupHead\CupBG.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Obj\CupHead\CupBG.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\CupHead\Cupboss.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -354,6 +369,12 @@
     <Image Include="Resource\CupHead\Jump.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\CupHead\Clown_Page_Last_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\CupHead\track.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -371,5 +392,6 @@
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Attack.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
+    <Xml Include="Resource\CupHead\Clown_Page_Last_Idle.xml" />
   </ItemGroup>
 </Project>

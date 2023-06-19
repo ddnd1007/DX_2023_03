@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "CupHead.h"
-#include "CupHeadBullet.h"
+#include "CupBullet.h"
 
 CupHead::CupHead()
 {
@@ -19,9 +19,8 @@ CupHead::CupHead()
 
 	_actions[State::IDLE]->Play();
 	_actions[State::RUN]->Play();
-	_actions[State::ATTACK]->Play();
 
-	//bullet = make_shared<CupHeadBullet>();
+	_bullets = make_shared<CupBullet>();
 }
 
 CupHead::~CupHead()
@@ -32,6 +31,7 @@ void CupHead::Update()
 {
 	Input();
 	Jump();
+	Attack();
 
 	_col->Update();
 	_transform->Update();
@@ -39,7 +39,7 @@ void CupHead::Update()
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
 
-	//bullet->Update();
+	_bullets->Update();
 }
 
 void CupHead::Render()
@@ -49,12 +49,11 @@ void CupHead::Render()
 
 	_col->Render();
 
-	//bullet->Render();
+	_bullets->Render();
 }
 
 void CupHead::PostRender()
 {
-	ImGui::SliderInt("State", (int*)&_curState, 0, 1);
 }
 
 void CupHead::Input()
@@ -72,23 +71,18 @@ void CupHead::Input()
 		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
 
 		SetRight();
-		if (_isFalling == false)
-			SetAction(State::RUN);
+	
 	}
+	
+	if (_curState == State::JUMP || _curState == State::ATTACK)
+		return;
+
 	if (KEY_PRESS('A') || KEY_PRESS('D'))
 		SetAction(State::RUN);
 	else if (_curState == State::RUN)
 		SetAction(State::IDLE);
 
 
-	if (KEY_PRESS(VK_LBUTTON) && _isAttack == false)
-	{
-		SetAction(State::ATTACK);
-	}
-	else if (KEY_UP(VK_LBUTTON))
-	{
-		SetAction(State::IDLE);
-	}
 
 }
 void CupHead::Jump()
@@ -98,7 +92,7 @@ void CupHead::Jump()
 	else if (_curState == JUMP && _isFalling == false)
 		SetAction(State::IDLE);
 
-	_jumpPower += GRAVITY;
+	_jumpPower -= GRAVITY * 9;
 
 	if (_jumpPower < -_maxFalling)
 		_jumpPower =  -_maxFalling;
@@ -106,17 +100,29 @@ void CupHead::Jump()
 
 	if (KEY_DOWN(VK_SPACE))
 	{
-		_jumpPower = 1000.0f;
+		_jumpPower = 1500.0f;
 		_isFalling = true;
-		SetAction(State::JUMP);
 	}
 }
 void CupHead::Attack()
 {
-	//_isAttack = false;
-	//SetAction(State::IDLE);
+	if (_isAttack == true)
+		SetAction(State::ATTACK);
+	else if (_curState == ATTACK && _isAttack == false )
+		SetAction(State::IDLE);
 
-	//bullet->Fire(_col->GetTransform()->GetWorldPos(), RIGHT_VECTOR);
+	if (KEY_DOWN(VK_LBUTTON))
+	{
+		_isAttack = true;
+		SetAction(State::ATTACK);
+
+		//_bullets->Fire(_col->GetTransform()->GetWorldPos(),RIGHT_VECTOR);
+	}
+	else if (KEY_UP(VK_LBUTTON))
+	{
+		_isAttack = false;
+		SetAction(State::IDLE);
+	}
 }
 
 void CupHead::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

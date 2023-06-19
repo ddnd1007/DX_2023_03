@@ -151,10 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
+    <ClInclude Include="Object\Obj\CupHead\CupBullet.h" />
     <ClInclude Include="Object\Obj\CupHead\CupBG.h" />
-    <ClInclude Include="Object\Obj\CupHead\CupHeadBullet.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Object\Obj\CupHead\CupBG.h" />
     <ClInclude Include="Object\Obj\CupHead\CupHead.h" />
     <ClInclude Include="Scene\BagicScene\CupHeadScene.h" />
     <ClInclude Include="Framework\Animation\Action.h" />
@@ -210,10 +210,10 @@
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
+    <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupBG.cpp" />
-    <ClCompile Include="Object\Obj\CupHead\CupHeadBullet.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Object\Obj\CupHead\CupBG.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupHead.cpp" />
     <ClCompile Include="Scene\BagicScene\CupHeadScene.cpp" />
     <ClCompile Include="Framework\Animation\Action.cpp" />
@@ -280,9 +280,11 @@
     <Image Include="Resource\CupHead\Attack.png" />
     <Image Include="Resource\CupHead\Bullet_Intro.png" />
     <Image Include="Resource\CupHead\Bullet_Loop.png" />
+    <Image Include="Resource\CupHead\Clown_Page_Last_Idle.png" />
     <Image Include="Resource\CupHead\Idle.png" />
     <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
+    <Image Include="Resource\CupHead\track.png" />
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />
@@ -398,6 +400,7 @@
     <Xml Include="Resource\CupHead\Attack.xml" />
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Bullet_Loop.xml" />
+    <Xml Include="Resource\CupHead\Clown_Page_Last_Idle.xml" />
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />

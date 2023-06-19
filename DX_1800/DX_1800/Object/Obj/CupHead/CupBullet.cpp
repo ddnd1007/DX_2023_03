@@ -1,60 +1,79 @@
 #include "framework.h"
-#include "CupHeadBullet.h"
+#include "CupBullet.h"
 
-CupHeadBullet::CupHeadBullet()
+CupBullet::CupBullet()
 {
-	_col = make_shared<CircleCollider>(15);
-
-	_spriteTrans = make_shared<Transform>();
-	_spriteTrans->SetParent(_col->GetTransform());
-	_spriteTrans->SetAngle(-PI * 0.5f);
-	_spriteTrans->SetPosition(Vector2(-50.0f, 0.0f));
+	_col = make_shared<CircleCollider>(15.0f);
 
 	CreateAction("Intro");
 	CreateAction("Loop");
-	
-	_actions[State::INTRO]->Play();
-	_actions[State::LOOP]->Play();
 
-	_actions[State::INTRO]->SetEndEvent(std::bind(&CupHeadBullet::EndEvent, this));
+	_transform = make_shared<Transform>();
+	_transform->SetParent(_col->GetTransform());
+	_transform->SetAngle(-PI * 0.5f);
+	_transform->SetPosition({ -10.0f, 0.0f });
+
+	_actions[INTRO]->SetEndEvent(std::bind(&CupBullet::EndEvent, this));
 }
 
-CupHeadBullet::~CupHeadBullet()
+CupBullet::~CupBullet()
 {
 }
 
-void CupHeadBullet::Update()
+void CupBullet::Update()
 {
 	if (_isActive == false)
 		return;
 
 	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
-	
 	_col->Update();
-	_actions[_state]->Update();
-	_sprites[_state]->SetCurClip(_actions[_state]->GetCurClip());
-	_sprites[_state]->Update();
-	_spriteTrans->Update();
-
+	_actions[_curState]->Update();
+	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
+	_sprites[_curState]->Update();
+	_transform->Update();
 }
 
-void CupHeadBullet::Render()
+void CupBullet::Render()
 {
 	if (_isActive == false)
 		return;
 
-	_spriteTrans->SetWorldBuffer(0);
-	
-	_sprites[_state]->Render();
+	_transform->SetWorldBuffer(0);
+	_sprites[_curState]->Render();
 
 	_col->Render();
 }
 
-void CupHeadBullet::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
+void CupBullet::Fire(Vector2 startPos, Vector2 dir)
+{
+	_isActive = true;
+	_curState = INTRO;
+	_actions[_curState]->Play();
+	_actions[LOOP]->Reset();
+
+	_col->GetTransform()->SetPosition(startPos);
+	if (dir.x > 0.0f)
+	{
+		_dir = RIGHT_VECTOR;
+		SetRight();
+	}
+	else
+	{
+		_dir = -RIGHT_VECTOR;
+		SetLeft();
+	}
+}
+
+void CupBullet::EndEvent()
+{
+	_curState = State::LOOP;
+	_actions[State::LOOP]->Play();
+}
+
+void CupBullet::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
 	wstring srvPath = L"Resource/CupHead/" + wName + L".png";
-	
 	shared_ptr<SRV> srv = ADD_SRV(wName);
 
 	string xmlPath = "Resource/CupHead/" + name + ".xml";
@@ -97,33 +116,3 @@ void CupHeadBullet::CreateAction(string name, float speed, Action::Type type, Ca
 	shared_ptr<Sprite_Clip> sprite = make_shared<Sprite_Clip>(srvPath, Vector2(averageW / count, averageH / count));
 	_sprites.push_back(sprite);
 }
-
-void CupHeadBullet::Fire(Vector2 startPos, Vector2 dir)
-{
-	_isActive = true;
-	_state = State::INTRO;
-	_actions[_state]->Play();
-	_actions[State::LOOP]->Reset();
-
-	_col->GetTransform()->SetPosition(startPos);
-	if (dir.x > 0.0f)
-	{
-		_dir = RIGHT_VECTOR;
-		SetRight();
-	}
-	else
-	{
-		_dir = -RIGHT_VECTOR;
-		SetLeft();
-	}
-}
-
-void CupHeadBullet::EndEvent()
-{
-	_state = State::LOOP;
-	_actions[State::LOOP]->Play();
-}
-
-
-
-
