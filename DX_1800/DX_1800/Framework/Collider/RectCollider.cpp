@@ -279,7 +279,7 @@ bool RectCollider::Block(shared_ptr<CircleCollider> col)
 
     AABB_Info infoA = GetAABB_Info();
     Vector2   infoB = col->GetWorldPos();
-  ;
+ 
 
     Vector2 halfSizeA = Vector2(infoA.right - infoA.left, infoA.top - infoA.bottom) * 0.5f;
     float circleRadius = col->GetWorldRadius();

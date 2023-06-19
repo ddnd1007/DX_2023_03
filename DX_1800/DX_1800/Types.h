@@ -8,6 +8,7 @@
 #define RIGHT_VECTOR	 Vector2(1.0f, 0.0f)
 
 #define PI 3.141592
+#define GRAVITY 9.8
 
 #define RED			{1.0f,0.0f,0.0f,1.0f}
 #define GREEN		{0.0f,1.0f,0.0f,1.0f}

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Obj\CupHead\CupBG.h" />
     <ClInclude Include="Object\Obj\CupHead\CupHeadBullet.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -209,6 +210,7 @@
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Obj\CupHead\CupBG.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupHeadBullet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -279,6 +281,7 @@
     <Image Include="Resource\CupHead\Bullet_Intro.png" />
     <Image Include="Resource\CupHead\Bullet_Loop.png" />
     <Image Include="Resource\CupHead\Idle.png" />
+    <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
@@ -396,6 +399,7 @@
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Bullet_Loop.xml" />
     <Xml Include="Resource\CupHead\Idle.xml" />
+    <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
