@@ -1,7 +1,7 @@
 Texture2D resource : register(t0);
 SamplerState samp : register(s0);
 
-cbuffer ReverseBuffer : register(b0)
+cbuffer ReverBuffer : register(b0)
 {
 	int isReverse;
 	int paddint[3];
@@ -29,9 +29,8 @@ float4 PS(PixelInput input) : SV_TARGET
 // startPos (0,520)
 // ImageSize(1200, 1040)
 // 
-
 if (isReverse == 1)
-		input.uv *= -1;
+	input.uv.x = 1 - input.uv.x;
 
 resultUV.x = (startPos.x) / (imageSize.x) + input.uv.x * (size.x / imageSize.x);
 resultUV.y = (startPos.y) / (imageSize.y) + input.uv.y * (size.y / imageSize.y);
