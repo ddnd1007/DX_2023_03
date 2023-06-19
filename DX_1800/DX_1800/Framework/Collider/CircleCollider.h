@@ -23,8 +23,5 @@ public:
 
 private:
 	float _radius;
-
-	Vector2 _pos;
-
 };
 

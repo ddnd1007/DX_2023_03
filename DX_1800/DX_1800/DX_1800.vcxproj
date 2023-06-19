@@ -151,29 +151,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
     <ClInclude Include="Object\Obj\CupHead\CupBullet.h" />
-    <ClInclude Include="Object\Obj\CupHead\CupBG.h" />
+    <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
     <ClInclude Include="Object\Obj\CupHead\CupBG.h" />
     <ClInclude Include="Object\Obj\CupHead\CupHead.h" />
     <ClInclude Include="Scene\BagicScene\CupHeadScene.h" />
     <ClInclude Include="Framework\Animation\Action.h" />
+    <ClInclude Include="Framework\Utility\tinyxml2.h" />
+    <ClInclude Include="Object\Obj\DunGreed\DunMonster.h" />
     <ClInclude Include="Framework\Collider\CircleCollider.h" />
     <ClInclude Include="Framework\Collider\Collider.h" />
-    <ClInclude Include="Framework\Utility\tinyxml2.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunMonster.h" />
-    <ClInclude Include="Object\Obj\Zelda\Zelda.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Scene\BagicScene\ColliderScene.h" />
     <ClInclude Include="Framework\Collider\RectCollider.h" />
     <ClInclude Include="Scene\BagicScene\DunGreedScene.h" />
     <ClInclude Include="Framework\TextureMapping\BlendState.h" />
     <ClInclude Include="Framework\Utility\InputManager.h" />
+    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h" />
     <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
@@ -207,26 +200,20 @@
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Framework\Render\VertexLayout.h" />
     <ClInclude Include="Framework\Render\VertexShader.h" />
+    <ClInclude Include="Object\Obj\Zelda\Zelda.h" />
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp" />
-    <ClCompile Include="Object\Obj\CupHead\CupBG.cpp" />
+    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupBG.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupHead.cpp" />
     <ClCompile Include="Scene\BagicScene\CupHeadScene.cpp" />
     <ClCompile Include="Framework\Animation\Action.cpp" />
-    <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
-    <ClCompile Include="Framework\Collider\Collider.cpp" />
     <ClCompile Include="Framework\Utility\tinyxml2.cpp" />
     <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp" />
-    <ClCompile Include="Object\Obj\Zelda\Zelda.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
+    <ClCompile Include="Framework\Collider\Collider.cpp" />
     <ClCompile Include="Scene\BagicScene\ColliderScene.cpp" />
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
     <ClCompile Include="Scene\BagicScene\DunGreedScene.cpp" />
@@ -270,6 +257,7 @@
     <ClCompile Include="Object\BagicObject\Sprite_Clip.cpp" />
     <ClCompile Include="Object\BagicObject\Sprite_Frame.cpp" />
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
+    <ClCompile Include="Object\Obj\Zelda\Zelda.cpp" />
     <ClCompile Include="Scene\BagicScene\ZeldaScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DX_1800.ico" />
+    <Image Include="Resource\CupHead\AimStraightShot.png" />
     <Image Include="Resource\CupHead\Attack.png" />
     <Image Include="Resource\CupHead\Bullet_Intro.png" />
     <Image Include="Resource\CupHead\Bullet_Loop.png" />
@@ -300,8 +289,14 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shader\ColliderPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -397,6 +392,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="Resource\CupHead\AimStraightShot.xml" />
     <Xml Include="Resource\CupHead\Attack.xml" />
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Bullet_Loop.xml" />

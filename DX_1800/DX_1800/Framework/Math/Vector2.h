@@ -3,22 +3,23 @@ class Vector2 : public XMFLOAT2
 {
 public:
 	Vector2()
-		:XMFLOAT2()
+		: XMFLOAT2(0.0f,0.0f)
 	{
 	}
 
 	Vector2(int x, int y)
-		:XMFLOAT2(x,y)
+		: XMFLOAT2(x,y)
 	{
 	}
 
 	Vector2(float x, float y)
-		:XMFLOAT2(x, y)
+		: XMFLOAT2(x,y)
 	{
+
 	}
 
 	Vector2(const Vector2& other) = default;
-	
+
 	Vector2 operator+(const Vector2& other) const
 	{
 		Vector2 result;
@@ -129,7 +130,4 @@ public:
 	bool IsBetween(Vector2 a, Vector2 b);
 
 	int ManhattenDistance(const Vector2& other) const;
-
-public:
-
 };

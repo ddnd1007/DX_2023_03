@@ -87,6 +87,9 @@
     <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Framework\TextureMapping\BlendState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -114,13 +117,10 @@
     <ClInclude Include="Framework\Utility\Timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\TextureMapping\SRVManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Obj\DunGreed\DunMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h">
+    <ClInclude Include="Framework\TextureMapping\SRVManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scene\BagicScene\SpriteScene.h">
@@ -130,9 +130,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Render\Shader.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Obj\Zelda\Zelda.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Animation\Action.h">
@@ -145,6 +142,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Render\ShaderManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\Zelda\Zelda.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h">
@@ -162,13 +162,10 @@
     <ClInclude Include="Object\Obj\CupHead\CupBG.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\CupHead\CupBG.h">
+    <ClInclude Include="Object\Obj\CupHead\CupMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Obj\CupHead\CupBullet.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Obj\CupHead\CupMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -260,10 +257,10 @@
     <ClCompile Include="Framework\Utility\Timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\TextureMapping\SRVManager.cpp">
+    <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp">
+    <ClCompile Include="Framework\TextureMapping\SRVManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\BagicScene\SpriteScene.cpp">
@@ -273,9 +270,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Render\Shader.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Obj\Zelda\Zelda.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Animation\Action.cpp">
@@ -288,6 +282,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Render\ShaderManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\Zelda\Zelda.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\BagicScene\ZeldaScene.cpp">
@@ -305,16 +302,10 @@
     <ClCompile Include="Object\Obj\CupHead\CupBG.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\CupHead\CupBG.cpp">
+    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Obj\CupHead\Cupboss.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -357,22 +348,25 @@
     <Image Include="Resource\CupHead\Run.png">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Resource\CupHead\Bullet_Loop.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Resource\CupHead\Bullet_Intro.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Resource\CupHead\Attack.png">
+    <Image Include="Resource\CupHead\AimStraightShot.png">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\CupHead\Jump.png">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Resource\CupHead\Clown_Page_Last_Idle.png">
+    <Image Include="Resource\CupHead\track.png">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Resource\CupHead\track.png">
+    <Image Include="Resource\CupHead\Attack.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\CupHead\Bullet_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\CupHead\Bullet_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\CupHead\Clown_Page_Last_Idle.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -388,10 +382,11 @@
   <ItemGroup>
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
-    <Xml Include="Resource\CupHead\Bullet_Loop.xml" />
-    <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
-    <Xml Include="Resource\CupHead\Attack.xml" />
+    <Xml Include="Resource\CupHead\AimStraightShot.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
+    <Xml Include="Resource\CupHead\Attack.xml" />
+    <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
+    <Xml Include="Resource\CupHead\Bullet_Loop.xml" />
     <Xml Include="Resource\CupHead\Clown_Page_Last_Idle.xml" />
   </ItemGroup>
 </Project>

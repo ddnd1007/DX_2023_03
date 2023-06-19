@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "CupHead.h"
-#include "CupBullet.h"
 
 CupHead::CupHead()
 {
@@ -20,7 +19,8 @@ CupHead::CupHead()
 	_actions[State::IDLE]->Play();
 	_actions[State::RUN]->Play();
 
-	_bullets = make_shared<CupBullet>();
+	_sprites[0]->SetLeft();
+	_sprites[1]->SetLeft();
 }
 
 CupHead::~CupHead()
@@ -31,15 +31,14 @@ void CupHead::Update()
 {
 	Input();
 	Jump();
-	Attack();
 
 	_col->Update();
 	_transform->Update();
+
 	_actions[_curState]->Update();
+
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
-
-	_bullets->Update();
 }
 
 void CupHead::Render()
@@ -48,8 +47,6 @@ void CupHead::Render()
 	_sprites[_curState]->Render();
 
 	_col->Render();
-
-	_bullets->Render();
 }
 
 void CupHead::PostRender()
@@ -58,7 +55,6 @@ void CupHead::PostRender()
 
 void CupHead::Input()
 {
-
 	if (KEY_PRESS('A'))
 	{
 		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
@@ -71,9 +67,8 @@ void CupHead::Input()
 		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
 
 		SetRight();
-	
 	}
-	
+
 	if (_curState == State::JUMP || _curState == State::ATTACK)
 		return;
 
@@ -81,10 +76,8 @@ void CupHead::Input()
 		SetAction(State::RUN);
 	else if (_curState == State::RUN)
 		SetAction(State::IDLE);
-
-
-
 }
+
 void CupHead::Jump()
 {
 	if (_isFalling == true)
@@ -95,7 +88,8 @@ void CupHead::Jump()
 	_jumpPower -= GRAVITY * 9;
 
 	if (_jumpPower < -_maxFalling)
-		_jumpPower =  -_maxFalling;
+		_jumpPower = -_maxFalling;
+
 	_col->GetTransform()->AddVector2(Vector2(0.0f, _jumpPower * DELTA_TIME));
 
 	if (KEY_DOWN(VK_SPACE))
@@ -104,11 +98,12 @@ void CupHead::Jump()
 		_isFalling = true;
 	}
 }
+
 void CupHead::Attack()
 {
 	if (_isAttack == true)
 		SetAction(State::ATTACK);
-	else if (_curState == ATTACK && _isAttack == false )
+	else if (_curState == ATTACK && _isAttack == false)
 		SetAction(State::IDLE);
 
 	if (KEY_DOWN(VK_LBUTTON))
@@ -179,11 +174,10 @@ void CupHead::SetAction(State state)
 
 	_curState = state;
 
-	_actions[_curState]->Reset();
-	_actions[_curState]->Pause();
+	_actions[_oldState]->Reset();
+	_actions[_oldState]->Pause();
 
 	_actions[_curState]->Play();
 
 	_oldState = _curState;
 }
-

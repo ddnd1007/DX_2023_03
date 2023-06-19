@@ -6,7 +6,7 @@ protected:
 
 public:
 	Quad(wstring path);
-	Quad(Vector2 size, wstring path);
+	Quad(wstring path, Vector2 size);
 	virtual ~Quad();
 
 	virtual void Update();
@@ -15,13 +15,11 @@ public:
 	virtual void CreateVertices();
 	virtual void CreateData(wstring path);
 
-	Vector2 GetImageSize() {return  _srv.lock()->GetImageSize(); }
+	Vector2 GetImageSize() { return _srv.lock()->GetImageSize(); }
 
 protected:
 	vector<Vertex_Texture> _vertices;
 	vector<UINT> _indices;
-
-	Vector2 _size;
 
 	shared_ptr<VertexBuffer> _vertexBuffer;
 	shared_ptr<IndexBuffer> _indexBuffer;
@@ -31,5 +29,6 @@ protected:
 
 	weak_ptr<SRV> _srv;
 
+	Vector2 _size;
 };
 

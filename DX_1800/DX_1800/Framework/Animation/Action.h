@@ -9,9 +9,9 @@ public:
 		weak_ptr<SRV> srv;
 
 		Clip(float x, float y, float w, float h, shared_ptr<SRV> srv)
-			: startPos(x, y)
-			, size(w, h)
-			, srv(srv)
+		: startPos(x,y)
+		, size(w,h)
+		, srv(srv)
 		{
 
 		}
@@ -37,7 +37,6 @@ public:
 	Clip GetCurClip() { return _clips[_curClipIndex]; }
 
 	void SetEndEvent(CallBack event_) { _endEvent = event_; }
-	void SetEndEventInt(CallBackInt event_) { _endEventInt = event_; }
 
 private:
 	string _name;
@@ -56,8 +55,7 @@ private:
 	// 리스너 패턴, 옵저버 패턴
 	// => Delegate
 	CallBack _endEvent = nullptr;
-	CallBackInt _endEventInt = nullptr;
-	
+
 	// 매개변수가 int으로 오는 콜백함수
 };
 

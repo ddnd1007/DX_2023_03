@@ -1,6 +1,4 @@
 #pragma once
-#include "framework.h"
-
 class Zelda
 {
 public:
@@ -14,8 +12,9 @@ public:
 		RUN_F,
 		RUN_L,
 		RUN_B,
-		RUN_R,
+		RUN_R
 	};
+
 	Zelda();
 	~Zelda();
 
@@ -24,22 +23,15 @@ public:
 
 	void Input();
 
-	
-
-
-
-//adfsadf
 
 private:
 	void CreateActions();
 
 	State _state = State::IDLE_F;
 
-	shared_ptr<Sprite_Clip> _sprite;
 	shared_ptr<Transform> _transform;
-	
-	vector<shared_ptr<Action>> _actions;
+	shared_ptr<Sprite_Clip> _sprite;
 
-	Vector2 _pos = CENTER;
-	float _speed = 400.0f;
+	vector<shared_ptr<Action>> _actions;
 };
+

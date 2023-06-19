@@ -10,7 +10,7 @@ public:
 	};
 
 	MatrixBuffer()
-		: ConstantBuffer(&_data, sizeof(_data))
+	: ConstantBuffer(&_data, sizeof(_data))
 	{
 		_data.matrix = XMMatrixIdentity();
 	}

@@ -17,19 +17,10 @@ struct PixelInput
 float4 PS(PixelInput input) : SV_TARGET
 {
 	float2 resultUV;
+	resultUV.x = input.uv.x / maxFrame.x + curFrame.x / maxFrame.x;
+	resultUV.y = input.uv.y / maxFrame.y + curFrame.y / maxFrame.y;
 
-// curFrame = (0,1)
-// maxFrame = (10,8)
-// input 0,0
-// resultUVx : 0
-// resultUVy : 1/8
-// input 1,1
-// resultUVx : 1/10
-// reusltUVy : 2/8
-resultUV.x = input.uv.x / maxFrame.x + curFrame.x / maxFrame.x;
-resultUV.y = input.uv.y / maxFrame.y + curFrame.y / maxFrame.y;
+	float4 color = resource.Sample(samp, resultUV);
 
-float4 color = resource.Sample(samp, resultUV);
-
-return color;
+	return color;
 }

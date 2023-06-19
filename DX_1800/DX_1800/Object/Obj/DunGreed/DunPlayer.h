@@ -8,36 +8,22 @@ public:
 	void Update();
 	void Render();
 
-	void Move();
-	void SetPosition(Vector2 pos) { _pos = pos; }
+	void InPut();
 
-	void Fire();
-	shared_ptr<class DunBullet> SetBullet();
+	void SetPosition(Vector2 pos) { _quadTrans->SetPosition(pos); }
+	void AddVector2(Vector2 pos) { _quadTrans->AddVector2(pos); }
 
-	vector<shared_ptr<DunBullet>>& GetBullets() { return _bullets; }
-	vector < shared_ptr<CircleCollider>>& GetBibles() { return _bibles; }
-	shared_ptr<Transform> GetTransform() { return _col->GetTransform(); }
-	shared_ptr<CircleCollider> GetCollider() { return _col; }
+	vector<shared_ptr<class DunBullet>>& GetBullets() { return _bullets; }
 
 private:
-	shared_ptr<Quad> _player;
-	shared_ptr<Transform> _playerTrans;
-	shared_ptr<CircleCollider> _col;
+	shared_ptr<Transform> _quadTrans;
+	shared_ptr<Quad> _quad;
 
-
-	shared_ptr<Quad> _bow;
-	shared_ptr<Transform> _bowTrans;
 	shared_ptr<Transform> _bowSlot;
 
-	shared_ptr<Transform> _bulletTrans;
+	shared_ptr<Transform> _bowTrans;
+	shared_ptr<Quad> _bowQuad;
+
 	vector<shared_ptr<class DunBullet>> _bullets;
-
-	vector<shared_ptr<CircleCollider>> _bibles;
-	vector<shared_ptr<Quad>> _bibleQuads;
-	vector<shared_ptr<Transform>> _bibleTrans;
-	shared_ptr<Transform> _bibleSlot;
-
-	Vector2 _pos = CENTER;
-	float _speed = 400.0f;
 };
 

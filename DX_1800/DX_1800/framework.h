@@ -29,13 +29,13 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-//DirectXTex
+// DirectX Tex
 #include "../DXTex/DirectXTex.h"
 
-//ImGui
-#include "../imGUI/imgui.h"
-#include "../imGUI/imgui_impl_dx11.h"
-#include "../imGUI/imgui_impl_win32.h"
+// Imgui
+#include "../ImGUI/imgui.h"
+#include "../ImGUI/imgui_impl_dx11.h"
+#include "../ImGUI/imgui_impl_win32.h"
 
 using namespace std;
 using namespace DirectX;
@@ -51,7 +51,7 @@ using namespace Microsoft::WRL;
 // Utility
 #include "Framework/Utility/Timer.h"
 #include "Framework/Utility/InputManager.h"
-#include "framework/Utility/tinyxml2.h"
+#include "Framework/Utility/tinyxml2.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"
@@ -64,7 +64,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/PixelShader.h"
 #include "Framework/Render/ShaderManager.h"
 
-//TextureMapping
+// TextureMapping
 #include "Framework/TextureMapping/SRV.h"
 #include "Framework/TextureMapping/SRVManager.h"
 #include "Framework/TextureMapping/SamplerState.h"
@@ -73,21 +73,20 @@ using namespace Microsoft::WRL;
 
 // Collider
 #include "Framework/Collider/Collider.h"
-#include "Framework/Collider/RectCollider.h"
 #include "Framework/Collider/CircleCollider.h"
+#include "Framework/Collider/RectCollider.h"
 
-//Action
+// Action
 #include "Framework/Animation/Action.h"
 
 // Obj
 #include "Object/BagicObject/Quad.h"
 #include "Object/BagicObject/Sprite.h"
-#include "Object/BagicObject/Sprite_Clip.h"
 #include "Object/BagicObject/Sprite_Frame.h"
+#include "Object/BagicObject/Sprite_Clip.h"
 
-//GameObj
+// GameObj
 #include "Object/Obj/Planet.h"
-
 
 // Scene
 #include "Scene/Scene.h"

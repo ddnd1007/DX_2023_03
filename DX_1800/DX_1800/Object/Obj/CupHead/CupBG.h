@@ -16,3 +16,4 @@ private:
 	shared_ptr<Transform> _transform;
 	shared_ptr<Quad>	_quad;
 };
+

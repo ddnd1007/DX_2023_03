@@ -8,7 +8,6 @@ protected:
 	virtual ~Sprite();
 
 public:
-
 	virtual void Update() override;
 	virtual void Render() override;
 

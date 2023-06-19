@@ -2,12 +2,12 @@
 #include "Action.h"
 
 Action::Action(vector<Clip> clips, string name, Type type, float speed)
-	: _clips(clips)
-	, _name(name)
-	, _repeatType(type)
-	, _speed(speed)
+: _clips(clips)
+, _name(name)
+, _repeatType(type)
+, _speed(speed)
 {
-
+	
 }
 
 Action::~Action()
@@ -16,7 +16,7 @@ Action::~Action()
 
 void Action::Update()
 {
-	if (_isPlay == false)
+	if(_isPlay == false)
 		return;
 
 	_time += DELTA_TIME;
@@ -30,32 +30,32 @@ void Action::Update()
 		case Action::END:
 		{
 			_curClipIndex++;
-			if (_curClipIndex >= _clips.size())
+			if(_curClipIndex >= _clips.size())
 				Stop();
 		}
-		break;
+			break;
 		case Action::LOOP:
 		{
 			_curClipIndex++;
 			_curClipIndex %= _clips.size();
 		}
-		break;
+			break;
 		case Action::PINGPONG:
 		{
 			if (_isReverse)
 			{
 				_curClipIndex--;
-				if (_curClipIndex <= 0)
+				if(_curClipIndex <= 0)
 					_isReverse = false;
 			}
 			else
 			{
 				_curClipIndex++;
-				if (_curClipIndex >= _clips.size() - 1)
+				if(_curClipIndex >= _clips.size() - 1)
 					_isReverse = true;
 			}
 		}
-		break;
+			break;
 		default:
 			break;
 		}
@@ -80,11 +80,8 @@ void Action::Stop()
 	_time = 0.0f;
 	_curClipIndex = 0;
 
-	if (_endEvent != nullptr)
+	if(_endEvent != nullptr)
 		_endEvent();
-
-	if (_endEventInt != nullptr)
-		_endEventInt(0);
 }
 
 void Action::Reset()

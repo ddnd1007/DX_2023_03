@@ -15,10 +15,6 @@ private:
 	shared_ptr<RectCollider> _rectColliderKeyBoard;
 	shared_ptr<RectCollider> _rectCollider2;
 
-	Vector2 _pos = CENTER;
-	Vector2 _scale = { 1.0f, 1.0f };
-	float _angle = 0.0f;
-
 	Vector2 _dir;
 	bool _isActive = false;
 };

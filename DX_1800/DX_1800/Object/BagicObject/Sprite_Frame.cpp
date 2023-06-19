@@ -2,14 +2,14 @@
 #include "Sprite_Frame.h"
 
 Sprite_Frame::Sprite_Frame(wstring path, Vector2 maxFrame)
-	: Sprite(path, Vector2(_size.x / maxFrame.x, _size.y / maxFrame.y))
+: Sprite(path, Vector2(_size.x / maxFrame.x, _size.y / maxFrame.y))
 {
 	Sprite::CreateVertices();
 	Sprite::CreateData(path);
 }
 
 Sprite_Frame::Sprite_Frame(wstring path, Vector2 maxFrame, Vector2 size)
-	: Sprite(path, Vector2(size.x / maxFrame.x, size.y / maxFrame.y))
+: Sprite(path, Vector2(size.x / maxFrame.x, size.y / maxFrame.y))
 {
 	Sprite::CreateVertices();
 	Sprite::CreateData(path);

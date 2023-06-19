@@ -30,7 +30,6 @@ public:
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	Vector2 GetWorldPos() { return _transform->GetWorldPos(); }
-	void SetPosition(Vector2 pos) { _transform->SetPosition(pos); }
 
 protected:
 	Type _type = Type::NONE;

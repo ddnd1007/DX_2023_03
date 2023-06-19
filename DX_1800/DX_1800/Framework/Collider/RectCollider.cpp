@@ -278,17 +278,15 @@ bool RectCollider::Block(shared_ptr<CircleCollider> col)
         return false;
 
     AABB_Info infoA = GetAABB_Info();
-    Vector2   infoB = col->GetWorldPos();
- 
 
     Vector2 halfSizeA = Vector2(infoA.right - infoA.left, infoA.top - infoA.bottom) * 0.5f;
-    float circleRadius = col->GetWorldRadius();
+    float radius = col->GetWorldRadius();
 
     Vector2 dir = col->GetWorldPos() - GetWorldPos();
 
     Vector2 overlap;
-    overlap.x = (halfSizeA.x + circleRadius) - abs(dir.x);
-    overlap.y = (halfSizeA.y + circleRadius) - abs(dir.y);
+    overlap.x = (halfSizeA.x + radius) - abs(dir.x);
+    overlap.y = (halfSizeA.y + radius) - abs(dir.y);
 
     if (overlap.y > overlap.x)
     {

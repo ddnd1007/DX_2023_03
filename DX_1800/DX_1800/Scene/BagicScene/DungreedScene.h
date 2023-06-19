@@ -11,6 +11,6 @@ public:
 
 private:
 	shared_ptr<class DunPlayer> _player;
-	vector<shared_ptr<class DunMonster>> _monsters;
+	shared_ptr<class DunMonster> _monster;
 };
 

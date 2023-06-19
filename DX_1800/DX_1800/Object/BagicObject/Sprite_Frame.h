@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 class Sprite_Frame : public Sprite
 {
 public:
-	// TODO: ºÐ¸®ÇÏ±â
+	// TODO: �и��ϱ�
 	Sprite_Frame(wstring path, Vector2 maxFrame);
 	Sprite_Frame(wstring path, Vector2 maxFrame, Vector2 size);
 	virtual ~Sprite_Frame();
@@ -15,3 +15,4 @@ public:
 private:
 	Vector2 _maxFrame;
 };
+

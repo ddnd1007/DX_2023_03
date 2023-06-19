@@ -27,14 +27,13 @@ public:
 
 	void CreateVertices();
 	void CreateData();
-	
+
 	virtual bool IsCollision(const Vector2& pos) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> col) override;
 	virtual bool IsCollision(shared_ptr<RectCollider> col)override;
 
 	bool IsOBB(shared_ptr<RectCollider> col);
 	bool IsOBB(shared_ptr<CircleCollider> col);
-	void AddVector2(Vector2 pos) { _pos += pos; }
 
 	void SetScale(Vector2 scale);
 	float SeperateAxis(Vector2 separate, Vector2 e1, Vector2 e2);
@@ -47,9 +46,6 @@ public:
 
 private:
 	Vector2 _size;
-
-	Vector2 _pos;
-
 
 };
 

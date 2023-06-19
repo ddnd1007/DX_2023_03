@@ -50,7 +50,7 @@ private:
 	shared_ptr<Transform> _transform;
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
-	
+
 	State _curState = State::IDLE;
 	State _oldState = State::IDLE;
 
@@ -63,4 +63,3 @@ private:
 
 	shared_ptr<class CupBullet> _bullets;
 };
-

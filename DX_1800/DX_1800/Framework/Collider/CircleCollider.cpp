@@ -76,7 +76,6 @@ bool CircleCollider::IsCollision(shared_ptr<CircleCollider> col)
 
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> col)
 {
-
     return col->IsCollision(shared_from_this());
 }
 

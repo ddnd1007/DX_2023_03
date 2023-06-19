@@ -11,11 +11,9 @@ public:
 
 	void CreateAction();
 
-	void EndEvent() {	_event = "END!!!";}
+	void EndEvent() { _event = "END!!!"; }
 	// 액션이 끝나면 _eventNumber는 5로 만들고 싶다.
-
-
-	void EndEventNumber(int num) { _eventNumber = 5 ;}
+	void EndEventNumber(int num) { _eventNumber = num; }
 
 private:
 	string _event = "Not End";

@@ -11,7 +11,8 @@
 
 Program::Program()
 {
-	
+	srand(static_cast<unsigned int>(time(nullptr)));
+
 	_curScene = make_shared<CupHeadScene>();
 
 	_view = make_shared<MatrixBuffer>();

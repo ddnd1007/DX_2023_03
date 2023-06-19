@@ -18,7 +18,6 @@ public:
 	void AddScale(Vector2 scale) { _scale += scale; }
 	void AddAngle(float angle) { _angle += angle; }
 
-
 	const Vector2& GetPos() { return _pos; }
 	const Vector2& GetScale() { return _scale; }
 	const float& GetAngle() { return _angle; }
@@ -32,7 +31,7 @@ public:
 
 private:
 	Vector2 _pos;
-	Vector2 _scale = { 1.0f, 1.0f };
+	Vector2 _scale = {1.0f, 1.0f};
 	float _angle = 0.0f;
 
 	XMMATRIX _scaleM = XMMatrixIdentity();

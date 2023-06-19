@@ -3,9 +3,9 @@
 
 VertexShader::VertexShader(wstring path)
 {
-    CreateBlob(path);
-    CreateInputLayout();
-    CreateVertexShader();
+	CreateBlob(path);
+	CreateInputLayout();
+	CreateVertexShader();
 }
 
 VertexShader::~VertexShader()
@@ -14,10 +14,10 @@ VertexShader::~VertexShader()
 
 void VertexShader::CreateBlob(wstring path)
 {
-    DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
+	DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
 
-    D3DCompileFromFile(path.c_str(),
-        nullptr, nullptr, "VS", "vs_5_0", flags, 0, _blob.GetAddressOf(), nullptr);
+	D3DCompileFromFile(path.c_str(),
+		nullptr, nullptr, "VS", "vs_5_0", flags, 0, _blob.GetAddressOf(), nullptr);
 }
 
 void VertexShader::CreateInputLayout()
