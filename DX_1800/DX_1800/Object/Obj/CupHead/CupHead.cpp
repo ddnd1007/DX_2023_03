@@ -19,7 +19,7 @@ CupHead::CupHead()
 	_transform->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 20));
 
-	_bulletSlot->SetPosition(Vector2(20, 0));
+	_bulletSlot->SetPosition(Vector2(100, 10));
 	_bulletSlot->SetParent(_col->GetTransform());
 	_bulletSlot->SetAngle(-PI * 0.75f);
 
@@ -34,6 +34,10 @@ CupHead::CupHead()
 		shared_ptr<CupBullet> bullet = make_shared<CupBullet>();
 		_bullets.push_back(bullet);
 	}
+
+	_filterBuffer = make_shared<FilterBuffer>();
+	_filterBuffer->_data.imageSize = _sprites[State::IDLE]->GetImageSize();
+	_filterBuffer->_data.selected = 1;
 }
 
 
@@ -59,11 +63,14 @@ void CupHead::Update()
 	{
 		bullet->Update();
 	}
+	_filterBuffer->Update_Resource();
+	_filterBuffer->_data.value2 += 1;
 }
 
 void CupHead::Render()
 {
 	_transform->SetWorldBuffer(0);
+	_filterBuffer->SetPS_Buffer(2);
 	_sprites[_curState]->Render();
 
 	_col->Render();
@@ -76,6 +83,10 @@ void CupHead::Render()
 
 void CupHead::PostRender()
 {
+	ImGui::SliderInt("selected", &_filterBuffer->_data.selected, 0, 5);
+	ImGui::SliderInt("value1", &_filterBuffer->_data.value1, 0, 300);
+	ImGui::SliderInt("value2", &_filterBuffer->_data.value2, 0, 300);
+	ImGui::SliderInt("value3", &_filterBuffer->_data.value3, 0, 300);
 }
 
 void CupHead::Input()
@@ -144,7 +155,7 @@ void CupHead::Attack()
 		{
 			bullet->_isActive = true;
 			bullet->SetDirtection(RIGHT_VECTOR);
-			bullet->SetPosition(_col->GetWorldPos());
+			bullet->SetPosition(_bulletSlot->GetWorldPos());
 			break;
 		}
 	}

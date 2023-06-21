@@ -26,17 +26,16 @@ public:
 		for (auto sprite : _sprites)
 			sprite->SetRight();
 	}
-	
+
 	int& GetHp() { return _hp; }
 	void TakeDamage(int damage);
-	void MonsterDie();
 	void SetPosition(Vector2 pos) { _col->GetTransform()->SetPosition(pos); }
 	void SetAction(State state);
 	void PostRender();
 
 	shared_ptr<RectCollider> GetCollider() { return _col; }
 	shared_ptr<Transform> GetTransform() { return _col->GetTransform(); }
-	
+
 	bool IsDead() { return _hp <= 0; }
 	bool IsDamaged() { return _isDamaged; }
 	bool IsActive() { return _hp > 0; }
@@ -55,7 +54,7 @@ private:
 	State _curState = State::IDLE;
 	State _oldState = State::IDLE;
 
-	int _hp = 10;
+	int _hp = 20;
 	bool _isDamaged = false;
 	bool _isActive = true;
 

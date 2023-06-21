@@ -9,7 +9,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void SetCurClip(Action::Clip clip);
+	virtual void SetCurClip(Action::Clip clip) override;
 
 private:
 

@@ -162,10 +162,13 @@
     <ClInclude Include="Object\Obj\CupHead\CupBG.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\CupHead\CupMonster.h">
+    <ClInclude Include="Object\Obj\CupHead\CupBullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Obj\CupHead\CupBullet.h">
+    <ClInclude Include="Object\BagicObject\Effect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\CupHead\CupMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -302,10 +305,13 @@
     <ClCompile Include="Object\Obj\CupHead\CupBG.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp">
+    <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp">
+    <ClCompile Include="Object\BagicObject\Effect.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -357,19 +363,22 @@
     <Image Include="Resource\CupHead\track.png">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Resource\CupHead\Attack.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Resource\CupHead\Bullet_Intro.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="Resource\CupHead\Bullet_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Texture\hit_4x2.png">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\CupHead\Clown_Page_Last_Idle.png">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\CupHead\Clown_Page_Last_Die.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\CupHead\Bullet_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\CupHead\Attack.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -381,18 +390,18 @@
     <FxCompile Include="Shader\ColliderPS.hlsl" />
     <FxCompile Include="Shader\SpritePS.hlsl" />
     <FxCompile Include="Shader\ActionPS.hlsl" />
-    <FxCompile Include="Shader\FIlterPS.hlsl" />
-    <FxCompile Include="Shader\AcFilterPS.hlsl" />
+    <FxCompile Include="Shader\FilterPS.hlsl" />
+    <FxCompile Include="Shader\CupHeadPS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
     <Xml Include="Resource\CupHead\AimStraightShot.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
-    <Xml Include="Resource\CupHead\Attack.xml" />
-    <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Bullet_Loop.xml" />
     <Xml Include="Resource\CupHead\Clown_Page_Last_Idle.xml" />
     <Xml Include="Resource\CupHead\Clown_Page_Last_Die.xml" />
+    <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
+    <Xml Include="Resource\CupHead\Attack.xml" />
   </ItemGroup>
 </Project>

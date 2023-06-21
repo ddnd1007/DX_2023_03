@@ -15,7 +15,7 @@ DunPlayer::DunPlayer()
 	_bowTrans->SetParent(_bowSlot);
 
 	_bowTrans->SetPosition(Vector2(100.0f,0.0f));
-	
+	_bowTrans->SetAngle(-PI * 0.75f);
 
 	for (int i = 0; i < 30; i++)
 	{

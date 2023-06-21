@@ -5,6 +5,7 @@ SolarSystem::SolarSystem()
 {
 	_sun = make_shared<Planet>(L"sun");
 	_sun->SetScale({0.3f, 0.3f});
+	_sun->SetPS(ADD_PS(L"Shader/FilterPS.hlsl"));
 
 	_earth = make_shared<Planet>(L"earth");
 	_earth->SetScale({0.3f, 0.3f});
@@ -21,6 +22,10 @@ SolarSystem::SolarSystem()
 
 	_earth->SetParent(_sun->GetOrbit());
 	_moon->SetParent(_earth->GetOrbit());
+
+	_filterBuffer = make_shared<FilterBuffer>();
+	_filterBuffer->_data.selected = 6;
+	_filterBuffer->_data.imageSize = _sun->GetImageSize();
 }
 
 SolarSystem::~SolarSystem()
@@ -44,11 +49,14 @@ void SolarSystem::Update()
 	_sun->Update();
 	_earth->Update();
 	_moon->Update();
+	
+	_filterBuffer->Update_Resource();
 }
 
 void SolarSystem::Render()
 {
 	_earth->Render();
+	_filterBuffer->SetPS_Buffer(0);
 	_sun->Render();
 	_moon->Render();
 }

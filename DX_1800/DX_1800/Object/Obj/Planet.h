@@ -12,6 +12,9 @@ public:
 	void SetScale(Vector2 scale) { _trans->SetScale(scale); _orbit->SetScale(scale); }
 	void SetPosition(Vector2 pos);
 
+	void SetPS(shared_ptr<PixelShader> ps) { _quad->SetPS(ps); }
+	Vector2 GetImageSize() { return _quad->GetImageSize(); }
+
 	void SetParent(shared_ptr<Transform> trans) { _trans->SetParent(trans); _orbit->SetParent(trans); }
 
 	shared_ptr<Transform> GetTransform() { return _trans; }

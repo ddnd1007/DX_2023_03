@@ -35,7 +35,7 @@ public:
 	void Jump();
 	void Attack();
 	void SetAction(State state);
-	
+
 	bool IsFalling() { return _isFalling; }
 	void SetIsFalling(bool value) { _isFalling = value; }
 	void Grounded() { _isFalling = false; }
@@ -63,6 +63,8 @@ private:
 	float _jumpPower = 0.0f;
 	float _maxFalling = 800.0f;
 	float _speed = 300.0f;
+
+	shared_ptr<FilterBuffer> _filterBuffer;
 
 	vector<shared_ptr<class CupBullet>> _bullets;
 };

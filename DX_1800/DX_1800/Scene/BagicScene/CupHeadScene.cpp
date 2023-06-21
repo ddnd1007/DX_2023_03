@@ -25,7 +25,7 @@ void CupHeadScene::Update()
 	_player->GetCollider()->Block(_monster->GetCollider());
 	_player->Update();
 
-	if(_bg->GetCollider()->Block(_player->GetCollider()))
+	if (_bg->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else
 		_player->SetIsFalling(true);
@@ -65,7 +65,7 @@ void CupHeadScene::Render()
 void CupHeadScene::PostRender()
 {
 	//ImGui::Text("Monster HP : %d ", _monster->GetHp());
-	_monster->PostRender();
 	_player->PostRender();
+	_monster->PostRender();
 }
 

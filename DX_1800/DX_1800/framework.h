@@ -84,6 +84,7 @@ using namespace Microsoft::WRL;
 #include "Object/BagicObject/Sprite.h"
 #include "Object/BagicObject/Sprite_Frame.h"
 #include "Object/BagicObject/Sprite_Clip.h"
+#include "Object/BagicObject/Effect.h"
 
 // GameObj
 #include "Object/Obj/Planet.h"
