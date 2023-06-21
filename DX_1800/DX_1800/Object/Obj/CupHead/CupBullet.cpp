@@ -1,19 +1,26 @@
 #include "framework.h"
 #include "CupBullet.h"
+#include "CupMonster.h"
 
 CupBullet::CupBullet()
 {
-	_col = make_shared<CircleCollider>(15.0f);
+	CreateAction("Bullet_Loop");
+	_action->Play();
 
-	CreateAction("Intro");
-	CreateAction("Loop");
+	Vector2 size = _sprite->GetClipSize();
 
+	_col = make_shared<CircleCollider>(10.0f);
 	_transform = make_shared<Transform>();
+
 	_transform->SetParent(_col->GetTransform());
 	_transform->SetAngle(-PI * 0.5f);
-	_transform->SetPosition({ -10.0f, 0.0f });
+	_transform->SetPosition(Vector2(-80.0f, 0.0f));
 
-	_actions[INTRO]->SetEndEvent(std::bind(&CupBullet::EndEvent, this));
+	_col->GetTransform()->SetPosition(Vector2(-WIN_WIDTH * 5, -WIN_HEIGHT * 5));
+	_isActive = false;
+
+	_col->Update();
+	_transform->Update();
 }
 
 CupBullet::~CupBullet()
@@ -25,12 +32,14 @@ void CupBullet::Update()
 	if (_isActive == false)
 		return;
 
-	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
+	_col->GetTransform()->AddVector2(_direction * _speed * DELTA_TIME);
 	_col->Update();
-	_actions[_curState]->Update();
-	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
-	_sprites[_curState]->Update();
 	_transform->Update();
+
+	_action->Update();
+	_sprite->SetCurClip(_action->GetCurClip());
+	_sprite->Update();
+
 }
 
 void CupBullet::Render()
@@ -39,35 +48,8 @@ void CupBullet::Render()
 		return;
 
 	_transform->SetWorldBuffer(0);
-	_sprites[_curState]->Render();
-
+	_sprite->Render();
 	_col->Render();
-}
-
-void CupBullet::Fire(Vector2 startPos, Vector2 dir)
-{
-	_isActive = true;
-	_curState = INTRO;
-	_actions[_curState]->Play();
-	_actions[LOOP]->Reset();
-
-	_col->GetTransform()->SetPosition(startPos);
-	if (dir.x > 0.0f)
-	{
-		_dir = RIGHT_VECTOR;
-		SetRight();
-	}
-	else
-	{
-		_dir = -RIGHT_VECTOR;
-		SetLeft();
-	}
-}
-
-void CupBullet::EndEvent()
-{
-	_curState = State::LOOP;
-	_actions[State::LOOP]->Play();
 }
 
 void CupBullet::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
@@ -108,11 +90,21 @@ void CupBullet::CreateAction(string name, float speed, Action::Type type, CallBa
 		row = row->NextSiblingElement();
 	}
 
-	shared_ptr<Action> action = make_shared<Action>(clips, name, type, speed);
-	action->SetEndEvent(callBack);
+	_action = make_shared<Action>(clips, name, type, speed);
+	_action->SetEndEvent(callBack);
 
-	_actions.push_back(action);
-
-	shared_ptr<Sprite_Clip> sprite = make_shared<Sprite_Clip>(srvPath, Vector2(averageW / count, averageH / count));
-	_sprites.push_back(sprite);
+	_sprite = make_shared<Sprite_Clip>(srvPath, Vector2(averageW / count, averageH / count));
 }
+
+void CupBullet::Attack(shared_ptr<class CupMonster> victim)
+{
+	if (_isActive == false)
+		return;
+	if (_col->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
+		return;
+
+	victim->TakeDamage(_damage);
+	_isActive = false;
+
+}
+

@@ -3,6 +3,8 @@
 #include "../../Object/Obj/CupHead/CupHead.h"
 #include "../../Object/Obj/CupHead/CupBG.h"
 #include "../../Object/Obj/CupHead/CupMonster.h"
+#include "../../Object/Obj/CupHead/CupBullet.h"
+
 
 CupHeadScene::CupHeadScene()
 {
@@ -19,15 +21,37 @@ CupHeadScene::~CupHeadScene()
 
 void CupHeadScene::Update()
 {
-	_player->Update();
 	_bg->Update();
-	_monster->Update();
+	_player->GetCollider()->Block(_monster->GetCollider());
+	_player->Update();
 
 	if(_bg->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else
 		_player->SetIsFalling(true);
+	_monster->Update();
 
+	_player->GetCollider()->Block(_monster->GetCollider());
+
+	for (auto bullet : _player->GetBullets())
+	{
+		bullet->Attack(_monster);
+	}
+
+	if (_monster->IsActive() == true)
+	{
+		for (auto bullet : _player->GetBullets())
+		{
+			//if (bullet->_isActive == false)
+			//	continue;
+
+			if (bullet->GetCollider()->IsCollision(_monster->GetCollider()))
+			{
+				_monster->TakeDamage(1);
+				bullet->_isActive = false;
+			}
+		}
+	}
 }
 
 void CupHeadScene::Render()
@@ -40,5 +64,8 @@ void CupHeadScene::Render()
 
 void CupHeadScene::PostRender()
 {
+	//ImGui::Text("Monster HP : %d ", _monster->GetHp());
+	_monster->PostRender();
 	_player->PostRender();
 }
+

@@ -34,20 +34,23 @@ public:
 	void Input();
 	void Jump();
 	void Attack();
-
 	void SetAction(State state);
-
-	shared_ptr<CircleCollider> GetCollider() { return _col; }
-
+	
 	bool IsFalling() { return _isFalling; }
 	void SetIsFalling(bool value) { _isFalling = value; }
 	void Grounded() { _isFalling = false; }
+	void AttackEnd();
+	vector < shared_ptr<class CupBullet>>& GetBullets() { return _bullets; }
+
+
+	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
 private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 	shared_ptr<CircleCollider> _col;
 
 	shared_ptr<Transform> _transform;
+	shared_ptr<Transform> _bulletSlot;
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 
@@ -55,11 +58,11 @@ private:
 	State _oldState = State::IDLE;
 
 	bool _isFalling;
-	bool _isAttack;
+	bool _isAttack = false;
 
 	float _jumpPower = 0.0f;
 	float _maxFalling = 800.0f;
 	float _speed = 300.0f;
 
-	shared_ptr<class CupBullet> _bullets;
+	vector<shared_ptr<class CupBullet>> _bullets;
 };

@@ -2,48 +2,29 @@
 class CupBullet
 {
 public:
-	enum State
-	{
-		INTRO,
-		LOOP
-	};
-
 	CupBullet();
 	~CupBullet();
 
 	void Update();
 	void Render();
 
-	void Fire(Vector2 startPos, Vector2 dir);
-	void EndEvent();
+	void SetPosition(Vector2 pos) { _col->GetTransform()->SetPosition(pos); }
+	void SetDirtection(Vector2 dir) { _direction = dir.NorMalVector2(); _col->GetTransform()->SetAngle(dir.Angle()); }
 
+	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
+
+	void Attack(shared_ptr<class CupMonster> victim);
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 
-	void SetLeft()
-	{
-		for (auto sprite : _sprites)
-			sprite->SetLeft();
-	}
-
-	void SetRight()
-	{
-		for (auto sprite : _sprites)
-			sprite->SetRight();
-	}
-
-private:
-	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
-	shared_ptr<CircleCollider> _col;
-	shared_ptr<Transform> _transform;
-	vector<shared_ptr<Action>> _actions;
-	vector<shared_ptr<Sprite_Clip>> _sprites;
-
-	State _curState = State::INTRO;
-	State _oldState = State::INTRO;
-
-	Vector2 _dir;
 	bool _isActive;
+private:
+	shared_ptr<Sprite_Clip> _sprite;
+	shared_ptr<Action> _action;
+	shared_ptr<Transform> _transform;
+	shared_ptr<CircleCollider> _col;
+
+	Vector2 _direction;
+	int _damage = 1;
 	float _speed = 500.0f;
 };
-
 

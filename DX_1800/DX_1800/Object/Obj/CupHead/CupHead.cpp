@@ -1,27 +1,41 @@
 #include "framework.h"
 #include "CupHead.h"
+#include "CupBullet.h"
 
 CupHead::CupHead()
 {
 	_col = make_shared<CircleCollider>(50);
 	_transform = make_shared<Transform>();
+	_bulletSlot = make_shared<Transform>();
 
 	CreateAction("Idle");
 	CreateAction("Run");
 	CreateAction("Jump");
-	CreateAction("Attack");
+	CreateAction("AimStraightShot", 0.1f, Action::END);
+	_actions[State::ATTACK]->SetEndEvent(std::bind(&CupHead::AttackEnd, this));
 
 	_col->GetTransform()->SetPosition(CENTER);
 
 	_transform->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 20));
 
+	_bulletSlot->SetPosition(Vector2(20, 0));
+	_bulletSlot->SetParent(_col->GetTransform());
+	_bulletSlot->SetAngle(-PI * 0.75f);
+
 	_actions[State::IDLE]->Play();
 	_actions[State::RUN]->Play();
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
+
+	for (int i = 0; i < 50; i++)
+	{
+		shared_ptr<CupBullet> bullet = make_shared<CupBullet>();
+		_bullets.push_back(bullet);
+	}
 }
+
 
 CupHead::~CupHead()
 {
@@ -34,11 +48,17 @@ void CupHead::Update()
 
 	_col->Update();
 	_transform->Update();
+	_bulletSlot->Update();
 
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
+
+	for (shared_ptr<CupBullet> bullet : _bullets)
+	{
+		bullet->Update();
+	}
 }
 
 void CupHead::Render()
@@ -47,6 +67,11 @@ void CupHead::Render()
 	_sprites[_curState]->Render();
 
 	_col->Render();
+
+	for (shared_ptr<CupBullet> bullet : _bullets)
+	{
+		bullet->Render();
+	}
 }
 
 void CupHead::PostRender()
@@ -55,6 +80,14 @@ void CupHead::PostRender()
 
 void CupHead::Input()
 {
+	if (KEY_DOWN(VK_LBUTTON) && _isAttack == false)
+	{
+		Attack();
+	}
+
+	if (_isAttack == true)
+		return;
+
 	if (KEY_PRESS('A'))
 	{
 		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
@@ -101,23 +134,26 @@ void CupHead::Jump()
 
 void CupHead::Attack()
 {
-	if (_isAttack == true)
-		SetAction(State::ATTACK);
-	else if (_curState == ATTACK && _isAttack == false)
-		SetAction(State::IDLE);
+	SetAction(State::ATTACK);
 
-	if (KEY_DOWN(VK_LBUTTON))
-	{
-		_isAttack = true;
-		SetAction(State::ATTACK);
+	_isAttack = true;
 
-		//_bullets->Fire(_col->GetTransform()->GetWorldPos(),RIGHT_VECTOR);
-	}
-	else if (KEY_UP(VK_LBUTTON))
+	for (shared_ptr<CupBullet> bullet : _bullets)
 	{
-		_isAttack = false;
-		SetAction(State::IDLE);
+		if (!bullet->_isActive)
+		{
+			bullet->_isActive = true;
+			bullet->SetDirtection(RIGHT_VECTOR);
+			bullet->SetPosition(_col->GetWorldPos());
+			break;
+		}
 	}
+}
+
+void CupHead::AttackEnd()
+{
+	_isAttack = false;
+	SetAction(State::IDLE);
 }
 
 void CupHead::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
@@ -158,6 +194,7 @@ void CupHead::CreateAction(string name, float speed, Action::Type type, CallBack
 		row = row->NextSiblingElement();
 	}
 
+
 	shared_ptr<Action> action = make_shared<Action>(clips, name, type, speed);
 	action->SetEndEvent(callBack);
 
@@ -181,3 +218,4 @@ void CupHead::SetAction(State state)
 
 	_oldState = _curState;
 }
+

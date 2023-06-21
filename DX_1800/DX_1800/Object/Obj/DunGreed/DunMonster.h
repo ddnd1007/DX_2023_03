@@ -21,5 +21,6 @@ private:
 
 	shared_ptr<Transform> _trans;
 	shared_ptr<Quad> _quad;
+	
 };
 
