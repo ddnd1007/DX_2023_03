@@ -11,7 +11,7 @@ public:
 
 	void Play(Vector2 pos);
 	void End();
-
+	void EndEvent();
 	bool _isActive = false;
 private:
 	void CreateAction_ByFrame(string name, wstring file, Vector2 maxFrame, Vector2 size, float speed = 0.1f, Action::Type type = Action::Type::END);

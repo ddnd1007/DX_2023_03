@@ -91,10 +91,10 @@ void CupMonster::PostRender()
 {
 	ImGui::SliderInt("Crown_HP", (int*)&_hp, 0, 10);
 
-	ImGui::SliderInt("Playerselected", &_filterBuffer->_data.selected, 0, 5);
-	ImGui::SliderInt("Playervalue1", &_filterBuffer->_data.value1, 0, 300);
-	ImGui::SliderInt("Playervalue2", &_filterBuffer->_data.value2, 0, 300);
-	ImGui::SliderInt("Playervalue3", &_filterBuffer->_data.value3, 0, 300);
+	//ImGui::SliderInt("Playerselected", &_filterBuffer->_data.selected, 0, 5);
+	//ImGui::SliderInt("Playervalue1", &_filterBuffer->_data.value1, 0, 300);
+	//ImGui::SliderInt("Playervalue2", &_filterBuffer->_data.value2, 0, 300);
+	//ImGui::SliderInt("Playervalue3", &_filterBuffer->_data.value3, 0, 300);
 }
 
 void CupMonster::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

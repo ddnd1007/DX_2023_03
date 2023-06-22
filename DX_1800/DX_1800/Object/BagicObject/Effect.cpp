@@ -80,5 +80,5 @@ void Effect::CreateAction_ByFrame(string name, wstring file, Vector2 maxFrame, V
 
 void Effect::CreateAction_ByXML(string name, wstring file, wstring xmlPath, Vector2 size, float speed, Action::Type type)
 {
-	// TODO
+	
 }

@@ -65,6 +65,7 @@ private:
 	float _speed = 300.0f;
 
 	shared_ptr<FilterBuffer> _filterBuffer;
+	shared_ptr<Effect> _effect;
 
 	vector<shared_ptr<class CupBullet>> _bullets;
 };

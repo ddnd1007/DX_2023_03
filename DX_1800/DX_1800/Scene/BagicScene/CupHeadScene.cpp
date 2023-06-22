@@ -21,22 +21,23 @@ CupHeadScene::~CupHeadScene()
 
 void CupHeadScene::Update()
 {
-	_bg->Update();
+	
 	_player->GetCollider()->Block(_monster->GetCollider());
-	_player->Update();
 
 	if (_bg->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else
 		_player->SetIsFalling(true);
-	_monster->Update();
+	
 
-	_player->GetCollider()->Block(_monster->GetCollider());
+	if (_player->GetCollider()->Block(_monster->GetCollider()))
+
 
 	for (auto bullet : _player->GetBullets())
 	{
 		bullet->Attack(_monster);
 	}
+	
 
 	if (_monster->IsActive() == true)
 	{
@@ -52,6 +53,9 @@ void CupHeadScene::Update()
 			}
 		}
 	}
+	_player->Update();
+	_monster->Update();
+	_bg->Update();
 }
 
 void CupHeadScene::Render()
