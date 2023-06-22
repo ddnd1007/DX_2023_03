@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\BagicObject\EffectManager.h" />
     <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
     <ClInclude Include="Object\BagicObject\Effect.h" />
     <ClInclude Include="Object\Obj\CupHead\CupBullet.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\BagicObject\EffectManager.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
     <ClCompile Include="Object\BagicObject\Effect.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp" />
@@ -280,6 +282,7 @@
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />
+    <Image Include="Resource\Texture\explosion.png" />
     <Image Include="Resource\Texture\hit_4x2.png" />
     <Image Include="Resource\Texture\moon.png" />
     <Image Include="Resource\Texture\Player.png" />

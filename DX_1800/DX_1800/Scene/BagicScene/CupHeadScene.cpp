@@ -13,6 +13,8 @@ CupHeadScene::CupHeadScene()
 	_bg->SetPosition(Vector2(CENTER.x, 100.0f));
 	_monster = make_shared<CupMonster>();
 	_monster->SetPosition(Vector2(1100.0f, CENTER.y));
+
+	EFFECT->ADDEffect("Hit", L"Resource/Texture/explosion.png", Vector2(5, 3), Vector2(100, 100));
 }
 
 CupHeadScene::~CupHeadScene()
@@ -43,12 +45,14 @@ void CupHeadScene::Update()
 	{
 		for (auto bullet : _player->GetBullets())
 		{
-			//if (bullet->_isActive == false)
-			//	continue;
+			if (bullet->_isActive == false)
+				continue;
 
 			if (bullet->GetCollider()->IsCollision(_monster->GetCollider()))
 			{
 				_monster->TakeDamage(1);
+				EFFECT->Play("Hit", Vector2(CENTER.x + 350.0f, CENTER.y - 47.0f));
+
 				bullet->_isActive = false;
 			}
 		}

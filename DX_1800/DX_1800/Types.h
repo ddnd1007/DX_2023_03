@@ -36,6 +36,7 @@
 #define ADD_VS(k)		ShaderManager::GetInstance()->Add_Vs(k)
 #define ADD_PS(k)		ShaderManager::GetInstance()->Add_Ps(k)
 
+#define					EFFECT EffectManager::GetInstance()
 using CallBack = function<void()>;
 
 #define LERP(s,e,t)			 s + (e - s) * t

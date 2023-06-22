@@ -37,6 +37,7 @@ void Program::Update()
 	Timer::GetInstance()->Update();
 	InputManager::GetInstance()->Update();
 	_curScene->Update();
+	EFFECT->Update();
 }
 
 void Program::Render()
@@ -52,6 +53,7 @@ void Program::Render()
 
 	ALPHA->SetState();
 	_curScene->Render();
+	EFFECT->Render();
 
 	ImGui::Text("FPS : %d", FPS);
 	ImGui::Text("DeltaTime : %1f", DELTA_TIME);

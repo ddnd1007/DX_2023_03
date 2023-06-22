@@ -171,6 +171,9 @@
     <ClInclude Include="Object\Obj\CupHead\CupMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\BagicObject\EffectManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX_1800.cpp">
@@ -314,6 +317,9 @@
     <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Object\BagicObject\EffectManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc">
@@ -379,6 +385,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\CupHead\Attack.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Texture\explosion.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

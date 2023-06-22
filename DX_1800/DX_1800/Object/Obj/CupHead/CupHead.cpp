@@ -2,6 +2,12 @@
 #include "CupHead.h"
 #include "CupBullet.h"
 
+// 다음주 수요일 포트폴리오 발표
+
+// 1.모작인지 내가 게임을 만들건지
+//	 무슨 게임 만들건지
+// 3.게임 만드는 기능 소개
+// 4.일정
 CupHead::CupHead()
 {
 	_col = make_shared<CircleCollider>(50);
@@ -23,8 +29,6 @@ CupHead::CupHead()
 	_bulletSlot->SetParent(_col->GetTransform());
 	_bulletSlot->SetAngle(-PI * 0.75f);
 
-	_effect = make_shared<Effect>("Hit", L"Resource/Texture/hit_4x2.png", Vector2(4, 2), Vector2(300, 300));
-
 	_actions[State::IDLE]->Play();
 	_actions[State::RUN]->Play();
 
@@ -40,6 +44,8 @@ CupHead::CupHead()
 	_filterBuffer = make_shared<FilterBuffer>();
 	_filterBuffer->_data.imageSize = _sprites[State::IDLE]->GetImageSize();
 	_filterBuffer->_data.selected = 1;
+
+	//EFFECT->ADDEffect("Hit", L"Resource/Texture/hit_4x2.png", Vector2(4, 2), Vector2(100, 100));
 }
 
 
@@ -61,13 +67,6 @@ void CupHead::Update()
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
 
-	if (KEY_DOWN(VK_LBUTTON))
-	{
-		_effect->Play(Vector2(1000.0f, CENTER.y - 100.0f));
-	}
-
-	_effect->Update();
-
 	for (shared_ptr<CupBullet> bullet : _bullets)
 	{
 		bullet->Update();
@@ -81,7 +80,6 @@ void CupHead::Render()
 	_transform->SetWorldBuffer(0);
 	_filterBuffer->SetPS_Buffer(2);
 	_sprites[_curState]->Render();
-	_effect->Render();
 
 	_col->Render();
 
@@ -129,7 +127,7 @@ void CupHead::Input()
 	if (KEY_PRESS('A') || KEY_PRESS('D'))
 		SetAction(State::RUN);
 	else if (_curState == State::RUN)
-		SetAction(State::IDLE);
+		SetAction(State::IDLE);	
 }
 
 void CupHead::Jump()
@@ -156,7 +154,6 @@ void CupHead::Jump()
 void CupHead::Attack()
 {
 	SetAction(State::ATTACK);
-
 	_isAttack = true;
 
 	for (shared_ptr<CupBullet> bullet : _bullets)

@@ -64,6 +64,7 @@ void Action::Update()
 
 void Action::Play()
 {
+	_curClipIndex = 0;
 	_isPlay = true;
 	_isReverse = false;
 	_time = 0.0f;
