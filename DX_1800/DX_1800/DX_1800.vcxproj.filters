@@ -413,4 +413,12 @@
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Attack.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Library\FMOD\fmod.dll" />
+    <None Include="imgui.ini" />
+    <None Include="fmod.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Library\FMOD\fmod_vc.lib" />
+  </ItemGroup>
 </Project>
