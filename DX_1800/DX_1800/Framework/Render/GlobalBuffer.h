@@ -134,5 +134,44 @@ public:
 
 	Data _data;
 };
+class ButtonBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		int state = 0;
+		float hover = 0.0f;
+		float click = 0.0f;
+		int padding = 0;
+	};
+
+	ButtonBuffer()
+		: ConstantBuffer(&_data, sizeof(_data))
+	{
+	}
+
+	virtual ~ButtonBuffer() {}
+
+	Data _data;
+};
+
+class BarBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		float ratio = 0.0f;
+		int padding[3];
+	};
+
+	BarBuffer()
+		: ConstantBuffer(&_data, sizeof(_data))
+	{
+	}
+
+	virtual ~BarBuffer() {}
+
+	Data _data;
+};
 
 

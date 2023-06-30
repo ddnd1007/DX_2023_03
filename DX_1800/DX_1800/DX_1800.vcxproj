@@ -151,6 +151,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\BagicScene\MapleScene.h" />
+    <ClInclude Include="Object\Maple\MapleBoss.h" />
+    <ClInclude Include="Framework\Camera\Camera.h" />
+    <ClInclude Include="Framework\Math\MathUtility.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod.hpp" />
+    <ClInclude Include="Library\FMOD\inc\fmod_codec.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_common.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_dsp.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_dsp_effects.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_errors.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
+    <ClInclude Include="Object\UI\Button.h" />
+    <ClInclude Include="Object\UI\HpBar.h" />
     <ClInclude Include="Object\BagicObject\EffectManager.h" />
     <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
     <ClInclude Include="Object\BagicObject\Effect.h" />
@@ -194,6 +208,7 @@
     <ClInclude Include="Object\BagicObject\Sprite_Clip.h" />
     <ClInclude Include="Object\BagicObject\Sprite_Frame.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
+    <ClInclude Include="Framework\Utility\SoundManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Scene\BagicScene\TutorialScene.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
@@ -206,6 +221,12 @@
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\BagicScene\MapleScene.cpp" />
+    <ClCompile Include="Object\Maple\MapleBoss.cpp" />
+    <ClCompile Include="Framework\Camera\Camera.cpp" />
+    <ClCompile Include="Framework\Math\MathUtility.cpp" />
+    <ClCompile Include="Object\UI\Button.cpp" />
+    <ClCompile Include="Object\UI\HpBar.cpp" />
     <ClCompile Include="Object\BagicObject\EffectManager.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
     <ClCompile Include="Object\BagicObject\Effect.cpp" />
@@ -263,6 +284,7 @@
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
     <ClCompile Include="Object\Obj\Zelda\Zelda.cpp" />
     <ClCompile Include="Scene\BagicScene\ZeldaScene.cpp" />
+    <ClCompile Include="Framework\Utility\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc" />
@@ -279,6 +301,20 @@
     <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
     <Image Include="Resource\CupHead\track.png" />
+    <Image Include="Resource\Maple\Boss\Attack2 Ball.png" />
+    <Image Include="Resource\Maple\Boss\Attack2 Hit.png" />
+    <Image Include="Resource\Maple\Boss\attack2 zenesis.png" />
+    <Image Include="Resource\Maple\Boss\attack2.png" />
+    <Image Include="Resource\Maple\Boss\Attack3 Effect.png" />
+    <Image Include="Resource\Maple\Boss\Attack3 Hit.png" />
+    <Image Include="Resource\Maple\Boss\attack3.png" />
+    <Image Include="Resource\Maple\Boss\Attack4 Effect.png" />
+    <Image Include="Resource\Maple\Boss\Attack4 Hit.png" />
+    <Image Include="Resource\Maple\Boss\Attack4.png" />
+    <Image Include="Resource\Maple\Boss\Die.png" />
+    <Image Include="Resource\Maple\Boss\Skill2.png" />
+    <Image Include="Resource\Maple\Boss\stand.png" />
+    <Image Include="Resource\Maple\Boss\stand2.png" />
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />
@@ -288,6 +324,7 @@
     <Image Include="Resource\Texture\Player.png" />
     <Image Include="Resource\Texture\sun.png" />
     <Image Include="Resource\Texture\zelda.png" />
+    <Image Include="Resource\UI\Button.png" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +397,14 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PS</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shader\HpBarPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shader\SpritePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -436,11 +481,28 @@
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack2 Ball.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack2 Hit.xml" />
+    <Xml Include="Resource\Maple\Boss\attack2 zenesis.xml" />
+    <Xml Include="Resource\Maple\Boss\attack2.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack3 Effect.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack3 Hit.xml" />
+    <Xml Include="Resource\Maple\Boss\attack3.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack4 Effect.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack4 Hit.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack4.xml" />
+    <Xml Include="Resource\Maple\Boss\Die.xml" />
+    <Xml Include="Resource\Maple\Boss\Skill2.xml" />
+    <Xml Include="Resource\Maple\Boss\stand.xml" />
+    <Xml Include="Resource\Maple\Boss\stand2.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fmod.dll" />
     <None Include="imgui.ini" />
     <None Include="Library\FMOD\fmod.dll" />
+    <None Include="Library\FMOD\inc\fmod.cs" />
+    <None Include="Library\FMOD\inc\fmod_dsp.cs" />
+    <None Include="Library\FMOD\inc\fmod_errors.cs" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Library\FMOD\fmod_vc.lib" />
