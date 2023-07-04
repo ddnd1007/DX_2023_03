@@ -25,7 +25,7 @@ void CupHeadScene::Update()
 {
 	
 	_player->GetCollider()->Block(_monster->GetCollider());
-
+	
 	if (_bg->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else

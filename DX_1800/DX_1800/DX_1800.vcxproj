@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Camera\Camera.h" />
+    <ClInclude Include="Framework\Math\MathUtility.h" />
     <ClInclude Include="Object\BagicObject\EffectManager.h" />
     <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
     <ClInclude Include="Object\BagicObject\Effect.h" />
@@ -194,6 +196,7 @@
     <ClInclude Include="Object\BagicObject\Sprite_Clip.h" />
     <ClInclude Include="Object\BagicObject\Sprite_Frame.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
+    <ClInclude Include="Framework\Utility\SoundManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Scene\BagicScene\TutorialScene.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
@@ -206,6 +209,8 @@
     <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Camera\Camera.cpp" />
+    <ClCompile Include="Framework\Math\MathUtility.cpp" />
     <ClCompile Include="Object\BagicObject\EffectManager.cpp" />
     <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
     <ClCompile Include="Object\BagicObject\Effect.cpp" />
@@ -263,6 +268,7 @@
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
     <ClCompile Include="Object\Obj\Zelda\Zelda.cpp" />
     <ClCompile Include="Scene\BagicScene\ZeldaScene.cpp" />
+    <ClCompile Include="Framework\Utility\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc" />
@@ -288,6 +294,7 @@
     <Image Include="Resource\Texture\Player.png" />
     <Image Include="Resource\Texture\sun.png" />
     <Image Include="Resource\Texture\zelda.png" />
+    <Image Include="Resource\UI\Button.png" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -436,6 +443,20 @@
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Library\FMOD\fmod_vc.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fmod.dll" />
+    <None Include="imgui.ini" />
+    <None Include="Library\FMOD\fmod.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\Sound\attack.wav" />
+    <Media Include="Resource\Sound\BGM.mp3" />
+    <Media Include="Resource\Sound\drumloop.wav" />
+    <Media Include="Resource\Sound\jump.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -174,6 +174,15 @@
     <ClInclude Include="Object\BagicObject\EffectManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Camera\Camera.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\MathUtility.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Utility\SoundManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX_1800.cpp">
@@ -320,6 +329,15 @@
     <ClCompile Include="Object\BagicObject\EffectManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Camera\Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\MathUtility.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Utility\SoundManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc">
@@ -390,6 +408,9 @@
     <Image Include="Resource\Texture\explosion.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\UI\Button.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -412,5 +433,25 @@
     <Xml Include="Resource\CupHead\Clown_Page_Last_Die.xml" />
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Attack.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Library\FMOD\fmod_vc.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Library\FMOD\fmod.dll" />
+    <None Include="fmod.dll" />
+    <None Include="imgui.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\Sound\attack.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="Resource\Sound\BGM.mp3" />
+    <Media Include="Resource\Sound\drumloop.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="Resource\Sound\jump.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿// header.h: 표준 시스템 포함 파일
+﻿﻿// header.h: 표준 시스템 포함 파일
 // 또는 프로젝트 특정 포함 파일이 들어 있는 포함 파일입니다.
 //
 
@@ -37,6 +37,10 @@
 #include "../ImGUI/imgui_impl_dx11.h"
 #include "../ImGUI/imgui_impl_win32.h"
 
+// FMOD
+#include "Library/FMOD/inc/fmod.hpp"
+#pragma comment(lib,"Library/FMOD/fmod_vc.lib")
+
 using namespace std;
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -46,12 +50,14 @@ using namespace Microsoft::WRL;
 
 // Math
 #include "Framework/Math/Vector2.h"
+#include "Framework/Math/MathUtility.h"
 #include "Framework/Math/Transform.h"
 
 // Utility
 #include "Framework/Utility/Timer.h"
 #include "Framework/Utility/InputManager.h"
 #include "Framework/Utility/tinyxml2.h"
+#include "Framework/Utility/SoundManager.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"
@@ -63,6 +69,9 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
 #include "Framework/Render/ShaderManager.h"
+
+// Camera
+#include "Framework/Camera/Camera.h"
 
 // TextureMapping
 #include "Framework/TextureMapping/SRV.h"
@@ -86,6 +95,9 @@ using namespace Microsoft::WRL;
 #include "Object/BagicObject/Sprite_Clip.h"
 #include "Object/BagicObject/Effect.h"
 #include "Object/BagicObject/EffectManager.h"
+
+// UI
+#include "Object/UI/Button.h"
 
 // GameObj
 #include "Object/Obj/Planet.h"
