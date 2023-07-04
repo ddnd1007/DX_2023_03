@@ -174,15 +174,61 @@
     <ClInclude Include="Object\BagicObject\EffectManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Framework\Camera\Camera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Math\MathUtility.h">
+=======
+    <ClInclude Include="Object\UI\Button.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UI\HpBar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Camera\Camera.h">
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Utility\SoundManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Framework\Math\MathUtility.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod_codec.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod_common.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod_dsp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod_dsp_effects.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod_errors.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FMOD\inc\fmod_output.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\MapleBoss.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BagicScene\MapleScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX_1800.cpp">
@@ -329,15 +375,37 @@
     <ClCompile Include="Object\BagicObject\EffectManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Framework\Camera\Camera.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Math\MathUtility.cpp">
+=======
+    <ClCompile Include="Object\UI\Button.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UI\HpBar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Camera\Camera.cpp">
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Utility\SoundManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Framework\Math\MathUtility.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\MapleBoss.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BagicScene\MapleScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc">
@@ -411,6 +479,51 @@
     <Image Include="Resource\UI\Button.png">
       <Filter>리소스 파일</Filter>
     </Image>
+<<<<<<< HEAD
+=======
+    <Image Include="Resource\Maple\Boss\Attack2 Ball.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Attack2 Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\attack2 zenesis.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\attack2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Attack3 Effect.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Attack3 Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\attack3.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Attack4 Effect.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Attack4 Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Attack4.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Die.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\Skill2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\stand.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Boss\stand2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -422,6 +535,7 @@
     <FxCompile Include="Shader\ActionPS.hlsl" />
     <FxCompile Include="Shader\FilterPS.hlsl" />
     <FxCompile Include="Shader\CupHeadPS.hlsl" />
+    <FxCompile Include="Shader\HpBarPS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\CupHead\Idle.xml" />
@@ -433,6 +547,31 @@
     <Xml Include="Resource\CupHead\Clown_Page_Last_Die.xml" />
     <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Attack.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack2 Ball.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack2 Hit.xml" />
+    <Xml Include="Resource\Maple\Boss\attack2 zenesis.xml" />
+    <Xml Include="Resource\Maple\Boss\attack2.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack3 Effect.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack3 Hit.xml" />
+    <Xml Include="Resource\Maple\Boss\attack3.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack4 Effect.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack4 Hit.xml" />
+    <Xml Include="Resource\Maple\Boss\Attack4.xml" />
+    <Xml Include="Resource\Maple\Boss\Die.xml" />
+    <Xml Include="Resource\Maple\Boss\Skill2.xml" />
+    <Xml Include="Resource\Maple\Boss\stand.xml" />
+    <Xml Include="Resource\Maple\Boss\stand2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Library\FMOD\fmod.dll" />
+    <None Include="imgui.ini" />
+    <None Include="fmod.dll" />
+    <None Include="Library\FMOD\inc\fmod.cs" />
+    <None Include="Library\FMOD\inc\fmod_dsp.cs" />
+    <None Include="Library\FMOD\inc\fmod_errors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Library\FMOD\fmod_vc.lib" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Library\FMOD\fmod_vc.lib" />

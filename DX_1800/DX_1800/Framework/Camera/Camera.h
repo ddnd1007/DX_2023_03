@@ -86,3 +86,7 @@ private:
 	Vector2 _originPos;
 	Vector2 _winSize;
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

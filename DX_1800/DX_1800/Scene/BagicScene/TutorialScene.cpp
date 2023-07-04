@@ -29,7 +29,7 @@ void TutorialScene::Update()
 
 	if (KEY_DOWN(VK_LBUTTON))
 	{
-		_effect->Play(MOUSE_POS);
+		_effect->Play(WIN_MOUSE_POS);
 	}
 
 	_effect->Update();

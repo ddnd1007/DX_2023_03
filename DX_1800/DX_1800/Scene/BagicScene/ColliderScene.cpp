@@ -35,7 +35,7 @@ void ColliderScene::Update()
 	{
 		_isActive = true;
 		_circleColliderMouse->GetTransform()->SetPosition(Vector2(0,0));
-		_dir = MOUSE_POS - Vector2(0,0);
+		_dir = WIN_MOUSE_POS - Vector2(0,0);
 		_dir.Normalize();
 	}
 

@@ -83,13 +83,4 @@ void Device::CreateDoubleBuffer()
     device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf());
 
     deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), nullptr);
-
-    D3D11_VIEWPORT vp;
-    vp.Width = WIN_WIDTH;
-    vp.Height = WIN_HEIGHT;
-    vp.MinDepth = 0.0f;
-    vp.MaxDepth = 1.0f;
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
-    deviceContext->RSSetViewports(1, &vp);
 }

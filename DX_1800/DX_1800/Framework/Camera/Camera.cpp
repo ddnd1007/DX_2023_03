@@ -195,4 +195,8 @@ void Camera::FollowMode()
 	Vector2 temp = LERP(-_view->GetWorldPos(), targetPos, 0.04f);
 
 	SetPosition(temp);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

@@ -8,12 +8,13 @@
 #include "../Scene/BagicScene/SpriteScene.h"
 #include "../Scene/BagicScene/ZeldaScene.h"
 #include "../Scene/BagicScene/CupHeadScene.h"
+#include "../Scene/BagicScene/MapleScene.h"
 
 Program::Program()
 {
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	_curScene = make_shared<CupHeadScene>();
+	_curScene = make_shared<MapleScene>();
 
 	_view = make_shared<MatrixBuffer>();
 	_proj = make_shared<MatrixBuffer>();

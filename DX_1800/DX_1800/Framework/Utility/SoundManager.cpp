@@ -109,4 +109,8 @@ bool SoundManager::IsPlayingSound(string key)
 	_soundMap[key].channel->isPlaying(OUT & isPlay);
 
 	return isPlay;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

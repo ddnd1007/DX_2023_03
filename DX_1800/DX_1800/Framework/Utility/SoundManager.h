@@ -53,3 +53,7 @@ private:
 	unordered_map<string, SoundInfo> _soundMap;
 	const int MAX_CHANNEL = 15;
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

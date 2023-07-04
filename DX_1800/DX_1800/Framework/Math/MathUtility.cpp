@@ -14,4 +14,8 @@ float MathUtility::RandomFloat(float min, float max)
     float temp = rand() / (float)RAND_MAX;
 
     return (max - min) * temp + min;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

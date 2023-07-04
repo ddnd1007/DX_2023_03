@@ -3,17 +3,17 @@ class Vector2 : public XMFLOAT2
 {
 public:
 	Vector2()
-		: XMFLOAT2(0.0f,0.0f)
+		: XMFLOAT2(0.0f, 0.0f)
 	{
 	}
 
 	Vector2(int x, int y)
-		: XMFLOAT2(x,y)
+		: XMFLOAT2(x, y)
 	{
 	}
 
 	Vector2(float x, float y)
-		: XMFLOAT2(x,y)
+		: XMFLOAT2(x, y)
 	{
 
 	}
@@ -29,7 +29,7 @@ public:
 		return result;
 	}
 
-	Vector2 operator-(const Vector2& other) const 
+	Vector2 operator-(const Vector2& other) const
 	{
 		Vector2 result;
 		result.x = (*this).x - other.x;
@@ -38,7 +38,7 @@ public:
 		return result;
 	}
 
-	Vector2 operator*(const float& value) const 
+	Vector2 operator*(const float& value) const
 	{
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);
@@ -130,4 +130,6 @@ public:
 	bool IsBetween(Vector2 a, Vector2 b);
 
 	int ManhattenDistance(const Vector2& other) const;
+
+	Vector2 TransformCoord(XMMATRIX matrix);
 };

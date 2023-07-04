@@ -35,12 +35,12 @@ SolarSystem::~SolarSystem()
 void SolarSystem::Update()
 {
 	if(KEY_PRESS('A'))
-		_sun->SetPosition(MOUSE_POS);
+		_sun->SetPosition(WIN_MOUSE_POS);
 
 	if (KEY_PRESS('D'))
 	{
 		Vector2 start = _sun->GetTransform()->GetWorldPos();
-		Vector2 end = MOUSE_POS;
+		Vector2 end = WIN_MOUSE_POS;
 
 		_sun->SetPosition(LERP(start,end, 0.001f));
 	}
