@@ -20,8 +20,8 @@ float4 PS(PixelInput input) : SV_TARGET
 	resultUV.x = input.uv.x;
 	resultUV.y = input.uv.y;
 
-	if (resultUV.x > ratio)
-		return float4(0, 0, 0, 0);
+	if(resultUV.x > ratio)
+		return float4(0,0,0,0);	
 
 	float4 color = resource.Sample(samp, resultUV);
 

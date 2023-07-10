@@ -23,13 +23,13 @@ void SoundManager::Update()
 
 void SoundManager::Add(string key, string file, bool bgm)
 {
-	if (_soundMap.count(key) > 0)
+	if(_soundMap.count(key) > 0)
 		return;
 
 	SoundInfo info;
 
-	if (bgm)
-		_soundSystem->createStream(file.c_str(), FMOD_LOOP_NORMAL, nullptr, OUT & info.sound);
+	if(bgm)
+		_soundSystem->createStream(file.c_str(), FMOD_LOOP_NORMAL, nullptr, OUT &info.sound);
 	else
 		_soundSystem->createStream(file.c_str(), FMOD_DEFAULT, nullptr, OUT & info.sound);
 
@@ -40,10 +40,10 @@ void SoundManager::Add(string key, string file, bool bgm)
 
 void SoundManager::Play(string key, float volume)
 {
-	if (_soundMap.count(key) == 0)
+	if(_soundMap.count(key) == 0)
 		return;
 
-	_soundSystem->playSound(_soundMap[key].sound, nullptr, false, OUT & _soundMap[key].channel);
+	_soundSystem->playSound(_soundMap[key].sound, nullptr, false, OUT &_soundMap[key].channel);
 	_soundMap[key].channel->setVolume(volume);
 }
 
@@ -52,7 +52,7 @@ void SoundManager::Stop(string key)
 	if (_soundMap.count(key) == 0)
 		return;
 
-	if (_soundMap[key].channel == nullptr)
+	if(_soundMap[key].channel == nullptr)
 		return;
 
 	_soundMap[key].channel->stop();
@@ -88,10 +88,10 @@ void SoundManager::SetVolume(string key, float volume)
 	if (_soundMap[key].channel == nullptr)
 		return;
 
-	if (volume < 0.0f)
+	if(volume < 0.0f)
 		volume = 0.0f;
 
-	if (volume > 2.0f)
+	if(volume > 2.0f)
 		volume = 2.0f;
 
 	_soundMap[key].channel->setVolume(volume);
@@ -106,11 +106,7 @@ bool SoundManager::IsPlayingSound(string key)
 		return false;
 
 	bool isPlay = false;
-	_soundMap[key].channel->isPlaying(OUT & isPlay);
+	_soundMap[key].channel->isPlaying(OUT &isPlay);
 
 	return isPlay;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

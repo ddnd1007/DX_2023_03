@@ -8,10 +8,10 @@
 DunGreedScene::DunGreedScene()
 {
 	_player = make_shared<DunPlayer>();
-	_player->SetPosition(CENTER);
+	_player->SetPosition(Vector2(0,0));
 
 	_monster= make_shared<DunMonster>();
-	_monster->SetPosition(CENTER + Vector2(300,300));
+	_monster->SetPosition(Vector2(0, 0) + Vector2(300,300));
 }
 
 DunGreedScene::~DunGreedScene()
@@ -48,4 +48,6 @@ void DunGreedScene::Render()
 void DunGreedScene::PostRender()
 {
 	ImGui::Text("Monster HP : %d", _monster->_hp);
+
+	_monster->PostRender();
 }

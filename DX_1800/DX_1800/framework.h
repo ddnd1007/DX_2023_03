@@ -1,4 +1,4 @@
-﻿﻿// header.h: 표준 시스템 포함 파일
+﻿// header.h: 표준 시스템 포함 파일
 // 또는 프로젝트 특정 포함 파일이 들어 있는 포함 파일입니다.
 //
 
@@ -98,10 +98,7 @@ using namespace Microsoft::WRL;
 
 // UI
 #include "Object/UI/Button.h"
-<<<<<<< HEAD
-=======
 #include "Object/UI/HpBar.h"
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
 
 // GameObj
 #include "Object/Obj/Planet.h"

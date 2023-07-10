@@ -7,10 +7,10 @@ public:
 
 	void Update();
 	void Render();
+	void PostRender();
 
 	void SetPosition(Vector2 pos) { _col->GetTransform()->SetPosition(pos); }
 	void TakeDamage(int amount);
-	void PostRender();
 
 	shared_ptr<RectCollider> GetCollider() { return _col; }
 

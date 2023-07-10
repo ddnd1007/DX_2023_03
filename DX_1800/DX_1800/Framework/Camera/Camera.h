@@ -11,19 +11,19 @@ private:
 public:
 	static void Create()
 	{
-		if (_instance == nullptr)
+		if(_instance == nullptr)
 			_instance = new Camera();
 	}
 
 	static void Delete()
 	{
-		if (_instance != nullptr)
+		if(_instance != nullptr)
 			delete _instance;
 	}
 
 	static Camera* GetInstance()
 	{
-		if (_instance != nullptr)
+		if(_instance != nullptr)
 			return _instance;
 
 		return nullptr;
@@ -41,7 +41,7 @@ public:
 	void SetProjectionBuffer();
 
 	void SetTarget(shared_ptr<Transform> target) { _target = target; }
-	void SetLeftBottom(Vector2 value) { _leftBottom = value; }
+	void SetLeftBottom(Vector2 value) { _leftBottom = value;}
 	void SetRightTop(Vector2 value) { _rightTop = value; }
 	void SetOffset(Vector2 value) { _offset = value; }
 
@@ -86,7 +86,4 @@ private:
 	Vector2 _originPos;
 	Vector2 _winSize;
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

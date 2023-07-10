@@ -13,7 +13,7 @@ bool Vector2::operator!=(const Vector2& other) const
 
 bool Vector2::operator<(const Vector2& other) const
 {
-    if (y != other.y)
+    if(y != other.y)
         return y < other.y;
 
     return x < other.x;

@@ -12,6 +12,5 @@ public:
 private:
 	shared_ptr<class DunPlayer> _player;
 	shared_ptr<class DunMonster> _monster;
- 
 };
 

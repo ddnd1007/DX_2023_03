@@ -5,12 +5,12 @@ Camera* Camera::_instance = nullptr;
 Camera::Camera()
 {
 	_view = make_shared<Transform>();
-	_uiView = make_shared<Transform>();
+	_uiView= make_shared<Transform>();
 	_uiView->Update();
 	_projection = make_shared<MatrixBuffer>();
 
 	//XMMATRIX projMatrix = XMMatrixOrthographicOffCenterLH(0,WIN_WIDTH,0,WIN_HEIGHT,0.0f, 1.0f);
-	XMMATRIX projMatrix = XMMatrixOrthographicLH(WIN_WIDTH, WIN_HEIGHT, 0.0f, 1.0f);
+	XMMATRIX projMatrix = XMMatrixOrthographicLH(WIN_WIDTH,WIN_HEIGHT, 0.0f, 1.0f);
 	_projection->SetData(projMatrix);
 	_projection->Update_Resource();
 
@@ -23,7 +23,7 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-	if (_target.expired())
+	if(_target.expired())
 		FreeMode();
 	else
 		FollowMode();
@@ -126,7 +126,7 @@ Vector2 Camera::GetScreenMousePos()
 
 void Camera::Shake()
 {
-	if (_duration <= 0.0f)
+	if(_duration <= 0.0f)
 		return;
 
 	_duration -= DELTA_TIME;
@@ -180,10 +180,10 @@ void Camera::FollowMode()
 {
 	Vector2 targetPos = _target.lock()->GetWorldPos() - _offset;
 
-	if (targetPos.x < _leftBottom.x + WIN_WIDTH * 0.5f)
+	if(targetPos.x < _leftBottom.x + WIN_WIDTH * 0.5f)
 		targetPos.x = _leftBottom.x + WIN_WIDTH * 0.5f;
 
-	if (targetPos.x > _rightTop.x - WIN_WIDTH * 0.5f)
+	if(targetPos.x > _rightTop.x - WIN_WIDTH * 0.5f)
 		targetPos.x = _rightTop.x - WIN_WIDTH * 0.5f;
 
 	if (targetPos.y < _leftBottom.y + WIN_HEIGHT * 0.5f)
@@ -195,8 +195,4 @@ void Camera::FollowMode()
 	Vector2 temp = LERP(-_view->GetWorldPos(), targetPos, 0.04f);
 
 	SetPosition(temp);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

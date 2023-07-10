@@ -134,6 +134,7 @@ public:
 
 	Data _data;
 };
+
 class ButtonBuffer : public ConstantBuffer
 {
 public:
@@ -173,5 +174,4 @@ public:
 
 	Data _data;
 };
-
 

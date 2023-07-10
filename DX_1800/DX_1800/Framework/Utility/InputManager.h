@@ -19,7 +19,7 @@ public:
 	static void Create()
 	{
 		if(_instance == nullptr)
-			_instance = new InputManager(); 
+			_instance = new InputManager();
 	}
 
 	static void Delete()

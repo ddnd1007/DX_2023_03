@@ -17,19 +17,19 @@ private:
 public:
 	static void Create()
 	{
-		if (_instance == nullptr)
+		if(_instance == nullptr)
 			_instance = new SoundManager();
 	}
 
 	static void Delete()
 	{
-		if (_instance != nullptr)
+		if(_instance != nullptr)
 			delete _instance;
 	}
 
 	static SoundManager* GetInstance()
 	{
-		if (_instance != nullptr)
+		if(_instance != nullptr)
 			return _instance;
 
 		return nullptr;
@@ -53,7 +53,4 @@ private:
 	unordered_map<string, SoundInfo> _soundMap;
 	const int MAX_CHANNEL = 15;
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805

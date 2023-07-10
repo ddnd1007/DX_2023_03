@@ -2,7 +2,6 @@
 #include "EffectManager.h"
 
 EffectManager* EffectManager::_instance = nullptr;
-
 EffectManager::EffectManager()
 {
 }
@@ -15,7 +14,7 @@ void EffectManager::Update()
 {
 	for (auto pair : _effectTable)
 	{
-		for (auto effect : pair.second)
+		for(auto effect : pair.second)
 			effect->Update();
 	}
 }
@@ -29,34 +28,30 @@ void EffectManager::Render()
 	}
 }
 
-void EffectManager::ADDEffect(string name, wstring file, Vector2 maxFrame, Vector2 size, float speed, Action::Type type)
+void EffectManager::AddEffect(string name, wstring file, Vector2 maxFrame, Vector2 size, float speed, Action::Type type)
 {
-	if (_effectTable.count(name) != 0)
+	if(_effectTable.count(name) != 0)
 		return;
 
 	for (int i = 0; i < _poolCount; i++)
 	{
-		shared_ptr<Effect> effect = make_shared<Effect>(name, file, maxFrame, size, speed, type);
+		shared_ptr<Effect> effect = make_shared<Effect>(name,file,maxFrame,size, speed, type);
 		_effectTable[name].push_back(effect);
 	}
 }
 
 void EffectManager::Play(string name, Vector2 pos)
 {
-	if (_effectTable.count(name) == 0)
+	if(_effectTable.count(name) == 0)
 		return;
 
-	for (auto pair : _effectTable)
+	for (auto effect : _effectTable[name])
 	{
-		for (auto effect : _effectTable[name])
+		if (effect->_isActive == false)
 		{
-			if (effect->_isActive == false)
-			{
-				effect->Play(pos);
-				return;
-			}
+			effect->Play(pos);
+			return;
 		}
 	}
+
 }
-
-

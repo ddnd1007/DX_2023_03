@@ -14,7 +14,7 @@ DunPlayer::DunPlayer()
 	_bowTrans = make_shared<Transform>();
 	_bowTrans->SetParent(_bowSlot);
 
-	_bowTrans->SetPosition(Vector2(100.0f, 0.0f));
+	_bowTrans->SetPosition(Vector2(100.0f,0.0f));
 	_bowTrans->SetAngle(-PI * 0.75f);
 
 	for (int i = 0; i < 30; i++)
@@ -45,7 +45,7 @@ void DunPlayer::Update()
 
 	_bowSlot->SetAngle(angle);
 
-	for (auto bullet : _bullets)
+	for(auto bullet : _bullets)
 		bullet->Update();
 }
 
@@ -57,7 +57,7 @@ void DunPlayer::Render()
 	_bowTrans->SetWorldBuffer(0);
 	_bowQuad->Render();
 
-	for (auto bullet : _bullets)
+	for(auto bullet : _bullets)
 		bullet->Render();
 }
 
@@ -68,15 +68,15 @@ void DunPlayer::InPut()
 		Vector2 start = _bowTrans->GetWorldPos();
 		Vector2 direction = (CAMERA->GetWorldMousePos() - start).NorMalVector2();
 
-		auto iter = std::find_if(_bullets.begin(), _bullets.end(), [](shared_ptr<DunBullet> bullet)-> bool
-			{
-				if (bullet->_isActive == false)
-					return true;
+		auto iter = std::find_if(_bullets.begin(), _bullets.end(), [](shared_ptr<DunBullet> bullet)-> bool 
+		{
+			if(bullet->_isActive == false)
+				return true;
 
-				return false;
-			});
+			return false;
+		});
 
-		if (iter != _bullets.end())
+		if(iter != _bullets.end())
 			(*iter)->Fire(start, direction);
 	}
 }

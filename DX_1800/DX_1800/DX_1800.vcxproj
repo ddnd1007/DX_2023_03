@@ -151,12 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="Framework\Camera\Camera.h" />
-    <ClInclude Include="Framework\Math\MathUtility.h" />
-=======
-    <ClInclude Include="Scene\BagicScene\MapleScene.h" />
-    <ClInclude Include="Object\Maple\MapleBoss.h" />
+    <ClInclude Include="Object\Maple\MapleMap.h" />
+    <ClInclude Include="Object\Maple\MaplePlayer.h" />
+    <ClInclude Include="Object\UI\HpBar.h" />
+    <ClInclude Include="Object\UI\Button.h" />
     <ClInclude Include="Framework\Camera\Camera.h" />
     <ClInclude Include="Framework\Math\MathUtility.h" />
     <ClInclude Include="Library\FMOD\inc\fmod.h" />
@@ -167,28 +165,15 @@
     <ClInclude Include="Library\FMOD\inc\fmod_dsp_effects.h" />
     <ClInclude Include="Library\FMOD\inc\fmod_errors.h" />
     <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
-    <ClInclude Include="Object\UI\Button.h" />
-    <ClInclude Include="Object\UI\HpBar.h" />
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
     <ClInclude Include="Object\BagicObject\EffectManager.h" />
-    <ClInclude Include="Object\Obj\CupHead\CupMonster.h" />
     <ClInclude Include="Object\BagicObject\Effect.h" />
-    <ClInclude Include="Object\Obj\CupHead\CupBullet.h" />
-    <ClInclude Include="Object\Obj\CupHead\CupBG.h" />
-    <ClInclude Include="Object\Obj\CupHead\CupHead.h" />
-    <ClInclude Include="Scene\BagicScene\CupHeadScene.h" />
     <ClInclude Include="Framework\Animation\Action.h" />
     <ClInclude Include="Framework\Utility\tinyxml2.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunMonster.h" />
     <ClInclude Include="Framework\Collider\CircleCollider.h" />
     <ClInclude Include="Framework\Collider\Collider.h" />
-    <ClInclude Include="Scene\BagicScene\ColliderScene.h" />
     <ClInclude Include="Framework\Collider\RectCollider.h" />
-    <ClInclude Include="Scene\BagicScene\DunGreedScene.h" />
     <ClInclude Include="Framework\TextureMapping\BlendState.h" />
     <ClInclude Include="Framework\Utility\InputManager.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunBullet.h" />
-    <ClInclude Include="Object\Obj\DunGreed\DunPlayer.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
     <ClInclude Include="Framework\Device\Device.h" />
@@ -197,17 +182,15 @@
     <ClInclude Include="Framework\Render\GlobalBuffer.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
-    <ClInclude Include="Object\Obj\Planet.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Object\BagicObject\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Framework\TextureMapping\SamplerState.h" />
     <ClInclude Include="Framework\TextureMapping\SRV.h" />
+    <ClInclude Include="Scene\BagicScene\MapleScene.h" />
     <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Scene\BagicScene\SolarSystem.h" />
     <ClInclude Include="Framework\TextureMapping\StateManager.h" />
     <ClInclude Include="Framework\TextureMapping\SRVManager.h" />
-    <ClInclude Include="Scene\BagicScene\SpriteScene.h" />
     <ClInclude Include="Object\BagicObject\Sprite.h" />
     <ClInclude Include="Framework\Render\Shader.h" />
     <ClInclude Include="Object\BagicObject\Sprite_Clip.h" />
@@ -215,47 +198,29 @@
     <ClInclude Include="Framework\Render\ShaderManager.h" />
     <ClInclude Include="Framework\Utility\SoundManager.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Scene\BagicScene\TutorialScene.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Framework\Render\VertexLayout.h" />
     <ClInclude Include="Framework\Render\VertexShader.h" />
-    <ClInclude Include="Object\Obj\Zelda\Zelda.h" />
-    <ClInclude Include="Scene\BagicScene\ZeldaScene.h" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClCompile Include="Framework\Camera\Camera.cpp" />
-    <ClCompile Include="Framework\Math\MathUtility.cpp" />
-=======
-    <ClCompile Include="Scene\BagicScene\MapleScene.cpp" />
-    <ClCompile Include="Object\Maple\MapleBoss.cpp" />
-    <ClCompile Include="Framework\Camera\Camera.cpp" />
-    <ClCompile Include="Framework\Math\MathUtility.cpp" />
-    <ClCompile Include="Object\UI\Button.cpp" />
+    <ClCompile Include="Object\Maple\MapleMap.cpp" />
+    <ClCompile Include="Object\Maple\MaplePlayer.cpp" />
     <ClCompile Include="Object\UI\HpBar.cpp" />
->>>>>>> 5069b615e54763b25dd1f2f94990ab3fc9b6b805
+    <ClCompile Include="Object\UI\Button.cpp" />
+    <ClCompile Include="Framework\Camera\Camera.cpp" />
+    <ClCompile Include="Framework\Math\MathUtility.cpp" />
     <ClCompile Include="Object\BagicObject\EffectManager.cpp" />
-    <ClCompile Include="Object\Obj\CupHead\CupMonster.cpp" />
     <ClCompile Include="Object\BagicObject\Effect.cpp" />
-    <ClCompile Include="Object\Obj\CupHead\CupBullet.cpp" />
-    <ClCompile Include="Object\Obj\CupHead\CupBG.cpp" />
-    <ClCompile Include="Object\Obj\CupHead\CupHead.cpp" />
-    <ClCompile Include="Scene\BagicScene\CupHeadScene.cpp" />
     <ClCompile Include="Framework\Animation\Action.cpp" />
     <ClCompile Include="Framework\Utility\tinyxml2.cpp" />
-    <ClCompile Include="Object\Obj\DunGreed\DunMonster.cpp" />
     <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
     <ClCompile Include="Framework\Collider\Collider.cpp" />
-    <ClCompile Include="Scene\BagicScene\ColliderScene.cpp" />
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
-    <ClCompile Include="Scene\BagicScene\DunGreedScene.cpp" />
     <ClCompile Include="Framework\TextureMapping\BlendState.cpp" />
     <ClCompile Include="Framework\Utility\InputManager.cpp" />
-    <ClCompile Include="Object\Obj\DunGreed\DunBullet.cpp" />
-    <ClCompile Include="Object\Obj\DunGreed\DunPlayer.cpp" />
     <ClCompile Include="Framework\Math\Vector2.cpp" />
     <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Framework\Device\Device.cpp" />
@@ -272,28 +237,23 @@
     </ClCompile>
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
-    <ClCompile Include="Object\Obj\Planet.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
     <ClCompile Include="Framework\TextureMapping\SamplerState.cpp" />
     <ClCompile Include="Framework\TextureMapping\SRV.cpp" />
     <ClCompile Include="Object\BagicObject\Quad.cpp" />
+    <ClCompile Include="Scene\BagicScene\MapleScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
-    <ClCompile Include="Scene\BagicScene\TutorialScene.cpp" />
     <ClCompile Include="Framework\Math\Transform.cpp" />
-    <ClCompile Include="Scene\BagicScene\SolarSystem.cpp" />
     <ClCompile Include="Framework\TextureMapping\StateManager.cpp" />
     <ClCompile Include="Framework\Utility\Timer.cpp" />
     <ClCompile Include="Framework\TextureMapping\SRVManager.cpp" />
-    <ClCompile Include="Scene\BagicScene\SpriteScene.cpp" />
     <ClCompile Include="Object\BagicObject\Sprite.cpp" />
     <ClCompile Include="Framework\Render\Shader.cpp" />
     <ClCompile Include="Object\BagicObject\Sprite_Clip.cpp" />
     <ClCompile Include="Object\BagicObject\Sprite_Frame.cpp" />
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
-    <ClCompile Include="Object\Obj\Zelda\Zelda.cpp" />
-    <ClCompile Include="Scene\BagicScene\ZeldaScene.cpp" />
     <ClCompile Include="Framework\Utility\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -302,33 +262,31 @@
   <ItemGroup>
     <Image Include="DX_1800.ico" />
     <Image Include="Resource\CupHead\AimStraightShot.png" />
-    <Image Include="Resource\CupHead\Attack.png" />
-    <Image Include="Resource\CupHead\Bullet_Intro.png" />
     <Image Include="Resource\CupHead\Bullet_Loop.png" />
-    <Image Include="Resource\CupHead\Clown_Page_Last_Die.png" />
-    <Image Include="Resource\CupHead\Clown_Page_Last_Idle.png" />
     <Image Include="Resource\CupHead\Idle.png" />
     <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
     <Image Include="Resource\CupHead\track.png" />
-    <Image Include="Resource\Maple\Boss\Attack2 Ball.png" />
-    <Image Include="Resource\Maple\Boss\Attack2 Hit.png" />
-    <Image Include="Resource\Maple\Boss\attack2 zenesis.png" />
-    <Image Include="Resource\Maple\Boss\attack2.png" />
-    <Image Include="Resource\Maple\Boss\Attack3 Effect.png" />
-    <Image Include="Resource\Maple\Boss\Attack3 Hit.png" />
-    <Image Include="Resource\Maple\Boss\attack3.png" />
-    <Image Include="Resource\Maple\Boss\Attack4 Effect.png" />
-    <Image Include="Resource\Maple\Boss\Attack4 Hit.png" />
-    <Image Include="Resource\Maple\Boss\Attack4.png" />
-    <Image Include="Resource\Maple\Boss\Die.png" />
-    <Image Include="Resource\Maple\Boss\Skill2.png" />
-    <Image Include="Resource\Maple\Boss\stand.png" />
-    <Image Include="Resource\Maple\Boss\stand2.png" />
+    <Image Include="Resource\Maple\Character\dead.png" />
+    <Image Include="Resource\Maple\Character\jump.png" />
+    <Image Include="Resource\Maple\Character\lay down.png" />
+    <Image Include="Resource\Maple\Character\rope.png" />
+    <Image Include="Resource\Maple\Character\stand.png" />
+    <Image Include="Resource\Maple\Character\work.png" />
+    <Image Include="Resource\Maple\map\chobomap.png" />
+    <Image Include="Resource\Maple\map\miniMap.canvas.png" />
+    <Image Include="Resource\Maple\Meso\meso1.png" />
+    <Image Include="Resource\Maple\Meso\meso2.png" />
+    <Image Include="Resource\Maple\Meso\meso3.png" />
+    <Image Include="Resource\Maple\Meso\meso4.png" />
+    <Image Include="Resource\Maple\Pet\pet_sleep.png" />
+    <Image Include="Resource\Maple\Pet\pet_stand.png" />
+    <Image Include="Resource\Maple\Pet\pet_stand2.png" />
+    <Image Include="Resource\Maple\Pet\pet_stand3.png" />
+    <Image Include="Resource\Maple\Pet\sleep.png" />
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />
-    <Image Include="Resource\Texture\explosion.png" />
     <Image Include="Resource\Texture\hit_4x2.png" />
     <Image Include="Resource\Texture\moon.png" />
     <Image Include="Resource\Texture\Player.png" />
@@ -339,6 +297,20 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\ActionPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shader\ButtonPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -380,20 +352,6 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VS</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Shader\CupHeadPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS</EntryPointName>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PS</EntryPointName>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PS</EntryPointName>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="Shader\FilterPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -413,8 +371,14 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shader\SpritePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -483,47 +447,33 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\CupHead\AimStraightShot.xml" />
-    <Xml Include="Resource\CupHead\Attack.xml" />
-    <Xml Include="Resource\CupHead\Bullet_Intro.xml" />
     <Xml Include="Resource\CupHead\Bullet_Loop.xml" />
-    <Xml Include="Resource\CupHead\Clown_Page_Last_Die.xml" />
-    <Xml Include="Resource\CupHead\Clown_Page_Last_Idle.xml" />
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack2 Ball.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack2 Hit.xml" />
-    <Xml Include="Resource\Maple\Boss\attack2 zenesis.xml" />
-    <Xml Include="Resource\Maple\Boss\attack2.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack3 Effect.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack3 Hit.xml" />
-    <Xml Include="Resource\Maple\Boss\attack3.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack4 Effect.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack4 Hit.xml" />
-    <Xml Include="Resource\Maple\Boss\Attack4.xml" />
-    <Xml Include="Resource\Maple\Boss\Die.xml" />
-    <Xml Include="Resource\Maple\Boss\Skill2.xml" />
-    <Xml Include="Resource\Maple\Boss\stand.xml" />
-    <Xml Include="Resource\Maple\Boss\stand2.xml" />
+    <Xml Include="Resource\Maple\Character\dead.xml" />
+    <Xml Include="Resource\Maple\Character\jump.xml" />
+    <Xml Include="Resource\Maple\Character\lay down.xml" />
+    <Xml Include="Resource\Maple\Character\rope.xml" />
+    <Xml Include="Resource\Maple\Character\stand.xml" />
+    <Xml Include="Resource\Maple\Character\work.xml" />
+    <Xml Include="Resource\Maple\Meso\meso1.xml" />
+    <Xml Include="Resource\Maple\Meso\meso2.xml" />
+    <Xml Include="Resource\Maple\Meso\meso3.xml" />
+    <Xml Include="Resource\Maple\Meso\meso4.xml" />
+    <Xml Include="Resource\Maple\Pet\pet_sleep.xml" />
+    <Xml Include="Resource\Maple\Pet\pet_stand.xml" />
+    <Xml Include="Resource\Maple\Pet\pet_stand2.xml" />
+    <Xml Include="Resource\Maple\Pet\pet_stand3.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fmod.dll" />
-    <None Include="imgui.ini" />
-    <None Include="Library\FMOD\fmod.dll" />
     <None Include="Library\FMOD\inc\fmod.cs" />
     <None Include="Library\FMOD\inc\fmod_dsp.cs" />
     <None Include="Library\FMOD\inc\fmod_errors.cs" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Library\FMOD\fmod_vc.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Library\FMOD\fmod_vc.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="fmod.dll" />
-    <None Include="imgui.ini" />
-    <None Include="Library\FMOD\fmod.dll" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resource\Sound\attack.wav" />

@@ -31,7 +31,7 @@ void Button::Update()
 
 		if (KEY_DOWN(VK_LBUTTON))
 		{
-			if (_event != nullptr)
+			if(_event != nullptr)
 				_event();
 		}
 
