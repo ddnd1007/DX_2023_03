@@ -151,8 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Maple\MapleMonster.h" />
     <ClInclude Include="Object\Maple\MapleMap.h" />
     <ClInclude Include="Object\Maple\MaplePlayer.h" />
+    <ClInclude Include="Object\Maple\Meso.h" />
     <ClInclude Include="Object\UI\HpBar.h" />
     <ClInclude Include="Object\UI\Button.h" />
     <ClInclude Include="Framework\Camera\Camera.h" />
@@ -206,8 +208,10 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Maple\MapleMonster.cpp" />
     <ClCompile Include="Object\Maple\MapleMap.cpp" />
     <ClCompile Include="Object\Maple\MaplePlayer.cpp" />
+    <ClCompile Include="Object\Maple\Meso.cpp" />
     <ClCompile Include="Object\UI\HpBar.cpp" />
     <ClCompile Include="Object\UI\Button.cpp" />
     <ClCompile Include="Framework\Camera\Camera.cpp" />
