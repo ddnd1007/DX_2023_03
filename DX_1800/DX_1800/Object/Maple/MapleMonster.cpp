@@ -1,38 +1,34 @@
 #include "framework.h"
-#include "MaplePlayer.h"
+#include "MapleMonster.h"
 
-MaplePlayer::MaplePlayer()
+MapleMonster::MapleMonster()
 {
-	_col = make_shared<CircleCollider>(30);
+	_col = make_shared<CircleCollider>(5);
 	_transform = make_shared<Transform>();
 
 	CreateAction("stand");
 	CreateAction("work");
-	CreateAction("jump");
-	CreateAction("dead");
-
+	
 	_col->GetTransform()->SetPosition(Vector2(0, 0));
 
 	_transform->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 0));
-	
+
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
+
+
 }
 
-MaplePlayer::~MaplePlayer()
+MapleMonster::~MapleMonster()
 {
 }
 
-void MaplePlayer::Update()
+void MapleMonster::Update()
 {
-	Input();
-	Jump();
-	Dead();
-
 	_col->Update();
 	_transform->Update();
 
@@ -42,22 +38,16 @@ void MaplePlayer::Update()
 	_sprites[_curState]->Update();
 }
 
-void MaplePlayer::Render()
+void MapleMonster::Render()
 {
 	_transform->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
 	_col->Render();
 
-
 }
 
-void MaplePlayer::PostRender()
-{
-	
-}
-
-void MaplePlayer::SetAction(State state)
+void MapleMonster::SetAction(State state)
 {
 	if (_curState == state)
 		return;
@@ -72,71 +62,27 @@ void MaplePlayer::SetAction(State state)
 	_oldState = _curState;
 }
 
-void MaplePlayer::Input()
-{
-	if (KEY_PRESS('D'))
-	{
-		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
-
-		SetLeft();
-	}
-
-	if (KEY_PRESS('A'))
-	{
-		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
-
-		SetRight();
-	}
-
-	if (_curState == State::JUMP)
-		return;
-
-	if (KEY_PRESS('A') || KEY_PRESS('D'))
-		SetAction(State::WORK);
-	else if (_curState == State::WORK)
-		SetAction(State::STAND);
-}
-
-void MaplePlayer::Jump()
-{
-	if (_isFalling == true && _isAttack == false)
-		SetAction(State::JUMP);
-	else if (_curState == JUMP && _isFalling == false && _isAttack == false)
-		SetAction(State::STAND);
-
-	_jumpPower -= GRAVITY * 9;
-
-	if (_jumpPower < -_maxFalling)
-		_jumpPower = -_maxFalling;
-
-	_col->GetTransform()->AddVector2(Vector2(0.0f, _jumpPower * DELTA_TIME));
-
-	if (KEY_DOWN(VK_SPACE) && _isAttack == false && _hp > 0)
-	{
-		_jumpPower = 1200.0f;
-		_isFalling = true;
-	}
-}
-
-void MaplePlayer::Dead()
+void MapleMonster::Dead()
 {
 	if (_isDead == false)
 		return;
 
 	if (_hp <= 0)
 	{
+		_actions[State::STAND]->Stop();
+		_actions[State::WORK]->Stop();
 		SetAction(State::DEAD);
-		_isFalling == false && _isAttack == false;
 	}
+
 }
 
-void MaplePlayer::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
+void MapleMonster::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
-	wstring srvPath = L"Resource/Maple/Character/" + wName + L".png";
+	wstring srvPath = L"Resource/Maple/Monster/" + wName + L".png";
 	shared_ptr<SRV> srv = ADD_SRV(wName);
 
-	string xmlPath = "Resource/Maple/Character/" + name + ".xml";
+	string xmlPath = "Resource/Maple/Monster/" + name + ".xml";
 	shared_ptr<tinyxml2::XMLDocument> document = make_shared<tinyxml2::XMLDocument>();
 	document->LoadFile(xmlPath.c_str());
 

@@ -12,5 +12,6 @@ public:
 private:
 	shared_ptr<class MaplePlayer> _player;
 	shared_ptr<class MapleMap> _map;
+	shared_ptr<class Meso> _meso;
 };
 
