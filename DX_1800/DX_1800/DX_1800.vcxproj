@@ -154,7 +154,6 @@
     <ClInclude Include="Object\Maple\MapleMonster.h" />
     <ClInclude Include="Object\Maple\MapleMap.h" />
     <ClInclude Include="Object\Maple\MaplePlayer.h" />
-    <ClInclude Include="Object\Maple\Meso.h" />
     <ClInclude Include="Object\UI\HpBar.h" />
     <ClInclude Include="Object\UI\Button.h" />
     <ClInclude Include="Framework\Camera\Camera.h" />
@@ -211,7 +210,6 @@
     <ClCompile Include="Object\Maple\MapleMonster.cpp" />
     <ClCompile Include="Object\Maple\MapleMap.cpp" />
     <ClCompile Include="Object\Maple\MaplePlayer.cpp" />
-    <ClCompile Include="Object\Maple\Meso.cpp" />
     <ClCompile Include="Object\UI\HpBar.cpp" />
     <ClCompile Include="Object\UI\Button.cpp" />
     <ClCompile Include="Framework\Camera\Camera.cpp" />
@@ -275,6 +273,7 @@
     <Image Include="Resource\Maple\Character\jump.png" />
     <Image Include="Resource\Maple\Character\lay down.png" />
     <Image Include="Resource\Maple\Character\rope.png" />
+    <Image Include="Resource\Maple\Character\shoot.png" />
     <Image Include="Resource\Maple\Character\stand.png" />
     <Image Include="Resource\Maple\Character\work.png" />
     <Image Include="Resource\Maple\map\chobomap.png" />
@@ -288,6 +287,10 @@
     <Image Include="Resource\Maple\Pet\pet_stand2.png" />
     <Image Include="Resource\Maple\Pet\pet_stand3.png" />
     <Image Include="Resource\Maple\Pet\sleep.png" />
+    <Image Include="Resource\Maple\snail\snail die.png" />
+    <Image Include="Resource\Maple\snail\snail hit.png" />
+    <Image Include="Resource\Maple\snail\snail stand.png" />
+    <Image Include="Resource\Maple\snail\snail work.png" />
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />
@@ -459,6 +462,7 @@
     <Xml Include="Resource\Maple\Character\jump.xml" />
     <Xml Include="Resource\Maple\Character\lay down.xml" />
     <Xml Include="Resource\Maple\Character\rope.xml" />
+    <Xml Include="Resource\Maple\Character\shoot.xml" />
     <Xml Include="Resource\Maple\Character\stand.xml" />
     <Xml Include="Resource\Maple\Character\work.xml" />
     <Xml Include="Resource\Maple\Meso\meso1.xml" />
@@ -469,6 +473,10 @@
     <Xml Include="Resource\Maple\Pet\pet_stand.xml" />
     <Xml Include="Resource\Maple\Pet\pet_stand2.xml" />
     <Xml Include="Resource\Maple\Pet\pet_stand3.xml" />
+    <Xml Include="Resource\Maple\snail\snail die.xml" />
+    <Xml Include="Resource\Maple\snail\snail hit.xml" />
+    <Xml Include="Resource\Maple\snail\snail stand.xml" />
+    <Xml Include="Resource\Maple\snail\snail work.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fmod.dll" />

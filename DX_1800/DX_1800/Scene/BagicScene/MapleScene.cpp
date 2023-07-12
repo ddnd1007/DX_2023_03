@@ -3,15 +3,18 @@
 
 #include "../../Object/Maple/MaplePlayer.h"
 #include "../../Object/Maple/MapleMap.h"
+#include "../../Object/Maple/MapleMonster.h"
 #include "../../Object/Maple/Meso.h"
 
 MapleScene::MapleScene()
 {
 	_player = make_shared<MaplePlayer>();
 	_map = make_shared<MapleMap>();
+	_monster = make_shared<MapleMonster>();
 	_map->SetPosition(Vector2(0.0f, -350.0f));
-	_meso = make_shared<Meso>();
-	_meso->SetPosition(Vector2(0.0f, -100.0f));
+	_monster->SetPosition(Vector2(0.0f, -320.0f));
+	//_meso = make_shared<Meso>();
+	//_meso->SetPosition(Vector2(0.0f, -100.0f));
 
 
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
@@ -28,26 +31,43 @@ MapleScene::~MapleScene()
 void MapleScene::Update()
 {
 	_player->Update();
-	
+	_monster->Update();
 	_map->Update();
-	_meso->Update();
+	//_meso->Update();
 
 	if (_map->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else
 		_player->SetIsFalling(true);
-	
+
+	_map->GetCollider()->Block(_monster->GetCollider());
+
+	if (_player->GetCollider()->IsCollision(_monster->GetCollider()))
+	{
+		_monster->_isDamaged = true;
+		_player->GetCollider()->SetColorRed();
+		_monster->GetCollider()->SetColorRed();
+	}
+	else
+	{
+		_monster->_isDamaged = false;
+		_player->GetCollider()->SetColorGreen();
+		_monster->GetCollider()->SetColorGreen();
+		
+	}
 }
 
 void MapleScene::Render()
 {
 	_map->Render();
-	_meso->Render();
+	//_meso->Render();
 	//_mapleBoss->Render();
+	_monster->Render();
 	_player->Render();
 }
 
 void MapleScene::PostRender()
 {
 	ImGui::Text("Player HP : %d", _player->_hp);
+	ImGui::Text("Snail HP : %d", _monster->_hp);
 }

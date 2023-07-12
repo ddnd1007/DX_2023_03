@@ -9,13 +9,14 @@ MaplePlayer::MaplePlayer()
 	CreateAction("stand");
 	CreateAction("work");
 	CreateAction("jump");
+	CreateAction("shoot");
 	CreateAction("dead");
 
 	_col->GetTransform()->SetPosition(Vector2(0, 0));
 
 	_transform->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 0));
-	
+
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
 
@@ -74,6 +75,15 @@ void MaplePlayer::SetAction(State state)
 
 void MaplePlayer::Input()
 {
+	if (KEY_PRESS(VK_LCONTROL) && _isFalling == false && _isAttack == false)
+	{
+		SetAction(State::SHOOT);
+	}
+	else if (KEY_UP(VK_LCONTROL))
+	{
+		SetAction(State::STAND);
+	}
+
 	if (KEY_PRESS('D'))
 	{
 		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
@@ -118,12 +128,19 @@ void MaplePlayer::Jump()
 	}
 }
 
+void MaplePlayer::Attack()
+{
+	SetAction(State::SHOOT);
+
+	_isAttack = true;
+}
+
 void MaplePlayer::Dead()
 {
 	if (_isDead == false)
 		return;
 
-	if (_hp <= 0)
+	if (_isDead == true)
 	{
 		SetAction(State::DEAD);
 		_isFalling == false && _isAttack == false;

@@ -1,18 +1,27 @@
 #include "framework.h"
 #include "MapleMonster.h"
 
+
 MapleMonster::MapleMonster()
 {
-	_col = make_shared<CircleCollider>(5);
-	_transform = make_shared<Transform>();
+	_circleCol = make_shared<CircleCollider>(15);
+	_circleTrans = make_shared<Transform>();
 
-	CreateAction("stand");
-	CreateAction("work");
+	_rectCol = make_shared<RectCollider>(Vector2(70.0f, 70.0f));
+	_rectTrans = make_shared<Transform>();
+
+	CreateAction("snail stand");
+	CreateAction("snail work");
+	CreateAction("snail hit");
+	CreateAction("snail die");
 	
-	_col->GetTransform()->SetPosition(Vector2(0, 0));
+	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
+	_rectCol->GetTransform()->SetPosition(Vector2(0, 0));
 
-	_transform->SetParent(_col->GetTransform());
-	_transform->SetPosition(Vector2(0, 0));
+	_circleTrans->SetParent(_circleCol->GetTransform());
+	_rectTrans->SetParent(_rectCol->GetTransform());
+	_circleTrans->SetPosition(Vector2(0, 0));
+	_rectTrans->SetPosition(Vector2(0, 0));
 
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
@@ -29,8 +38,14 @@ MapleMonster::~MapleMonster()
 
 void MapleMonster::Update()
 {
-	_col->Update();
-	_transform->Update();
+	Hit();
+	HitEnd();
+	Dead();
+
+	_circleCol->Update();
+	_rectCol->Update();
+	_circleTrans->Update();
+	_rectTrans->Update();
 
 	_actions[_curState]->Update();
 
@@ -40,11 +55,11 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
-	_transform->SetWorldBuffer(0);
+	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
-	_col->Render();
-
+	_circleCol->Render();
+	_rectCol->Render();
 }
 
 void MapleMonster::SetAction(State state)
@@ -69,20 +84,36 @@ void MapleMonster::Dead()
 
 	if (_hp <= 0)
 	{
-		_actions[State::STAND]->Stop();
-		_actions[State::WORK]->Stop();
 		SetAction(State::DEAD);
 	}
 
 }
 
+void MapleMonster::Hit()
+{
+	if (_isDead == true)
+		return;
+
+	if (_isDamaged == true)
+	SetAction(State::HIT);
+}
+
+void MapleMonster::HitEnd()
+{
+	if (_isDead == true)
+		return;
+
+	if (_isDamaged == false)
+		SetAction(State::WORK);
+}
+
 void MapleMonster::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
-	wstring srvPath = L"Resource/Maple/Monster/" + wName + L".png";
+	wstring srvPath = L"Resource/Maple/snail/" + wName + L".png";
 	shared_ptr<SRV> srv = ADD_SRV(wName);
 
-	string xmlPath = "Resource/Maple/Monster/" + name + ".xml";
+	string xmlPath = "Resource/Maple/snail/" + name + ".xml";
 	shared_ptr<tinyxml2::XMLDocument> document = make_shared<tinyxml2::XMLDocument>();
 	document->LoadFile(xmlPath.c_str());
 

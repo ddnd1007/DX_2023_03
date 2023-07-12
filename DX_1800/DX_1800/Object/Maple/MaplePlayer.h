@@ -6,6 +6,7 @@ class MaplePlayer
 		STAND,
 		WORK,
 		JUMP,
+		SHOOT,
 		DEAD
 	};
 public:
@@ -29,6 +30,7 @@ public:
 	void SetAction(State state);
 	void Input();
 	void Jump();
+	void Attack();
 	void Dead();
 
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
@@ -43,8 +45,10 @@ private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 
 	shared_ptr<CircleCollider> _col;
+	shared_ptr<CircleCollider> _bowCol;
 
 	shared_ptr<Transform> _transform;
+	shared_ptr<Transform> _bowTrans;
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 
