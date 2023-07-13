@@ -15,12 +15,12 @@ MaplePlayer::MaplePlayer()
 	CreateAction("dead");
 
 	_col->GetTransform()->SetPosition(Vector2(0, 0));
-	_bowCol->GetTransform()->SetPosition(Vector2(10, 0));
+	_bowCol->GetTransform()->SetPosition(Vector2(0, 0));
 
 	_transform->SetParent(_col->GetTransform());
 	_bowTrans->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 0));
-	_bowTrans->SetPosition(Vector2(10, 0));
+	_bowTrans->SetPosition(Vector2(0, 0));
 
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();

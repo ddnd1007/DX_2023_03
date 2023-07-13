@@ -56,16 +56,16 @@ void MapleArrow::PostRender()
 
 }
 
-void MapleArrow::Attack(shared_ptr<class MapleMonster> victim)
-{
-	if (_isActive == false)
-		return;
-	if (_col->IsCollision(victim->GetCirCollider()) == false || victim->IsDead() == true)
-		return;
-
-	victim->TakeDamage(_damage);
-	_isActive = false;
-}
+//void MapleArrow::Attack(shared_ptr<class MapleMonster> victim)
+//{
+//	if (_isActive == false)
+//		return;
+//	if (_col->IsCollision(victim->GetCirCollider()) == false || victim->IsDead() == true)
+//		return;
+//
+//	victim->TakeDamage(_damage);
+//	_isActive = false;
+//}
 
 void MapleArrow::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
