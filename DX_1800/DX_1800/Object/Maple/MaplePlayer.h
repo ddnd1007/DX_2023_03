@@ -46,11 +46,13 @@ private:
 
 	shared_ptr<CircleCollider> _col;
 	shared_ptr<CircleCollider> _bowCol;
-
+	
 	shared_ptr<Transform> _transform;
 	shared_ptr<Transform> _bowTrans;
+	
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
+	vector <shared_ptr<class MapleArrow>> _arrows;
 
 	State _curState = State::STAND;
 	State _oldState = State::STAND;

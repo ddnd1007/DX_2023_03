@@ -7,7 +7,7 @@ MapleMonster::MapleMonster()
 	_circleCol = make_shared<CircleCollider>(15);
 	_circleTrans = make_shared<Transform>();
 
-	_rectCol = make_shared<RectCollider>(Vector2(70.0f, 70.0f));
+	_rectCol = make_shared<RectCollider>(Vector2(300.0f, 100.0f));
 	_rectTrans = make_shared<Transform>();
 
 	CreateAction("snail stand");
@@ -16,7 +16,7 @@ MapleMonster::MapleMonster()
 	CreateAction("snail die");
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
-	_rectCol->GetTransform()->SetPosition(Vector2(0, 0));
+	_rectCol->GetTransform()->SetPosition(Vector2(0, -290));
 
 	_circleTrans->SetParent(_circleCol->GetTransform());
 	_rectTrans->SetParent(_rectCol->GetTransform());
@@ -28,8 +28,6 @@ MapleMonster::MapleMonster()
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
-
-
 }
 
 MapleMonster::~MapleMonster()
@@ -40,12 +38,12 @@ void MapleMonster::Update()
 {
 	Hit();
 	HitEnd();
-	Dead();
+	IsDead();
 
-	_circleCol->Update();
 	_rectCol->Update();
-	_circleTrans->Update();
 	_rectTrans->Update();
+	_circleCol->Update();
+	_circleTrans->Update();
 
 	_actions[_curState]->Update();
 
@@ -55,6 +53,7 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
+	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
@@ -77,7 +76,15 @@ void MapleMonster::SetAction(State state)
 	_oldState = _curState;
 }
 
-void MapleMonster::Dead()
+void MapleMonster::TakeDamage(int damage)
+{
+	if (_isDamaged == true)
+		return;
+
+	_hp -= damage;
+	_isDamaged = true;
+}
+void MapleMonster::IsDead()
 {
 	if (_isDead == false)
 		return;

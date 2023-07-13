@@ -29,11 +29,13 @@ public:
 
 	void SetPosition(Vector2 pos) { _circleCol->GetTransform()->SetPosition(pos); }
 	void SetAction(State state);
-	void Dead();
+	void TakeDamage(int _hp);
+	void IsDead();
 	void Hit();
 	void HitEnd();
 
-	shared_ptr<CircleCollider> GetCollider() { return _circleCol; }
+	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
+	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
 
 	int _hp = 3;
 	bool _isDamaged = false;

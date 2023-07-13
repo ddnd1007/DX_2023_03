@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Maple\MapleArrow.h" />
     <ClInclude Include="Object\Maple\MapleMonster.h" />
     <ClInclude Include="Object\Maple\MapleMap.h" />
     <ClInclude Include="Object\Maple\MaplePlayer.h" />
@@ -166,8 +167,8 @@
     <ClInclude Include="Library\FMOD\inc\fmod_dsp_effects.h" />
     <ClInclude Include="Library\FMOD\inc\fmod_errors.h" />
     <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
-    <ClInclude Include="Object\BagicObject\EffectManager.h" />
-    <ClInclude Include="Object\BagicObject\Effect.h" />
+    <ClInclude Include="Object\BasicObject\EffectManager.h" />
+    <ClInclude Include="Object\BasicObject\Effect.h" />
     <ClInclude Include="Framework\Animation\Action.h" />
     <ClInclude Include="Framework\Utility\tinyxml2.h" />
     <ClInclude Include="Framework\Collider\CircleCollider.h" />
@@ -184,7 +185,7 @@
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
     <ClInclude Include="Program\Program.h" />
-    <ClInclude Include="Object\BagicObject\Quad.h" />
+    <ClInclude Include="Object\BasicObject\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Framework\TextureMapping\SamplerState.h" />
     <ClInclude Include="Framework\TextureMapping\SRV.h" />
@@ -192,10 +193,10 @@
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Framework\TextureMapping\StateManager.h" />
     <ClInclude Include="Framework\TextureMapping\SRVManager.h" />
-    <ClInclude Include="Object\BagicObject\Sprite.h" />
+    <ClInclude Include="Object\BasicObject\Sprite.h" />
     <ClInclude Include="Framework\Render\Shader.h" />
-    <ClInclude Include="Object\BagicObject\Sprite_Clip.h" />
-    <ClInclude Include="Object\BagicObject\Sprite_Frame.h" />
+    <ClInclude Include="Object\BasicObject\Sprite_Clip.h" />
+    <ClInclude Include="Object\BasicObject\Sprite_Frame.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
     <ClInclude Include="Framework\Utility\SoundManager.h" />
     <ClInclude Include="targetver.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Maple\MapleArrow.cpp" />
     <ClCompile Include="Object\Maple\MapleMonster.cpp" />
     <ClCompile Include="Object\Maple\MapleMap.cpp" />
     <ClCompile Include="Object\Maple\MaplePlayer.cpp" />
@@ -214,8 +216,8 @@
     <ClCompile Include="Object\UI\Button.cpp" />
     <ClCompile Include="Framework\Camera\Camera.cpp" />
     <ClCompile Include="Framework\Math\MathUtility.cpp" />
-    <ClCompile Include="Object\BagicObject\EffectManager.cpp" />
-    <ClCompile Include="Object\BagicObject\Effect.cpp" />
+    <ClCompile Include="Object\BasicObject\EffectManager.cpp" />
+    <ClCompile Include="Object\BasicObject\Effect.cpp" />
     <ClCompile Include="Framework\Animation\Action.cpp" />
     <ClCompile Include="Framework\Utility\tinyxml2.cpp" />
     <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
@@ -244,17 +246,17 @@
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
     <ClCompile Include="Framework\TextureMapping\SamplerState.cpp" />
     <ClCompile Include="Framework\TextureMapping\SRV.cpp" />
-    <ClCompile Include="Object\BagicObject\Quad.cpp" />
+    <ClCompile Include="Object\BasicObject\Quad.cpp" />
     <ClCompile Include="Scene\BagicScene\MapleScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Framework\Math\Transform.cpp" />
     <ClCompile Include="Framework\TextureMapping\StateManager.cpp" />
     <ClCompile Include="Framework\Utility\Timer.cpp" />
     <ClCompile Include="Framework\TextureMapping\SRVManager.cpp" />
-    <ClCompile Include="Object\BagicObject\Sprite.cpp" />
+    <ClCompile Include="Object\BasicObject\Sprite.cpp" />
     <ClCompile Include="Framework\Render\Shader.cpp" />
-    <ClCompile Include="Object\BagicObject\Sprite_Clip.cpp" />
-    <ClCompile Include="Object\BagicObject\Sprite_Frame.cpp" />
+    <ClCompile Include="Object\BasicObject\Sprite_Clip.cpp" />
+    <ClCompile Include="Object\BasicObject\Sprite_Frame.cpp" />
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
     <ClCompile Include="Framework\Utility\SoundManager.cpp" />
   </ItemGroup>

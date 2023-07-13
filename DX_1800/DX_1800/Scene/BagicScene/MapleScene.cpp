@@ -13,6 +13,7 @@ MapleScene::MapleScene()
 	_monster = make_shared<MapleMonster>();
 	_map->SetPosition(Vector2(0.0f, -350.0f));
 	_monster->SetPosition(Vector2(0.0f, -320.0f));
+	
 	//_meso = make_shared<Meso>();
 	//_meso->SetPosition(Vector2(0.0f, -100.0f));
 
@@ -40,20 +41,34 @@ void MapleScene::Update()
 	else
 		_player->SetIsFalling(true);
 
-	_map->GetCollider()->Block(_monster->GetCollider());
+	_map->GetCollider()->Block(_monster->GetCirCollider());
 
-	if (_player->GetCollider()->IsCollision(_monster->GetCollider()))
+	if (_player->GetCollider()->IsCollision(_monster->GetCirCollider()))
 	{
 		_monster->_isDamaged = true;
 		_player->GetCollider()->SetColorRed();
-		_monster->GetCollider()->SetColorRed();
+		_monster->GetCirCollider()->SetColorRed();
 	}
 	else
 	{
 		_monster->_isDamaged = false;
 		_player->GetCollider()->SetColorGreen();
-		_monster->GetCollider()->SetColorGreen();
+		_monster->GetCirCollider()->SetColorGreen();
 		
+	}
+
+	if (_player->GetCollider()->IsCollision(_monster->GetRectCollider()))
+	{
+		
+		_player->GetCollider()->SetColorRed();
+		_monster->GetRectCollider()->SetColorRed();
+	}
+	else
+	{
+		
+		_player->GetCollider()->SetColorGreen();
+		_monster->GetRectCollider()->SetColorGreen();
+
 	}
 }
 

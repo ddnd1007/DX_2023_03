@@ -4,7 +4,9 @@
 MaplePlayer::MaplePlayer()
 {
 	_col = make_shared<CircleCollider>(30);
+	_bowCol = make_shared<CircleCollider>(10);
 	_transform = make_shared<Transform>();
+	_bowTrans = make_shared<Transform>();
 
 	CreateAction("stand");
 	CreateAction("work");
@@ -13,9 +15,12 @@ MaplePlayer::MaplePlayer()
 	CreateAction("dead");
 
 	_col->GetTransform()->SetPosition(Vector2(0, 0));
+	_bowCol->GetTransform()->SetPosition(Vector2(10, 0));
 
 	_transform->SetParent(_col->GetTransform());
+	_bowTrans->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 0));
+	_bowTrans->SetPosition(Vector2(10, 0));
 
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
@@ -35,7 +40,9 @@ void MaplePlayer::Update()
 	Dead();
 
 	_col->Update();
+	_bowCol->Update();
 	_transform->Update();
+	_bowTrans->Update();
 
 	_actions[_curState]->Update();
 
@@ -46,10 +53,11 @@ void MaplePlayer::Update()
 void MaplePlayer::Render()
 {
 	_transform->SetWorldBuffer(0);
+	_bowTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
 	_col->Render();
-
+	_bowCol->Render();
 
 }
 
@@ -130,7 +138,11 @@ void MaplePlayer::Jump()
 
 void MaplePlayer::Attack()
 {
-	SetAction(State::SHOOT);
+	if (_isDead == true)
+		return;
+
+	if (_isFalling == false && _isAttack == false && _isDead == false)
+		SetAction(State::SHOOT);
 
 	_isAttack = true;
 }

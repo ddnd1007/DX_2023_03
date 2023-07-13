@@ -57,7 +57,7 @@
     <ClInclude Include="Scene\Scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BagicObject\Quad.h">
+    <ClInclude Include="Object\BasicObject\Quad.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Render\IndexBuffer.h">
@@ -99,7 +99,7 @@
     <ClInclude Include="Framework\TextureMapping\SRVManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BagicObject\Sprite.h">
+    <ClInclude Include="Object\BasicObject\Sprite.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Render\Shader.h">
@@ -108,10 +108,10 @@
     <ClInclude Include="Framework\Animation\Action.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BagicObject\Sprite_Frame.h">
+    <ClInclude Include="Object\BasicObject\Sprite_Frame.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BagicObject\Sprite_Clip.h">
+    <ClInclude Include="Object\BasicObject\Sprite_Clip.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Render\ShaderManager.h">
@@ -120,10 +120,10 @@
     <ClInclude Include="Framework\Utility\tinyxml2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BagicObject\Effect.h">
+    <ClInclude Include="Object\BasicObject\Effect.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BagicObject\EffectManager.h">
+    <ClInclude Include="Object\BasicObject\EffectManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Library\FMOD\inc\fmod.h">
@@ -177,6 +177,9 @@
     <ClInclude Include="Object\Maple\MapleMonster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Maple\MapleArrow.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX_1800.cpp">
@@ -209,7 +212,7 @@
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BagicObject\Quad.cpp">
+    <ClCompile Include="Object\BasicObject\Quad.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Render\IndexBuffer.cpp">
@@ -248,7 +251,7 @@
     <ClCompile Include="Framework\TextureMapping\SRVManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BagicObject\Sprite.cpp">
+    <ClCompile Include="Object\BasicObject\Sprite.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Render\Shader.cpp">
@@ -257,10 +260,10 @@
     <ClCompile Include="Framework\Animation\Action.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BagicObject\Sprite_Frame.cpp">
+    <ClCompile Include="Object\BasicObject\Sprite_Frame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BagicObject\Sprite_Clip.cpp">
+    <ClCompile Include="Object\BasicObject\Sprite_Clip.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Render\ShaderManager.cpp">
@@ -269,10 +272,10 @@
     <ClCompile Include="Framework\Utility\tinyxml2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BagicObject\Effect.cpp">
+    <ClCompile Include="Object\BasicObject\Effect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BagicObject\EffectManager.cpp">
+    <ClCompile Include="Object\BasicObject\EffectManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Utility\SoundManager.cpp">
@@ -300,6 +303,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Maple\MapleMonster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\MapleArrow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
