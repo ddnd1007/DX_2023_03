@@ -271,6 +271,7 @@
     <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
     <Image Include="Resource\CupHead\track.png" />
+    <Image Include="Resource\Maple\Character\arrow.png" />
     <Image Include="Resource\Maple\Character\dead.png" />
     <Image Include="Resource\Maple\Character\jump.png" />
     <Image Include="Resource\Maple\Character\lay down.png" />

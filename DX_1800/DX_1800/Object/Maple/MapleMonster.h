@@ -30,7 +30,6 @@ public:
 	void SetPosition(Vector2 pos) { _circleCol->GetTransform()->SetPosition(pos); }
 	void SetAction(State state);
 	void TakeDamage(int _hp);
-	void IsDead();
 	void Hit();
 	void HitEnd();
 
@@ -39,6 +38,8 @@ public:
 
 	int _hp = 3;
 	bool _isDamaged = false;
+	bool IsDead();
+	bool IsActive() { return _hp > 0; }
 
 private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
@@ -55,6 +56,8 @@ private:
 
 	bool _isAttack = false;
 	bool _isDead = false;
+
+	float _hitTime = 0.3f;
 
 	int _damage = 1;
 };

@@ -1,12 +1,14 @@
 #include "framework.h"
 #include "MaplePlayer.h"
+#include "MapleArrow.h"
 
 MaplePlayer::MaplePlayer()
 {
 	_col = make_shared<CircleCollider>(30);
-	_bowCol = make_shared<CircleCollider>(10);
 	_transform = make_shared<Transform>();
-	_bowTrans = make_shared<Transform>();
+
+	_bowSlot = make_shared<Transform>();
+	_bowSlot->SetParent(_transform);
 
 	CreateAction("stand");
 	CreateAction("work");
@@ -15,11 +17,12 @@ MaplePlayer::MaplePlayer()
 	CreateAction("dead");
 
 	_col->GetTransform()->SetPosition(Vector2(0, 0));
-	_bowCol->GetTransform()->SetPosition(Vector2(0, 0));
-
+	
 	_transform->SetParent(_col->GetTransform());
-	_bowTrans->SetParent(_col->GetTransform());
 	_transform->SetPosition(Vector2(0, 0));
+
+	_bowTrans = make_shared<Transform>();
+	_bowTrans->SetParent(_bowSlot);
 	_bowTrans->SetPosition(Vector2(0, 0));
 
 	_actions[State::STAND]->Play();
@@ -27,6 +30,14 @@ MaplePlayer::MaplePlayer()
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
+
+	for (int i = 0; i < 30; i++)
+	{
+		shared_ptr<MapleArrow> arrow = make_shared<MapleArrow>();
+		_arrows.push_back(arrow);
+
+	}
+	
 }
 
 MaplePlayer::~MaplePlayer()
@@ -39,10 +50,14 @@ void MaplePlayer::Update()
 	Jump();
 	Dead();
 
+
 	_col->Update();
-	_bowCol->Update();
+	_bowSlot->Update();
 	_transform->Update();
 	_bowTrans->Update();
+	
+	for (auto arrow : _arrows)
+		arrow->Update();
 
 	_actions[_curState]->Update();
 
@@ -57,7 +72,9 @@ void MaplePlayer::Render()
 	_sprites[_curState]->Render();
 
 	_col->Render();
-	_bowCol->Render();
+
+	for (auto arrow : _arrows)
+		arrow->Render();
 
 }
 
@@ -85,13 +102,12 @@ void MaplePlayer::Input()
 {
 	if (KEY_PRESS(VK_LCONTROL) && _isFalling == false && _isAttack == false)
 	{
-		SetAction(State::SHOOT);
+		Attack();
 	}
 	else if (KEY_UP(VK_LCONTROL))
 	{
-		SetAction(State::STAND);
+		EndAttack();
 	}
-
 	if (KEY_PRESS('D'))
 	{
 		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
@@ -144,7 +160,24 @@ void MaplePlayer::Attack()
 	if (_isFalling == false && _isAttack == false && _isDead == false)
 		SetAction(State::SHOOT);
 
+	for (int i = 0; i < 30; i++)
+	{
+		_arrows[i]->_isActive = true;
+		_arrows[i]->SetDirtection(RIGHT_VECTOR);
+		_arrows[i]->SetPosition(_col->GetWorldPos());
+	}
+	
 	_isAttack = true;
+	
+}
+
+void MaplePlayer::EndAttack()
+{
+	if (_isDead == true)
+		return;
+
+	_isAttack = false;
+	SetAction(State::STAND);
 }
 
 void MaplePlayer::Dead()

@@ -432,6 +432,9 @@
     <Image Include="Resource\Maple\snail\snail work.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\Maple\Character\arrow.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />

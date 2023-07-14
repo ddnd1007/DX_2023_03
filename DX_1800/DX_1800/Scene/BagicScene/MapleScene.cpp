@@ -2,8 +2,9 @@
 #include "MapleScene.h"
 
 #include "../../Object/Maple/MaplePlayer.h"
-#include "../../Object/Maple/MapleMap.h"
 #include "../../Object/Maple/MapleMonster.h"
+#include "../../Object/Maple/MapleArrow.h"
+#include "../../Object/Maple/MapleMap.h"
 #include "../../Object/Maple/Meso.h"
 
 MapleScene::MapleScene()
@@ -69,6 +70,22 @@ void MapleScene::Update()
 		_player->GetCollider()->SetColorGreen();
 		_monster->GetRectCollider()->SetColorGreen();
 
+	}
+
+	if (_monster->IsActive() == true)
+	{
+		for (auto arrow : _player->GetBullets())
+		{
+			if (arrow->_isActive == false)
+				continue;
+
+			if (arrow->GetCollider()->IsCollision(_monster->GetCirCollider()))
+			{
+				_monster->TakeDamage(1);
+				_monster->GetCirCollider()->SetColorRed();
+				arrow->_isActive = false;
+			}
+		}
 	}
 }
 

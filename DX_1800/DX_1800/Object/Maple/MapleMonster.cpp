@@ -12,8 +12,8 @@ MapleMonster::MapleMonster()
 
 	CreateAction("snail stand");
 	CreateAction("snail work");
-	CreateAction("snail hit");
-	CreateAction("snail die");
+	CreateAction("snail hit", 0.1, Action::Type::END);
+	CreateAction("snail die", 0.2, Action::Type::END);
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
 	_rectCol->GetTransform()->SetPosition(Vector2(0, -290));
@@ -36,9 +36,9 @@ MapleMonster::~MapleMonster()
 
 void MapleMonster::Update()
 {
+	IsDead();
 	Hit();
 	HitEnd();
-	IsDead();
 
 	_rectCol->Update();
 	_rectTrans->Update();
@@ -84,33 +84,36 @@ void MapleMonster::TakeDamage(int damage)
 	_hp -= damage;
 	_isDamaged = true;
 }
-void MapleMonster::IsDead()
+bool MapleMonster::IsDead()
 {
-	if (_isDead == false)
-		return;
+	if (_hp > 0)
+		return true;
 
 	if (_hp <= 0)
 	{
 		SetAction(State::DEAD);
 	}
-
+	
 }
 
 void MapleMonster::Hit()
 {
-	if (_isDead == true)
+	if (_hp <= 0)
 		return;
 
-	if (_isDamaged == true)
-	SetAction(State::HIT);
+	if (_isDamaged == true && _hp > 0)
+	{
+		SetAction(State::HIT);
+	}
+	
 }
 
 void MapleMonster::HitEnd()
 {
-	if (_isDead == true)
+	if (_hp <= 0)
 		return;
 
-	if (_isDamaged == false)
+	if (_isDamaged == false && _hp > 0)
 		SetAction(State::WORK);
 }
 
