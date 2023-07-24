@@ -7,7 +7,6 @@ class MapleMonster
 		WORK,
 		HIT,
 		DEAD,
-
 	};
 public:
 	MapleMonster();
@@ -31,6 +30,7 @@ public:
 	void SetAction(State state);
 	void TakeDamage(int _hp);
 	void Hit();
+	void Attack();
 	void HitEnd();
 
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
@@ -57,8 +57,8 @@ private:
 	bool _isAttack = false;
 	bool _isDead = false;
 
+	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
-
-	int _damage = 1;
+	int _damage = 1; 
 };
 

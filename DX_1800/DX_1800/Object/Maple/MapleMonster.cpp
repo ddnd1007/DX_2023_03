@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "MapleMonster.h"
 
-
 MapleMonster::MapleMonster()
 {
 	_circleCol = make_shared<CircleCollider>(15);
@@ -12,8 +11,8 @@ MapleMonster::MapleMonster()
 
 	CreateAction("snail stand");
 	CreateAction("snail work");
-	CreateAction("snail hit", 0.1, Action::Type::END);
-	CreateAction("snail die", 0.2, Action::Type::END);
+	CreateAction("snail hit", 0.2, Action::Type::LOOP);
+	CreateAction("snail die", 0.1, Action::Type::END);
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
 	_rectCol->GetTransform()->SetPosition(Vector2(0, -290));
@@ -39,6 +38,17 @@ void MapleMonster::Update()
 	IsDead();
 	Hit();
 	HitEnd();
+
+	if (_isDamaged == true)
+	{
+		_curTime += DELTA_TIME;
+	}
+
+	if (_curTime > _hitTime)
+	{
+		_isDamaged = false;
+		_curTime = 0.0f;
+	}
 
 	_rectCol->Update();
 	_rectTrans->Update();
@@ -93,7 +103,6 @@ bool MapleMonster::IsDead()
 	{
 		SetAction(State::DEAD);
 	}
-	
 }
 
 void MapleMonster::Hit()
@@ -103,9 +112,14 @@ void MapleMonster::Hit()
 
 	if (_isDamaged == true && _hp > 0)
 	{
+		SetLeft();
 		SetAction(State::HIT);
 	}
-	
+}
+
+void MapleMonster::Attack()
+{
+
 }
 
 void MapleMonster::HitEnd()

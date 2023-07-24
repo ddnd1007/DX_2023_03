@@ -6,23 +6,25 @@ MaplePlayer::MaplePlayer()
 {
 	_col = make_shared<CircleCollider>(30);
 	_transform = make_shared<Transform>();
+	_transform->SetPosition(Vector2(0,0));
 
-	_bowSlot = make_shared<Transform>();
-	_bowSlot->SetParent(_transform);
+	_bowCol = make_shared<CircleCollider>(5);
+	_bowTrans = make_shared<Transform>();
+	_bowCol->GetTransform()->SetParent(_col->GetTransform());
+	_bowCol->GetTransform()->SetPosition(Vector2(0, 0));
 
 	CreateAction("stand");
 	CreateAction("work");
 	CreateAction("jump");
 	CreateAction("shoot");
 	CreateAction("dead");
+	CreateAction("lay down");
 
 	_col->GetTransform()->SetPosition(Vector2(0, 0));
 	
 	_transform->SetParent(_col->GetTransform());
-	_transform->SetPosition(Vector2(0, 0));
 
-	_bowTrans = make_shared<Transform>();
-	_bowTrans->SetParent(_bowSlot);
+	_bowTrans->SetParent(_bowCol->GetTransform());
 	_bowTrans->SetPosition(Vector2(0, 0));
 
 	_actions[State::STAND]->Play();
@@ -35,9 +37,7 @@ MaplePlayer::MaplePlayer()
 	{
 		shared_ptr<MapleArrow> arrow = make_shared<MapleArrow>();
 		_arrows.push_back(arrow);
-
 	}
-	
 }
 
 MaplePlayer::~MaplePlayer()
@@ -49,10 +49,11 @@ void MaplePlayer::Update()
 	Input();
 	Jump();
 	Dead();
+	LayDown();
 
 
+	_bowCol->Update();
 	_col->Update();
-	_bowSlot->Update();
 	_transform->Update();
 	_bowTrans->Update();
 	
@@ -71,6 +72,7 @@ void MaplePlayer::Render()
 	_bowTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
+	_bowCol->Render();
 	_col->Render();
 
 	for (auto arrow : _arrows)
@@ -80,7 +82,7 @@ void MaplePlayer::Render()
 
 void MaplePlayer::PostRender()
 {
-	
+
 }
 
 void MaplePlayer::SetAction(State state)
@@ -129,6 +131,7 @@ void MaplePlayer::Input()
 		SetAction(State::WORK);
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
+
 }
 
 void MaplePlayer::Jump()
@@ -164,7 +167,7 @@ void MaplePlayer::Attack()
 	{
 		_arrows[i]->_isActive = true;
 		_arrows[i]->SetDirtection(RIGHT_VECTOR);
-		_arrows[i]->SetPosition(_col->GetWorldPos());
+		_arrows[i]->SetPosition(_bowCol->GetWorldPos());
 	}
 	
 	_isAttack = true;
@@ -182,14 +185,40 @@ void MaplePlayer::EndAttack()
 
 void MaplePlayer::Dead()
 {
-	if (_isDead == false)
+	if (_hp > 0)
 		return;
 
-	if (_isDead == true)
+	if (_hp <= 0)
 	{
 		SetAction(State::DEAD);
 		_isFalling == false && _isAttack == false;
 	}
+}
+
+void MaplePlayer::LayDown()
+{
+	if (_hp <= 0)
+		return;
+
+
+	if (KEY_PRESS('S'))
+	{
+		if (_isFalling == false && _isAttack == false && _hp > 0)
+			SetAction(State::LAYDOWN);
+	}
+	else if (KEY_UP('S'))
+	{
+		SetAction(State::STAND);
+	}
+}
+
+void MaplePlayer::TakeDamage(int damage)
+{
+	if (_isDamaged == true)
+		return;
+
+	_hp -= damage;
+	_isDamaged = true;
 }
 
 void MaplePlayer::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

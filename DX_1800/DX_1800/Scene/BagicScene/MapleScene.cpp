@@ -101,5 +101,6 @@ void MapleScene::Render()
 void MapleScene::PostRender()
 {
 	ImGui::Text("Player HP : %d", _player->_hp);
+	ImGui::SliderInt("Player_HP", (int*)&_player->_hp, 0, 10);
 	ImGui::Text("Snail HP : %d", _monster->_hp);
 }
