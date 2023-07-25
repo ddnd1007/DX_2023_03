@@ -28,10 +28,11 @@ public:
 
 	void SetPosition(Vector2 pos) { _circleCol->GetTransform()->SetPosition(pos); }
 	void SetAction(State state);
-	void TakeDamage(int _hp);
+	void TakeDamage(int damage);
 	void Hit();
-	void Attack();
+	void Attack(shared_ptr<class MaplePlayer> victim);
 	void HitEnd();
+	void Dead();
 
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
@@ -59,6 +60,7 @@ private:
 
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
+	float _deadTime = 0.3f;
 	int _damage = 1; 
 };
 

@@ -74,6 +74,15 @@ void MapleScene::Update()
 
 	if (_monster->IsActive() == true)
 	{
+		if (_monster->GetCirCollider()->IsCollision(_player->GetCollider()))
+		{
+			_player->TakeDamage(1);
+			_player->_isDamaged == false;
+		}
+	}
+
+	if (_monster->IsActive() == true)
+	{
 		for (auto arrow : _player->GetBullets())
 		{
 			if (arrow->_isActive == false)
@@ -100,7 +109,7 @@ void MapleScene::Render()
 
 void MapleScene::PostRender()
 {
-	ImGui::Text("Player HP : %d", _player->_hp);
-	ImGui::SliderInt("Player_HP", (int*)&_player->_hp, 0, 10);
+	ImGui::Text("Player HP : %d", _player->GetHp());
+	ImGui::SliderInt("Player_HP", (int*)&_player->GetHp(), 0, 10);
 	ImGui::Text("Snail HP : %d", _monster->_hp);
 }

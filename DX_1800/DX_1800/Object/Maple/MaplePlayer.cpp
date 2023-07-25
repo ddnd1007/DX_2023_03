@@ -13,8 +13,8 @@ MaplePlayer::MaplePlayer()
 	_bowCol->GetTransform()->SetParent(_col->GetTransform());
 	_bowCol->GetTransform()->SetPosition(Vector2(0, 0));
 
-	CreateAction("stand");
-	CreateAction("work");
+	CreateAction("stand", 0.2f);
+	CreateAction("work", 0.1f);
 	CreateAction("jump");
 	CreateAction("shoot");
 	CreateAction("dead");
@@ -48,9 +48,8 @@ void MaplePlayer::Update()
 {
 	Input();
 	Jump();
-	Dead();
+	IsDead();
 	LayDown();
-
 
 	_bowCol->Update();
 	_col->Update();
@@ -77,7 +76,6 @@ void MaplePlayer::Render()
 
 	for (auto arrow : _arrows)
 		arrow->Render();
-
 }
 
 void MaplePlayer::PostRender()
@@ -113,15 +111,15 @@ void MaplePlayer::Input()
 	if (KEY_PRESS('D'))
 	{
 		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
-
 		SetLeft();
+		_isWork == true;
 	}
 
 	if (KEY_PRESS('A'))
 	{
 		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
-
 		SetRight();
+		_isWork == true;
 	}
 
 	if (_curState == State::JUMP)
@@ -148,7 +146,7 @@ void MaplePlayer::Jump()
 
 	_col->GetTransform()->AddVector2(Vector2(0.0f, _jumpPower * DELTA_TIME));
 
-	if (KEY_DOWN(VK_SPACE) && _isAttack == false && _hp > 0)
+	if (KEY_DOWN(VK_SPACE) && _isAttack == false && IsActive() == true)
 	{
 		_jumpPower = 1200.0f;
 		_isFalling = true;
@@ -157,10 +155,10 @@ void MaplePlayer::Jump()
 
 void MaplePlayer::Attack()
 {
-	if (_isDead == true)
+	if (IsActive() == false)
 		return;
 
-	if (_isFalling == false && _isAttack == false && _isDead == false)
+	if (_isFalling == false && _isAttack == false && IsActive() == true)
 		SetAction(State::SHOOT);
 
 	for (int i = 0; i < 30; i++)
@@ -171,40 +169,39 @@ void MaplePlayer::Attack()
 	}
 	
 	_isAttack = true;
-	
 }
 
 void MaplePlayer::EndAttack()
 {
-	if (_isDead == true)
+	if (IsActive() == false)
 		return;
 
 	_isAttack = false;
 	SetAction(State::STAND);
 }
 
-void MaplePlayer::Dead()
+bool MaplePlayer::IsDead()
 {
-	if (_hp > 0)
-		return;
+	if (IsActive() == true)
+		return _hp > 0;
 
-	if (_hp <= 0)
+	if (IsActive() == false)
 	{
 		SetAction(State::DEAD);
-		_isFalling == false && _isAttack == false;
+		_isFalling == false && _isAttack == false && _isWork == false;
 	}
 }
 
 void MaplePlayer::LayDown()
 {
-	if (_hp <= 0)
+	if (IsActive() == false)
 		return;
-
 
 	if (KEY_PRESS('S'))
 	{
-		if (_isFalling == false && _isAttack == false && _hp > 0)
+		if (_isFalling == false && _isAttack == false && IsActive() == true && _isWork == false)
 			SetAction(State::LAYDOWN);
+			_col->GetTransform()->AddVector2(Vector2(0,-10));
 	}
 	else if (KEY_UP('S'))
 	{

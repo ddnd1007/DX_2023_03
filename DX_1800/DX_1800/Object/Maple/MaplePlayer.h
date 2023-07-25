@@ -28,25 +28,28 @@ public:
 		for (auto sprite : _sprites)
 			sprite->SetRight();
 	}
+	int& GetHp() { return _hp; }
+
 	void SetAction(State state);
 	void Input();
 	void Jump();
 	void Attack();
 	void EndAttack();
-	void Dead();
 	void LayDown();
-	void TakeDamage(int _hp);
+	void TakeDamage(int damage);
 
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	vector<shared_ptr<class MapleArrow>>& GetBullets() { return _arrows; }
 
 	bool IsFalling() { return _isFalling; }
+	bool IsActive() { return _hp > 0; }
+	bool IsDead();
 	bool _isDamaged = false;
+	
 
 	void SetIsFalling(bool value) { _isFalling = value; }
 	void Grounded() { _isFalling = false; }
 
-	int _hp = 100;
 
 private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
@@ -66,9 +69,10 @@ private:
 
 	bool _isFalling;
 	bool _isAttack = false;
-
+	bool _isWork = false;
 	bool _isDead = false;
 
+	int _hp = 100;
 	float _jumpPower = 0.0f;
 	float _maxFalling = 800.0f;
 	float _speed = 200.0f;

@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "MapleMonster.h"
+#include "MaplePlayer.h"
 
 MapleMonster::MapleMonster()
 {
@@ -63,6 +64,12 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
+	if (IsActive() == false)
+	{
+		Dead();
+		IsDead();
+		return;
+	}
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -94,41 +101,57 @@ void MapleMonster::TakeDamage(int damage)
 	_hp -= damage;
 	_isDamaged = true;
 }
+
 bool MapleMonster::IsDead()
 {
-	if (_hp > 0)
-		return true;
-
-	if (_hp <= 0)
+	if (IsActive() == true)
+		return false;
+	else
 	{
 		SetAction(State::DEAD);
+		return true;
 	}
 }
 
 void MapleMonster::Hit()
 {
-	if (_hp <= 0)
+	if (IsActive() == false)
 		return;
 
-	if (_isDamaged == true && _hp > 0)
+	if (_isDamaged == true && IsActive() == true)
 	{
 		SetLeft();
 		SetAction(State::HIT);
 	}
 }
 
-void MapleMonster::Attack()
+void MapleMonster::Attack(shared_ptr<class MaplePlayer> victim)
 {
+	if (IsActive() == false)
+		return;
+	if (_circleCol->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
+		return;
 
+	victim->TakeDamage(_damage);
 }
 
 void MapleMonster::HitEnd()
 {
-	if (_hp <= 0)
+	if (IsActive() == false)
 		return;
 
-	if (_isDamaged == false && _hp > 0)
+	if (_isDamaged == false && IsActive() == true)
 		SetAction(State::WORK);
+}
+
+void MapleMonster::Dead()
+{
+	if (IsActive() == true)
+		return;
+	if (_curState == State::DEAD)
+		return;
+
+	_curState == State::DEAD;
 }
 
 void MapleMonster::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
