@@ -7,7 +7,8 @@ MapleMonster::MapleMonster()
 	_circleCol = make_shared<CircleCollider>(15);
 	_circleTrans = make_shared<Transform>();
 
-	_rectCol = make_shared<RectCollider>(Vector2(300.0f, 100.0f));
+	_rectCol = make_shared<RectCollider>(Vector2(100.0f, 100.0f));
+	_rectCol->GetTransform()->SetParent(_circleCol->GetTransform());
 	_rectTrans = make_shared<Transform>();
 
 	CreateAction("snail stand");
@@ -15,12 +16,12 @@ MapleMonster::MapleMonster()
 	CreateAction("snail hit", 0.2, Action::Type::LOOP);
 	CreateAction("snail die", 0.1, Action::Type::END);
 	
-	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
-	_rectCol->GetTransform()->SetPosition(Vector2(0, -290));
+	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
+	_rectCol->GetTransform()->SetPosition(Vector2(0,0));
 
 	_circleTrans->SetParent(_circleCol->GetTransform());
-	_rectTrans->SetParent(_rectCol->GetTransform());
 	_circleTrans->SetPosition(Vector2(0, 0));
+	_rectTrans->SetParent(_rectCol->GetTransform());
 	_rectTrans->SetPosition(Vector2(0, 0));
 
 	_actions[State::STAND]->Play();
@@ -152,6 +153,17 @@ void MapleMonster::Dead()
 		return;
 
 	_curState == State::DEAD;
+}
+
+int MapleMonster::getRandomNumber(int min, int max)
+{
+	static const double fraction = 1.0 / (RAND_MAX + 1.0);
+	static bool seedInitialized = false;
+	if (!seedInitialized) {
+		srand(static_cast<unsigned int>(std::time(0)));
+		seedInitialized = true;
+	}
+	return min + static_cast<int>((max - min + 1) * (std::rand() * fraction));
 }
 
 void MapleMonster::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

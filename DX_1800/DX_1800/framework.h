@@ -21,6 +21,8 @@
 #include <algorithm>
 #include <wrl/client.h>
 #include <functional>
+#include <random>
+#include <ctime>
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
