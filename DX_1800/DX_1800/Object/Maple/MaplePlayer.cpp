@@ -164,8 +164,8 @@ void MaplePlayer::Attack()
 	for (int i = 0; i < 30; i++)
 	{
 		_arrows[i]->_isActive = true;
-		_arrows[i]->SetDirtection(RIGHT_VECTOR);
 		_arrows[i]->SetPosition(_bowCol->GetWorldPos());
+		_arrows[i]->SetDirtection(RIGHT_VECTOR);
 	}
 	
 	_isAttack = true;

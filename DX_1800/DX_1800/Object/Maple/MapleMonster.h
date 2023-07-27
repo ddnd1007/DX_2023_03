@@ -33,7 +33,8 @@ public:
 	void Attack(shared_ptr<class MaplePlayer> victim);
 	void HitEnd();
 	void Dead();
-
+	void Move(shared_ptr<class MaplePlayer> player);
+	void ChangeState(State nextState, int duration);
 	int getRandomNumber(int min, int max);
 
 
@@ -64,7 +65,9 @@ private:
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
 	float _deadTime = 0.3f;
+	float _speed = 50.0f;
 
+	const float HIT_ANIMATION_DURATION_MS = 3000;
 	int _damage = 1; 
 	int posX;
 	int posY;

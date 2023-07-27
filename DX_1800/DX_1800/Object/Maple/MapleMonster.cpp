@@ -29,6 +29,8 @@ MapleMonster::MapleMonster()
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
+
+	
 }
 
 MapleMonster::~MapleMonster()
@@ -119,9 +121,11 @@ void MapleMonster::Hit()
 	if (IsActive() == false)
 		return;
 
-	if (_isDamaged == true && IsActive() == true)
+	if (_isDamaged && _curState != State::HIT)
 	{
 		SetLeft();
+
+		ChangeState(State::STAND, HIT_ANIMATION_DURATION_MS);
 		SetAction(State::HIT);
 	}
 }
@@ -152,8 +156,45 @@ void MapleMonster::Dead()
 	if (_curState == State::DEAD)
 		return;
 
-	_curState == State::DEAD;
+	SetAction(State::DEAD);
 }
+
+void MapleMonster::Move(shared_ptr<class MaplePlayer> player)
+{
+	if (!IsActive())
+		return;
+
+	if (_curState == State::HIT || _curState == State::DEAD || _isDamaged)
+		return;
+
+	if (player->GetCollider()->IsCollision(_circleCol))
+		SetAction(State::WORK);
+
+	if (player->GetCollider()->IsCollision(_rectCol))
+	{
+		_circleCol->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
+		SetRight();
+	}
+	else
+	{
+		_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
+		SetLeft();
+	}
+}
+
+void MapleMonster::ChangeState(State nextState, int duration)
+{
+	if (_curState == _oldState)
+		return;
+
+	_curState = State::HIT; // 상태 변경을 표시하고 피격 애니메이션을 재생할 수 있도록 한다.
+
+	// 일정 시간이 지난 후에 상태를 변경하는 타이머 시작
+	std::this_thread::sleep_for(std::chrono::milliseconds(duration));
+
+	_curState = nextState; // 피격 애니메이션의 재생 시간이 지나면 원래 상태로 돌아감
+}
+
 
 int MapleMonster::getRandomNumber(int min, int max)
 {

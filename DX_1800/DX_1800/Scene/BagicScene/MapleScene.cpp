@@ -79,7 +79,6 @@ void MapleScene::Update()
 			_monster[i]->GetRectCollider()->SetColorGreen();
 
 		}
-
 	}
 
 	for (int i = 0; i < 5; i++)
@@ -88,7 +87,7 @@ void MapleScene::Update()
 		{
 			if (_monster[i]->GetCirCollider()->IsCollision(_player->GetCollider()))
 			{
-				_player->TakeDamage(1);
+				_player->TakeDamage(3);
 				_player->_isDamaged == false;
 			}
 		}
@@ -112,6 +111,17 @@ void MapleScene::Update()
 			}
 		}
 	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (_monster[i]->IsActive() == false)
+			return;
+		
+		if (_monster[i]->GetRectCollider()->IsCollision(_player->GetCollider()))
+		{
+			_monster[i]->Move(_player);
+		}
+	}
 }
 
 void MapleScene::Render()
@@ -127,11 +137,11 @@ void MapleScene::Render()
 
 void MapleScene::PostRender()
 {
-	ImGui::Text("Player HP : %d", _player->GetHp());
-	ImGui::SliderInt("Player_HP", (int*)&_player->GetHp(), 0, 10);
+	//ImGui::Text("Player HP : %d", _player->GetHp());
+	ImGui::SliderInt("Player_HP", (int*)&_player->GetHp(), 0, 100);
 	for (int i = 0; i < 5; i++)
 	{
-		ImGui::Text("Snail HP : %d", _monster[i]->_hp);
+		//ImGui::Text("Snail HP : %d", _monster[i]->_hp);
 		ImGui::SliderInt("Snail_HP", (int*)&_monster[i]->_hp, 0, 3);
 	}
 }
