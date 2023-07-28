@@ -83,12 +83,15 @@ void MapleScene::Update()
 
 	for (int i = 0; i < 5; i++)
 	{
+		
+
 		if (_monster[i]->IsActive() == true)
 		{
 			if (_monster[i]->GetCirCollider()->IsCollision(_player->GetCollider()))
 			{
+				
 				_player->TakeDamage(3);
-				_player->_isDamaged == false;
+				//_player->_isDamaged == false;
 			}
 		}
 	}
@@ -115,6 +118,9 @@ void MapleScene::Update()
 	for (int i = 0; i < 5; i++)
 	{
 		if (_monster[i]->IsActive() == false)
+			return;
+
+		if (_player->IsActive() == false)
 			return;
 		
 		if (_monster[i]->GetRectCollider()->IsCollision(_player->GetCollider()))

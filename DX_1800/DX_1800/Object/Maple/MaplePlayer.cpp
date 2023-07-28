@@ -11,7 +11,7 @@ MaplePlayer::MaplePlayer()
 	_bowCol = make_shared<CircleCollider>(5);
 	_bowTrans = make_shared<Transform>();
 	_bowCol->GetTransform()->SetParent(_col->GetTransform());
-	_bowCol->GetTransform()->SetPosition(Vector2(0, 0));
+	_bowCol->GetTransform()->SetPosition(Vector2(0,0));
 
 	CreateAction("stand", 0.2f);
 	CreateAction("work", 0.1f);
@@ -25,7 +25,7 @@ MaplePlayer::MaplePlayer()
 	_transform->SetParent(_col->GetTransform());
 
 	_bowTrans->SetParent(_bowCol->GetTransform());
-	_bowTrans->SetPosition(Vector2(0, 0));
+	_bowTrans->SetPosition(Vector2(0,0));
 
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
@@ -63,6 +63,15 @@ void MaplePlayer::Update()
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
+
+	if (_isInvincible)
+	{
+		_invincibleTimer -= DELTA_TIME;
+		if (_invincibleTimer <= 0.0f)
+		{
+			_isInvincible = false; 
+		}
+	}
 }
 
 void MaplePlayer::Render()
@@ -114,14 +123,12 @@ void MaplePlayer::Input()
 		SetLeft();
 		_isWork == true;
 	}
-
 	if (KEY_PRESS('A'))
 	{
 		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
 		SetRight();
 		_isWork == true;
 	}
-
 	if (_curState == State::JUMP)
 		return;
 
@@ -129,7 +136,6 @@ void MaplePlayer::Input()
 		SetAction(State::WORK);
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
-
 }
 
 void MaplePlayer::Jump()
@@ -158,17 +164,27 @@ void MaplePlayer::Attack()
 	if (IsActive() == false)
 		return;
 
-	if (_isFalling == false && _isAttack == false && IsActive() == true)
+	if (_isFalling == false && _isAttack == false)
 		SetAction(State::SHOOT);
 
 	for (int i = 0; i < 30; i++)
 	{
 		_arrows[i]->_isActive = true;
 		_arrows[i]->SetPosition(_bowCol->GetWorldPos());
-		_arrows[i]->SetDirtection(RIGHT_VECTOR);
+
+		if (_col->GetWorldPos().x < _bowCol->GetWorldPos().x)
+		{
+			_arrows[i]->SetPosition(_bowCol->GetWorldPos());
+			_arrows[i]->SetDirtection(-RIGHT_VECTOR);
+		}
+		else
+		{
+			_arrows[i]->SetPosition(_bowCol->GetWorldPos()); 
+			_arrows[i]->SetDirtection(RIGHT_VECTOR); 
+		}
+
+		_isAttack = true;
 	}
-	
-	_isAttack = true;
 }
 
 void MaplePlayer::EndAttack()
@@ -200,8 +216,9 @@ void MaplePlayer::LayDown()
 	if (KEY_PRESS('S'))
 	{
 		if (_isFalling == false && _isAttack == false && IsActive() == true && _isWork == false)
+			_col->GetTransform()->AddVector2(Vector2(0, -10));
 			SetAction(State::LAYDOWN);
-			_col->GetTransform()->AddVector2(Vector2(0,-10));
+			
 	}
 	else if (KEY_UP('S'))
 	{
@@ -211,11 +228,16 @@ void MaplePlayer::LayDown()
 
 void MaplePlayer::TakeDamage(int damage)
 {
-	if (_isDamaged == true)
+	if (IsActive() == false)
 		return;
+	 
+	if (!_isInvincible)
+	{
 
-	_hp -= damage;
-	_isDamaged = true;
+		_hp -= damage;
+		_isInvincible = true;
+		_invincibleTimer = _invincibleDuration;
+	}
 }
 
 void MaplePlayer::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
