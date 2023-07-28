@@ -29,8 +29,6 @@ MapleMonster::MapleMonster()
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
-
-	
 }
 
 MapleMonster::~MapleMonster()
@@ -63,6 +61,15 @@ void MapleMonster::Update()
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
+
+	if (_isInvincible)
+	{
+		_invincibleTimer -= DELTA_TIME;
+		if (_invincibleTimer <= 0.0f)
+		{
+			_isInvincible = false;
+		}
+	}
 }
 
 void MapleMonster::Render()
@@ -101,8 +108,12 @@ void MapleMonster::TakeDamage(int damage)
 	if (_isDamaged == true)
 		return;
 
-	_hp -= damage;
-	_isDamaged = true;
+	if (!_isInvincible)
+	{
+		_hp -= damage;
+		_isInvincible = true;
+		_invincibleTimer = _invincibleDuration;
+	}
 }
 
 bool MapleMonster::IsDead()
@@ -121,23 +132,21 @@ void MapleMonster::Hit()
 	if (IsActive() == false)
 		return;
 
-	if (_isDamaged && _curState != State::HIT)
+	if (_isDamaged == true && _curState != State::HIT)
 	{
-		SetLeft();
-
-		ChangeState(State::STAND, HIT_ANIMATION_DURATION_MS);
+		SetRight();
 		SetAction(State::HIT);
 	}
 }
 
-void MapleMonster::Attack(shared_ptr<class MaplePlayer> victim)
+void MapleMonster::Attack(shared_ptr<class MaplePlayer> player)
 {
 	if (IsActive() == false)
 		return;
-	if (_circleCol->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
+	if (_circleCol->IsCollision(player->GetCollider()) == false || player->IsDead() == true)
 		return;
 
-	victim->TakeDamage(_damage);
+	player->TakeDamage(_damage);
 }
 
 void MapleMonster::HitEnd()
@@ -164,7 +173,7 @@ void MapleMonster::Move(shared_ptr<class MaplePlayer> player)
 	if (!IsActive())
 		return;
 
-	if (_curState == State::HIT || _curState == State::DEAD || _isDamaged)
+	if (_curState == State::HIT || _curState == State::DEAD || _isDamaged == true)
 		return;
 
 	if (player->GetCollider()->IsCollision(_circleCol))
@@ -172,13 +181,16 @@ void MapleMonster::Move(shared_ptr<class MaplePlayer> player)
 
 	if (player->GetCollider()->IsCollision(_rectCol))
 	{
-		_circleCol->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
-		SetRight();
-	}
-	else
-	{
-		_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
-		SetLeft();
+		if (player->GetPosition().x > _rectCol->GetTransform()->GetWorldPos().x)
+		{
+			_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
+			SetLeft();
+		}
+		else
+		{
+			_circleCol->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
+			SetRight();
+		}
 	}
 }
 
@@ -194,7 +206,6 @@ void MapleMonster::ChangeState(State nextState, int duration)
 
 	_curState = nextState; // 피격 애니메이션의 재생 시간이 지나면 원래 상태로 돌아감
 }
-
 
 int MapleMonster::getRandomNumber(int min, int max)
 {

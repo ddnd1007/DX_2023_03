@@ -15,6 +15,7 @@ public:
 
 	void Attack(shared_ptr<class MapleMonster> victim);
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
+	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
 
 
 	bool _isActive;

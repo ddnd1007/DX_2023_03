@@ -37,6 +37,7 @@ public:
 	void EndAttack();
 	void LayDown();
 	void TakeDamage(int damage);
+	Vector2 GetPosition() {return _col->GetTransform()->GetPos();}
 
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	vector<shared_ptr<class MapleArrow>>& GetBullets() { return _arrows; }
@@ -71,11 +72,15 @@ private:
 	bool _isAttack = false;
 	bool _isWork = false;
 	bool _isDead = false;
+	bool _isInvincible;
 
-	int _hp = 100;
+	float _invincibleTimer;
+	const float _invincibleDuration = 1.0f;
 	float _jumpPower = 0.0f;
 	float _maxFalling = 800.0f;
 	float _speed = 200.0f;
+
+	int _hp = 100;
 
 
 };
