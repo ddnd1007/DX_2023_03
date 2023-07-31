@@ -7,7 +7,7 @@ MapleMonster::MapleMonster()
 	_circleCol = make_shared<CircleCollider>(15);
 	_circleTrans = make_shared<Transform>();
 
-	_rectCol = make_shared<RectCollider>(Vector2(100.0f, 100.0f));
+	_rectCol = make_shared<RectCollider>(Vector2(150.0f, 100.0f));
 	_rectCol->GetTransform()->SetParent(_circleCol->GetTransform());
 	_rectTrans = make_shared<Transform>();
 
@@ -38,19 +38,7 @@ MapleMonster::~MapleMonster()
 void MapleMonster::Update()
 {
 	IsDead();
-	Hit();
 	HitEnd();
-
-	if (_isDamaged == true)
-	{
-		_curTime += DELTA_TIME;
-	}
-
-	if (_curTime > _hitTime)
-	{
-		_isDamaged = false;
-		_curTime = 0.0f;
-	}
 
 	_rectCol->Update();
 	_rectTrans->Update();
@@ -75,11 +63,8 @@ void MapleMonster::Update()
 void MapleMonster::Render()
 {
 	if (IsActive() == false)
-	{
-		Dead();
-		IsDead();
 		return;
-	}
+	
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -122,22 +107,12 @@ bool MapleMonster::IsDead()
 		return false;
 	else
 	{
+		//DeathAnimation();
 		SetAction(State::DEAD);
 		return true;
-	}
+	};
 }
 
-void MapleMonster::Hit()
-{
-	if (IsActive() == false)
-		return;
-
-	if (_isDamaged == true && _curState != State::HIT)
-	{
-		SetRight();
-		SetAction(State::HIT);
-	}
-}
 
 void MapleMonster::Attack(shared_ptr<class MaplePlayer> player)
 {
@@ -149,6 +124,30 @@ void MapleMonster::Attack(shared_ptr<class MaplePlayer> player)
 	player->TakeDamage(_damage);
 }
 
+void MapleMonster::Hit(shared_ptr<class MaplePlayer> player)
+{
+	if (IsActive() == false)
+		return;
+
+	if (_isDamaged == true && _curState != State::HIT)
+	
+
+	if (player->GetCollider()->IsCollision(_circleCol))
+	{
+		if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
+		{
+			SetLeft();
+			SetAction(State::HIT);
+
+		}
+		else
+		{
+			SetRight();
+			SetAction(State::HIT);
+		}
+	}
+}
+
 void MapleMonster::HitEnd()
 {
 	if (IsActive() == false)
@@ -158,14 +157,9 @@ void MapleMonster::HitEnd()
 		SetAction(State::WORK);
 }
 
-void MapleMonster::Dead()
+void MapleMonster::DeathAnimation()
 {
-	if (IsActive() == true)
-		return;
-	if (_curState == State::DEAD)
-		return;
-
-	SetAction(State::DEAD);
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 void MapleMonster::Move(shared_ptr<class MaplePlayer> player)
@@ -199,13 +193,14 @@ void MapleMonster::ChangeState(State nextState, int duration)
 	if (_curState == _oldState)
 		return;
 
-	_curState = State::HIT; // 상태 변경을 표시하고 피격 애니메이션을 재생할 수 있도록 한다.
+	_curState = State::HIT;
 
-	// 일정 시간이 지난 후에 상태를 변경하는 타이머 시작
 	std::this_thread::sleep_for(std::chrono::milliseconds(duration));
 
-	_curState = nextState; // 피격 애니메이션의 재생 시간이 지나면 원래 상태로 돌아감
+	_curState = nextState; 
 }
+
+
 
 int MapleMonster::getRandomNumber(int min, int max)
 {

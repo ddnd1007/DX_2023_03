@@ -4,10 +4,10 @@
 MapleMap::MapleMap()
 {
 	_quad = make_shared<Quad>(L"Resource/Maple/map/chobomap.png");
-	_col = make_shared<RectCollider>(Vector2(2000,30));
+	_col = make_shared<RectCollider>(Vector2(2000,500));
 	_transform = make_shared<Transform>();
 	_transform->SetParent(_col->GetTransform());
-	_transform->SetPosition(Vector2(0.0f, 200.0f));
+	_transform->SetPosition(Vector2(0.0f,440.0f));
 }
 
 MapleMap::~MapleMap()

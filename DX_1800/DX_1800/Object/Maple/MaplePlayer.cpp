@@ -11,7 +11,7 @@ MaplePlayer::MaplePlayer()
 	_bowCol = make_shared<CircleCollider>(5);
 	_bowTrans = make_shared<Transform>();
 	_bowCol->GetTransform()->SetParent(_col->GetTransform());
-	_bowCol->GetTransform()->SetPosition(Vector2(0,0));
+	
 
 	CreateAction("stand", 0.2f);
 	CreateAction("work", 0.1f);
@@ -119,12 +119,14 @@ void MaplePlayer::Input()
 	}
 	if (KEY_PRESS('D'))
 	{
+		_bowCol->GetTransform()->SetPosition(Vector2(1, 0));
 		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
 		SetLeft();
 		_isWork == true;
 	}
 	if (KEY_PRESS('A'))
 	{
+		_bowCol->GetTransform()->SetPosition(Vector2(-1, 0));
 		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
 		SetRight();
 		_isWork == true;
@@ -172,7 +174,7 @@ void MaplePlayer::Attack()
 		_arrows[i]->_isActive = true;
 		_arrows[i]->SetPosition(_bowCol->GetWorldPos());
 
-		if (_col->GetWorldPos().x < _bowCol->GetWorldPos().x)
+		if (_col->GetWorldPos().x > _bowCol->GetWorldPos().x)
 		{
 			_arrows[i]->SetPosition(_bowCol->GetWorldPos());
 			_arrows[i]->SetDirtection(-RIGHT_VECTOR);
@@ -216,8 +218,10 @@ void MaplePlayer::LayDown()
 	if (KEY_PRESS('S'))
 	{
 		if (_isFalling == false && _isAttack == false && IsActive() == true && _isWork == false)
-			_col->GetTransform()->AddVector2(Vector2(0, -10));
+		{
 			SetAction(State::LAYDOWN);
+			_col->GetTransform()->AddVector2(Vector2(0, 0));
+		}
 			
 	}
 	else if (KEY_UP('S'))

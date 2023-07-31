@@ -29,10 +29,10 @@ public:
 	void SetPosition(Vector2 pos) { _circleCol->GetTransform()->SetPosition(pos); }
 	void SetAction(State state);
 	void TakeDamage(int damage);
-	void Hit();
+	void Hit(shared_ptr<class MaplePlayer> player);
 	void Attack(shared_ptr<class MaplePlayer> victim);
 	void HitEnd();
-	void Dead();
+	void DeathAnimation();
 	void Move(shared_ptr<class MaplePlayer> player);
 	void ChangeState(State nextState, int duration);
 	int getRandomNumber(int min, int max);

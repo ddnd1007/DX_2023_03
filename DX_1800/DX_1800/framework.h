@@ -10,6 +10,7 @@
 #include <windows.h>
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
+#include <iostream>
 #include <malloc.h>
 #include <memory.h>
 #include <time.h>
@@ -25,6 +26,8 @@
 #include <ctime>
 #include <chrono>
 #include <thread>
+
+
 
 #include <d3d11.h>
 #include <d3dcompiler.h>

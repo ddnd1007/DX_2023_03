@@ -44,6 +44,11 @@ void MapleScene::Update()
 	
 	for (int i = 0; i < 5; i++)
 	{
+		_monster[i]->Hit(_player);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
 		_map->GetCollider()->Block(_monster[i]->GetCirCollider());
 	}
 
@@ -108,6 +113,7 @@ void MapleScene::Update()
 				if (arrow->GetCollider()->IsCollision(_monster[i]->GetCirCollider()))
 				{
 					_monster[i]->TakeDamage(1);
+					_monster[i]->Hit(_player);
 					_monster[i]->GetCirCollider()->SetColorRed();
 					arrow->_isActive = false;
 				}
