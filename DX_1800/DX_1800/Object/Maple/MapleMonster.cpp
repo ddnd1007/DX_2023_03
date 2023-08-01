@@ -14,7 +14,7 @@ MapleMonster::MapleMonster()
 	CreateAction("snail stand");
 	CreateAction("snail work");
 	CreateAction("snail hit", 0.2, Action::Type::LOOP);
-	CreateAction("snail die", 0.1, Action::Type::END);
+	CreateAction("snail die", 0.12, Action::Type::END);
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
 	_rectCol->GetTransform()->SetPosition(Vector2(0,0));
@@ -37,7 +37,10 @@ MapleMonster::~MapleMonster()
 
 void MapleMonster::Update()
 {
-	IsDead();
+	if (IsDead())
+	{
+		DeathAnimation();
+	}
 	HitEnd();
 
 	_rectCol->Update();
@@ -62,7 +65,7 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
-	if (IsActive() == false)
+	if(DeathAnimation() == true)
 		return;
 	
 	_rectTrans->SetWorldBuffer(0);
@@ -103,13 +106,13 @@ void MapleMonster::TakeDamage(int damage)
 
 bool MapleMonster::IsDead()
 {
-	if (IsActive() == true)
-		return false;
+	if (IsActive() == false)
+	{
+		return true;
+	}
 	else
 	{
-		//DeathAnimation();
-		SetAction(State::DEAD);
-		return true;
+		return false;
 	};
 }
 
@@ -157,9 +160,22 @@ void MapleMonster::HitEnd()
 		SetAction(State::WORK);
 }
 
-void MapleMonster::DeathAnimation()
+bool MapleMonster::DeathAnimation()
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	if (IsActive() == false)
+	{
+		_deathAnimationTimer += DELTA_TIME;
+
+		if (_deathAnimationTimer >= _deathAnimationDuration)
+		{
+			SetAction(State::DEAD);
+			_deathAnimationTimer = 0.0f;
+			IsActive() == false;
+		}
+		return true;
+	}
+	//_deathAnimationTimer = 0.0f;
+	//IsActive() == false;
 }
 
 void MapleMonster::Move(shared_ptr<class MaplePlayer> player)
