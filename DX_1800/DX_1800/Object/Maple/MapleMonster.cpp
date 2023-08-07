@@ -37,10 +37,9 @@ MapleMonster::~MapleMonster()
 
 void MapleMonster::Update()
 {
-	if (IsDead())
-	{
-		DeathAnimation();
-	}
+	if (DeathAnimation() == true)
+		return;
+
 	HitEnd();
 
 	_rectCol->Update();
@@ -65,9 +64,6 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
-	if(DeathAnimation() == true)
-		return;
-	
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -96,7 +92,7 @@ void MapleMonster::TakeDamage(int damage)
 	if (_isDamaged == true)
 		return;
 
-	if (!_isInvincible)
+	if (!_isInvincible)	
 	{
 		_hp -= damage;
 		_isInvincible = true;
@@ -170,12 +166,13 @@ bool MapleMonster::DeathAnimation()
 		{
 			SetAction(State::DEAD);
 			_deathAnimationTimer = 0.0f;
-			IsActive() == false;
+			_isActive = false;
+			_curState = (State::DEAD);
+			return true;
 		}
-		return true;
+		return false;
 	}
-	//_deathAnimationTimer = 0.0f;
-	//IsActive() == false;
+	return false;
 }
 
 void MapleMonster::Move(shared_ptr<class MaplePlayer> player)

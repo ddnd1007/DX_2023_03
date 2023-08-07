@@ -61,11 +61,12 @@ private:
 
 	bool _isAttack = false;
 	bool _isDead = false;
+	bool _isActive = false;
 	bool _isInvincible;
 
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
-	const float _deathAnimationDuration = 0.1f;
+	const float _deathAnimationDuration = 0.2f;
 	float _deathAnimationTimer = 0.0f;
 	const float _speed = 50.0f;
 	const float _invincibleDuration = 1.0f;
