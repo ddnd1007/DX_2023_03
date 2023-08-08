@@ -10,8 +10,10 @@ public:
 	virtual void PostRender() override;
 
 private:
-	shared_ptr<class MaplePlayer> _player;
+	//shared_ptr<class MaplePlayer> _player;
+	shared_ptr<class PlayerManager> _player;
 	shared_ptr<class MapleMap> _map;
+	shared_ptr<class MaplePotar> _potar;
 	vector<shared_ptr<class MapleMonster>> _monster;
 
 	//shared_ptr<class Meso> _meso;

@@ -7,6 +7,8 @@ public:
 
 	void Update();
 	void Render();
+
+	void SetPosition(Vector2 pos) { _col->GetTransform()->SetPosition(pos); }
 	
 
 private:

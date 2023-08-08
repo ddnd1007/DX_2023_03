@@ -151,11 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Maple\MapleBossMap.h" />
     <ClInclude Include="Object\Maple\MaplePotar.h" />
     <ClInclude Include="Object\Maple\MapleArrow.h" />
     <ClInclude Include="Object\Maple\MapleMonster.h" />
     <ClInclude Include="Object\Maple\MapleMap.h" />
-    <ClInclude Include="Object\Maple\MaplePlayer.h" />
     <ClInclude Include="Object\UI\HpBar.h" />
     <ClInclude Include="Object\UI\Button.h" />
     <ClInclude Include="Framework\Camera\Camera.h" />
@@ -185,6 +185,7 @@
     <ClInclude Include="Framework\Render\GlobalBuffer.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
+    <ClInclude Include="Object\Maple\PlayerManager.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Object\BasicObject\Quad.h" />
     <ClInclude Include="Resource.h" />
@@ -209,11 +210,11 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Maple\MapleBossMap.cpp" />
     <ClCompile Include="Object\Maple\MaplePotar.cpp" />
     <ClCompile Include="Object\Maple\MapleArrow.cpp" />
     <ClCompile Include="Object\Maple\MapleMonster.cpp" />
     <ClCompile Include="Object\Maple\MapleMap.cpp" />
-    <ClCompile Include="Object\Maple\MaplePlayer.cpp" />
     <ClCompile Include="Object\UI\HpBar.cpp" />
     <ClCompile Include="Object\UI\Button.cpp" />
     <ClCompile Include="Framework\Camera\Camera.cpp" />
@@ -243,6 +244,7 @@
     </ClCompile>
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
+    <ClCompile Include="Object\Maple\PlayerManager.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />

@@ -113,7 +113,7 @@ bool MapleMonster::IsDead()
 }
 
 
-void MapleMonster::Attack(shared_ptr<class MaplePlayer> player)
+void MapleMonster::Attack(shared_ptr<class PlayerManager> player)
 {
 	if (IsActive() == false)
 		return;
@@ -123,7 +123,7 @@ void MapleMonster::Attack(shared_ptr<class MaplePlayer> player)
 	player->TakeDamage(_damage);
 }
 
-void MapleMonster::Hit(shared_ptr<class MaplePlayer> player)
+void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 {
 	if (IsActive() == false)
 		return;
@@ -175,7 +175,7 @@ bool MapleMonster::DeathAnimation()
 	return false;
 }
 
-void MapleMonster::Move(shared_ptr<class MaplePlayer> player)
+void MapleMonster::Move(shared_ptr<class PlayerManager> player)
 {
 	if (!IsActive())
 		return;

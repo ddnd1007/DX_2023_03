@@ -109,6 +109,7 @@ using namespace Microsoft::WRL;
 
 // GameObj
 #include "Object/Obj/Planet.h"
+#include "Object/Maple/PlayerManager.h"
 
 // Scene
 #include "Scene/Scene.h"

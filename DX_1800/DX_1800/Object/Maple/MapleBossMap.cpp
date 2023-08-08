@@ -1,38 +1,36 @@
 #include "framework.h"
-#include "MapleMap.h"
-#include "MaplePotar.h"
+#include "MapleBossMap.h"
 
-MapleMap::MapleMap()
+MapleBossMap::MapleBossMap()
 {
-	_quad = make_shared<Quad>(L"Resource/Maple/map/chobomap.png");
-	_col = make_shared<RectCollider>(Vector2(2000,500));
+	//_quad = make_shared<Quad>(L"Resource/Maple/map/chobomap.png");
+	_col = make_shared<RectCollider>(Vector2(2000, 500));
 	_transform = make_shared<Transform>();
 	_transform->SetParent(_col->GetTransform());
-	_transform->SetPosition(Vector2(0.0f,440.0f));
+	_transform->SetPosition(Vector2(0.0f, 440.0f));
 }
 
-MapleMap::~MapleMap()
+MapleBossMap::~MapleBossMap()
 {
 }
 
-void MapleMap::Update()
+void MapleBossMap::Update()
 {
-	
 	_col->Update();
 	_transform->Update();
-	
-	_quad->Update();
+
+	//_quad->Update();
 }
 
-void MapleMap::Render()
+void MapleBossMap::Render()
 {
 	_transform->SetWorldBuffer(0);
-	_quad->Render();
-	
+	//_quad->Render();
+
 	_col->Render();
 }
 
-Vector2 MapleMap::leftBottom()
+Vector2 MapleBossMap::leftBottom()
 {
 	Vector2 quadHalfSize = _quad->GetSize() * 0.5f;
 
@@ -42,7 +40,7 @@ Vector2 MapleMap::leftBottom()
 	return Vector2(x, y);
 }
 
-Vector2 MapleMap::rightTop()
+Vector2 MapleBossMap::rightTop()
 {
 	Vector2 quadHalfSize = _quad->GetSize() * 0.5f;
 

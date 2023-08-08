@@ -168,9 +168,6 @@
     <ClInclude Include="Object\Maple\MapleMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Maple\MaplePlayer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\BagicScene\MapleScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -181,6 +178,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Maple\MaplePotar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\PlayerManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\MapleBossMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -299,9 +302,6 @@
     <ClCompile Include="Object\Maple\MapleMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Maple\MaplePlayer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\BagicScene\MapleScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -312,6 +312,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Maple\MaplePotar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\PlayerManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\MapleBossMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

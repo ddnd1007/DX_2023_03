@@ -1,6 +1,8 @@
 #pragma once
-class MaplePlayer: public PlayerManager
+class PlayerManager
 {
+public:
+
 	enum State
 	{
 		STAND,
@@ -10,13 +12,33 @@ class MaplePlayer: public PlayerManager
 		DEAD,
 		LAYDOWN
 	};
-public:
-	MaplePlayer();
-	~MaplePlayer();
+
+	PlayerManager();
+	~PlayerManager();
+
+
+	static void Create()
+	{
+		if (_instance == nullptr)
+			_instance = new PlayerManager();
+	}
+
+	static void Delete()
+	{
+		if (_instance != nullptr)
+			delete _instance;
+	}
+
+	static PlayerManager* GetInstance()
+	{
+		if (_instance != nullptr)
+			return _instance;
+		return nullptr;
+	}
+
 
 	void Update();
 	void Render();
-	void PostRender();
 
 	void SetLeft()
 	{
@@ -37,7 +59,7 @@ public:
 	void EndAttack();
 	void LayDown();
 	void TakeDamage(int damage);
-	Vector2 GetPosition() {return _col->GetTransform()->GetPos();}
+	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
 
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	vector<shared_ptr<class MapleArrow>>& GetBullets() { return _arrows; }
@@ -46,18 +68,19 @@ public:
 	bool IsActive() { return _hp > 0; }
 	bool IsDead();
 	bool _isDamaged = false;
-	
+
 
 	void SetIsFalling(bool value) { _isFalling = value; }
 	void Grounded() { _isFalling = false; }
 
-
 private:
+	static PlayerManager* _instance;
+
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 
 	shared_ptr<CircleCollider> _col;
 	shared_ptr<CircleCollider> _bowCol;
-	
+
 	shared_ptr<Transform> _transform;
 	shared_ptr<Transform> _bowTrans;
 
@@ -81,7 +104,5 @@ private:
 	float _speed = 200.0f;
 
 	int _hp = 100;
-
-
 };
 

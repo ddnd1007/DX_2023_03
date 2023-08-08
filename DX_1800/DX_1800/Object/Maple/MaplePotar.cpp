@@ -3,6 +3,10 @@
 
 MaplePotar::MaplePotar()
 {
+	_col = make_shared<RectCollider>(Vector2(50.0f, 50.0f));
+	_trans = make_shared<Transform>();
+	_col->GetTransform()->SetParent(_trans);
+
 }
 
 MaplePotar::~MaplePotar()
@@ -11,10 +15,14 @@ MaplePotar::~MaplePotar()
 
 void MaplePotar::Update()
 {
+	_col->Update();
+	_trans->Update();
 }
 
 void MaplePotar::Render()
 {
+	_trans->SetWorldBuffer(0);
+	_col->Render();
 }
 
 void MaplePotar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
