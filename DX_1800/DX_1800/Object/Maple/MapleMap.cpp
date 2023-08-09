@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "MapleMap.h"
-#include "MaplePotar.h"
+#include "MaplePortar.h"
 
 MapleMap::MapleMap()
 {

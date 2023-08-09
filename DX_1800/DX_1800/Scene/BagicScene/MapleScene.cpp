@@ -5,7 +5,8 @@
 #include "../../Object/Maple/MapleMonster.h"
 #include "../../Object/Maple/MapleArrow.h"
 #include "../../Object/Maple/MapleMap.h"
-#include "../../Object/Maple/MaplePotar.h"
+
+#include "../../Object/Maple/MaplePortar.h"
 #include "../../Object/Maple/Meso.h"
 
 MapleScene::MapleScene()
@@ -20,8 +21,8 @@ MapleScene::MapleScene()
 		_monster.push_back(monster);
 	}
 	_map->SetPosition(Vector2(0.0f, -350.0f));
-	_potar = make_shared<MaplePotar>();
-	_potar->SetPosition(Vector2(650.0f, -50.0f));
+	_portar = make_shared<MaplePortar>();
+	_portar->SetPosition(Vector2(650.0f, -50.0f));
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
 	CAMERA->SetRightTop(_map->rightTop());
@@ -36,7 +37,7 @@ void MapleScene::Update()
 {
 	_player->Update();
 	_map->Update();
-	_potar->Update();
+	_portar->Update();
 
 	if (_map->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
@@ -138,14 +139,18 @@ void MapleScene::Update()
 			_monster[i]->Move(_player);
 		}
 	}
+
+	//if (_portar->Interact(_player))
+	//{
+
+	//}
 }
 
 void MapleScene::Render()
 {
 	_map->Render();
-	_potar->Render();
+	_portar->Render();
 	//_meso->Render();
-	//_mapleBoss->Render();
 	for (auto monster : _monster)
 		monster->Render();
 

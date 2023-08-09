@@ -2,6 +2,7 @@
 #include "Program.h"
 
 #include "../Scene/BagicScene/MapleScene.h"
+#include "../Scene/BagicScene/MapleBossScene.h"
 
 Program::Program()
 {

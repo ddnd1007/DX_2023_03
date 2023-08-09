@@ -1,7 +1,7 @@
 #include "framework.h"
-#include "MaplePotar.h"
+#include "MaplePortar.h"
 
-MaplePotar::MaplePotar()
+MaplePortar::MaplePortar()
 {
 	_col = make_shared<RectCollider>(Vector2(50.0f, 50.0f));
 	_trans = make_shared<Transform>();
@@ -9,23 +9,38 @@ MaplePotar::MaplePotar()
 
 }
 
-MaplePotar::~MaplePotar()
+MaplePortar::~MaplePortar()
 {
 }
 
-void MaplePotar::Update()
+void MaplePortar::Update()
 {
 	_col->Update();
 	_trans->Update();
 }
 
-void MaplePotar::Render()
+void MaplePortar::Render()
 {
 	_trans->SetWorldBuffer(0);
 	_col->Render();
 }
 
-void MaplePotar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
+void MaplePortar::Interact(shared_ptr<PlayerManager> player)
+{
+	if (player->GetCollider()->IsCollision(_col))
+	{
+		if (KEY_PRESS('W'))
+		{
+			_col->SetColorRed();
+			std::string destinationScene = GetDestinationScene();
+		}
+
+	}
+}
+
+
+
+void MaplePortar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
 	wstring srvPath = L"Resource/Maple/Character/" + wName + L".png";

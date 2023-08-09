@@ -3,7 +3,7 @@
 
 MapleBossMap::MapleBossMap()
 {
-	//_quad = make_shared<Quad>(L"Resource/Maple/map/chobomap.png");
+	_quad = make_shared<Quad>(L"Resource/Maple/map/miniMap.canvas.png");
 	_col = make_shared<RectCollider>(Vector2(2000, 500));
 	_transform = make_shared<Transform>();
 	_transform->SetParent(_col->GetTransform());
@@ -19,13 +19,13 @@ void MapleBossMap::Update()
 	_col->Update();
 	_transform->Update();
 
-	//_quad->Update();
+	_quad->Update();
 }
 
 void MapleBossMap::Render()
 {
 	_transform->SetWorldBuffer(0);
-	//_quad->Render();
+	_quad->Render();
 
 	_col->Render();
 }

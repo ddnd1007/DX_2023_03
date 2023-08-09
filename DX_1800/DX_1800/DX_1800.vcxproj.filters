@@ -177,13 +177,16 @@
     <ClInclude Include="Object\Maple\MapleArrow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Maple\MaplePotar.h">
+    <ClInclude Include="Object\Maple\MaplePortar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Maple\PlayerManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Maple\MapleBossMap.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BagicScene\MapleBossScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -311,13 +314,16 @@
     <ClCompile Include="Object\Maple\MapleArrow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Maple\MaplePotar.cpp">
+    <ClCompile Include="Object\Maple\MaplePortar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Maple\PlayerManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Maple\MapleBossMap.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BagicScene\MapleBossScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "PlayerManager.h"
 #include "MapleArrow.h"
+#include "MaplePortar.h"
 
 PlayerManager* PlayerManager::_instance = nullptr;
 

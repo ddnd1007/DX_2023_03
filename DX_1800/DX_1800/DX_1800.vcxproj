@@ -151,8 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\BagicScene\MapleBossScene.h" />
     <ClInclude Include="Object\Maple\MapleBossMap.h" />
-    <ClInclude Include="Object\Maple\MaplePotar.h" />
+    <ClInclude Include="Object\Maple\MaplePortar.h" />
     <ClInclude Include="Object\Maple\MapleArrow.h" />
     <ClInclude Include="Object\Maple\MapleMonster.h" />
     <ClInclude Include="Object\Maple\MapleMap.h" />
@@ -210,8 +211,9 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\BagicScene\MapleBossScene.cpp" />
     <ClCompile Include="Object\Maple\MapleBossMap.cpp" />
-    <ClCompile Include="Object\Maple\MaplePotar.cpp" />
+    <ClCompile Include="Object\Maple\MaplePortar.cpp" />
     <ClCompile Include="Object\Maple\MapleArrow.cpp" />
     <ClCompile Include="Object\Maple\MapleMonster.cpp" />
     <ClCompile Include="Object\Maple\MapleMap.cpp" />
