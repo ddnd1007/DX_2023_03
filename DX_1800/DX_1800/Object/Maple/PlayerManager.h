@@ -57,7 +57,6 @@ public:
 	void Jump();
 	void Attack();
 	void EndAttack();
-	void LayDown();
 	void TakeDamage(int damage);
 	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
 
@@ -100,6 +99,7 @@ private:
 	float _invincibleTimer;
 	const float _invincibleDuration = 1.0f;
 	float _jumpPower = 0.0f;
+	float _knockBack = 0.0f;
 	float _maxFalling = 800.0f;
 	float _speed = 200.0f;
 

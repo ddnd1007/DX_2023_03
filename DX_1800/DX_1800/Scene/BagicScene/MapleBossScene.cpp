@@ -36,6 +36,14 @@ void MapleBossScene::Update()
 		_player->Grounded();
 	else
 		_player->SetIsFalling(true);
+
+	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
+	{
+		if (KEY_PRESS('W'))
+		{
+			SCENE->PrevScene();
+		}
+	}
 }
 
 

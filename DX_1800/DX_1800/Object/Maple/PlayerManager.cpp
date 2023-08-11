@@ -52,7 +52,6 @@ void PlayerManager::Update()
 	Input();
 	Jump();
 	IsDead();
-	LayDown();
 
 	_bowCol->Update();
 	_col->Update();
@@ -208,26 +207,6 @@ bool PlayerManager::IsDead()
 	}
 }
 
-void PlayerManager::LayDown()
-{
-	if (IsActive() == false)
-		return;
-
-	if (KEY_PRESS('S'))
-	{
-		if (_isFalling == false && _isAttack == false && IsActive() == true && _isWork == false)
-		{
-			SetAction(State::LAYDOWN);
-			_col->GetTransform()->AddVector2(Vector2(0, 0));
-		}
-
-	}
-	else if (KEY_UP('S'))
-	{
-		SetAction(State::STAND);
-	}
-}
-
 void PlayerManager::TakeDamage(int damage)
 {
 	if (IsActive() == false)
@@ -235,10 +214,23 @@ void PlayerManager::TakeDamage(int damage)
 
 	if (!_isInvincible)
 	{
-
 		_hp -= damage;
 		_isInvincible = true;
 		_invincibleTimer = _invincibleDuration;
+		_knockBack = 100;
+		_knockBack -= GRAVITY * 7;
+		if (_col->GetWorldPos().x > _bowCol->GetWorldPos().x)
+		{
+			_col->GetTransform()->AddVector2(Vector2(_knockBack, _knockBack * DELTA_TIME));
+			SetAction(State::JUMP);
+			SetRight();
+		}
+		else
+		{
+			_col->GetTransform()->AddVector2(Vector2(-_knockBack, -_knockBack * DELTA_TIME));
+			SetAction(State::JUMP);
+			SetLeft();
+		}
 	}
 }
 

@@ -25,21 +25,6 @@ void MaplePortar::Render()
 	_col->Render();
 }
 
-void MaplePortar::Interact(shared_ptr<PlayerManager> player)
-{
-	if (player->GetCollider()->IsCollision(_col))
-	{
-		if (KEY_PRESS('W'))
-		{
-			_col->SetColorRed();
-			std::string destinationScene = GetDestinationScene();
-		}
-
-	}
-}
-
-
-
 void MaplePortar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());

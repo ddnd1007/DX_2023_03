@@ -4,7 +4,7 @@
 
 MapleArrow::MapleArrow()
 {
-	_quad = make_shared<Quad>(L"Resource/Maple/Character/arrrow.png", Vector2(200,200));
+	_quad = make_shared<Quad>(L"Resource/Maple/Character/arrrow.png", Vector2(400,400));
 	_col = make_shared<CircleCollider>(5);
 	_trans = make_shared<Transform>();
 

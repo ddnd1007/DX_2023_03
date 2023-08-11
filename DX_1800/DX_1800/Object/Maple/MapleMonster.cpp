@@ -58,6 +58,7 @@ void MapleMonster::Update()
 		if (_invincibleTimer <= 0.0f)
 		{
 			_isInvincible = false;
+			
 		}
 	}
 }

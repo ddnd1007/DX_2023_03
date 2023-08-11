@@ -37,7 +37,7 @@ Vector2 MapleMap::leftBottom()
 	Vector2 quadHalfSize = _quad->GetSize() * 0.5f;
 
 	float x = _col->GetTransform()->GetWorldPos().x - quadHalfSize.x;
-	float y = -3000.0f;
+	float y = -2000.0f;
 
 	return Vector2(x, y);
 }
@@ -47,7 +47,7 @@ Vector2 MapleMap::rightTop()
 	Vector2 quadHalfSize = _quad->GetSize() * 0.5f;
 
 	float x = _col->GetTransform()->GetWorldPos().x + quadHalfSize.x;
-	float y = +3000.0f;
+	float y = +2000.0f;
 
 	return Vector2(x, y);
 }

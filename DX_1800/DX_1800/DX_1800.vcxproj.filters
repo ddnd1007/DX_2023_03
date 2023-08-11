@@ -189,6 +189,15 @@
     <ClInclude Include="Scene\BagicScene\MapleBossScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\MapleBoss.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\MapleInventory.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX_1800.cpp">
@@ -324,6 +333,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\BagicScene\MapleBossScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\MapleBoss.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\MapleInventory.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

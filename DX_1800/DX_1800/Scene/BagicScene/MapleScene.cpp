@@ -23,6 +23,7 @@ MapleScene::MapleScene()
 	_map->SetPosition(Vector2(0.0f, -350.0f));
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(650.0f, -50.0f));
+
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
 	CAMERA->SetRightTop(_map->rightTop());
@@ -140,10 +141,14 @@ void MapleScene::Update()
 		}
 	}
 
-	//if (_portar->Interact(_player))
-	//{
-
-	//}
+	
+	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
+	{
+		if (KEY_PRESS('W'))
+		{
+			SCENE->NextScene();
+		}
+	}
 }
 
 void MapleScene::Render()

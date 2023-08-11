@@ -3,8 +3,6 @@ class MaplePortar
 {
 public:
 	MaplePortar();
-	MaplePortar(const std::string& destinationScene)
-		: destinationScene(destinationScene) {};
 	~MaplePortar();
 
 	void Update();

@@ -42,6 +42,8 @@
 #define SOUND		SoundManager::GetInstance()
 #define CAMERA		Camera::GetInstance()
 
+#define SCENE		SceneManager::GetInstance()
+
 using CallBack = function<void()>;
 
 #define LERP(s,e,t)			 s + (e - s) * t
