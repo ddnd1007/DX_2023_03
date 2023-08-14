@@ -38,7 +38,11 @@ MapleMonster::~MapleMonster()
 void MapleMonster::Update()
 {
 	if (DeathAnimation() == true)
-		return;
+	{
+		if (_isActive == false)
+			return;
+	}
+		
 
 	HitEnd();
 
@@ -65,6 +69,12 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
+	if (DeathAnimation() == true)
+	{
+		if(_isActive == false)
+		return;
+	}
+
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();

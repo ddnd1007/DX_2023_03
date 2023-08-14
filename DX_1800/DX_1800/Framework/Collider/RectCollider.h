@@ -19,6 +19,7 @@ public:
 		float length[2];
 	};
 
+	RectCollider() {};
 	RectCollider(Vector2 size);
 	virtual ~RectCollider();
 

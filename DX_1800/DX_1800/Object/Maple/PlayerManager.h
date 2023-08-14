@@ -86,6 +86,7 @@ private:
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	vector<shared_ptr<class MapleArrow>> _arrows;
+	shared_ptr<class MapleInventory> _inven;
 
 	State _curState = State::STAND;
 	State _oldState = State::STAND;
