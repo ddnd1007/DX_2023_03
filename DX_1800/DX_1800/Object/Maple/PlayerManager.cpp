@@ -2,7 +2,7 @@
 #include "PlayerManager.h"
 #include "MapleArrow.h"
 #include "MaplePortar.h"
-#include "MapleInventory.h"
+//#include "MapleInventory.h"
 
 PlayerManager* PlayerManager::_instance = nullptr;
 
@@ -43,7 +43,7 @@ PlayerManager::PlayerManager()
 		_arrows.push_back(arrow);
 	}
 
-	_inven = make_shared<MapleInventory>();
+	//_inven = make_shared<MapleInventory>();
 }
 
 PlayerManager::~PlayerManager()
@@ -77,7 +77,7 @@ void PlayerManager::Update()
 			_isInvincible = false;
 		}
 	}
-	_inven->Update();
+	//_inven->Update();
 }
 
 void PlayerManager::Render()
@@ -91,7 +91,7 @@ void PlayerManager::Render()
 
 	for (auto arrow : _arrows)
 		arrow->Render();
-	_inven->Render();
+	//_inven->Render();
 }
 
 void PlayerManager::SetAction(State state)
@@ -141,10 +141,10 @@ void PlayerManager::Input()
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
 
-	if (KEY_PRESS('I'))
-	{
-		_inven->InventoryView();
-	}
+	//if (KEY_PRESS('I'))
+	//{
+	//	_inven->InventoryView();
+	//}
 }
 
 void PlayerManager::Jump()
