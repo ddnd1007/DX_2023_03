@@ -19,9 +19,9 @@ void Program::Update()
 {
 	Timer::GetInstance()->Update();
 	InputManager::GetInstance()->Update();
+
 	CAMERA->Update();
 	SCENE->Update();
-
 
 	EFFECT->Update();
 	SOUND->Update();
@@ -40,15 +40,15 @@ void Program::Render()
 	ImGui::NewFrame();
 
 	ALPHA->SetState();
+	CAMERA->SetUIViewBuffer();
+	CAMERA->PostRender();
 	EFFECT->Render();
+
+	SCENE->PostRender();
 
 	ImGui::Text("FPS : %d", FPS);
 	ImGui::Text("DeltaTime : %1f", DELTA_TIME);
 	ImGui::Text("RunTime : %1f", RUN_TIME);
-	SCENE->PostRender();
-	CAMERA->PostRender();
-	CAMERA->SetUIViewBuffer();
-
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 

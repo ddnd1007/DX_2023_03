@@ -2,7 +2,7 @@
 #include "PlayerManager.h"
 #include "MapleArrow.h"
 #include "MaplePortar.h"
-//#include "MapleInventory.h"
+#include "MapleInventory.h"
 
 PlayerManager* PlayerManager::_instance = nullptr;
 
@@ -11,7 +11,8 @@ PlayerManager::PlayerManager()
 	_col = make_shared<CircleCollider>(30);
 	_col->GetTransform()->SetPosition(Vector2(0,0));
 	_transform = make_shared<Transform>();
-	//_transform->SetPosition(Vector2(0, 0));
+	_transform->SetPosition(Vector2(0, 0));
+	_transform->SetParent(_col->GetTransform());
 
 	_bowCol = make_shared<CircleCollider>(5);
 	_bowTrans = make_shared<Transform>();
@@ -26,7 +27,6 @@ PlayerManager::PlayerManager()
 	CreateAction("lay down");
 
 
-	_transform->SetParent(_col->GetTransform());
 
 	_bowTrans->SetParent(_bowCol->GetTransform());
 	_bowTrans->SetPosition(Vector2(0, 0));
@@ -141,10 +141,10 @@ void PlayerManager::Input()
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
 
-	//if (KEY_PRESS('I'))
-	//{
-	//	_inven->InventoryView();
-	//}
+	/*if (KEY_PRESS('I'))
+	{
+		_inven->PrintInventory();
+	}*/
 }
 
 void PlayerManager::Jump()

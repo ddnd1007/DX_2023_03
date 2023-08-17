@@ -79,13 +79,11 @@ void MapleScene::Update()
 	{
 		if (_player->GetCollider()->IsCollision(_monster[i]->GetRectCollider()))
 		{
-		
 			_player->GetCollider()->SetColorRed();
 			_monster[i]->GetRectCollider()->SetColorRed();
 		}
 		else
 		{
-		
 			_player->GetCollider()->SetColorGreen();
 			_monster[i]->GetRectCollider()->SetColorGreen();
 
@@ -94,13 +92,10 @@ void MapleScene::Update()
 
 	for (int i = 0; i < 5; i++)
 	{
-		
-
 		if (_monster[i]->IsActive() == true)
 		{
 			if (_monster[i]->GetCirCollider()->IsCollision(_player->GetCollider()))
 			{
-				
 				_player->TakeDamage(3);
 				//_player->_isDamaged == false;
 			}

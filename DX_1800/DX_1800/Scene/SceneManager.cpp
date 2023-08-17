@@ -23,6 +23,7 @@ void SceneManager::Update()
 
 void SceneManager::Render()
 {
+
 	_scenes[_curScene]->Render();
 }
 
