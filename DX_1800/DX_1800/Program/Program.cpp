@@ -20,7 +20,7 @@ void Program::Update()
 	Timer::GetInstance()->Update();
 	InputManager::GetInstance()->Update();
 
-	CAMERA->Update();
+	//CAMERA->Update();
 	SCENE->Update();
 
 	EFFECT->Update();
@@ -32,16 +32,16 @@ void Program::Render()
 	Device::GetInstance()->Clear();
 
 	SCENE->Render();
-	CAMERA->SetViewBuffer();
-	CAMERA->SetProjectionBuffer();
+	//CAMERA->SetViewBuffer();
+	//CAMERA->SetProjectionBuffer();
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
 	ALPHA->SetState();
-	CAMERA->SetUIViewBuffer();
-	CAMERA->PostRender();
+	//CAMERA->SetUIViewBuffer();
+	//CAMERA->PostRender();
 	EFFECT->Render();
 
 	SCENE->PostRender();

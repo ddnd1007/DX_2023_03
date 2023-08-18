@@ -42,8 +42,6 @@ PlayerManager::PlayerManager()
 		shared_ptr<MapleArrow> arrow = make_shared<MapleArrow>();
 		_arrows.push_back(arrow);
 	}
-
-	//_inven = make_shared<MapleInventory>();
 }
 
 PlayerManager::~PlayerManager()
@@ -64,6 +62,7 @@ void PlayerManager::Update()
 	for (auto arrow : _arrows)
 		arrow->Update();
 
+
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
@@ -77,7 +76,7 @@ void PlayerManager::Update()
 			_isInvincible = false;
 		}
 	}
-	//_inven->Update();
+	
 }
 
 void PlayerManager::Render()
@@ -91,7 +90,10 @@ void PlayerManager::Render()
 
 	for (auto arrow : _arrows)
 		arrow->Render();
-	//_inven->Render();
+	
+	for (auto inven : _inven)
+		inven->Render();
+	
 }
 
 void PlayerManager::SetAction(State state)
@@ -140,11 +142,6 @@ void PlayerManager::Input()
 		SetAction(State::WORK);
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
-
-	/*if (KEY_PRESS('I'))
-	{
-		_inven->PrintInventory();
-	}*/
 }
 
 void PlayerManager::Jump()

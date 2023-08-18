@@ -10,6 +10,7 @@ SceneManager::SceneManager()
 {
 	_scenes.push_back(make_shared<MapleScene>());
 	_scenes.push_back(make_shared<MapleBossScene>());
+	
 }
 
 SceneManager::~SceneManager()
@@ -18,13 +19,20 @@ SceneManager::~SceneManager()
 
 void SceneManager::Update()
 {
+	CAMERA->Update();
 	_scenes[_curScene]->Update();
 }
 
 void SceneManager::Render()
 {
+	CAMERA->SetViewBuffer();
+	CAMERA->SetProjectionBuffer();
 
 	_scenes[_curScene]->Render();
+
+	CAMERA->SetUIViewBuffer();
+	//CAMERA->PostRender();
+	
 }
 
 void SceneManager::PreRender()
@@ -50,8 +58,10 @@ void SceneManager::PostRender()
 
 void SceneManager::NextScene()
 {
+	
 	if (_curScene >= _scenes.size() - 1)
 		return;
+
 
 	_scenes[_curScene]->End();
 	++_curScene;
@@ -60,9 +70,11 @@ void SceneManager::NextScene()
 
 void SceneManager::PrevScene()
 {
+	
 	if (_curScene <= 0)
 		return;
 
+	
 	_scenes[_curScene]->End();
 	--_curScene;
 	_scenes[_curScene]->Init();

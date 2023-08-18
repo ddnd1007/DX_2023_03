@@ -39,6 +39,7 @@ void MapleScene::Update()
 	_player->Update();
 	_map->Update();
 	_portar->Update();
+	
 
 	if (_map->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();

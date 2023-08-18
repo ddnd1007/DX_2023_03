@@ -1,13 +1,7 @@
 #pragma once
 class MapleInventory
 {
-	/*struct Item
-	{
-		std::string name;
-		int quantity;
 
-		Item(const std::string& n, int q) : name(n), quantity(q) {}
-	};*/
 public:
 	MapleInventory();
 	~MapleInventory();
@@ -17,8 +11,10 @@ public:
 
 	void PrintInventory();
 
+	
+
 private:
-	vector<vector<shared_ptr<RectCollider>>> _slot;
+	vector<vector<shared_ptr<RectCollider>>> _col;
 	shared_ptr<Quad> _quad;
 	shared_ptr<Transform> _trans;
 

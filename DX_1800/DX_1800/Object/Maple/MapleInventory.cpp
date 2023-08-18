@@ -1,29 +1,25 @@
 #include "framework.h"
 #include "MapleInventory.h"
-#include "InventorySlot.h"
+//#include "InventorySlot.h"
 
 MapleInventory::MapleInventory()
 {
-	//_quad = make_shared<Quad>();
-	_slot = make_shared<RectCollider>(Vector2(Vector2(20,20)));
 	_trans = make_shared<Transform>();
-	
-	/*Vector2 offset = Vector2(100, 100);*/
 
-	//_slot.resize(_inventoryY);
-	//for (int y = 0; y < _inventoryY; y++)
-	//{
-	//	_slot[y].resize(_inventoryY);
+	Vector2 offset = Vector2(100, 100);
 
-	//	for (int x = 0; x < _inventoryX; x++)
-	//	{
-	//		shared_ptr<RectCollider> inventory = make_shared<RectCollider>();
-	//		inventory->GetTransform()->SetPosition(offset + (Vector2(5 * x, 10 * y)));
-
-	//		_slot[y][x] = inventory;
-	//	}
-	//}
-	
+	_col.resize(10);
+	for (int y = 0; y < _inventoryY; y++)
+	{
+		_col[y].reserve(10);
+		for (int x = 0; x < _inventoryX; x++)
+		{
+			shared_ptr<RectCollider> slot = make_shared<RectCollider>();
+			slot->GetTransform()->SetPosition(offset + Vector2(x, y));
+			_col[y].push_back(slot);
+		}
+	}
+  
 }
 
 MapleInventory::~MapleInventory()
@@ -33,41 +29,39 @@ MapleInventory::~MapleInventory()
 void MapleInventory::Update()
 {
 	PrintInventory();
+
 	_trans->Update();
-	for (auto inventoryArr : _slot)
+	for (auto slotY : _col)
 	{
-		for (auto _slot : inventoryArr)
-			_slot->Update();
+		for (auto slotX : slotY)
+			slotX->Update();
 	}
 }
 
 void MapleInventory::Render()
 {
 	_trans->SetWorldBuffer(0);
-	for (auto inventoryArr : _slot)
+	for (auto slotY : _col)
 	{
-		for (auto _slot : inventoryArr)
-			_slot->Render();
+		for (auto slotX : slotY)
+			slotX->Render();
 	}
 }
 
 void MapleInventory::PrintInventory()
 {
-	Vector2 offset = Vector2(100, 100);
-
-	_slot.resize(_inventoryY);
 	for (int y = 0; y < _inventoryY; y++)
 	{
-		_slot[y].resize(_inventoryY);
-
 		for (int x = 0; x < _inventoryX; x++)
 		{
-			shared_ptr<RectCollider> inventory = make_shared<RectCollider>();
-			inventory->GetTransform()->SetPosition(offset + (Vector2(x, y)));
-
-			_slot[y][x] = inventory;
+			_col[y][x]->GetTransform();
 		}
 	}
 }
+
+
+
+
+
 
 
