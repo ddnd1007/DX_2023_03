@@ -38,6 +38,10 @@ private:
 
 	vector<shared_ptr<Scene>> _scenes;
 
+	shared_ptr<class PlayerManager> _player;
+	shared_ptr<class MapleMap> _map;
+	shared_ptr<class MapleBossMap> _bossMap;
+
 	UINT _curScene = 0;
 
 	UINT _test = 0;

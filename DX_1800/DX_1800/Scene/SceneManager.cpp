@@ -1,6 +1,9 @@
 #include "framework.h"
 #include "SceneManager.h"
 
+#include "../Object/Maple/PlayerManager.h"
+#include "../Object/Maple/MapleMap.h"
+#include "../Object/Maple/MapleBossMap.h"
 #include "BagicScene/MapleBossScene.h"
 #include "BagicScene/MapleScene.h"
 
@@ -8,9 +11,17 @@ SceneManager* SceneManager::_instance = nullptr;
 
 SceneManager::SceneManager()
 {
+	_player = make_shared<PlayerManager>();
+	_map = make_shared<MapleMap>();
+	_bossMap = make_shared<MapleBossMap>();
+
 	_scenes.push_back(make_shared<MapleScene>());
 	_scenes.push_back(make_shared<MapleBossScene>());
-	
+
+	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
+	CAMERA->SetLeftBottom(_map->leftBottom());
+	CAMERA->SetRightTop(_map->rightTop());
+	CAMERA->SetOffset(Vector2(0, -110));
 }
 
 SceneManager::~SceneManager()
@@ -19,25 +30,24 @@ SceneManager::~SceneManager()
 
 void SceneManager::Update()
 {
-	CAMERA->Update();
 	_scenes[_curScene]->Update();
 }
 
 void SceneManager::Render()
 {
-	CAMERA->SetViewBuffer();
-	CAMERA->SetProjectionBuffer();
-
 	_scenes[_curScene]->Render();
-
-	CAMERA->SetUIViewBuffer();
-	//CAMERA->PostRender();
-	
 }
 
 void SceneManager::PreRender()
 {
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	ALPHA->SetState();
+
 	_scenes[_curScene]->preRender();
+
 }
 
 void SceneManager::PostRender()
@@ -58,10 +68,11 @@ void SceneManager::PostRender()
 
 void SceneManager::NextScene()
 {
-	
 	if (_curScene >= _scenes.size() - 1)
 		return;
 
+	CAMERA->SetLeftBottom(_bossMap->leftBottom());
+	CAMERA->SetRightTop(_bossMap->rightTop());
 
 	_scenes[_curScene]->End();
 	++_curScene;
@@ -70,11 +81,12 @@ void SceneManager::NextScene()
 
 void SceneManager::PrevScene()
 {
-	
 	if (_curScene <= 0)
 		return;
 
-	
+	CAMERA->SetLeftBottom(_map->leftBottom());
+	CAMERA->SetRightTop(_map->rightTop());
+
 	_scenes[_curScene]->End();
 	--_curScene;
 	_scenes[_curScene]->Init();

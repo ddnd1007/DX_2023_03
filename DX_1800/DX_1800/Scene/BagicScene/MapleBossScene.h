@@ -10,7 +10,6 @@ public:
 	virtual void PostRender() override;
 
 private:
-	//shared_ptr<class MaplePlayer> _player;
 	shared_ptr<class PlayerManager> _player;
 	shared_ptr<class MapleBossMap> _bossMap;
 	shared_ptr<class MaplePortar> _portar;

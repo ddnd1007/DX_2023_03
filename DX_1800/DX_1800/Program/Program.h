@@ -9,7 +9,7 @@ public:
 	void Render();
 
 private:
-	shared_ptr<Scene> _curScene;
-	shared_ptr<Scene> _oldScene;
+	shared_ptr<SceneManager> _curScene;
+	shared_ptr<SceneManager> _oldScene;
 };
 

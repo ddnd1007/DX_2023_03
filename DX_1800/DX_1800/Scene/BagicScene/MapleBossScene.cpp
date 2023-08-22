@@ -17,11 +17,10 @@ MapleBossScene::MapleBossScene()
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(0.0f, -50.0f));
 	
-	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
-	CAMERA->SetLeftBottom(_bossMap->leftBottom());
-	CAMERA->SetRightTop(_bossMap->rightTop());
-	CAMERA->SetOffset(Vector2(0, -110));
-
+	//CAMERA->SetTarget(_player->GetCollider()->GetTransform());
+	//CAMERA->SetLeftBottom(_bossMap->leftBottom());
+	//CAMERA->SetRightTop(_bossMap->rightTop());
+	//CAMERA->SetOffset(Vector2(0, -110));
 }
 
 MapleBossScene::~MapleBossScene()

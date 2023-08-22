@@ -110,7 +110,6 @@ using namespace Microsoft::WRL;
 // GameObj
 #include "Object/Maple/PlayerManager.h"
 
-
 // Scene
 #include "Scene/Scene.h"
 #include "Scene/SceneManager.h"

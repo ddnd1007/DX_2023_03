@@ -9,11 +9,8 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-
-	//void ChangeScene(class MapleBossScene* newScene);
-
 private:
-	//shared_ptr<class MaplePlayer> _player;
+
 	shared_ptr<class PlayerManager> _player;
 	shared_ptr<class MapleMap> _map;
 	shared_ptr<class MaplePortar> _portar;
