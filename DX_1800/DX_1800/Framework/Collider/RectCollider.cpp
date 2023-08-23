@@ -69,6 +69,12 @@ void RectCollider::CreateData()
     _ps = make_shared<PixelShader>(L"Shader/ColliderPS.hlsl");
 }
 
+bool RectCollider::Intersects(const RectCollider& other) const
+{
+    return !(x + width < other.x || x > other.x + other.width ||
+        y + height < other.y || y > other.y + other.height);
+}
+
 bool RectCollider::IsCollision(shared_ptr<CircleCollider> col)
 {
     AABB_Info info = GetAABB_Info();

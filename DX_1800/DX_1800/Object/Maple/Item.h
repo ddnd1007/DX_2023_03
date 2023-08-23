@@ -1,23 +1,26 @@
 #pragma once
-class MapleInventory
+class Item
 {
+enum class ItemInfo
+{
+	NAME,
+	NONE
 
+};
 public:
-	MapleInventory();
-	~MapleInventory();
+	Item();
+	~Item();
 
 	void Update();
 	void Render();
 
-	
 
-	
 
 private:
-	vector<vector<shared_ptr<class Slot>>> _slot;
 	shared_ptr<Quad> _quad;
+	shared_ptr<RectCollider> _col;
 	shared_ptr<Transform> _trans;
-
-	
 };
+
+
 

@@ -1,23 +1,24 @@
 #pragma once
-class MapleInventory
+class Slot
 {
+	enum class SlotType
+	{
+		FULL,
+		NONE
+	};
 
 public:
-	MapleInventory();
-	~MapleInventory();
+	Slot();
+	~Slot();
 
 	void Update();
 	void Render();
 
-	
-
-	
-
 private:
-	vector<vector<shared_ptr<class Slot>>> _slot;
+	shared_ptr<RectCollider> _col;
 	shared_ptr<Quad> _quad;
 	shared_ptr<Transform> _trans;
-
-	
 };
+
+
 

@@ -28,6 +28,7 @@ public:
 
 	void CreateVertices();
 	void CreateData();
+	bool Intersects(const RectCollider& other) const;
 
 	virtual bool IsCollision(const Vector2& pos) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> col) override;
@@ -46,6 +47,7 @@ public:
 	OBB_Info GetOBB_info();
 
 private:
+	float x, y, width, height;
 	Vector2 _size;
 
 };
