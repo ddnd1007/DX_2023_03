@@ -18,6 +18,8 @@ PlayerManager::PlayerManager()
 	_bowTrans = make_shared<Transform>();
 	_bowCol->GetTransform()->SetParent(_col->GetTransform());
 
+	_inven = make_shared<MapleInventory>();
+
 
 	CreateAction("stand", 0.2f);
 	CreateAction("work", 0.1f);
@@ -42,6 +44,8 @@ PlayerManager::PlayerManager()
 		shared_ptr<MapleArrow> arrow = make_shared<MapleArrow>();
 		_arrows.push_back(arrow);
 	}
+	
+
 }
 
 PlayerManager::~PlayerManager()
@@ -54,14 +58,19 @@ void PlayerManager::Update()
 	Jump();
 	IsDead();
 
+	_inven->PrintInventory();
+
 	_bowCol->Update();
 	_col->Update();
 	_transform->Update();
 	_bowTrans->Update();
 
+	_inven->Update();
+
 	for (auto arrow : _arrows)
 		arrow->Update();
 
+	
 
 	_actions[_curState]->Update();
 
@@ -87,12 +96,12 @@ void PlayerManager::Render()
 
 	_bowCol->Render();
 	_col->Render();
+	
+	_inven->Render();
 
 	for (auto arrow : _arrows)
 		arrow->Render();
-	
-	for (auto inven : _inven)
-		inven->Render();
+
 	
 }
 
@@ -142,6 +151,7 @@ void PlayerManager::Input()
 		SetAction(State::WORK);
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
+
 }
 
 void PlayerManager::Jump()

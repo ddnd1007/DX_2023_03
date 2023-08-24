@@ -83,10 +83,11 @@ private:
 	shared_ptr<Transform> _transform;
 	shared_ptr<Transform> _bowTrans;
 
+	shared_ptr<class MapleInventory> _inven;
+
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	vector<shared_ptr<class MapleArrow>> _arrows;
-	vector<shared_ptr<class MapleInventory>> _inven;
 
 	State _curState = State::STAND;
 	State _oldState = State::STAND;

@@ -151,9 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Object\Maple\Item.h" />
     <ClInclude Include="Object\Maple\MapleBoss.h" />
     <ClInclude Include="Object\Maple\MapleInventory.h" />
+    <ClInclude Include="Object\Maple\Slot.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\BagicScene\MapleBossScene.h" />
     <ClInclude Include="Object\Maple\MapleBossMap.h" />
@@ -206,7 +206,6 @@
     <ClInclude Include="Object\BasicObject\Sprite_Frame.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
     <ClInclude Include="Framework\Utility\SoundManager.h" />
-    <ClInclude Include="Object\Maple\Slot.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
@@ -216,9 +215,9 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Object\Maple\Item.cpp" />
     <ClCompile Include="Object\Maple\MapleBoss.cpp" />
     <ClCompile Include="Object\Maple\MapleInventory.cpp" />
+    <ClCompile Include="Object\Maple\Slot.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\BagicScene\MapleBossScene.cpp" />
     <ClCompile Include="Object\Maple\MapleBossMap.cpp" />
@@ -274,7 +273,6 @@
     <ClCompile Include="Object\BasicObject\Sprite_Frame.cpp" />
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
     <ClCompile Include="Framework\Utility\SoundManager.cpp" />
-    <ClCompile Include="Object\Maple\Slot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_1800.rc" />

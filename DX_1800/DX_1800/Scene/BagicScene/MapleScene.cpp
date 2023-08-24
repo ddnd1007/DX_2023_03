@@ -6,6 +6,7 @@
 #include "../../Object/Maple/MapleArrow.h"
 #include "../../Object/Maple/MapleMap.h"
 
+#include "../../Object/Maple/MapleInventory.h"
 #include "../../Object/Maple/MaplePortar.h"
 #include "../../Object/Maple/Meso.h"
 
@@ -23,7 +24,7 @@ MapleScene::MapleScene()
 	_map->SetPosition(Vector2(0.0f, -350.0f));
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(550.0f, -50.0f));
-
+	
 	/*CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
 	CAMERA->SetRightTop(_map->rightTop());
@@ -40,7 +41,6 @@ void MapleScene::Update()
 	_map->Update();
 	_portar->Update();
 	
-
 	if (_map->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else
@@ -145,6 +145,7 @@ void MapleScene::Update()
 			SCENE->NextScene();
 		}
 	}
+	
 }
 
 void MapleScene::Render()
@@ -154,7 +155,6 @@ void MapleScene::Render()
 	//_meso->Render();
 	for (auto monster : _monster)
 		monster->Render();
-
 	_player->Render();
 }
 

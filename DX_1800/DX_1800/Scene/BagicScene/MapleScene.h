@@ -17,6 +17,7 @@ private:
 	shared_ptr<class MapleBossScene> _bossScene;
 	vector<shared_ptr<class MapleMonster>> _monster;
 
+
 	//shared_ptr<class Meso> _meso;
 };
 
