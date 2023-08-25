@@ -4,7 +4,7 @@
 Slot::Slot()
 {
 	//_quad = make_shared<Quad>(L"");
-	_col = make_shared<RectCollider>(Vector2(50, 50));
+	_col = make_shared<RectCollider>(Vector2(350, 350));
 	_trans = make_shared<Transform>();
 }
 

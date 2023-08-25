@@ -17,7 +17,5 @@ private:
 
 	UINT slotX = 5;
 	UINT slotY = 10;
-
-	
 };
 

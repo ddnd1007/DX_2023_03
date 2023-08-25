@@ -16,7 +16,7 @@ MapleInventory::MapleInventory()
 		for (int x = 0; x < slotX; x++)
 		{
 			shared_ptr<Slot> slot = make_shared<Slot>();
-			slot->SetPosition(offset + Vector2(5 * x,10 * y));
+			slot->SetPosition(offset + Vector2(30 * x,30 * y));
 			slot->SetType(Slot::SlotType::NONE);	
 
 			_slot[y].push_back(slot);
@@ -57,6 +57,7 @@ void MapleInventory::PrintInventory()
 			for (int x = 0; x < slotX; x++)
 			{
 				_slot[y][x]->SetType(Slot::SlotType::NONE);
+				//_slot.push_back(slot)
 			}
 		}
 	}
