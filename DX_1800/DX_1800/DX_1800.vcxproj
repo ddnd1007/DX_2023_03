@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Maple\Item.h" />
     <ClInclude Include="Object\Maple\MapleBoss.h" />
     <ClInclude Include="Object\Maple\MapleInventory.h" />
     <ClInclude Include="Object\Maple\Slot.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Maple\Item.cpp" />
     <ClCompile Include="Object\Maple\MapleBoss.cpp" />
     <ClCompile Include="Object\Maple\MapleInventory.cpp" />
     <ClCompile Include="Object\Maple\Slot.cpp" />

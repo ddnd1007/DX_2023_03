@@ -58,8 +58,8 @@ void PlayerManager::Update()
 	Jump();
 	IsDead();
 
-	_inven->PrintInventory();
-
+	_inven->ToggleInventory();
+	
 	_bowCol->Update();
 	_col->Update();
 	_transform->Update();

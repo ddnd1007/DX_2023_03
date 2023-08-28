@@ -2,13 +2,16 @@
 class MapleInventory
 {
 public:
-	MapleInventory();
+	MapleInventory() { _trans = make_shared<Transform>(); };
 	~MapleInventory();
 
 	void Update();
 	void Render();
 
-	void PrintInventory();
+	void InitializeSlots();
+	void ToggleInventory();
+	void ClearSlots();
+	void CloseInventory();
 
 private:
 	vector<vector<shared_ptr<class Slot>>> _slot;
@@ -17,5 +20,7 @@ private:
 
 	UINT slotX = 5;
 	UINT slotY = 10;
+
+	bool inventoryVisible = false;
 };
 
