@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="work.png" width="8192" height="512" scale="1" format="RGBA8888">
+  <sprite n="attack1.0.png" x="0" y="0" w="127" h="179" pX="0.5" pY="0.5" oX="7" oY="3" oW="139" oH="190"/>
+  <sprite n="attack1.1.png" x="127" y="0" w="129" h="179" pX="0.5" pY="0.5" oX="9" oY="3" oW="145" oH="190"/>
+  <sprite n="attack1.2.png" x="256" y="0" w="140" h="180" pX="0.5" pY="0.5" oX="6" oY="3" oW="153" oH="191"/>
+  <sprite n="attack1.3.png" x="396" y="0" w="140" h="181" pX="0.5" pY="0.5" oX="9" oY="3" oW="158" oH="192"/>
+  <sprite n="attack1.29.png" x="536" y="0" w="127" h="182" pX="0.5" pY="0.5" oX="7" oY="3" oW="140" oH="193"/>
+  <sprite n="attack1.30.png" x="663" y="0" w="127" h="182" pX="0.5" pY="0.5" oX="7" oY="3" oW="140" oH="193"/>
+  <sprite n="attack1.31.png" x="790" y="0" w="127" h="182" pX="0.5" pY="0.5" oX="7" oY="3" oW="140" oH="196"/>
+  <sprite n="attack1.4.png" x="917" y="0" w="143" h="182" pX="0.5" pY="0.5" oX="9" oY="3" oW="160" oH="193"/>
+  <sprite n="attack1.28.png" x="1060" y="0" w="127" h="186" pX="0.5" pY="0.5" oX="9" oY="3" oW="141" oH="213"/>
+  <sprite n="attack1.5.png" x="1187" y="0" w="147" h="206" pX="0.5" pY="0.5" oX="8" oY="3" oW="162" oH="212"/>
+  <sprite n="attack1.6.png" x="1334" y="0" w="147" h="212" pX="0.5" pY="0.5" oX="8" oY="3" oW="162" oH="217"/>
+  <sprite n="attack1.7.png" x="1481" y="0" w="158" h="220" pX="0.5" pY="0.5" oX="7" oY="3" oW="172" oH="225"/>
+  <sprite n="attack1.8.png" x="1639" y="0" w="212" h="231" pX="0.5" pY="0.5" oX="7" oY="3" oW="226" oH="236"/>
+  <sprite n="attack1.9.png" x="1851" y="0" w="248" h="248" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="253"/>
+  <sprite n="attack1.10.png" x="2099" y="0" w="248" h="255" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="260"/>
+  <sprite n="attack1.14.png" x="2347" y="0" w="248" h="255" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="260"/>
+  <sprite n="attack1.13.png" x="2595" y="0" w="248" h="256" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="261"/>
+  <sprite n="attack1.15.png" x="2843" y="0" w="248" h="256" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="261"/>
+  <sprite n="attack1.12.png" x="3091" y="0" w="248" h="257" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="262"/>
+  <sprite n="attack1.16.png" x="3339" y="0" w="248" h="257" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="262"/>
+  <sprite n="attack1.11.png" x="3587" y="0" w="248" h="258" pX="0.5" pY="0.5" oX="8" oY="3" oW="264" oH="263"/>
+  <sprite n="attack1.17.png" x="3835" y="0" w="330" h="267" pX="0.5" pY="0.5" oX="6" oY="3" oW="342" oH="272"/>
+  <sprite n="attack1.27.png" x="4165" y="0" w="309" h="277" pX="0.5" pY="0.5" oX="1" oY="2" oW="310" oH="283"/>
+  <sprite n="attack1.26.png" x="4474" y="0" w="310" h="306" pX="0.5" pY="0.5" oX="4" oY="6" oW="318" oH="316"/>
+  <sprite n="attack1.25.png" x="4784" y="0" w="310" h="326" pX="0.5" pY="0.5" oX="5" oY="7" oW="320" oH="334"/>
+  <sprite n="attack1.20.png" x="5094" y="0" w="311" h="329" pX="0.5" pY="0.5" oX="7" oY="9" oW="325" oH="344"/>
+  <sprite n="attack1.22.png" x="5405" y="0" w="310" h="329" pX="0.5" pY="0.5" oX="7" oY="9" oW="324" oH="339"/>
+  <sprite n="attack1.21.png" x="5715" y="0" w="310" h="330" pX="0.5" pY="0.5" oX="7" oY="8" oW="324" oH="340"/>
+  <sprite n="attack1.18.png" x="6025" y="0" w="310" h="331" pX="0.5" pY="0.5" oX="7" oY="9" oW="324" oH="344"/>
+  <sprite n="attack1.24.png" x="6335" y="0" w="310" h="331" pX="0.5" pY="0.5" oX="7" oY="8" oW="324" oH="340"/>
+  <sprite n="attack1.23.png" x="6645" y="0" w="310" h="333" pX="0.5" pY="0.5" oX="7" oY="8" oW="324" oH="342"/>
+  <sprite n="attack1.19.png" x="6955" y="0" w="310" h="334" pX="0.5" pY="0.5" oX="7" oY="8" oW="324" oH="346"/>
+</TextureAtlas>
