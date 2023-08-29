@@ -2,7 +2,7 @@
 #include "MapleInventory.h"
 #include "Slot.h"
 
-Vector2 offset(0, 0);
+Vector2 offset(50, 50);
 
 MapleInventory::~MapleInventory()
 {
@@ -37,7 +37,7 @@ void MapleInventory::InitializeSlots()
 		for (int x = 0; x < slotX; x++)
 		{
 			shared_ptr<Slot> slot = make_shared<Slot>();
-			slot->SetPosition(offset + Vector2(50*x,50*y));
+			slot->SetPosition(offset + Vector2(40*x,40*y));
 			slot->SetType(Slot::SlotType::NONE);
 
 			_slot[y][x] = slot;
@@ -65,7 +65,7 @@ void MapleInventory::ClearSlots()
 	{
 		for (int x = 0; x < slotX; x++)
 		{
-			_slot[y][x].reset(new Slot()); // 슬롯 객체를 삭제하고 새로운 객체로 교체
+			_slot[y][x].reset(new Slot());
 			_slot[y][x]->SetType(Slot::SlotType::NONE);
 		}
 	}

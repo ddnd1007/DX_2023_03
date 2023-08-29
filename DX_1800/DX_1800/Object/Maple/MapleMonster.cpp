@@ -37,13 +37,10 @@ MapleMonster::~MapleMonster()
 
 void MapleMonster::Update()
 {
-	if (DeathAnimation() == true)
-	{
-		if (_isActive == false)
-			return;
-	}
-		
-
+	DeathAnimation();
+	HitAnimation();
+	
+	IsDead();
 	HitEnd();
 
 	_rectCol->Update();
@@ -69,11 +66,9 @@ void MapleMonster::Update()
 
 void MapleMonster::Render()
 {
-	if (DeathAnimation() == true)
-	{
-		if(_isActive == false)
-		return;
-	}
+	if(_isActive == false)
+	return;
+	
 
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
@@ -113,14 +108,14 @@ void MapleMonster::TakeDamage(int damage)
 
 bool MapleMonster::IsDead()
 {
+	if (IsActive() == true)
+		return IsActive() == true;
+
 	if (IsActive() == false)
 	{
-		return true;
+		SetAction(State::DEAD);
+		return IsActive() == false;
 	}
-	else
-	{
-		return false;
-	};
 }
 
 
@@ -179,6 +174,25 @@ bool MapleMonster::DeathAnimation()
 			_deathAnimationTimer = 0.0f;
 			_isActive = false;
 			_curState = (State::DEAD);
+			return true;
+		}
+		return false;
+	}
+	return false;
+}
+
+bool MapleMonster::HitAnimation()
+{
+	if (_isDamaged == true)
+	{
+		_hitAnimationTimer += DELTA_TIME;
+
+		if (_hitAnimationTimer >= _hitAnimationDuration)
+		{
+			SetAction(State::HIT);
+			_deathAnimationTimer = 0.0f;
+			_isDamaged = true;
+			_curState = (State::HIT);
 			return true;
 		}
 		return false;

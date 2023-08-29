@@ -13,6 +13,7 @@ private:
 	shared_ptr<class PlayerManager> _player;
 	shared_ptr<class MapleBossMap> _bossMap;
 	shared_ptr<class MaplePortar> _portar;
+	shared_ptr<class MapleBoss> _boss;
 	//shared_ptr<class Meso> _meso;
 };
 

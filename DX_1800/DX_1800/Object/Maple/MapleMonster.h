@@ -33,6 +33,7 @@ public:
 	void Attack(shared_ptr<class PlayerManager> victim);
 	void HitEnd();
 	bool DeathAnimation();
+	bool HitAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
 	void ChangeState(State nextState, int duration);
 	int getRandomNumber(int min, int max);
@@ -61,13 +62,15 @@ private:
 
 	bool _isAttack = false;
 	bool _isDead = false;
-	bool _isActive = false;
+	bool _isActive = true;
 	bool _isInvincible;
 
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
-	const float _deathAnimationDuration = 0.2f;
+	const float _deathAnimationDuration = 0.9f;
 	float _deathAnimationTimer = 0.0f;
+	const float _hitAnimationDuration = 0.5f;
+	float _hitAnimationTimer = 0.0f;
 	const float _speed = 50.0f;
 	const float _invincibleDuration = 1.0f;
 	float _invincibleTimer;
