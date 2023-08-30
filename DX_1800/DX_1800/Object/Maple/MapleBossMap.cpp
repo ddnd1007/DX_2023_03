@@ -3,7 +3,7 @@
 
 MapleBossMap::MapleBossMap()
 {
-	_quad = make_shared<Quad>(L"Resource/Maple/map/miniMap.canvas.png");
+	_quad = make_shared<Quad>(L"Resource/Maple/map/bossMap.png");
 	_col = make_shared<RectCollider>(Vector2(2000, 500));
 	_transform = make_shared<Transform>();
 	_transform->SetParent(_col->GetTransform());

@@ -1,6 +1,10 @@
 #pragma once
 class MaplePortar
 {
+	enum State
+	{
+		POTAR
+	};
 public:
 	MaplePortar();
 	~MaplePortar();
@@ -20,6 +24,9 @@ private:
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	std::string destinationScene;
+
+	State _curState = State::POTAR;
+	State _oldState = State::POTAR;
 
 
 

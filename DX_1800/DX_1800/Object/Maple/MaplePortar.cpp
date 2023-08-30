@@ -6,7 +6,11 @@ MaplePortar::MaplePortar()
 	_col = make_shared<RectCollider>(Vector2(50.0f, 50.0f));
 	_trans = make_shared<Transform>();
 	_col->GetTransform()->SetParent(_trans);
+	_col->GetTransform()->SetPosition(Vector2(50.0f, 50.0f));
 
+	CreateAction("potar");
+
+	_actions[State::POTAR]->Play();
 }
 
 MaplePortar::~MaplePortar()
@@ -17,21 +21,27 @@ void MaplePortar::Update()
 {
 	_col->Update();
 	_trans->Update();
+
+	_actions[_curState]->Update();
+
+	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
+	_sprites[_curState]->Update();
 }
 
 void MaplePortar::Render()
 {
 	_trans->SetWorldBuffer(0);
+	_sprites[_curState]->Render();
 	_col->Render();
 }
 
 void MaplePortar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
-	wstring srvPath = L"Resource/Maple/Character/" + wName + L".png";
+	wstring srvPath = L"Resource/Maple/map/" + wName + L".png";
 	shared_ptr<SRV> srv = ADD_SRV(wName);
 
-	string xmlPath = "Resource/Maple/Character/" + name + ".xml";
+	string xmlPath = "Resource/Maple/map/" + name + ".xml";
 	shared_ptr<tinyxml2::XMLDocument> document = make_shared<tinyxml2::XMLDocument>();
 	document->LoadFile(xmlPath.c_str());
 

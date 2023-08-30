@@ -3,13 +3,15 @@
 
 MapleBoss::MapleBoss()
 {
-	_circleCol = make_shared<CircleCollider>(40);
+	_circleCol = make_shared<CircleCollider>(80);
 	_circleTrans = make_shared<Transform>();
 
 	CreateAction("stand");
-	CreateAction("Die");
+	CreateAction("work");
+	CreateAction("hit");
+	//CreateAction("dead");
 
-	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
+	_circleCol->GetTransform()->SetPosition(Vector2(10, 0));
 
 	_circleTrans->SetParent(_circleCol->GetTransform());
 	_circleTrans->SetPosition(Vector2(0, 0));
@@ -47,6 +49,7 @@ void MapleBoss::SetAction(State state)
 {
 	if (_curState == state)
 		return;
+
 	_curState = state;
 
 	_actions[_oldState]->Reset();
@@ -78,13 +81,11 @@ void MapleBoss::Hit(shared_ptr<class PlayerManager> player)
 			if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 			{
 				SetLeft();
-				SetAction(State::HIT);
 
 			}
 			else
 			{
 				SetRight();
-				SetAction(State::HIT);
 			}
 		}
 }
@@ -105,7 +106,7 @@ void MapleBoss::HitEnd()
 		return;
 
 	if (_isDamaged == false && IsActive() == true)
-		SetAction(State::WORK);
+		SetAction(State::STAND);
 }
 
 bool MapleBoss::DeathAnimation()

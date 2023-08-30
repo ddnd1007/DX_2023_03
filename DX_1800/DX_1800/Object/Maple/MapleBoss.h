@@ -7,7 +7,7 @@ class MapleBoss
 		STAND,
 		WORK,
 		HIT,
-		DEAD,
+		DEAD
 	};
 public:
 	MapleBoss();
