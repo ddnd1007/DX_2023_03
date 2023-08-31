@@ -7,7 +7,9 @@ MapleBossMap::MapleBossMap()
 	_col = make_shared<RectCollider>(Vector2(2000, 500));
 	_transform = make_shared<Transform>();
 	_transform->SetParent(_col->GetTransform());
-	_transform->SetPosition(Vector2(0.0f, 440.0f));
+	_transform->SetPosition(Vector2(0.0f, 450.0f));
+
+	
 }
 
 MapleBossMap::~MapleBossMap()

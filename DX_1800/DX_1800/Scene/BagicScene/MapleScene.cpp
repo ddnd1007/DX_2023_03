@@ -25,10 +25,10 @@ MapleScene::MapleScene()
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(550.0f, -50.0f));
 	
-	/*CAMERA->SetTarget(_player->GetCollider()->GetTransform());
+	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
 	CAMERA->SetRightTop(_map->rightTop());
-	CAMERA->SetOffset(Vector2(0, -110));*/
+	CAMERA->SetOffset(Vector2(0, -110));
 }
 
 MapleScene::~MapleScene()

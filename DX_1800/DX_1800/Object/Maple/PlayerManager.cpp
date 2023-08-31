@@ -20,15 +20,12 @@ PlayerManager::PlayerManager()
 
 	_inven = make_shared<MapleInventory>();
 
-
 	CreateAction("stand", 0.2f);
 	CreateAction("work", 0.1f);
 	CreateAction("jump");
 	CreateAction("shoot");
 	CreateAction("dead");
 	CreateAction("lay down");
-
-
 
 	_bowTrans->SetParent(_bowCol->GetTransform());
 	_bowTrans->SetPosition(Vector2(0, 0));
@@ -44,8 +41,6 @@ PlayerManager::PlayerManager()
 		shared_ptr<MapleArrow> arrow = make_shared<MapleArrow>();
 		_arrows.push_back(arrow);
 	}
-	
-
 }
 
 PlayerManager::~PlayerManager()
@@ -70,8 +65,6 @@ void PlayerManager::Update()
 	for (auto arrow : _arrows)
 		arrow->Update();
 
-	
-
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
@@ -85,7 +78,6 @@ void PlayerManager::Update()
 			_isInvincible = false;
 		}
 	}
-	
 }
 
 void PlayerManager::Render()
@@ -101,8 +93,6 @@ void PlayerManager::Render()
 
 	for (auto arrow : _arrows)
 		arrow->Render();
-
-	
 }
 
 void PlayerManager::SetAction(State state)
@@ -209,7 +199,7 @@ void PlayerManager::EndAttack()
 		return;
 
 	_isAttack = false;
-	SetAction(State::STAND);
+	SetAction(State::WORK);
 }
 
 bool PlayerManager::IsDead()

@@ -19,9 +19,9 @@ SceneManager::SceneManager()
 	_scenes.push_back(make_shared<MapleBossScene>());
 
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
-	CAMERA->SetLeftBottom(_map->leftBottom());
-	CAMERA->SetRightTop(_map->rightTop());
-	CAMERA->SetOffset(Vector2(0, -110));
+	//CAMERA->SetLeftBottom(_map->leftBottom());
+	//CAMERA->SetRightTop(_map->rightTop());
+	//CAMERA->SetOffset(Vector2(0, -110));
 }
 
 SceneManager::~SceneManager()
@@ -71,8 +71,10 @@ void SceneManager::NextScene()
 	if (_curScene >= _scenes.size() - 1)
 		return;
 
+	
 	CAMERA->SetLeftBottom(_bossMap->leftBottom());
 	CAMERA->SetRightTop(_bossMap->rightTop());
+	CAMERA->SetOffset(Vector2(0, -400));
 
 	_scenes[_curScene]->End();
 	++_curScene;
@@ -84,8 +86,10 @@ void SceneManager::PrevScene()
 	if (_curScene <= 0)
 		return;
 
+	
 	CAMERA->SetLeftBottom(_map->leftBottom());
 	CAMERA->SetRightTop(_map->rightTop());
+	CAMERA->SetOffset(Vector2(0, -110));
 
 	_scenes[_curScene]->End();
 	--_curScene;

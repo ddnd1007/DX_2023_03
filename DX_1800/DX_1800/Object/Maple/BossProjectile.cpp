@@ -1,25 +1,38 @@
 #include "framework.h"
-#include "MaplePortar.h"
+#include "BossProjectile.h"
+#include "PlayerManager.h"
 
-MaplePortar::MaplePortar()
+Projectile::Projectile()
 {
-	_col = make_shared<RectCollider>(Vector2(50.0f, 50.0f));
-	_col->GetTransform()->SetPosition(Vector2(50.0f, 80.0f));
+	_col = make_shared<CircleCollider>(10);
 	_trans = make_shared<Transform>();
+
 	_trans->SetParent(_col->GetTransform());
-	_trans->SetPosition(Vector2(0.0f, 30.0f));
+	_trans->SetPosition(Vector2(-80.0f, 0.0f));
+	_trans->SetAngle(-PI * 0.5);
 
-	CreateAction("potar");
+	CreateAction("attack ball");
 
-	_actions[State::POTAR]->Play();
+	_col->GetTransform()->SetPosition(Vector2(-WIN_WIDTH * 5, -WIN_HEIGHT * 5));
+	
+	_actions[State::BALL]->Play();
+
+	_col->Update();
+	_trans->Update();
+
+	_sprites[0]->SetLeft();
+	_sprites[1]->SetLeft();
 }
 
-MaplePortar::~MaplePortar()
+Projectile::~Projectile()
 {
 }
 
-void MaplePortar::Update()
+void Projectile::Update()
 {
+
+	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
+
 	_col->Update();
 	_trans->Update();
 
@@ -29,20 +42,36 @@ void MaplePortar::Update()
 	_sprites[_curState]->Update();
 }
 
-void MaplePortar::Render()
+void Projectile::Render()
 {
 	_trans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
+
 	_col->Render();
 }
 
-void MaplePortar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
+void Projectile::SetAction(State state)
+{
+}
+
+void Projectile::Attack(shared_ptr<class PlayerManager> victim)
+{
+	if (_isActive == false)
+		return;
+	if (_col->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
+		return;
+
+	victim->TakeDamage(_damage);
+	_isActive = false;
+}
+
+void Projectile::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
-	wstring srvPath = L"Resource/Maple/map/" + wName + L".png";
+	wstring srvPath = L"Resource/Maple/Boss/" + wName + L".png";
 	shared_ptr<SRV> srv = ADD_SRV(wName);
 
-	string xmlPath = "Resource/Maple/map/" + name + ".xml";
+	string xmlPath = "Resource/Maple/Boss/" + name + ".xml";
 	shared_ptr<tinyxml2::XMLDocument> document = make_shared<tinyxml2::XMLDocument>();
 	document->LoadFile(xmlPath.c_str());
 

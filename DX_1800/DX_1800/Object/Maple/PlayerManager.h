@@ -10,7 +10,6 @@ public:
 		JUMP,
 		SHOOT,
 		DEAD,
-		LAYDOWN
 	};
 
 	PlayerManager();

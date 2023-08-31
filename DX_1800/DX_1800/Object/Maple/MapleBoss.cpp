@@ -1,12 +1,13 @@
 #include "framework.h"
 #include "MapleBoss.h"
+#include "BossProjectile.h"
 
 MapleBoss::MapleBoss()
 {
 	_circleCol = make_shared<CircleCollider>(80);
 	_circleTrans = make_shared<Transform>();
 
-	CreateAction("stand");
+	CreateAction("stand", 0.1f, Action::LOOP);
 	CreateAction("work");
 	CreateAction("hit");
 	//CreateAction("dead");
@@ -16,10 +17,13 @@ MapleBoss::MapleBoss()
 	_circleTrans->SetParent(_circleCol->GetTransform());
 	_circleTrans->SetPosition(Vector2(0, 0));
 
-	_actions[State::STAND]->Play();
+	_actions[State::WORK]->Play();
 	
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
+
+	//_skill = make_shared<BossProjectile>();
+	
 }
 
 MapleBoss::~MapleBoss()
@@ -35,6 +39,8 @@ void MapleBoss::Update()
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
+
+	
 }
 
 void MapleBoss::Render()
@@ -43,6 +49,8 @@ void MapleBoss::Render()
 	_sprites[_curState]->Render();
 
 	_circleCol->Render();
+
+	
 }
 
 void MapleBoss::SetAction(State state)
@@ -120,6 +128,11 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 
 void MapleBoss::ChangeState(State nextState, int duration)
 {
+}
+
+void MapleBoss::Skil()
+{
+
 }
 
 bool MapleBoss::IsDead()
