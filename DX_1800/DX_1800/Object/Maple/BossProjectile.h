@@ -3,8 +3,10 @@ class Projectile
 {
 	enum State
 	{
-		BALL
+		BALL,
+		NONE
 	};
+
 public:
 	Projectile();
 	~Projectile();
@@ -20,6 +22,8 @@ public:
 	void Attack(shared_ptr<class PlayerManager> victim);
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
+
+	void Shoot(shared_ptr<class PlayerManager> victim);
 
 	void SetLeft()
 	{

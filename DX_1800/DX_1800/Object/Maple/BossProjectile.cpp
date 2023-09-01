@@ -52,6 +52,17 @@ void Projectile::Render()
 
 void Projectile::SetAction(State state)
 {
+	if (_curState == state)
+		return;
+
+	_curState = state;
+
+	_actions[_oldState]->Reset();
+	_actions[_oldState]->Pause();
+
+	_actions[_curState]->Play();
+
+	_oldState = _curState;
 }
 
 void Projectile::Attack(shared_ptr<class PlayerManager> victim)
@@ -62,6 +73,17 @@ void Projectile::Attack(shared_ptr<class PlayerManager> victim)
 		return;
 
 	victim->TakeDamage(_damage);
+	_isActive = false;
+}
+
+void Projectile::Shoot(shared_ptr<class PlayerManager> victim)
+{
+	if (victim->IsActive() == false)
+		return;
+	if (_col->IsCollision(victim->GetCollider()) == false);
+		return;
+	SetAction(State::BALL);
+	victim->TakeDamage(50);
 	_isActive = false;
 }
 

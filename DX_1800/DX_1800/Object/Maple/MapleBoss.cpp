@@ -7,6 +7,13 @@ MapleBoss::MapleBoss()
 	_circleCol = make_shared<CircleCollider>(80);
 	_circleTrans = make_shared<Transform>();
 
+	_ballCol = make_shared<CircleCollider>(5);
+	_ballTrans = make_shared<Transform>();
+
+	_rectCol = make_shared<RectCollider>(Vector2(1000.0f, 200.0f));
+	_rectCol->GetTransform()->SetParent(_circleCol->GetTransform());
+	_rectTrans = make_shared<Transform>();
+
 	CreateAction("stand", 0.1f, Action::LOOP);
 	CreateAction("work");
 	CreateAction("hit");
@@ -16,13 +23,22 @@ MapleBoss::MapleBoss()
 
 	_circleTrans->SetParent(_circleCol->GetTransform());
 	_circleTrans->SetPosition(Vector2(0, 0));
-
+	_rectTrans->SetParent(_rectCol->GetTransform());
+	_rectTrans->SetPosition(Vector2(0, 0));
+	_ballCol->GetTransform()->SetParent(_circleCol->GetTransform());
+	//_ballCol->GetTransform()->SetPosition(Vector2(70.0f, -20.0f));
+	_ballTrans->SetParent(_circleCol->GetTransform());
+	
+	_hpBar = make_shared<HpBar>();
+	_hpBar->SetPosition(Vector2(0.0f, 700.0f));
+	
+	_hpBar->SetRatio(200.0f);
+	
 	_actions[State::WORK]->Play();
 	
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	//_skill = make_shared<BossProjectile>();
 	
 }
 
@@ -32,24 +48,37 @@ MapleBoss::~MapleBoss()
 
 void MapleBoss::Update()
 {
+	
+	 
 	_circleCol->Update();
 	_circleTrans->Update();
+
+	_ballCol->Update();
+	_ballTrans->Update();
+
+	_rectCol->Update();
+	_rectTrans->Update();
+
+	_hpBar->Update();
 
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
-
-	
 }
 
 void MapleBoss::Render()
 {
+	_hpBar->PostRender();
+
 	_circleTrans->SetWorldBuffer(0);
+	_ballTrans->SetWorldBuffer(0);
+	_rectTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
 	_circleCol->Render();
-
+	_ballCol->Render();
+	_rectCol->Render();
 	
 }
 
@@ -124,13 +153,37 @@ bool MapleBoss::DeathAnimation()
 
 void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 {
+	if (!IsActive())
+		return;
+
+	/*if (_curState == State::HIT || _curState == State::DEAD || _isDamaged == true)
+		return;*/
+
+	if (player->GetCollider()->IsCollision(_circleCol))
+		SetAction(State::WORK);
+
+	if (player->GetCollider()->IsCollision(_rectCol))
+	{
+		if (player->GetPosition().x > _rectCol->GetTransform()->GetWorldPos().x)
+		{
+			_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
+			_ballCol->GetTransform()->SetPosition(Vector2(+70.0f, -20.0f));
+			SetLeft();
+		}
+		else
+		{
+			_circleCol->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
+			_ballCol->GetTransform()->SetPosition(Vector2(-70.0f, -20.0f));
+			SetRight();
+		}
+	}
 }
 
 void MapleBoss::ChangeState(State nextState, int duration)
 {
 }
 
-void MapleBoss::Skil()
+void MapleBoss::Skill()
 {
 
 }

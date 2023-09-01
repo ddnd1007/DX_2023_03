@@ -70,6 +70,19 @@ void MapleBossScene::Update()
 		}
 	}
 
+	
+	if (_boss->IsActive() == false)
+		return;
+
+	if (_player->IsActive() == false)
+		return;
+
+	if (_boss->GetRectCollider()->IsCollision(_player->GetCollider()))
+	{
+		_boss->Move(_player);
+	}
+	
+
 	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
 	{
 		if (KEY_PRESS('W'))
@@ -77,6 +90,8 @@ void MapleBossScene::Update()
 			SCENE->PrevScene();
 		}
 	}
+
+	
 }
 
 

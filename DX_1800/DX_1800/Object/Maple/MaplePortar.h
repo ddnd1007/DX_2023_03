@@ -13,7 +13,6 @@ public:
 	void Render();
 
 	void SetPosition(Vector2 pos) { _col->GetTransform()->SetPosition(pos); }
-	void Interact(shared_ptr<PlayerManager> player);
 	const std::string& GetDestinationScene() const { return destinationScene; }
 	shared_ptr<RectCollider> GetCollider() { return _col; }
 

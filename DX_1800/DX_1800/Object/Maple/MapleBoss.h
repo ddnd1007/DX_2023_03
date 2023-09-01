@@ -36,8 +36,9 @@ public:
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
 	void ChangeState(State nextState, int duration);
-	void Skil();
+	void Skill();
 
+	void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
 
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
@@ -53,10 +54,13 @@ private:
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	shared_ptr<CircleCollider> _circleCol;
 	shared_ptr<Transform> _circleTrans;
+	shared_ptr<CircleCollider> _ballCol;
+	shared_ptr<Transform> _ballTrans;
 	shared_ptr<RectCollider> _rectCol;
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
 	shared_ptr<class BossProjectile> _skill;
+	shared_ptr<HpBar> _hpBar;
 
 	State _curState = State::WORK;
 	State _oldState = State::WORK;
