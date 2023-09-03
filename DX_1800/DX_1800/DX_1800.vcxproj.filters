@@ -489,6 +489,9 @@
     <Image Include="Resource\Maple\Character\arrow.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\Maple\Boss\dead.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -527,6 +530,7 @@
     <Xml Include="Resource\Maple\snail\snail hit.xml" />
     <Xml Include="Resource\Maple\snail\snail stand.xml" />
     <Xml Include="Resource\Maple\snail\snail work.xml" />
+    <Xml Include="Resource\Maple\Boss\dead.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fmod.dll" />

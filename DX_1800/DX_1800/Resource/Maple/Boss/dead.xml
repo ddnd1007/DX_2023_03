@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="potar.png" width="4096" height="1024" scale="1" format="RGBA8888">
+  <sprite n="9.png" x="10" y="10" w="258" h="303" pX="0.5" pY="0.5" oX="0" oY="0" oW="260" oH="304"/>
+  <sprite n="10.png" x="288" y="10" w="246" h="295" pX="0.5" pY="0.5" oX="0" oY="0" oW="248" oH="296"/>
+  <sprite n="8.png" x="554" y="10" w="242" h="308" pX="0.5" pY="0.5" oX="0" oY="0" oW="244" oH="308"/>
+  <sprite n="7.png" x="10" y="333" w="240" h="308" pX="0.5" pY="0.5"/>
+  <sprite n="6.png" x="270" y="333" w="238" h="305" pX="0.5" pY="0.5" oX="0" oY="0" oW="240" oH="308"/>
+  <sprite n="5.png" x="816" y="10" w="234" h="301" pX="0.5" pY="0.5" oX="0" oY="0" oW="236" oH="304"/>
+  <sprite n="11.png" x="1070" y="10" w="230" h="272" pX="0.5" pY="0.5" oX="0" oY="0" oW="232" oH="272"/>
+  <sprite n="27.png" x="1320" y="10" w="228" h="200" pX="0.5" pY="0.5"/>
+  <sprite n="28.png" x="1568" y="10" w="226" h="182" pX="0.5" pY="0.5" oX="0" oY="0" oW="228" oH="184"/>
+  <sprite n="12.png" x="1814" y="10" w="225" h="264" pX="0.5" pY="0.5" oX="0" oY="0" oW="228" oH="264"/>
+  <sprite n="4.png" x="1320" y="230" w="203" h="281" pX="0.5" pY="0.5" oX="0" oY="0" oW="204" oH="284"/>
+  <sprite n="3.png" x="816" y="331" w="191" h="279" pX="0.5" pY="0.5" oX="0" oY="0" oW="192" oH="280"/>
+  <sprite n="2.png" x="528" y="338" w="179" h="276" pX="0.5" pY="0.5" oX="0" oY="0" oW="180" oH="276"/>
+  <sprite n="15.png" x="528" y="634" w="208" h="262" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="264"/>
+  <sprite n="14.png" x="270" y="658" w="208" h="257" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="260"/>
+  <sprite n="16.png" x="10" y="661" w="208" h="254" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="256"/>
+  <sprite n="13.png" x="1027" y="331" w="222" h="249" pX="0.5" pY="0.5" oX="0" oY="0" oW="224" oH="252"/>
+  <sprite n="19.png" x="1543" y="230" w="206" h="248" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="248"/>
+  <sprite n="26.png" x="2059" y="10" w="221" h="204" pX="0.5" pY="0.5" oX="0" oY="0" oW="224" oH="204"/>
+  <sprite n="25.png" x="2300" y="10" w="215" h="206" pX="0.5" pY="0.5" oX="0" oY="0" oW="216" oH="208"/>
+  <sprite n="17.png" x="2059" y="234" w="208" h="247" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="248"/>
+  <sprite n="18.png" x="1543" y="498" w="208" h="243" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="244"/>
+  <sprite n="20.png" x="1269" y="531" w="206" h="247" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="248"/>
+  <sprite n="22.png" x="1027" y="600" w="205" h="231" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="232"/>
+  <sprite n="24.png" x="1252" y="798" w="209" h="211" pX="0.5" pY="0.5" oX="0" oY="0" oW="212" oH="212"/>
+  <sprite n="21.png" x="756" y="630" w="208" h="229" pX="0.5" pY="0.5" oX="0" oY="0" oW="208" oH="232"/>
+  <sprite n="23.png" x="1771" y="294" w="199" h="222" pX="0.5" pY="0.5" oX="0" oY="0" oW="200" oH="224"/>
+  <sprite n="1.png" x="1771" y="536" w="172" h="203" pX="0.5" pY="0.5" oX="0" oY="0" oW="172" oH="204"/>
+  <sprite n="0.png" x="2535" y="10" w="163" h="191" pX="0.5" pY="0.5" oX="0" oY="0" oW="164" oH="192"/>
+</TextureAtlas>

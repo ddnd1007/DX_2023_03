@@ -289,6 +289,7 @@
     <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
     <Image Include="Resource\CupHead\track.png" />
+    <Image Include="Resource\Maple\Boss\dead.png" />
     <Image Include="Resource\Maple\Character\arrow.png" />
     <Image Include="Resource\Maple\Character\dead.png" />
     <Image Include="Resource\Maple\Character\jump.png" />
@@ -479,6 +480,7 @@
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
+    <Xml Include="Resource\Maple\Boss\dead.xml" />
     <Xml Include="Resource\Maple\Character\dead.xml" />
     <Xml Include="Resource\Maple\Character\jump.xml" />
     <Xml Include="Resource\Maple\Character\lay down.xml" />

@@ -17,7 +17,7 @@ MapleBoss::MapleBoss()
 	CreateAction("stand", 0.1f, Action::LOOP);
 	CreateAction("work");
 	CreateAction("hit");
-	//CreateAction("dead");
+	CreateAction("dead", 0.2f, Action::END);
 
 	_circleCol->GetTransform()->SetPosition(Vector2(10, 0));
 
@@ -48,7 +48,8 @@ MapleBoss::~MapleBoss()
 
 void MapleBoss::Update()
 {
-	
+	DeathAnimation();
+	IsDead();
 	 
 	_circleCol->Update();
 	_circleTrans->Update();
@@ -69,6 +70,9 @@ void MapleBoss::Update()
 
 void MapleBoss::Render()
 {
+	if (_isActive == false)
+		return;
+
 	_hpBar->PostRender();
 
 	_circleTrans->SetWorldBuffer(0);
@@ -103,6 +107,7 @@ void MapleBoss::TakeDamage(int damage)
 		return;
 
 	_hp -= damage;
+	_hpBar->SetRatio(_hp / (float)_maxHp);
 }
 
 void MapleBoss::Hit(shared_ptr<class PlayerManager> player)
@@ -148,6 +153,20 @@ void MapleBoss::HitEnd()
 
 bool MapleBoss::DeathAnimation()
 {
+	if (IsActive() == false)
+	{
+		_deathAnimationTimer += DELTA_TIME;
+
+		if (_deathAnimationTimer >= _deathAnimationDuration)
+		{
+			SetAction(State::DEAD);
+			_deathAnimationTimer = 0.0f;
+			_isActive = false;
+			_curState = (State::DEAD);
+			return true;
+		}
+		return false;
+	}
 	return false;
 }
 

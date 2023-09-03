@@ -15,6 +15,7 @@ public:
 
 	void Update();
 	void Render();
+	void PostRender();
 
 	void SetLeft()
 	{
@@ -44,6 +45,7 @@ public:
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
 
 	int _hp = 200;
+	const int _maxHp = 200;
 	bool _isDamaged = false;
 	bool IsDead();
 	bool IsActive() { return _hp > 0; }
@@ -71,7 +73,7 @@ private:
 	
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
-	const float _deathAnimationDuration = 0.2f;
+	const float _deathAnimationDuration = 1.5f;
 	float _deathAnimationTimer = 0.0f;
 	const float _speed = 50.0f;
 	
