@@ -3,6 +3,7 @@
 #include "MapleArrow.h"
 #include "MaplePortar.h"
 #include "MapleInventory.h"
+#include "../UI/PlayerHpBar.h"
 
 PlayerManager* PlayerManager::_instance = nullptr;
 
@@ -41,6 +42,9 @@ PlayerManager::PlayerManager()
 		shared_ptr<MapleArrow> arrow = make_shared<MapleArrow>();
 		_arrows.push_back(arrow);
 	}
+
+	_hpBar = make_shared<PlayerHpBar>();
+	_hpBar->SetPosition(Vector2(-300.0f, -150.0f));
 }
 
 PlayerManager::~PlayerManager()
@@ -78,13 +82,18 @@ void PlayerManager::Update()
 			_isInvincible = false;
 		}
 	}
+
+	_hpBar->Update();
 }
 
 void PlayerManager::Render()
 {
+	_hpBar->PostRender();
+
 	_transform->SetWorldBuffer(0);
 	_bowTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
+
 
 	_bowCol->Render();
 	_col->Render();
@@ -222,6 +231,7 @@ void PlayerManager::TakeDamage(int damage)
 	if (!_isInvincible)
 	{
 		_hp -= damage;
+		_hpBar->SetRatio(_hp / (float)_maxHp);
 		_isInvincible = true;
 		_invincibleTimer = _invincibleDuration;
 		_knockBack = 100;

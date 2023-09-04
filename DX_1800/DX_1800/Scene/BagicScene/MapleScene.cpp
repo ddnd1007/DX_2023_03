@@ -145,7 +145,8 @@ void MapleScene::Update()
 			SCENE->NextScene();
 		}
 	}
-	
+
+
 }
 
 void MapleScene::Render()

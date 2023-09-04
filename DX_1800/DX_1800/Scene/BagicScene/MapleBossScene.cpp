@@ -91,6 +91,10 @@ void MapleBossScene::Update()
 		}
 	}
 
+	if (_player->GetCollider()->IsCollision(_boss->GetRectCollider()))
+	{
+		_boss->Skill(_player);
+	}
 	
 }
 

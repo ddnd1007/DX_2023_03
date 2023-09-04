@@ -156,6 +156,7 @@
     <ClInclude Include="Object\Maple\MapleBoss.h" />
     <ClInclude Include="Object\Maple\MapleInventory.h" />
     <ClInclude Include="Object\Maple\Slot.h" />
+    <ClInclude Include="Object\UI\PlayerHpBar.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\BagicScene\MapleBossScene.h" />
     <ClInclude Include="Object\Maple\MapleBossMap.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Object\Maple\MapleBoss.cpp" />
     <ClCompile Include="Object\Maple\MapleInventory.cpp" />
     <ClCompile Include="Object\Maple\Slot.cpp" />
+    <ClCompile Include="Object\UI\PlayerHpBar.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\BagicScene\MapleBossScene.cpp" />
     <ClCompile Include="Object\Maple\MapleBossMap.cpp" />

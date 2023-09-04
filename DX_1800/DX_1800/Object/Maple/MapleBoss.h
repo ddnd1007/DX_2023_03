@@ -7,6 +7,7 @@ class MapleBoss
 		STAND,
 		WORK,
 		HIT,
+		SKILL,
 		DEAD
 	};
 public:
@@ -37,7 +38,7 @@ public:
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
 	void ChangeState(State nextState, int duration);
-	void Skill();
+	void Skill(shared_ptr<PlayerManager> player);
 
 	void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
 
@@ -73,8 +74,9 @@ private:
 	
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;
-	const float _deathAnimationDuration = 1.5f;
+	const float _deathAnimationDuration = 2.8f;
 	float _deathAnimationTimer = 0.0f;
+
 	const float _speed = 50.0f;
 	
 	const int _damage = 3;

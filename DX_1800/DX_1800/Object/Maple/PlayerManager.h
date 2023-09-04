@@ -88,6 +88,8 @@ private:
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	vector<shared_ptr<class MapleArrow>> _arrows;
 
+	shared_ptr<class PlayerHpBar> _hpBar;
+
 	State _curState = State::STAND;
 	State _oldState = State::STAND;
 
@@ -105,5 +107,6 @@ private:
 	float _speed = 200.0f;
 
 	int _hp = 100;
+	int _maxHp = 100;
 };
 

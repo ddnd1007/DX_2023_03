@@ -2,6 +2,7 @@
 #include "MapleBoss.h"
 #include "BossProjectile.h"
 
+
 MapleBoss::MapleBoss()
 {
 	_circleCol = make_shared<CircleCollider>(80);
@@ -17,7 +18,8 @@ MapleBoss::MapleBoss()
 	CreateAction("stand", 0.1f, Action::LOOP);
 	CreateAction("work");
 	CreateAction("hit");
-	CreateAction("dead", 0.2f, Action::END);
+	CreateAction("skil1");
+	CreateAction("dead", 0.1f, Action::END);
 
 	_circleCol->GetTransform()->SetPosition(Vector2(10, 0));
 
@@ -39,7 +41,6 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	
 }
 
 MapleBoss::~MapleBoss()
@@ -50,7 +51,7 @@ void MapleBoss::Update()
 {
 	DeathAnimation();
 	IsDead();
-	 
+	
 	_circleCol->Update();
 	_circleTrans->Update();
 
@@ -66,6 +67,8 @@ void MapleBoss::Update()
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
+
+	
 }
 
 void MapleBoss::Render()
@@ -83,7 +86,6 @@ void MapleBoss::Render()
 	_circleCol->Render();
 	_ballCol->Render();
 	_rectCol->Render();
-	
 }
 
 void MapleBoss::SetAction(State state)
@@ -122,11 +124,13 @@ void MapleBoss::Hit(shared_ptr<class PlayerManager> player)
 		{
 			if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 			{
+				SetAction(State::HIT);
 				SetLeft();
 
 			}
 			else
 			{
+				SetAction(State::HIT);
 				SetRight();
 			}
 		}
@@ -159,7 +163,6 @@ bool MapleBoss::DeathAnimation()
 
 		if (_deathAnimationTimer >= _deathAnimationDuration)
 		{
-			SetAction(State::DEAD);
 			_deathAnimationTimer = 0.0f;
 			_isActive = false;
 			_curState = (State::DEAD);
@@ -202,20 +205,29 @@ void MapleBoss::ChangeState(State nextState, int duration)
 {
 }
 
-void MapleBoss::Skill()
+void MapleBoss::Skill(shared_ptr<PlayerManager> player)
 {
+	if (IsActive() == false && player->IsActive() == false)
+		return;
 
+	if (_maxHp / 10)
+	{
+	  SetAction(State::SKILL);
+	}
 }
 
 bool MapleBoss::IsDead()
 {
-	if (IsActive() == false)
+	if (IsActive() == true)
 	{
-		return true;
+		return _hp > 0;
+		return false;
 	}
 	else
 	{
-		return false;
+		SetAction(State::DEAD);
+		CAMERA->ShakeStart(0.5f, 1.3f, 0.1f);
+		return true;
 	};
 }
 

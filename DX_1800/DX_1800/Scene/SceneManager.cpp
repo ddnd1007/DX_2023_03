@@ -78,6 +78,7 @@ void SceneManager::NextScene()
 	CAMERA->SetRightTop(_bossMap->rightTop());
 	CAMERA->SetOffset(Vector2(0, -400));
 
+	
 	_scenes[_curScene]->End();
 	++_curScene;
 	_scenes[_curScene]->Init();
