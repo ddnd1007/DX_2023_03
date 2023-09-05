@@ -107,7 +107,7 @@ using namespace Microsoft::WRL;
 
 // GameObj
 #include "Object/Maple/PlayerManager.h"
-//#include "Object/Maple/BossProjectile.h"
+#include "Object/Maple/BossProjectiles.h"
 
 // Scene
 #include "Scene/Scene.h"

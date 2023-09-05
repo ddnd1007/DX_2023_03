@@ -1,8 +1,8 @@
 #include "framework.h"
-#include "BossProjectile.h"
-#include "PlayerManager.h"
+#include "BossProjectiles.h"
+//#include "PlayerManager.h"
 
-Projectile::Projectile()
+Projectiles::Projectiles()
 {
 	_col = make_shared<CircleCollider>(10);
 	_trans = make_shared<Transform>();
@@ -14,7 +14,7 @@ Projectile::Projectile()
 	CreateAction("attack ball");
 
 	_col->GetTransform()->SetPosition(Vector2(-WIN_WIDTH * 5, -WIN_HEIGHT * 5));
-	
+
 	_actions[State::BALL]->Play();
 
 	_col->Update();
@@ -24,11 +24,11 @@ Projectile::Projectile()
 	_sprites[1]->SetLeft();
 }
 
-Projectile::~Projectile()
+Projectiles::~Projectiles()
 {
 }
 
-void Projectile::Update()
+void Projectiles::Update()
 {
 
 	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
@@ -42,7 +42,7 @@ void Projectile::Update()
 	_sprites[_curState]->Update();
 }
 
-void Projectile::Render()
+void Projectiles::Render()
 {
 	_trans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -50,7 +50,7 @@ void Projectile::Render()
 	_col->Render();
 }
 
-void Projectile::SetAction(State state)
+void Projectiles::SetAction(State state)
 {
 	if (_curState == state)
 		return;
@@ -65,7 +65,7 @@ void Projectile::SetAction(State state)
 	_oldState = _curState;
 }
 
-void Projectile::Attack(shared_ptr<class PlayerManager> victim)
+void Projectiles::Attack(shared_ptr<class PlayerManager> victim)
 {
 	if (_isActive == false)
 		return;
@@ -76,18 +76,18 @@ void Projectile::Attack(shared_ptr<class PlayerManager> victim)
 	_isActive = false;
 }
 
-void Projectile::Shoot(shared_ptr<class PlayerManager> victim)
+void Projectiles::Shoot(shared_ptr<class PlayerManager> victim)
 {
 	if (victim->IsActive() == false)
 		return;
 	if (_col->IsCollision(victim->GetCollider()) == false);
-		return;
+	return;
 	SetAction(State::BALL);
 	victim->TakeDamage(50);
 	_isActive = false;
 }
 
-void Projectile::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
+void Projectiles::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
 	wstring srvPath = L"Resource/Maple/Boss/" + wName + L".png";

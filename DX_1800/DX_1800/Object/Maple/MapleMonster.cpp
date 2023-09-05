@@ -118,17 +118,6 @@ bool MapleMonster::IsDead()
 	}
 }
 
-
-void MapleMonster::Attack(shared_ptr<class PlayerManager> player)
-{
-	if (IsActive() == false)
-		return;
-	if (_circleCol->IsCollision(player->GetCollider()) == false || player->IsDead() == true)
-		return;
-
-	player->TakeDamage(_damage);
-}
-
 void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 {
 	if (IsActive() == false)

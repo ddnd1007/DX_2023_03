@@ -62,8 +62,9 @@ private:
 	shared_ptr<RectCollider> _rectCol;
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
-	shared_ptr<class BossProjectile> _skill;
+	vector<shared_ptr<class BossProjectiles>> _skill;
 	shared_ptr<HpBar> _hpBar;
+
 
 	State _curState = State::WORK;
 	State _oldState = State::WORK;
@@ -71,6 +72,7 @@ private:
 	bool _isAttack = false;
 	bool _isDead = false;
 	bool _isActive = true;
+	bool _skillUsed = false;
 	
 	float _curTime = 0.0f;
 	float _hitTime = 0.3f;

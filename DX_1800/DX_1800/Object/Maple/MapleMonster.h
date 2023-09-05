@@ -30,7 +30,6 @@ public:
 	void SetAction(State state);
 	void TakeDamage(int damage);
 	void Hit(shared_ptr<class PlayerManager> player);
-	void Attack(shared_ptr<class PlayerManager> victim);
 	void HitEnd();
 	bool DeathAnimation();
 	bool HitAnimation();

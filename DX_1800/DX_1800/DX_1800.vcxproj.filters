@@ -204,10 +204,10 @@
     <ClInclude Include="Object\Maple\Item.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Maple\BossProjectile.h">
+    <ClInclude Include="Object\UI\PlayerHpBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\UI\PlayerHpBar.h">
+    <ClInclude Include="Object\Maple\Bossprojectiles.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -362,10 +362,10 @@
     <ClCompile Include="Object\Maple\Item.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Maple\BossProjectile.cpp">
+    <ClCompile Include="Object\UI\PlayerHpBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\UI\PlayerHpBar.cpp">
+    <ClCompile Include="Object\Maple\Bossprojectiles.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

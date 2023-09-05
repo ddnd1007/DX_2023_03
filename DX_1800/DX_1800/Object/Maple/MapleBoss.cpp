@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "MapleBoss.h"
-#include "BossProjectile.h"
+#include "BossProjectiles.h"
 
 
 MapleBoss::MapleBoss()
@@ -28,7 +28,6 @@ MapleBoss::MapleBoss()
 	_rectTrans->SetParent(_rectCol->GetTransform());
 	_rectTrans->SetPosition(Vector2(0, 0));
 	_ballCol->GetTransform()->SetParent(_circleCol->GetTransform());
-	//_ballCol->GetTransform()->SetPosition(Vector2(70.0f, -20.0f));
 	_ballTrans->SetParent(_circleCol->GetTransform());
 	
 	_hpBar = make_shared<HpBar>();
@@ -41,6 +40,11 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
+	for (int i = 0; i < 30; i++)
+	{
+		shared_ptr<BossProjectiles> skill = make_shared<BossProjectiles>();
+		_skill.push_back(skill);
+	}
 }
 
 MapleBoss::~MapleBoss()
@@ -68,7 +72,8 @@ void MapleBoss::Update()
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
 
-	
+	for (auto skill : _skill)
+		skill->Update();
 }
 
 void MapleBoss::Render()
@@ -86,6 +91,9 @@ void MapleBoss::Render()
 	_circleCol->Render();
 	_ballCol->Render();
 	_rectCol->Render();
+
+	for (auto skill : _skill)
+		skill->Render();
 }
 
 void MapleBoss::SetAction(State state)
@@ -210,9 +218,11 @@ void MapleBoss::Skill(shared_ptr<PlayerManager> player)
 	if (IsActive() == false && player->IsActive() == false)
 		return;
 
-	if (_maxHp / 10)
+
+	if ((_hp == 140 || _hp == 80 || _hp == 20) && !_skillUsed )
 	{
-	  SetAction(State::SKILL);
+		SetAction(State::SKILL);
+		_skillUsed = true;
 	}
 }
 

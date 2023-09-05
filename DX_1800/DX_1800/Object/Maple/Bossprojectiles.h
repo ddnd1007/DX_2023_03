@@ -1,5 +1,5 @@
 #pragma once
-class Projectile
+class Projectiles
 {
 	enum State
 	{
@@ -8,8 +8,8 @@ class Projectile
 	};
 
 public:
-	Projectile();
-	~Projectile();
+	Projectiles();
+	~Projectiles();
 
 	void Update();
 	void Render();
@@ -53,7 +53,7 @@ private:
 
 	float _speed = 100.0f;
 	int _damage = 40;
-	
+
 };
 
 
