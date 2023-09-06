@@ -19,10 +19,6 @@ MapleBossScene::MapleBossScene()
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(-500.0f, 270.0f));
 
-	/*CAMERA->SetTarget(_player->GetCollider()->GetTransform());
-	CAMERA->SetLeftBottom(_bossMap->leftBottom());
-	CAMERA->SetRightTop(_bossMap->rightTop());
-	CAMERA->SetOffset(Vector2(0, -1010));*/
 }
 
 MapleBossScene::~MapleBossScene()
@@ -91,11 +87,8 @@ void MapleBossScene::Update()
 		}
 	}
 
-	if (_player->GetCollider()->IsCollision(_boss->GetRectCollider()))
-	{
-		_boss->Skill(_player);
-	}
-	
+	_boss->Skill(_player);
+
 }
 
 

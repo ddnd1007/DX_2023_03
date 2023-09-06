@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "MapleBoss.h"
 #include "BossProjectiles.h"
+#include "BossSkill2.h"
 
 
 MapleBoss::MapleBoss()
@@ -40,10 +41,12 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		shared_ptr<BossProjectiles> skill = make_shared<BossProjectiles>();
-		_skill.push_back(skill);
+		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
+		int randomX = skill2->getRandomNumber(0, WIN_WIDTH - 100);
+		skill2->SetPosition(Vector2(randomX, -330));
+		_skill2.push_back(skill2);
 	}
 }
 
@@ -55,15 +58,20 @@ void MapleBoss::Update()
 {
 	DeathAnimation();
 	IsDead();
-	
+
 	_circleCol->Update();
 	_circleTrans->Update();
 
-	_ballCol->Update();
-	_ballTrans->Update();
+	//_ballCol->Update();
+	//_ballTrans->Update();
 
 	_rectCol->Update();
 	_rectTrans->Update();
+
+	for (int i = 0; i < _skill2Count; i++)
+	{
+		_skill2[i]->Update();
+	}
 
 	_hpBar->Update();
 
@@ -72,8 +80,6 @@ void MapleBoss::Update()
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
 
-	for (auto skill : _skill)
-		skill->Update();
 }
 
 void MapleBoss::Render()
@@ -84,16 +90,18 @@ void MapleBoss::Render()
 	_hpBar->PostRender();
 
 	_circleTrans->SetWorldBuffer(0);
-	_ballTrans->SetWorldBuffer(0);
+	//_ballTrans->SetWorldBuffer(0);
 	_rectTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
 	_circleCol->Render();
-	_ballCol->Render();
+	//_ballCol->Render();
 	_rectCol->Render();
 
-	for (auto skill : _skill)
-		skill->Render();
+	for (int i = 0; i < _skill2Count; i++)
+	{
+		_skill2[i]->Render();
+	}
 }
 
 void MapleBoss::SetAction(State state)
@@ -186,9 +194,6 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 	if (!IsActive())
 		return;
 
-	/*if (_curState == State::HIT || _curState == State::DEAD || _isDamaged == true)
-		return;*/
-
 	if (player->GetCollider()->IsCollision(_circleCol))
 		SetAction(State::WORK);
 
@@ -218,13 +223,17 @@ void MapleBoss::Skill(shared_ptr<PlayerManager> player)
 	if (IsActive() == false && player->IsActive() == false)
 		return;
 
-
-	if ((_hp == 140 || _hp == 80 || _hp == 20) && !_skillUsed )
+	for (int i = 0; i < _skill2Count; i++)
 	{
-		SetAction(State::SKILL);
-		_skillUsed = true;
+		if (_hp == 140)
+		{
+			SetAction(State::SKILL);
+			_skill2[i]->Attack(player);
+			player->TakeDamage(_skill2Damage);
+		}
 	}
 }
+
 
 bool MapleBoss::IsDead()
 {

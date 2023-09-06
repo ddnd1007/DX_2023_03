@@ -40,7 +40,7 @@ public:
 	void ChangeState(State nextState, int duration);
 	void Skill(shared_ptr<PlayerManager> player);
 
-	void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
+	//void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
 
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
@@ -62,7 +62,7 @@ private:
 	shared_ptr<RectCollider> _rectCol;
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
-	vector<shared_ptr<class BossProjectiles>> _skill;
+	vector <shared_ptr<class BossSkill2>> _skill2;
 	shared_ptr<HpBar> _hpBar;
 
 
@@ -82,5 +82,7 @@ private:
 	const float _speed = 50.0f;
 	
 	const int _damage = 3;
+	const int _skill2Damage = 100;
+	const int _skill2Count = 10;
 };
 

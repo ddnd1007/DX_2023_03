@@ -108,5 +108,6 @@ private:
 
 	int _hp = 100;
 	int _maxHp = 100;
+	
 };
 
