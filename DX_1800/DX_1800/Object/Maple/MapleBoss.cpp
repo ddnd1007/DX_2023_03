@@ -41,13 +41,8 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	for (int i = 0; i < 10; i++)
-	{
-		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
-		int randomX = skill2->getRandomNumber(0, WIN_WIDTH - 100);
-		skill2->SetPosition(Vector2(randomX, -330));
-		_skill2.push_back(skill2);
-	}
+	
+
 }
 
 MapleBoss::~MapleBoss()
@@ -68,10 +63,7 @@ void MapleBoss::Update()
 	_rectCol->Update();
 	_rectTrans->Update();
 
-	for (int i = 0; i < _skill2Count; i++)
-	{
-		_skill2[i]->Update();
-	}
+	
 
 	_hpBar->Update();
 
@@ -98,10 +90,7 @@ void MapleBoss::Render()
 	//_ballCol->Render();
 	_rectCol->Render();
 
-	for (int i = 0; i < _skill2Count; i++)
-	{
-		_skill2[i]->Render();
-	}
+	
 }
 
 void MapleBoss::SetAction(State state)
@@ -214,24 +203,14 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 	}
 }
 
-void MapleBoss::ChangeState(State nextState, int duration)
+void MapleBoss::Skill()
 {
-}
-
-void MapleBoss::Skill(shared_ptr<PlayerManager> player)
-{
-	if (IsActive() == false && player->IsActive() == false)
+	if (IsActive() == false)
 		return;
 
-	for (int i = 0; i < _skill2Count; i++)
-	{
-		if (_hp == 140)
-		{
-			SetAction(State::SKILL);
-			_skill2[i]->Attack(player);
-			player->TakeDamage(_skill2Damage);
-		}
-	}
+	
+	SetAction(State::SKILL);
+			
 }
 
 

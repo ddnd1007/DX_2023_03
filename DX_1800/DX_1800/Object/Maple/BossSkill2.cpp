@@ -4,14 +4,14 @@
 
 BossSkill2::BossSkill2()
 {
-	_cirCol = make_shared<CircleCollider>(10);
+	_cirCol = make_shared<CircleCollider>(5);
 	_cirTrans = make_shared<Transform>();
 
-	_rectCol = make_shared<RectCollider>(Vector2(10.0f, 500.0f));
+	_rectCol = make_shared<RectCollider>(Vector2(5.0f, 500.0f));
 	_rectTrans = make_shared<Transform>();
 
 	_cirTrans->SetParent(_cirCol->GetTransform());
-	_cirTrans->SetPosition(Vector2(-80.0f, 0.0f));
+	_cirTrans->SetPosition(Vector2(0.0f, 0.0f));
 
 	_rectCol->GetTransform()->SetParent(_cirCol->GetTransform());
 	_rectTrans->SetParent(_rectCol->GetTransform());
@@ -28,9 +28,6 @@ BossSkill2::~BossSkill2()
 
 void BossSkill2::Update()
 {
-
-	//_cirCol->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
-
 	_cirCol->Update();
 	_cirTrans->Update();
 
@@ -53,6 +50,15 @@ void BossSkill2::Render()
 	_rectCol->Render();
 }
 
+void BossSkill2::EndSkill()
+{
+	if (_isActive == false)
+		return;
+
+	SetAction(State::NONE);
+	_isActive = false;
+}
+
 void BossSkill2::SetAction(State state)
 {
 	if (_curState == state)
@@ -70,7 +76,7 @@ void BossSkill2::SetAction(State state)
 
 void BossSkill2::Attack(shared_ptr<class PlayerManager> victim)
 {
-	if (victim->IsDead() == true)
+	if (victim->IsDead() == true || _isActive == true)
 		return;
 
 		SetAction(State::Skill);
@@ -78,7 +84,7 @@ void BossSkill2::Attack(shared_ptr<class PlayerManager> victim)
 	if (_rectCol->IsCollision(victim->GetCollider()))
 	{
 		victim->TakeDamage(_damage);
-		_isActive = false;
+		_isActive = true;
 	}
 }
 

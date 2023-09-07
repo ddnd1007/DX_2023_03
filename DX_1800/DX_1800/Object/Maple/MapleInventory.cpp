@@ -10,7 +10,6 @@ MapleInventory::~MapleInventory()
 
 void MapleInventory::Update()
 {
-
 	for (auto slotArr : _slot)
 	{
 		for (auto slot : slotArr)

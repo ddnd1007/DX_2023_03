@@ -38,7 +38,7 @@ public:
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
 	void ChangeState(State nextState, int duration);
-	void Skill(shared_ptr<PlayerManager> player);
+	void Skill();
 
 	//void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
 
@@ -51,6 +51,8 @@ public:
 	bool IsDead();
 	bool IsActive() { return _hp > 0; }
 
+	//vector <shared_ptr<class BossSkill2>> _skill2;
+
 private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 
@@ -62,7 +64,7 @@ private:
 	shared_ptr<RectCollider> _rectCol;
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
-	vector <shared_ptr<class BossSkill2>> _skill2;
+	
 	shared_ptr<HpBar> _hpBar;
 
 
@@ -83,6 +85,5 @@ private:
 	
 	const int _damage = 3;
 	const int _skill2Damage = 100;
-	const int _skill2Count = 10;
 };
 

@@ -14,6 +14,7 @@ private:
 	shared_ptr<class MapleBossMap> _bossMap;
 	shared_ptr<class MaplePortar> _portar;
 	shared_ptr<class MapleBoss> _boss;
+	vector<shared_ptr<class BossSkill2>> _skill2;
 	//shared_ptr<class Meso> _meso;
 };
 

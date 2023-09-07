@@ -7,12 +7,16 @@ class BossSkill2
 		NONE
 	};
 
+
+
 public:
 	BossSkill2();
 	~BossSkill2();
 
 	void Update();
 	void Render();
+
+	void EndSkill();
 
 	void SetPosition(Vector2 pos) { _cirCol->GetTransform()->SetPosition(pos); }
 	void SetDirection(Vector2 dir) { _dir = dir.NorMalVector2(); _cirCol->GetTransform()->SetAngle(dir.Angle()); }
@@ -26,7 +30,7 @@ public:
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
 	Vector2 GetPosition() { return _cirCol->GetTransform()->GetPos(); }
 
-	/*void SetLeft()
+	void SetLeft()
 	{
 		for (auto sprite : _sprites)
 			sprite->SetLeft();
@@ -35,7 +39,7 @@ public:
 	{
 		for (auto sprite : _sprites)
 			sprite->SetRight();
-	}*/
+	}
 
 	bool _isActive = false;
 

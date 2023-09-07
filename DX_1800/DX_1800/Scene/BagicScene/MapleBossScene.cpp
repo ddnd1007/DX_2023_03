@@ -3,6 +3,7 @@
 
 #include "../../Object/Maple/MaplePlayer.h"
 #include "../../Object/Maple/MapleBoss.h"
+#include "../../Object/Maple/BossSkill2.h"
 #include "../../Object/Maple/MapleArrow.h"
 #include "../../Object/Maple/MapleBossMap.h"
 #include "../../Object/Maple/MaplePortar.h"
@@ -19,6 +20,14 @@ MapleBossScene::MapleBossScene()
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(-500.0f, 270.0f));
 
+	for (int i = 0; i < 5; i++)
+	{
+		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
+		int randomX = skill2->getRandomNumber(WIN_WIDTH - 200, 0);
+		skill2->SetPosition(Vector2(randomX, -330));
+		_skill2.push_back(skill2);
+	}
+
 }
 
 MapleBossScene::~MapleBossScene()
@@ -31,6 +40,9 @@ void MapleBossScene::Update()
 	_boss->Update();
 	_bossMap->Update();
 	_portar->Update();
+
+	for (auto skill2 : _skill2)
+		skill2->Update();
 
 	if (_bossMap->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
@@ -66,7 +78,18 @@ void MapleBossScene::Update()
 		}
 	}
 
-	
+	if (_boss->IsActive() == false || _player->IsActive() == false)
+		return;
+	for (int i = 0; i < 5; i++)
+	{
+		if (_boss->_hp == 140)
+		{
+			_boss->Skill();
+			_skill2[i]->Attack(_player);
+			_skill2[i]->EndSkill();
+		}
+	}
+
 	if (_boss->IsActive() == false)
 		return;
 
@@ -87,7 +110,7 @@ void MapleBossScene::Update()
 		}
 	}
 
-	_boss->Skill(_player);
+
 
 }
 
@@ -99,7 +122,11 @@ void MapleBossScene::Render()
 	_portar->Render();
 	//_meso->Render();
 	_boss->Render();
+	for (auto skill2 : _skill2)
+		skill2->Render();
 	_player->Render();
+
+
 }
 
 void MapleBossScene::PostRender()
