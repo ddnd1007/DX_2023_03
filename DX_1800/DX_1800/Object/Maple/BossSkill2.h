@@ -3,8 +3,7 @@ class BossSkill2
 {
 	enum State
 	{
-		Skill,
-		NONE
+		SKILL,
 	};
 
 
@@ -23,7 +22,7 @@ public:
 
 	void SetAction(State state);
 
-	void Attack(shared_ptr<class PlayerManager> victim);
+	void Skill2(shared_ptr<class PlayerManager> victim);
 
 	int getRandomNumber(int min, int max);
 	shared_ptr<CircleCollider> GetCirCollider() { return _cirCol; }
@@ -41,13 +40,14 @@ public:
 			sprite->SetRight();
 	}
 
-	bool _isActive = false;
+	bool _isActive = true;
+	bool _skillActive = false;
 
 private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 
-	State _curState = State::NONE;
-	State _oldState = State::NONE;
+	State _curState = State::SKILL;
+	State _oldState = State::SKILL;
 
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	vector <shared_ptr<Action>> _actions;

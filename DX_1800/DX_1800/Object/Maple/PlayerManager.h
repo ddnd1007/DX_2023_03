@@ -71,6 +71,8 @@ public:
 	void SetIsFalling(bool value) { _isFalling = value; }
 	void Grounded() { _isFalling = false; }
 
+	shared_ptr<class PlayerHpBar> _hpBar;
+
 private:
 	static PlayerManager* _instance;
 
@@ -88,7 +90,7 @@ private:
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	vector<shared_ptr<class MapleArrow>> _arrows;
 
-	shared_ptr<class PlayerHpBar> _hpBar;
+	
 
 	State _curState = State::STAND;
 	State _oldState = State::STAND;

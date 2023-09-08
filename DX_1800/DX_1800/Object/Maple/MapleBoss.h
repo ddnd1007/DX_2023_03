@@ -37,8 +37,8 @@ public:
 	void HitEnd();
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
-	void ChangeState(State nextState, int duration);
 	void Skill();
+	void SkillEnd();
 
 	//void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
 

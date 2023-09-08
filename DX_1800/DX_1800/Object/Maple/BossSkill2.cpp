@@ -4,22 +4,24 @@
 
 BossSkill2::BossSkill2()
 {
-	_cirCol = make_shared<CircleCollider>(5);
+	_cirCol = make_shared<CircleCollider>(20);
 	_cirTrans = make_shared<Transform>();
 
-	_rectCol = make_shared<RectCollider>(Vector2(5.0f, 500.0f));
+	_rectCol = make_shared<RectCollider>(Vector2(100,500));
 	_rectTrans = make_shared<Transform>();
 
+	_cirCol->GetTransform()->SetPosition(Vector2(0.0f, -330.0f));
 	_cirTrans->SetParent(_cirCol->GetTransform());
-	_cirTrans->SetPosition(Vector2(0.0f, 0.0f));
-
-	_rectCol->GetTransform()->SetParent(_cirCol->GetTransform());
+	
+    _rectCol->GetTransform()->SetParent(_cirCol->GetTransform());
+	_rectCol->GetTransform()->SetPosition(Vector2(_cirCol->GetTransform()->GetPos() + Vector2(0,+550)));
 	_rectTrans->SetParent(_rectCol->GetTransform());
 	
 	CreateAction("effect1");
 
-	_actions[State::Skill]->Play();
+	_actions[State::SKILL]->Play();
 
+	_sprites[0]->SetLeft();
 }
 
 BossSkill2::~BossSkill2()
@@ -42,21 +44,23 @@ void BossSkill2::Update()
 
 void BossSkill2::Render()
 {
-	_cirTrans->SetWorldBuffer(0);
-	_rectTrans->SetWorldBuffer(0);
-	_sprites[_curState]->Render();
+	if (_skillActive == true)
+	{
+		_cirTrans->SetWorldBuffer(0);
+		_rectTrans->SetWorldBuffer(0);
+		_sprites[_curState]->Render();
 
-	_cirCol->Render();
-	_rectCol->Render();
+		_cirCol->Render();
+		_rectCol->Render();
+	}
 }
 
 void BossSkill2::EndSkill()
 {
-	if (_isActive == false)
+	if (_skillActive == false)
 		return;
 
-	SetAction(State::NONE);
-	_isActive = false;
+	_skillActive = false;
 }
 
 void BossSkill2::SetAction(State state)
@@ -74,18 +78,13 @@ void BossSkill2::SetAction(State state)
 	_oldState = _curState;
 }
 
-void BossSkill2::Attack(shared_ptr<class PlayerManager> victim)
+void BossSkill2::Skill2(shared_ptr<class PlayerManager> victim)
 {
-	if (victim->IsDead() == true || _isActive == true)
+	if (victim->IsDead() == true || _isActive == false || _skillActive == true)
 		return;
 
-		SetAction(State::Skill);
-
-	if (_rectCol->IsCollision(victim->GetCollider()))
-	{
-		victim->TakeDamage(_damage);
-		_isActive = true;
-	}
+		SetAction(State::SKILL);
+		_skillActive = true;
 }
 
 int BossSkill2::getRandomNumber(int min, int max)

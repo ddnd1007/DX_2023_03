@@ -2,12 +2,12 @@
 #include "MapleBossScene.h"
 
 #include "../../Object/Maple/MaplePlayer.h"
+#include "../../Object/UI/PlayerHpBar.h"
 #include "../../Object/Maple/MapleBoss.h"
-#include "../../Object/Maple/BossSkill2.h"
 #include "../../Object/Maple/MapleArrow.h"
 #include "../../Object/Maple/MapleBossMap.h"
 #include "../../Object/Maple/MaplePortar.h"
-#include "../../Object/Maple/Meso.h"
+#include "../../Object/Maple/BossSkill2.h"
 
 MapleBossScene::MapleBossScene()
 {
@@ -20,11 +20,11 @@ MapleBossScene::MapleBossScene()
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(-500.0f, 270.0f));
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
-		int randomX = skill2->getRandomNumber(WIN_WIDTH - 200, 0);
-		skill2->SetPosition(Vector2(randomX, -330));
+		int randomX = skill2->getRandomNumber(0, WIN_WIDTH);
+		skill2->SetPosition(Vector2(randomX, 330));
 		_skill2.push_back(skill2);
 	}
 
@@ -78,18 +78,6 @@ void MapleBossScene::Update()
 		}
 	}
 
-	if (_boss->IsActive() == false || _player->IsActive() == false)
-		return;
-	for (int i = 0; i < 5; i++)
-	{
-		if (_boss->_hp == 140)
-		{
-			_boss->Skill();
-			_skill2[i]->Attack(_player);
-			_skill2[i]->EndSkill();
-		}
-	}
-
 	if (_boss->IsActive() == false)
 		return;
 
@@ -101,7 +89,6 @@ void MapleBossScene::Update()
 		_boss->Move(_player);
 	}
 	
-
 	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
 	{
 		if (KEY_PRESS('W'))
@@ -110,8 +97,20 @@ void MapleBossScene::Update()
 		}
 	}
 
-
-
+	//if (_boss->IsActive() == false || _player->IsActive() == false)
+	//	return;
+	for (int i = 0; i < 10; i++)
+	{
+		if (_boss->_hp == 140)
+		{
+			_boss->Skill();
+			_skill2[i]->Skill2(_player);
+			if (_skill2[i]->GetRectCollider()->IsCollision(_player->GetCollider()))
+			{
+				_player->TakeDamage(100);
+			}
+		}
+	}
 }
 
 
@@ -125,6 +124,7 @@ void MapleBossScene::Render()
 	for (auto skill2 : _skill2)
 		skill2->Render();
 	_player->Render();
+
 
 
 }

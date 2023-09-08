@@ -64,6 +64,7 @@ void PlayerManager::Update()
 	_transform->Update();
 	_bowTrans->Update();
 
+	_hpBar->Update();
 	_inven->Update();
 
 	for (auto arrow : _arrows)
@@ -83,7 +84,7 @@ void PlayerManager::Update()
 		}
 	}
 
-	_hpBar->Update();
+	
 }
 
 void PlayerManager::Render()

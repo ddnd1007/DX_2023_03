@@ -41,8 +41,6 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	
-
 }
 
 MapleBoss::~MapleBoss()
@@ -53,17 +51,16 @@ void MapleBoss::Update()
 {
 	DeathAnimation();
 	IsDead();
+	SkillEnd();
 
 	_circleCol->Update();
 	_circleTrans->Update();
 
-	//_ballCol->Update();
-	//_ballTrans->Update();
+	_ballCol->Update();
+	_ballTrans->Update();
 
 	_rectCol->Update();
 	_rectTrans->Update();
-
-	
 
 	_hpBar->Update();
 
@@ -82,12 +79,12 @@ void MapleBoss::Render()
 	_hpBar->PostRender();
 
 	_circleTrans->SetWorldBuffer(0);
-	//_ballTrans->SetWorldBuffer(0);
+	_ballTrans->SetWorldBuffer(0);
 	_rectTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
 	_circleCol->Render();
-	//_ballCol->Render();
+	_ballCol->Render();
 	_rectCol->Render();
 
 	
@@ -208,9 +205,21 @@ void MapleBoss::Skill()
 	if (IsActive() == false)
 		return;
 
-	
-	SetAction(State::SKILL);
-			
+	if (_hp == 140)
+	{
+		SetAction(State::SKILL);
+	}
+}
+
+void MapleBoss::SkillEnd()
+{
+	if (IsActive() == false)
+		return;
+
+	if (_hp < 140 || _hp > 140)
+	{
+		SetAction(State::WORK);
+	}
 }
 
 
