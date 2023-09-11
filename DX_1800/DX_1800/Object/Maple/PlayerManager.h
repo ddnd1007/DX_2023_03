@@ -57,9 +57,9 @@ public:
 	void Attack();
 	void EndAttack();
 	void TakeDamage(int damage);
-	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
+	Vector2 GetPosition() { return _circleCol->GetTransform()->GetPos(); }
 
-	shared_ptr<CircleCollider> GetCollider() { return _col; }
+	shared_ptr<CircleCollider> GetCollider() { return _circleCol; }
 	vector<shared_ptr<class MapleArrow>>& GetBullets() { return _arrows; }
 
 	bool IsFalling() { return _isFalling; }
@@ -78,12 +78,13 @@ private:
 
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 
-	shared_ptr<CircleCollider> _col;
+	shared_ptr<CircleCollider> _circleCol;
 	shared_ptr<CircleCollider> _bowCol;
 
 	shared_ptr<Transform> _transform;
 	shared_ptr<Transform> _bowTrans;
 
+	shared_ptr<class Item> _item;
 	shared_ptr<class MapleInventory> _inven;
 
 	vector<shared_ptr<Action>> _actions;

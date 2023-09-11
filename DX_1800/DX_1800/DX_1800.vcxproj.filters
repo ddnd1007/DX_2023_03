@@ -198,9 +198,6 @@
     <ClInclude Include="Object\Maple\MapleInventory.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Maple\Slot.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Maple\Item.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -356,9 +353,6 @@
     <ClCompile Include="Object\Maple\MapleInventory.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Maple\Slot.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object\Maple\Item.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -496,6 +490,24 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\Maple\Boss\dead.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Ui\bow.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Ui\equipment.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Ui\hat.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Ui\inventory.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Ui\pants.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Maple\Ui\top.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

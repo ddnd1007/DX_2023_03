@@ -155,7 +155,6 @@
     <ClInclude Include="Object\Maple\Item.h" />
     <ClInclude Include="Object\Maple\MapleBoss.h" />
     <ClInclude Include="Object\Maple\MapleInventory.h" />
-    <ClInclude Include="Object\Maple\Slot.h" />
     <ClInclude Include="Object\UI\PlayerHpBar.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\BagicScene\MapleBossScene.h" />
@@ -222,7 +221,6 @@
     <ClCompile Include="Object\Maple\Item.cpp" />
     <ClCompile Include="Object\Maple\MapleBoss.cpp" />
     <ClCompile Include="Object\Maple\MapleInventory.cpp" />
-    <ClCompile Include="Object\Maple\Slot.cpp" />
     <ClCompile Include="Object\UI\PlayerHpBar.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\BagicScene\MapleBossScene.cpp" />
@@ -315,6 +313,12 @@
     <Image Include="Resource\Maple\snail\snail hit.png" />
     <Image Include="Resource\Maple\snail\snail stand.png" />
     <Image Include="Resource\Maple\snail\snail work.png" />
+    <Image Include="Resource\Maple\Ui\bow.png" />
+    <Image Include="Resource\Maple\Ui\equipment.png" />
+    <Image Include="Resource\Maple\Ui\hat.png" />
+    <Image Include="Resource\Maple\Ui\inventory.png" />
+    <Image Include="Resource\Maple\Ui\pants.png" />
+    <Image Include="Resource\Maple\Ui\top.png" />
     <Image Include="Resource\Texture\Bow.png" />
     <Image Include="Resource\Texture\Bullet.png" />
     <Image Include="Resource\Texture\earth.png" />

@@ -1,26 +1,32 @@
 #pragma once
 class MapleInventory
 {
+	friend class PlayerManager;
 public:
-	MapleInventory() { _trans = make_shared<Transform>(); };
+	MapleInventory();
 	~MapleInventory();
 
 	void Update();
 	void Render();
 
-	void InitializeSlots();
-	void ToggleInventory();
-	void ClearSlots();
-	void CloseInventory();
+	void Drag();
+	void OpenInventory();
+
+	
+	bool itemDrag = false;
+	bool active = false;
+	
 
 private:
-	vector<vector<shared_ptr<class Slot>>> _slot;
+	shared_ptr<RectCollider> _col;
+	shared_ptr<RectCollider> _dragBar;
 	shared_ptr<Quad> _quad;
 	shared_ptr<Transform> _trans;
 
-	UINT slotX = 5;
-	UINT slotY = 10;
-
-	bool inventoryVisible = false;
+	vector<vector<shared_ptr<class Item>>> _items;
+	//vector<vector<shared_ptr<class Item>>> _haven;
+	
+	UINT slotX = 16;
+	UINT slotY = 8;
 };
 

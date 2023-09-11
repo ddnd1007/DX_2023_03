@@ -1,80 +1,93 @@
 #include "framework.h"
 #include "MapleInventory.h"
-#include "Slot.h"
+#include "item.h"
 
-Vector2 offset(50, 50);
+MapleInventory::MapleInventory()
+{
+	_quad = make_shared<Quad>(L"Resource/Maple/UI/inventory.png");
+	_trans = make_shared<Transform>();
+	_col = make_shared<RectCollider>(_quad->GetImageSize());
+	_dragBar = make_shared<RectCollider>(Vector2(_quad->GetImageSize().x, 10.0f));
 
+	_trans->SetParent(_col->GetTransform());
+
+	_col->GetTransform()->SetPosition(Vector2(0.0f, 0.0f));
+
+	_dragBar->GetTransform()->SetParent(_col->GetTransform());
+	_dragBar->GetTransform()->SetPosition({ 0.0f, 200.0f });
+
+	_items.resize(128);
+	
+	OpenInventory();
+}
 MapleInventory::~MapleInventory()
 {
 }
 
 void MapleInventory::Update()
 {
-	for (auto slotArr : _slot)
+	_col->Update();
+	_quad->Update();
+	_dragBar->Update();
+	_trans->Update();
+
+	Drag();
+
+	for (auto itemarr : _items)
 	{
-		for (auto slot : slotArr)
-			slot->Update();
+		for (auto item : itemarr)
+		{
+			item->Update();
+			item->drag = false;
+		}
 	}
 }
 
 void MapleInventory::Render()
 {
-	for (auto slotArr : _slot)
+	if (active == true)
 	{
-		for (auto slot : slotArr)
-			slot->Render();
-	}
-}
+		_trans->SetWorldBuffer(0);
+		_col->Render();
+		_quad->Render();
+		_dragBar->Render();
 
-void MapleInventory::InitializeSlots()
-{
-	_slot.resize(slotY);
-	for (int y = 0; y < slotY; y++)
-	{
-		_slot[y].resize(slotX);
-
-		for (int x = 0; x < slotX; x++)
+		for (auto itemarr : _items)
 		{
-			shared_ptr<Slot> slot = make_shared<Slot>();
-			slot->SetPosition(offset + Vector2(40*x,40*y));
-			slot->SetType(Slot::SlotType::NONE);
-
-			_slot[y][x] = slot;
+			for (auto item : itemarr)
+			{
+				item->Render();
+			}
 		}
 	}
 }
 
-void MapleInventory::ToggleInventory()
+void MapleInventory::Drag()
 {
-	if (KEY_PRESS('I')) {
-		if (inventoryVisible) {
-			CloseInventory(); // 인벤토리 숨기기
-			inventoryVisible = false;
-		}
-		else {
-			InitializeSlots(); // 인벤토리 표시하기
-			inventoryVisible = true;
-		}
+	if (_dragBar->IsCollision(W_MOUSE_POS) && KEY_PRESS(VK_LBUTTON))
+	{
+		_col->GetTransform()->SetPosition({ W_MOUSE_POS.x, W_MOUSE_POS.y - 200.0f });
 	}
 }
 
-void MapleInventory::ClearSlots()
+void MapleInventory::OpenInventory()
 {
 	for (int y = 0; y < slotY; y++)
 	{
+		_items.reserve(128);
+
 		for (int x = 0; x < slotX; x++)
 		{
-			_slot[y][x].reset(new Slot());
-			_slot[y][x]->SetType(Slot::SlotType::NONE);
+			shared_ptr<Item> item = make_shared<Item>();
+			item->_col->GetTransform()->SetParent(_col->GetTransform());
+
+			item->_col->GetTransform()->SetPosition(Vector2(x * 30, y* 30));
+
+			_items[y].push_back(item);
 		}
 	}
 }
 
-void MapleInventory::CloseInventory()
-{
-	ClearSlots();
-	inventoryVisible = false;
-}
 
 
 

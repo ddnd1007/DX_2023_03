@@ -3,23 +3,25 @@
 #include "MapleArrow.h"
 #include "MaplePortar.h"
 #include "MapleInventory.h"
+#include "Item.h"
 #include "../UI/PlayerHpBar.h"
 
 PlayerManager* PlayerManager::_instance = nullptr;
 
 PlayerManager::PlayerManager()
 {
-	_col = make_shared<CircleCollider>(30);
-	_col->GetTransform()->SetPosition(Vector2(0,0));
+	_circleCol = make_shared<CircleCollider>(30);
+	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
 	_transform = make_shared<Transform>();
 	_transform->SetPosition(Vector2(0, 0));
-	_transform->SetParent(_col->GetTransform());
+	_transform->SetParent(_circleCol->GetTransform());
 
 	_bowCol = make_shared<CircleCollider>(5);
 	_bowTrans = make_shared<Transform>();
-	_bowCol->GetTransform()->SetParent(_col->GetTransform());
+	_bowCol->GetTransform()->SetParent(_circleCol->GetTransform());
 
 	_inven = make_shared<MapleInventory>();
+	_item = make_shared<Item>();
 
 	CreateAction("stand", 0.2f);
 	CreateAction("work", 0.1f);
@@ -53,14 +55,17 @@ PlayerManager::~PlayerManager()
 
 void PlayerManager::Update()
 {
+	_item->Update();
+	_inven->Update();
+
 	Input();
 	Jump();
 	IsDead();
 
-	_inven->ToggleInventory();
+
 	
 	_bowCol->Update();
-	_col->Update();
+	_circleCol->Update();
 	_transform->Update();
 	_bowTrans->Update();
 
@@ -97,7 +102,7 @@ void PlayerManager::Render()
 
 
 	_bowCol->Render();
-	_col->Render();
+	_circleCol->Render();
 	
 	_inven->Render();
 
@@ -133,14 +138,14 @@ void PlayerManager::Input()
 	if (KEY_PRESS('D'))
 	{
 		_bowCol->GetTransform()->SetPosition(Vector2(1, 0));
-		_col->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
+		_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
 		SetLeft();
 		_isWork == true;
 	}
 	if (KEY_PRESS('A'))
 	{
 		_bowCol->GetTransform()->SetPosition(Vector2(-1, 0));
-		_col->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
+		_circleCol->GetTransform()->AddVector2(-RIGHT_VECTOR * _speed * DELTA_TIME);
 		SetRight();
 		_isWork == true;
 	}
@@ -151,6 +156,18 @@ void PlayerManager::Input()
 		SetAction(State::WORK);
 	else if (_curState == State::WORK)
 		SetAction(State::STAND);
+
+	if (KEY_DOWN('I') && _inven->active == false)
+	{
+		_inven->_col->GetTransform()->SetPosition(_circleCol->GetWorldPos());
+		_inven->active = true;
+		
+
+	}
+	else if (KEY_DOWN('I') && _inven->active == true)
+	{
+		_inven->active = false;
+	}
 
 }
 
@@ -166,7 +183,7 @@ void PlayerManager::Jump()
 	if (_jumpPower < -_maxFalling)
 		_jumpPower = -_maxFalling;
 
-	_col->GetTransform()->AddVector2(Vector2(0.0f, _jumpPower * DELTA_TIME));
+	_circleCol->GetTransform()->AddVector2(Vector2(0.0f, _jumpPower * DELTA_TIME));
 
 	if (KEY_DOWN(VK_SPACE) && _isAttack == false && IsActive() == true)
 	{
@@ -188,7 +205,7 @@ void PlayerManager::Attack()
 		_arrows[i]->_isActive = true;
 		_arrows[i]->SetPosition(_bowCol->GetWorldPos());
 
-		if (_col->GetWorldPos().x > _bowCol->GetWorldPos().x)
+		if (_circleCol->GetWorldPos().x > _bowCol->GetWorldPos().x)
 		{
 			_arrows[i]->SetPosition(_bowCol->GetWorldPos());
 			_arrows[i]->SetDirtection(-RIGHT_VECTOR);
@@ -237,15 +254,15 @@ void PlayerManager::TakeDamage(int damage)
 		_invincibleTimer = _invincibleDuration;
 		_knockBack = 100;
 		_knockBack -= GRAVITY * 7;
-		if (_col->GetWorldPos().x > _bowCol->GetWorldPos().x)
+		if (_circleCol->GetWorldPos().x > _bowCol->GetWorldPos().x)
 		{
-			_col->GetTransform()->AddVector2(Vector2(_knockBack, _knockBack * DELTA_TIME));
+			_circleCol->GetTransform()->AddVector2(Vector2(_knockBack, _knockBack * DELTA_TIME));
 			SetAction(State::JUMP);
 			SetRight();
 		}
 		else
 		{
-			_col->GetTransform()->AddVector2(Vector2(-_knockBack, -_knockBack * DELTA_TIME));
+			_circleCol->GetTransform()->AddVector2(Vector2(-_knockBack, -_knockBack * DELTA_TIME));
 			SetAction(State::JUMP);
 			SetLeft();
 		}
