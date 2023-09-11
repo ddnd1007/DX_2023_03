@@ -40,7 +40,7 @@ void Item::Render()
 
 void Item::SetQuad(wstring path)
 {
-	_quad = make_shared<Quad>(path, Vector2(26.0f, 26.0f));
+	_quad = make_shared<Quad>(path, Vector2(20.0f, 20.0f));
 }
 
 bool Item::colision(Vector2 mouse, shared_ptr<RectCollider> rect)

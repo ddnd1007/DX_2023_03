@@ -94,7 +94,7 @@ void PlayerManager::Update()
 
 void PlayerManager::Render()
 {
-	_hpBar->PostRender();
+	_hpBar->PreRender();
 
 	_transform->SetWorldBuffer(0);
 	_bowTrans->SetWorldBuffer(0);

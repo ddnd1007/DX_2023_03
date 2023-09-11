@@ -19,6 +19,9 @@ MapleBossScene::MapleBossScene()
 	_bossMap->SetPosition(Vector2(0.0f, -30.0f));
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(-500.0f, 270.0f));
+	
+	_player->_hpBar->SetPosition(Vector2(_player->GetPosition().x - 300.0f, _player->GetPosition().y - 250.0f));
+	_player->_hpBar->Update();
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -40,6 +43,8 @@ void MapleBossScene::Update()
 	_boss->Update();
 	_bossMap->Update();
 	_portar->Update();
+	
+
 
 	for (auto skill2 : _skill2)
 		skill2->Update();
@@ -111,6 +116,11 @@ void MapleBossScene::Update()
 			}
 		}
 	}
+
+	if (_boss->GetCirCollider()->IsCollision(_player->GetCollider()))
+	{
+		_player->TakeDamage(10);
+	}
 }
 
 
@@ -124,6 +134,7 @@ void MapleBossScene::Render()
 	for (auto skill2 : _skill2)
 		skill2->Render();
 	_player->Render();
+	
 
 
 
@@ -131,6 +142,8 @@ void MapleBossScene::Render()
 
 void MapleBossScene::PostRender()
 {
+	_player->_hpBar->PostRender();
+
 	ImGui::SliderInt("Player_HP", (int*)&_player->GetHp(), 0, 100);
 	
 	//ImGui::Text("Snail HP : %d", _monster[i]->_hp);

@@ -41,10 +41,12 @@ public:
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
 
-	int _hp = 3;
+	int _hp = 30;
+	const int _maxHp = 30;
 	bool _isDamaged = false;
 	bool IsDead();
 	bool IsActive() { return _hp > 0; }
+	shared_ptr<class MonsterHpBar> _hpBar;
 
 private:
 	void CreateAction(string name, float speed = 0.1f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);

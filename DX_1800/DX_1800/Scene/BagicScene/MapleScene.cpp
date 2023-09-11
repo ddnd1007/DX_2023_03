@@ -3,6 +3,7 @@
 
 #include "../../Object/Maple/MaplePlayer.h"
 #include "../../Object/Maple/MapleMonster.h"
+#include "../../Object/UI/MonsterHpBar.h"
 #include "../../Object/Maple/MapleArrow.h"
 #include "../../Object/Maple/MapleMap.h"
 
@@ -24,6 +25,13 @@ MapleScene::MapleScene()
 	_map->SetPosition(Vector2(0.0f, -350.0f));
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(550.0f, -50.0f));
+
+	/*for (int i = 0; i < 5; i++)
+	{
+		_monster[i]->_hpBar->SetPosition(Vector2(_monster[i]->GetCirCollider()->GetTransform()->GetPos().x, _monster[i]->GetCirCollider()->GetTransform()->GetPos().y - 10.0f));
+		_monster[i]->_hpBar->Update();
+		_monster[i]->_hpBar->PostRender();
+	}*/
 	
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
@@ -114,7 +122,7 @@ void MapleScene::Update()
 
 				if (arrow->GetCollider()->IsCollision(_monster[i]->GetCirCollider()))
 				{
-					_monster[i]->TakeDamage(1);
+					_monster[i]->TakeDamage(10);
 					_monster[i]->Hit(_player);
 					_monster[i]->GetCirCollider()->SetColorRed();
 					arrow->_isActive = false;
@@ -161,11 +169,9 @@ void MapleScene::Render()
 
 void MapleScene::PostRender()
 {
-	//ImGui::Text("Player HP : %d", _player->GetHp());
-	ImGui::SliderInt("Player_HP", (int*)&_player->GetHp(), 0, 100);
+	//ImGui::SliderInt("Player_HP", (int*)&_player->GetHp(), 0, 100);
 	for (int i = 0; i < 5; i++)
 	{
-		//ImGui::Text("Snail HP : %d", _monster[i]->_hp);
 		ImGui::SliderInt("Snail_HP", (int*)&_monster[i]->_hp, 0, 3);
 	}
 }

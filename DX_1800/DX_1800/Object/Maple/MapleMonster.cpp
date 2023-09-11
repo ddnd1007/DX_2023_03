@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "MapleMonster.h"
 #include "MaplePlayer.h"
+#include "../UI/MonsterHpBar.h"
 
 MapleMonster::MapleMonster()
 {
@@ -23,6 +24,10 @@ MapleMonster::MapleMonster()
 	_circleTrans->SetPosition(Vector2(0, 0));
 	_rectTrans->SetParent(_rectCol->GetTransform());
 	_rectTrans->SetPosition(Vector2(0, 0));
+
+	_hpBar = make_shared<MonsterHpBar>();
+	_hpBar->SetPosition(Vector2(_circleCol->GetTransform()->GetPos().x, _circleCol->GetTransform()->GetPos().y - 10.0f));
+	
 
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
@@ -47,6 +52,7 @@ void MapleMonster::Update()
 	_rectTrans->Update();
 	_circleCol->Update();
 	_circleTrans->Update();
+	_hpBar->Update();
 
 	_actions[_curState]->Update();
 
@@ -69,7 +75,7 @@ void MapleMonster::Render()
 	if(_isActive == false)
 	return;
 	
-
+	_hpBar->PostRender();
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -101,6 +107,7 @@ void MapleMonster::TakeDamage(int damage)
 	if (!_isInvincible)	
 	{
 		_hp -= damage;
+		_hpBar->SetRatio(_hp / (float)_maxHp);
 		_isInvincible = true;
 		_invincibleTimer = _invincibleDuration;
 	}
