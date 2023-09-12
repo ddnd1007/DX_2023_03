@@ -25,15 +25,15 @@ MapleMonster::MapleMonster()
 	_rectTrans->SetParent(_rectCol->GetTransform());
 	_rectTrans->SetPosition(Vector2(0, 0));
 
-	_hpBar = make_shared<MonsterHpBar>();
-	_hpBar->SetPosition(Vector2(_circleCol->GetTransform()->GetPos().x, _circleCol->GetTransform()->GetPos().y - 10.0f));
-	
-
 	_actions[State::STAND]->Play();
 	_actions[State::WORK]->Play();
 
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
+
+	_hpBar = make_shared<MonsterHpBar>();
+	_hpBar->SetParent(_circleCol->GetTransform());
+	_hpBar->SetPosition(Vector2(0.0,-150.0f));
 }
 
 MapleMonster::~MapleMonster()
@@ -65,7 +65,6 @@ void MapleMonster::Update()
 		if (_invincibleTimer <= 0.0f)
 		{
 			_isInvincible = false;
-			
 		}
 	}
 }
@@ -73,7 +72,7 @@ void MapleMonster::Update()
 void MapleMonster::Render()
 {
 	if(_isActive == false)
-	return;
+		return;
 	
 	_hpBar->PostRender();
 	_rectTrans->SetWorldBuffer(0);
@@ -233,8 +232,6 @@ void MapleMonster::ChangeState(State nextState, int duration)
 
 	_curState = nextState; 
 }
-
-
 
 int MapleMonster::getRandomNumber(int min, int max)
 {

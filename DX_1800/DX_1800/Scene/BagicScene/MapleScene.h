@@ -18,6 +18,7 @@ private:
 	vector<shared_ptr<class MapleMonster>> _monster;
 
 
+
 	//shared_ptr<class Meso> _meso;
 };
 

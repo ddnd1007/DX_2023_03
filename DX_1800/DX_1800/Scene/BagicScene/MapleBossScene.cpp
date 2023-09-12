@@ -30,7 +30,6 @@ MapleBossScene::MapleBossScene()
 		skill2->SetPosition(Vector2(randomX, 330));
 		_skill2.push_back(skill2);
 	}
-
 }
 
 MapleBossScene::~MapleBossScene()

@@ -18,7 +18,7 @@ MapleScene::MapleScene()
 	for (int i = 0; i < 5; i++)
 	{
 		shared_ptr<MapleMonster> monster = make_shared<MapleMonster>();
-		int randomX = monster->getRandomNumber(0, WIN_WIDTH - 700);
+		int randomX = monster->getRandomNumber(0, WIN_WIDTH - 1100);
 		monster->SetPosition(Vector2(randomX, -330));
 		_monster.push_back(monster);
 	}
@@ -26,13 +26,6 @@ MapleScene::MapleScene()
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(550.0f, -50.0f));
 
-	/*for (int i = 0; i < 5; i++)
-	{
-		_monster[i]->_hpBar->SetPosition(Vector2(_monster[i]->GetCirCollider()->GetTransform()->GetPos().x, _monster[i]->GetCirCollider()->GetTransform()->GetPos().y - 10.0f));
-		_monster[i]->_hpBar->Update();
-		_monster[i]->_hpBar->PostRender();
-	}*/
-	
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
 	CAMERA->SetRightTop(_map->rightTop());
@@ -56,6 +49,11 @@ void MapleScene::Update()
 
 	for (auto monster : _monster)
 		monster->Update();
+
+	for (int i = 0; i < 5; i++)
+	{
+		_monster[i]->_hpBar->Update();
+	}
 	
 	for (int i = 0; i < 5; i++)
 	{
@@ -153,8 +151,6 @@ void MapleScene::Update()
 			SCENE->NextScene();
 		}
 	}
-
-
 }
 
 void MapleScene::Render()
@@ -164,6 +160,10 @@ void MapleScene::Render()
 	//_meso->Render();
 	for (auto monster : _monster)
 		monster->Render();
+	for (int i = 0; i < 5; i++)
+	{
+		_monster[i]->_hpBar->PostRender();
+	}
 	_player->Render();
 }
 

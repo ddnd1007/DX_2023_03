@@ -4,7 +4,7 @@
 MonsterHpBar::MonsterHpBar()
 {
 	_quadTransform = make_shared<Transform>();
-	_quad = make_shared<Quad>(L"Resource/UI/Button.png", Vector2(20, 30));
+	_quad = make_shared<Quad>(L"Resource/UI/Button.png", Vector2(50, 10));
 	_quad->SetPS(ADD_PS(L"Shader/HpBarPS.hlsl"));
 
 	_buffer = make_shared<BarBuffer>();
