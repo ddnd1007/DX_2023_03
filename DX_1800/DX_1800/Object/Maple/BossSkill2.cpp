@@ -10,7 +10,7 @@ BossSkill2::BossSkill2()
 	_rectCol = make_shared<RectCollider>(Vector2(100,500));
 	_rectTrans = make_shared<Transform>();
 
-	_cirCol->GetTransform()->SetPosition(Vector2(0.0f, -330.0f));
+	_cirCol->GetTransform()->SetPosition(Vector2(0.0f, -530.0f));
 	_cirTrans->SetParent(_cirCol->GetTransform());
 	
     _rectCol->GetTransform()->SetParent(_cirCol->GetTransform());
@@ -44,23 +44,32 @@ void BossSkill2::Update()
 
 void BossSkill2::Render()
 {
-	if (_skillActive == true)
-	{
-		_cirTrans->SetWorldBuffer(0);
-		_rectTrans->SetWorldBuffer(0);
-		_sprites[_curState]->Render();
+	_cirTrans->SetWorldBuffer(0);
+	_rectTrans->SetWorldBuffer(0);
+	_sprites[_curState]->Render();
 
-		_cirCol->Render();
-		_rectCol->Render();
+	_cirCol->Render();
+
+}
+
+void BossSkill2::Skill2(shared_ptr<class PlayerManager> victim)
+{
+	if (victim->IsDead() == true || _skillActive == true)
+		return;
+
+	SetAction(State::SKILL);
+	_skillActive = true;
+
+	if (_rectCol->IsCollision(victim->GetCollider()))
+	{
+		victim->TakeDamage(100);
 	}
 }
 
 void BossSkill2::EndSkill()
 {
-	if (_skillActive == false)
-		return;
-
-	_skillActive = false;
+	if (_skillActive == true)
+		_skillActive = false;
 }
 
 void BossSkill2::SetAction(State state)
@@ -78,15 +87,6 @@ void BossSkill2::SetAction(State state)
 	_oldState = _curState;
 }
 
-void BossSkill2::Skill2(shared_ptr<class PlayerManager> victim)
-{
-	if (victim->IsDead() == true || _isActive == false || _skillActive == true)
-		return;
-
-		SetAction(State::SKILL);
-		_skillActive = true;
-}
-
 int BossSkill2::getRandomNumber(int min, int max)
 {
 	static const double fraction = 1.0 / (RAND_MAX + 1.0);
@@ -97,7 +97,6 @@ int BossSkill2::getRandomNumber(int min, int max)
 	}
 	return min + static_cast<int>((max - min + 1) * (std::rand() * fraction));
 }
-
 
 void BossSkill2::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {

@@ -23,13 +23,7 @@ MapleBossScene::MapleBossScene()
 	_player->_hpBar->SetPosition(Vector2(_player->GetPosition().x - 300.0f, _player->GetPosition().y - 250.0f));
 	_player->_hpBar->Update();
 
-	for (int i = 0; i < 10; i++)
-	{
-		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
-		int randomX = skill2->getRandomNumber(0, WIN_WIDTH);
-		skill2->SetPosition(Vector2(randomX, 330));
-		_skill2.push_back(skill2);
-	}
+
 }
 
 MapleBossScene::~MapleBossScene()
@@ -45,8 +39,7 @@ void MapleBossScene::Update()
 	
 
 
-	for (auto skill2 : _skill2)
-		skill2->Update();
+	
 
 	if (_bossMap->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
@@ -107,12 +100,7 @@ void MapleBossScene::Update()
 	{
 		if (_boss->_hp == 140)
 		{
-			_boss->Skill();
-			_skill2[i]->Skill2(_player);
-			if (_skill2[i]->GetRectCollider()->IsCollision(_player->GetCollider()))
-			{
-				_player->TakeDamage(100);
-			}
+			_boss->Skill(_player);
 		}
 	}
 

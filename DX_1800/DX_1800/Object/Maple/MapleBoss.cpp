@@ -35,6 +35,14 @@ MapleBoss::MapleBoss()
 	_hpBar->SetPosition(Vector2(0.0f, 700.0f));
 	
 	_hpBar->SetRatio(200.0f);
+
+	for (int i = 0; i < 10; i++)
+	{
+		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
+		int randomX = skill2->getRandomNumber(0, WIN_WIDTH);
+		skill2->SetPosition(Vector2(randomX, 330));
+		_skill2.push_back(skill2);
+	}
 	
 	_actions[State::WORK]->Play();
 	
@@ -51,8 +59,7 @@ void MapleBoss::Update()
 {
 	DeathAnimation();
 	IsDead();
-	SkillEnd();
-
+	
 	_circleCol->Update();
 	_circleTrans->Update();
 
@@ -62,13 +69,15 @@ void MapleBoss::Update()
 	_rectCol->Update();
 	_rectTrans->Update();
 
+	for (auto skill2 : _skill2)
+		skill2->Update();
+
 	_hpBar->Update();
 
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
-
 }
 
 void MapleBoss::Render()
@@ -87,7 +96,8 @@ void MapleBoss::Render()
 	_ballCol->Render();
 	_rectCol->Render();
 
-	
+	for (auto skill2 : _skill2)
+		skill2->Render();
 }
 
 void MapleBoss::SetAction(State state)
@@ -180,11 +190,12 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 	if (!IsActive())
 		return;
 
-	if (player->GetCollider()->IsCollision(_circleCol))
+	if (player->GetCollider()->IsCollision(_circleCol) && _move == true)
 		SetAction(State::WORK);
 
-	if (player->GetCollider()->IsCollision(_rectCol))
+	if (player->GetCollider()->IsCollision(_rectCol) && _move == true)
 	{
+		_move = true;
 		if (player->GetPosition().x > _rectCol->GetTransform()->GetWorldPos().x)
 		{
 			_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
@@ -200,25 +211,34 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 	}
 }
 
-void MapleBoss::Skill()
+void MapleBoss::Skill(shared_ptr<class PlayerManager> player)
 {
 	if (IsActive() == false)
 		return;
-
-	if (_hp == 140)
+	for (int i = 0; i < 10; i++)
 	{
-		SetAction(State::SKILL);
+		if (_hp == 140)
+		{
+			_move = false;
+			SetAction(State::SKILL);
+			_skill2[i]->Skill2(player);
+		
+		}
+		_skill2[i]->EndSkill();
+		SkillEnd();
+		
 	}
 }
 
 void MapleBoss::SkillEnd()
 {
-	if (IsActive() == false)
+	if (IsActive() == false && _move == false)
 		return;
 
 	if (_hp < 140 || _hp > 140)
 	{
 		SetAction(State::WORK);
+		_move = true;
 	}
 }
 
@@ -233,7 +253,7 @@ bool MapleBoss::IsDead()
 	else
 	{
 		SetAction(State::DEAD);
-		CAMERA->ShakeStart(0.5f, 1.3f, 0.1f);
+		CAMERA->ShakeStart(0.5f, 0.5f);
 		return true;
 	};
 }
