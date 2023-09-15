@@ -101,6 +101,8 @@ void PlayerManager::Render()
 	_sprites[_curState]->Render();
 
 
+	
+
 	_bowCol->Render();
 	_circleCol->Render();
 	

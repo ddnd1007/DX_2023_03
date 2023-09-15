@@ -49,20 +49,22 @@ void BossSkill2::Render()
 	_sprites[_curState]->Render();
 
 	_cirCol->Render();
-
 }
 
 void BossSkill2::Skill2(shared_ptr<class PlayerManager> victim)
 {
-	if (victim->IsDead() == true || _skillActive == true)
+	if (victim->IsDead() == true)
 		return;
 
-	SetAction(State::SKILL);
-	_skillActive = true;
-
-	if (_rectCol->IsCollision(victim->GetCollider()))
+	if (_skillActive == false)
 	{
-		victim->TakeDamage(100);
+		SetAction(State::SKILL);
+		_skillActive = true;
+
+		if (_rectCol->IsCollision(victim->GetCollider()))
+		{
+			victim->TakeDamage(100);
+		}
 	}
 }
 

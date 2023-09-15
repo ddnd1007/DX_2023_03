@@ -103,10 +103,13 @@ void MapleMonster::TakeDamage(int damage)
 	if (_isDamaged == true)
 		return;
 
+	
+
 	if (!_isInvincible)	
 	{
 		_hp -= damage;
 		_hpBar->SetRatio(_hp / (float)_maxHp);
+		
 		_isInvincible = true;
 		_invincibleTimer = _invincibleDuration;
 	}

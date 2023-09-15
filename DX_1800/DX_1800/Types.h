@@ -43,6 +43,7 @@
 #define CAMERA		Camera::GetInstance()
 
 #define SCENE		SceneManager::GetInstance()
+#define FONT		Font::GetInstance()
 
 using CallBack = function<void()>;
 

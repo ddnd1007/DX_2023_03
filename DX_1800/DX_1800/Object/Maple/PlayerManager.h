@@ -72,7 +72,7 @@ public:
 	void Grounded() { _isFalling = false; }
 
 	shared_ptr<class PlayerHpBar> _hpBar;
-
+	int _damage = 10;
 private:
 	static PlayerManager* _instance;
 
@@ -111,6 +111,7 @@ private:
 
 	int _hp = 100;
 	int _maxHp = 100;
+	
 	
 };
 

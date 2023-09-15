@@ -224,8 +224,8 @@ void MapleBoss::Skill(shared_ptr<class PlayerManager> player)
 			_skill2[i]->Skill2(player);
 		
 		}
-		_skill2[i]->EndSkill();
 		SkillEnd();
+		_skill2[i]->EndSkill();
 		
 	}
 }

@@ -110,7 +110,8 @@ void MapleScene::Update()
 	}
 
 	for (int i = 0; i < 5; i++)
-	{
+	{   
+
 		if (_monster[i]->IsActive() == true)
 		{
 			for (auto arrow : _player->GetBullets())
@@ -155,6 +156,11 @@ void MapleScene::Update()
 
 void MapleScene::Render()
 {
+	wstring str;
+
+	str = L"123456";
+	FONT->RenderText(str, "D2Coding", Vector2(100.0f, 20.0f));
+
 	_map->Render();
 	_portar->Render();
 	//_meso->Render();
