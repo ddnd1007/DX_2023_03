@@ -65,7 +65,6 @@ private:
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
 	shared_ptr<HpBar> _hpBar;
-	shared_ptr<Bossprojectiles> _skill;
 	shared_ptr<PlayerManager> _player;
 
 

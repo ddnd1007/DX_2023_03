@@ -32,8 +32,8 @@ MapleBoss::MapleBoss()
 
 	_hpBar = make_shared<HpBar>();
 	_hpBar->SetPosition(Vector2(0.0f, 700.0f));
-	
-	_hpBar->SetRatio(200.0f);
+
+	_hpBar->SetRatio(1000.0f);
 
 	_actions[State::WORK]->Play();
 	
@@ -66,22 +66,6 @@ void MapleBoss::Update()
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
-
-	//if (_projectileCooldownTimer > 0.0f)
-	//{
-	//	_projectileCooldownTimer -= DELTA_TIME;
-	//}
-
-	//if (_isActive && _projectileCooldownTimer <= 0.0f)
-	//{
-	//	// 플레이어를 향한 방향 계산 (예: 플레이어 위치로 향하는 방향)
-	//	Vector2 playerDirection = (_player->GetCollider()->GetTransform()->GetWorldPos() - _circleCol->GetTransform()->GetWorldPos()).NorMalVector2();
-
-	//	// 투사체 발사 함수 호출 (쿨타임 초기화)
-	//	_skill->Shoot(_circleCol->GetTransform()->GetWorldPos(), playerDirection);
-	//	_projectileCooldownTimer = _projectileCooldownDuration;
-	//}
-
 
 }
 
@@ -213,11 +197,6 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 		}
 	}
 }
-
-//void MapleBoss::Skill(Vector2 startPos, Vector2 dir)
-//{
-//	_skill->Shoot(startPos, dir);
-//}
 
 bool MapleBoss::IsDead()
 {

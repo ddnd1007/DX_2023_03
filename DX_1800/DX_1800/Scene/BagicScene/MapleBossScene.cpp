@@ -105,6 +105,7 @@ void MapleBossScene::Update()
 	{
 		_player->TakeDamage(10);
 	}
+
 }
 
 
@@ -113,15 +114,8 @@ void MapleBossScene::Render()
 {
 	_bossMap->Render();
 	_portar->Render();
-	//_meso->Render();
 	_boss->Render();
-	/*for (auto skill2 : _skill2)
-		skill2->Render();*/
 	_player->Render();
-	
-
-
-
 }
 
 void MapleBossScene::PostRender()

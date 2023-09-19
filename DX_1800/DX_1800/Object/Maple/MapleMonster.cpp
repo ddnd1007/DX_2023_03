@@ -14,7 +14,7 @@ MapleMonster::MapleMonster()
 
 	CreateAction("snail stand");
 	CreateAction("snail work");
-	CreateAction("snail hit", 0.2, Action::Type::LOOP);
+	CreateAction("snail hit", 0.2);
 	CreateAction("snail die", 0.12, Action::Type::END);
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
@@ -40,7 +40,7 @@ MapleMonster::~MapleMonster()
 void MapleMonster::Update()
 {
 	DeathAnimation();
-	HitAnimation();
+	
 	
 	IsDead();
 	HitEnd();
@@ -63,6 +63,15 @@ void MapleMonster::Update()
 			_isInvincible = false;
 		}
 	}
+
+	/*if (_isDamaged)
+	{
+		_hitAnimationTimer -= DELTA_TIME;
+		if (_hitAnimationTimer <= 0.0f)
+		{
+			_isDamaged = false;
+		}
+	}*/
 }
 
 void MapleMonster::Render()
@@ -98,8 +107,6 @@ void MapleMonster::TakeDamage(int damage)
 	if (_isDamaged == true)
 		return;
 
-	
-
 	if (!_isInvincible)	
 	{
 		_hp -= damage;
@@ -107,6 +114,16 @@ void MapleMonster::TakeDamage(int damage)
 		_isInvincible = true;
 		_invincibleTimer = _invincibleDuration;
 	}
+
+	/*if (_isDamaged)
+	{
+		_hitAnimationTimer -= DELTA_TIME;
+		if (_hitAnimationTimer <= 0.0f)
+		{
+			HitAnimation();
+			_isDamaged = false;
+		}
+	}*/
 }
 
 bool MapleMonster::IsDead()
@@ -134,13 +151,12 @@ void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 		if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 		{
 			SetLeft();
-			SetAction(State::HIT);
-
+			HitAnimation();
 		}
 		else
 		{
 			SetRight();
-			SetAction(State::HIT);
+			HitAnimation();
 		}
 	}
 }
@@ -182,8 +198,8 @@ bool MapleMonster::HitAnimation()
 		if (_hitAnimationTimer >= _hitAnimationDuration)
 		{
 			SetAction(State::HIT);
-			_deathAnimationTimer = 0.0f;
-			_isDamaged = true;
+			_hitAnimationTimer = 0.0f;
+			_isDamaged = false;
 			_curState = (State::HIT);
 			return true;
 		}
@@ -216,18 +232,6 @@ void MapleMonster::Move(shared_ptr<class PlayerManager> player)
 			SetRight();
 		}
 	}
-}
-
-void MapleMonster::ChangeState(State nextState, int duration)
-{
-	if (_curState == _oldState)
-		return;
-
-	_curState = State::HIT;
-
-	std::this_thread::sleep_for(std::chrono::milliseconds(duration));
-
-	_curState = nextState; 
 }
 
 int MapleMonster::getRandomNumber(int min, int max)

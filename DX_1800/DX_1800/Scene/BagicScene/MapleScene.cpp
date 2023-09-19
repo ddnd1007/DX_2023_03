@@ -127,6 +127,7 @@ void MapleScene::Update()
 				{
 					_monster[i]->TakeDamage(10);
 					_monster[i]->Hit(_player);
+					_monster[i]->_isDamaged = true;
 					_monster[i]->GetCirCollider()->SetColorRed();
 					arrow->_isActive = false;
 				}

@@ -30,20 +30,17 @@ Bossprojectiles::~Bossprojectiles()
 
 void Bossprojectiles::Update()
 {
-	
-		_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
+	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
 
-		// 투사체가 활성 상태에서 움직일 때의 로직 추가
+	// 투사체가 활성 상태에서 움직일 때의 로직 추가
 
-		_col->Update();
-		_trans->Update();
+	_col->Update();
+	_trans->Update();
 
-		_actions[_curState]->Update();
+	_actions[_curState]->Update();
 
-		_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
-		_sprites[_curState]->Update();
-
-		
+	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
+	_sprites[_curState]->Update();
 }
 
 void Bossprojectiles::Render()
@@ -91,6 +88,12 @@ void Bossprojectiles::Shoot(Vector2 startPos, Vector2 dir)
 		SetAction(State::BALL);
 
 	}
+}
+
+void Bossprojectiles::ShootEnd()
+{
+	if (_isActive)
+		!_isActive;
 }
 
 void Bossprojectiles::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

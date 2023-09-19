@@ -24,6 +24,7 @@ public:
 	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
 
 	void Shoot(Vector2 startPos, Vector2 dir);
+	void ShootEnd();
 
 	void SetLeft()
 	{
