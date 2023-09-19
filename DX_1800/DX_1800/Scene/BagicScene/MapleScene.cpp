@@ -9,11 +9,11 @@
 
 #include "../../Object/Maple/MapleInventory.h"
 #include "../../Object/Maple/MaplePortar.h"
-#include "../../Object/Maple/Meso.h"
 
 MapleScene::MapleScene()
 {
 	_player = make_shared<PlayerManager>();
+	_player->GetCollider()->GetTransform()->SetPosition(Vector2(0.0f, 1000.0));
 	_map = make_shared<MapleMap>();
 	for (int i = 0; i < 5; i++)
 	{
@@ -50,11 +50,15 @@ void MapleScene::Update()
 	for (auto monster : _monster)
 		monster->Update();
 
-	for (int i = 0; i < 5; i++)
+	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
 	{
-		_monster[i]->_hpBar->Update();
+		if (KEY_PRESS('W'))
+		{
+			SCENE->NextScene();
+		}
 	}
-	
+
+
 	for (int i = 0; i < 5; i++)
 	{
 		_monster[i]->Hit(_player);
@@ -144,32 +148,16 @@ void MapleScene::Update()
 		}
 	}
 
-	
-	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
-	{
-		if (KEY_PRESS('W'))
-		{
-			SCENE->NextScene();
-		}
-	}
 }
 
 void MapleScene::Render()
 {
-	wstring str;
-
-	str = L"123456";
-	FONT->RenderText(str, "D2Coding", Vector2(100.0f, 20.0f));
-
 	_map->Render();
 	_portar->Render();
 	//_meso->Render();
 	for (auto monster : _monster)
 		monster->Render();
-	for (int i = 0; i < 5; i++)
-	{
-		_monster[i]->_hpBar->PostRender();
-	}
+
 	_player->Render();
 }
 

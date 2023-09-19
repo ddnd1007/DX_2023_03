@@ -2,7 +2,7 @@
 #include "BossProjectiles.h"
 //#include "PlayerManager.h"
 
-Projectiles::Projectiles()
+Bossprojectiles::Bossprojectiles()
 {
 	_col = make_shared<CircleCollider>(10);
 	_trans = make_shared<Transform>();
@@ -24,25 +24,29 @@ Projectiles::Projectiles()
 	_sprites[1]->SetLeft();
 }
 
-Projectiles::~Projectiles()
+Bossprojectiles::~Bossprojectiles()
 {
 }
 
-void Projectiles::Update()
+void Bossprojectiles::Update()
 {
+	
+		_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
 
-	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
+		// 투사체가 활성 상태에서 움직일 때의 로직 추가
 
-	_col->Update();
-	_trans->Update();
+		_col->Update();
+		_trans->Update();
 
-	_actions[_curState]->Update();
+		_actions[_curState]->Update();
 
-	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
-	_sprites[_curState]->Update();
+		_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
+		_sprites[_curState]->Update();
+
+		
 }
 
-void Projectiles::Render()
+void Bossprojectiles::Render()
 {
 	_trans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -50,7 +54,7 @@ void Projectiles::Render()
 	_col->Render();
 }
 
-void Projectiles::SetAction(State state)
+void Bossprojectiles::SetAction(State state)
 {
 	if (_curState == state)
 		return;
@@ -65,7 +69,7 @@ void Projectiles::SetAction(State state)
 	_oldState = _curState;
 }
 
-void Projectiles::Attack(shared_ptr<class PlayerManager> victim)
+void Bossprojectiles::Attack(shared_ptr<class PlayerManager> victim)
 {
 	if (_isActive == false)
 		return;
@@ -76,18 +80,20 @@ void Projectiles::Attack(shared_ptr<class PlayerManager> victim)
 	_isActive = false;
 }
 
-void Projectiles::Shoot(shared_ptr<class PlayerManager> victim)
+void Bossprojectiles::Shoot(Vector2 startPos, Vector2 dir)
 {
-	if (victim->IsActive() == false)
-		return;
-	if (_col->IsCollision(victim->GetCollider()) == false);
-	return;
-	SetAction(State::BALL);
-	victim->TakeDamage(50);
-	_isActive = false;
+	if (!_isActive)
+	{
+		_isActive = true;
+		_col->GetTransform()->SetPosition(startPos);
+		_dir = dir.NorMalVector2();
+		_col->GetTransform()->SetAngle(dir.Angle());
+		SetAction(State::BALL);
+
+	}
 }
 
-void Projectiles::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
+void Bossprojectiles::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
 {
 	wstring wName = wstring(name.begin(), name.end());
 	wstring srvPath = L"Resource/Maple/Boss/" + wName + L".png";

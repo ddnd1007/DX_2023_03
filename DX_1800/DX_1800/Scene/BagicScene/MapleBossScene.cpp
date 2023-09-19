@@ -37,9 +37,13 @@ void MapleBossScene::Update()
 	_bossMap->Update();
 	_portar->Update();
 	
-
-
-	
+	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
+	{
+		if (KEY_PRESS('W'))
+		{
+			SCENE->PrevScene();
+		}
+	}
 
 	if (_bossMap->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
@@ -55,6 +59,7 @@ void MapleBossScene::Update()
 		if (_boss->GetCirCollider()->IsCollision(_player->GetCollider()))
 		{
 			_player->TakeDamage(10);
+
 		}
 	}
 
@@ -86,23 +91,15 @@ void MapleBossScene::Update()
 		_boss->Move(_player);
 	}
 	
-	if (_player->GetCollider()->IsCollision(_portar->GetCollider()))
-	{
-		if (KEY_PRESS('W'))
-		{
-			SCENE->PrevScene();
-		}
-	}
-
-	//if (_boss->IsActive() == false || _player->IsActive() == false)
-	//	return;
+	/*if (_boss->IsActive() == false || _player->IsActive() == false)
+		return;
 	for (int i = 0; i < 10; i++)
 	{
 		if (_boss->_hp == 140)
 		{
 			_boss->Skill(_player);
 		}
-	}
+	}*/
 
 	if (_boss->GetCirCollider()->IsCollision(_player->GetCollider()))
 	{
@@ -118,8 +115,8 @@ void MapleBossScene::Render()
 	_portar->Render();
 	//_meso->Render();
 	_boss->Render();
-	for (auto skill2 : _skill2)
-		skill2->Render();
+	/*for (auto skill2 : _skill2)
+		skill2->Render();*/
 	_player->Render();
 	
 

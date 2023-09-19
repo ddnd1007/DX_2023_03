@@ -204,9 +204,6 @@
     <ClInclude Include="Object\UI\PlayerHpBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Maple\BossSkill2.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object\UI\MonsterHpBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -214,6 +211,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Utility\Singleton.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\EquipmentInven.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Maple\Bossprojectiles.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -368,13 +371,16 @@
     <ClCompile Include="Object\UI\PlayerHpBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Maple\BossSkill2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object\UI\MonsterHpBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Utility\Font.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\EquipmentInven.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Maple\Bossprojectiles.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -585,5 +591,6 @@
     <Media Include="Resource\Sound\jump.wav">
       <Filter>리소스 파일</Filter>
     </Media>
+    <Media Include="Resource\Sound\bossbgm.mp3" />
   </ItemGroup>
 </Project>

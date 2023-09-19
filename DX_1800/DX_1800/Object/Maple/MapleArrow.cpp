@@ -4,14 +4,14 @@
 
 MapleArrow::MapleArrow()
 {
-	_quad = make_shared<Quad>(L"Resource/Maple/Character/arrrow.png", Vector2(400,400));
+	_quad = make_shared<Quad>(L"Resource/Maple/Character/arrrow.png", Vector2(400, 400));
 	_col = make_shared<CircleCollider>(5);
 	_trans = make_shared<Transform>();
 
 	_trans->SetParent(_col->GetTransform());
 	_trans->SetPosition(Vector2(-80.0f, 0.0f));
 	_trans->SetAngle(-PI * 0.5f);
-	
+
 	_col->GetTransform()->SetPosition(Vector2(-WIN_WIDTH * 5, -WIN_HEIGHT * 5));
 	_isActive = false;
 
@@ -43,7 +43,7 @@ void MapleArrow::Render()
 	_trans->SetWorldBuffer(0);
 	_quad->Render();
 	_col->Render();
-	
+
 }
 
 void MapleArrow::PostRender()

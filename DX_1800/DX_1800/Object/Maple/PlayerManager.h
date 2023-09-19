@@ -1,8 +1,6 @@
 #pragma once
 class PlayerManager
 {
-public:
-
 	enum State
 	{
 		STAND,
@@ -12,6 +10,7 @@ public:
 		DEAD,
 	};
 
+public:
 	PlayerManager();
 	~PlayerManager();
 
@@ -57,8 +56,11 @@ public:
 	void Attack();
 	void EndAttack();
 	void TakeDamage(int damage);
+
+
 	Vector2 GetPosition() { return _circleCol->GetTransform()->GetPos(); }
 
+	shared_ptr<class MapleArrow> SetArrows();
 	shared_ptr<CircleCollider> GetCollider() { return _circleCol; }
 	vector<shared_ptr<class MapleArrow>>& GetBullets() { return _arrows; }
 
@@ -72,7 +74,7 @@ public:
 	void Grounded() { _isFalling = false; }
 
 	shared_ptr<class PlayerHpBar> _hpBar;
-	int _damage = 10;
+	int _damage = 20;
 private:
 	static PlayerManager* _instance;
 
@@ -86,12 +88,11 @@ private:
 
 	shared_ptr<class Item> _item;
 	shared_ptr<class MapleInventory> _inven;
+	shared_ptr<class EquipmentInven> _equip;
 
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite_Clip>> _sprites;
 	vector<shared_ptr<class MapleArrow>> _arrows;
-
-	
 
 	State _curState = State::STAND;
 	State _oldState = State::STAND;
@@ -111,7 +112,5 @@ private:
 
 	int _hp = 100;
 	int _maxHp = 100;
-	
-	
 };
 

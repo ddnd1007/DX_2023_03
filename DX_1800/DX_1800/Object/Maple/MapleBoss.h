@@ -1,7 +1,6 @@
 #pragma once
 class MapleBoss
 {
-
 	enum State
 	{
 		STAND,
@@ -37,16 +36,16 @@ public:
 	void HitEnd();
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
-	void Skill(shared_ptr<class PlayerManager> player);
-	void SkillEnd();
+	void Skill(Vector2 startPos, Vector2 dir);
+	
 
 	//void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
 
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
 
-	int _hp = 200;
-	const int _maxHp = 200;
+	int _hp = 1000;
+	const int _maxHp = 1000;
 	bool _isDamaged = false;
 	bool IsDead();
 	bool IsActive() { return _hp > 0; }
@@ -65,8 +64,9 @@ private:
 	shared_ptr<RectCollider> _rectCol;
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
-	vector<shared_ptr<class BossSkill2>> _skill2;
 	shared_ptr<HpBar> _hpBar;
+	shared_ptr<Bossprojectiles> _skill;
+	shared_ptr<PlayerManager> _player;
 
 
 	State _curState = State::WORK;
@@ -86,5 +86,8 @@ private:
 	
 	const int _damage = 3;
 	const int _skill2Damage = 100;
+
+	float _projectileCooldownDuration = 2.0f;
+	float _projectileCooldownTimer = 0.0f;
 };
 

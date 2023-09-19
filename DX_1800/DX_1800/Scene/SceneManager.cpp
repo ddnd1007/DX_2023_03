@@ -23,6 +23,9 @@ SceneManager::SceneManager()
 	//CAMERA->SetLeftBottom(_map->leftBottom());
 	//CAMERA->SetRightTop(_map->rightTop());
 	//CAMERA->SetOffset(Vector2(0, -110));
+	SOUND->Add("BGM", "Resource/Sound/bossbgm.mp3", false);
+	//SOUND->SetVolume("BGM", 0.01f);
+	SOUND->Play("BGM", 0.1f);
 }
 
 SceneManager::~SceneManager()

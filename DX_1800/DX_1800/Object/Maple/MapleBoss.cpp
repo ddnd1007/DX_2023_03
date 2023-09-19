@@ -1,8 +1,7 @@
 #include "framework.h"
 #include "MapleBoss.h"
-#include "BossProjectiles.h"
-#include "BossSkill2.h"
-
+#include "Bossprojectiles.h"
+//#include "BossSkill2.h"
 
 MapleBoss::MapleBoss()
 {
@@ -30,20 +29,12 @@ MapleBoss::MapleBoss()
 	_rectTrans->SetPosition(Vector2(0, 0));
 	_ballCol->GetTransform()->SetParent(_circleCol->GetTransform());
 	_ballTrans->SetParent(_circleCol->GetTransform());
-	
+
 	_hpBar = make_shared<HpBar>();
 	_hpBar->SetPosition(Vector2(0.0f, 700.0f));
 	
 	_hpBar->SetRatio(200.0f);
 
-	for (int i = 0; i < 10; i++)
-	{
-		shared_ptr<BossSkill2> skill2 = make_shared<BossSkill2>();
-		int randomX = skill2->getRandomNumber(0, WIN_WIDTH);
-		skill2->SetPosition(Vector2(randomX, 330));
-		_skill2.push_back(skill2);
-	}
-	
 	_actions[State::WORK]->Play();
 	
 	_sprites[0]->SetLeft();
@@ -69,15 +60,29 @@ void MapleBoss::Update()
 	_rectCol->Update();
 	_rectTrans->Update();
 
-	for (auto skill2 : _skill2)
-		skill2->Update();
-
 	_hpBar->Update();
 
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
+
+	//if (_projectileCooldownTimer > 0.0f)
+	//{
+	//	_projectileCooldownTimer -= DELTA_TIME;
+	//}
+
+	//if (_isActive && _projectileCooldownTimer <= 0.0f)
+	//{
+	//	// 플레이어를 향한 방향 계산 (예: 플레이어 위치로 향하는 방향)
+	//	Vector2 playerDirection = (_player->GetCollider()->GetTransform()->GetWorldPos() - _circleCol->GetTransform()->GetWorldPos()).NorMalVector2();
+
+	//	// 투사체 발사 함수 호출 (쿨타임 초기화)
+	//	_skill->Shoot(_circleCol->GetTransform()->GetWorldPos(), playerDirection);
+	//	_projectileCooldownTimer = _projectileCooldownDuration;
+	//}
+
+
 }
 
 void MapleBoss::Render()
@@ -96,8 +101,6 @@ void MapleBoss::Render()
 	_ballCol->Render();
 	_rectCol->Render();
 
-	for (auto skill2 : _skill2)
-		skill2->Render();
 }
 
 void MapleBoss::SetAction(State state)
@@ -211,37 +214,10 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 	}
 }
 
-void MapleBoss::Skill(shared_ptr<class PlayerManager> player)
-{
-	if (IsActive() == false)
-		return;
-	for (int i = 0; i < 10; i++)
-	{
-		if (_hp == 140)
-		{
-			_move = false;
-			SetAction(State::SKILL);
-			_skill2[i]->Skill2(player);
-		
-		}
-		SkillEnd();
-		_skill2[i]->EndSkill();
-		
-	}
-}
-
-void MapleBoss::SkillEnd()
-{
-	if (IsActive() == false && _move == false)
-		return;
-
-	if (_hp < 140 || _hp > 140)
-	{
-		SetAction(State::WORK);
-		_move = true;
-	}
-}
-
+//void MapleBoss::Skill(Vector2 startPos, Vector2 dir)
+//{
+//	_skill->Shoot(startPos, dir);
+//}
 
 bool MapleBoss::IsDead()
 {

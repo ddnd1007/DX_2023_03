@@ -2,6 +2,7 @@
 #include "PlayerManager.h"
 #include "MapleArrow.h"
 #include "MaplePortar.h"
+#include "EquipmentInven.h"
 #include "MapleInventory.h"
 #include "Item.h"
 #include "../UI/PlayerHpBar.h"
@@ -11,7 +12,7 @@ PlayerManager* PlayerManager::_instance = nullptr;
 PlayerManager::PlayerManager()
 {
 	_circleCol = make_shared<CircleCollider>(30);
-	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
+	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
 	_transform = make_shared<Transform>();
 	_transform->SetPosition(Vector2(0, 0));
 	_transform->SetParent(_circleCol->GetTransform());
@@ -20,15 +21,11 @@ PlayerManager::PlayerManager()
 	_bowTrans = make_shared<Transform>();
 	_bowCol->GetTransform()->SetParent(_circleCol->GetTransform());
 
-	_inven = make_shared<MapleInventory>();
-	_item = make_shared<Item>();
-
 	CreateAction("stand", 0.2f);
 	CreateAction("work", 0.1f);
 	CreateAction("jump");
 	CreateAction("shoot");
 	CreateAction("dead");
-	CreateAction("lay down");
 
 	_bowTrans->SetParent(_bowCol->GetTransform());
 	_bowTrans->SetPosition(Vector2(0, 0));
@@ -47,6 +44,29 @@ PlayerManager::PlayerManager()
 
 	_hpBar = make_shared<PlayerHpBar>();
 	_hpBar->SetPosition(Vector2(-300.0f, -150.0f));
+
+	_inven = make_shared<class MapleInventory>();
+	_equip = make_shared<class EquipmentInven>();
+	_item = make_shared<class Item>();
+
+	_inven->_col->GetTransform()->AddVector2({ 100.0f,0.0f });
+	//SetLeft();
+
+	_inven->_haven[7][0]->SetQuad(L"Resource/Maple/UI/hat.png");
+	_inven->_haven[7][0]->SetItemInfo(Item::HAT);
+
+
+	_inven->_haven[7][1]->SetQuad(L"Resource/Maple/UI/top.png");
+	_inven->_haven[7][1]->SetItemInfo(Item::TOP);
+
+
+	_inven->_haven[7][2]->SetQuad(L"Resource/Maple/UI/pants.png");
+	_inven->_haven[7][2]->SetItemInfo(Item::PANTS);
+
+
+	_inven->_haven[7][3]->SetQuad(L"Resource/Maple/UI/bow.png");
+	_inven->_haven[7][3]->SetItemInfo(Item::BOW);
+
 }
 
 PlayerManager::~PlayerManager()
@@ -55,22 +75,20 @@ PlayerManager::~PlayerManager()
 
 void PlayerManager::Update()
 {
-	_item->Update();
-	_inven->Update();
-
 	Input();
 	Jump();
 	IsDead();
 
+	_item->Update();
+	_inven->Update();
+	_equip->Update();
 
-	
 	_bowCol->Update();
 	_circleCol->Update();
 	_transform->Update();
 	_bowTrans->Update();
 
 	_hpBar->Update();
-	_inven->Update();
 
 	for (auto arrow : _arrows)
 		arrow->Update();
@@ -89,7 +107,7 @@ void PlayerManager::Update()
 		}
 	}
 
-	
+
 }
 
 void PlayerManager::Render()
@@ -100,13 +118,11 @@ void PlayerManager::Render()
 	_bowTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
-
-	
-
 	_bowCol->Render();
 	_circleCol->Render();
-	
+
 	_inven->Render();
+	_equip->Render();
 
 	for (auto arrow : _arrows)
 		arrow->Render();
@@ -161,9 +177,9 @@ void PlayerManager::Input()
 
 	if (KEY_DOWN('I') && _inven->active == false)
 	{
-		_inven->_col->GetTransform()->SetPosition(_circleCol->GetWorldPos());
+		_inven->_col->GetTransform()->SetPosition(Vector2(_circleCol->GetWorldPos().x, _circleCol->GetWorldPos().y + 200.0f));
 		_inven->active = true;
-		
+
 
 	}
 	else if (KEY_DOWN('I') && _inven->active == true)
@@ -171,6 +187,17 @@ void PlayerManager::Input()
 		_inven->active = false;
 	}
 
+	if (KEY_DOWN('E') && _equip->active == false)
+	{
+		_equip->_col->GetTransform()->SetPosition(_circleCol->GetWorldPos());
+		_equip->active = true;
+
+
+	}
+	else if (KEY_DOWN('E') && _equip->active == true)
+	{
+		_equip->active = false;
+	}
 }
 
 void PlayerManager::Jump()
@@ -198,6 +225,8 @@ void PlayerManager::Attack()
 {
 	if (IsActive() == false)
 		return;
+
+	shared_ptr<MapleArrow> arrows = SetArrows();
 
 	if (_isFalling == false && _isAttack == false)
 		SetAction(State::SHOOT);
@@ -269,6 +298,18 @@ void PlayerManager::TakeDamage(int damage)
 			SetLeft();
 		}
 	}
+}
+
+shared_ptr<MapleArrow> PlayerManager::SetArrows()
+{
+	for (auto arrows : _arrows)
+	{
+		if (arrows->_isActive == true)
+			continue;
+		else
+			return arrows;
+	}
+	return nullptr;
 }
 
 void PlayerManager::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

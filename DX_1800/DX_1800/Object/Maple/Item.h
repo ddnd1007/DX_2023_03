@@ -2,11 +2,12 @@
 class Item
 {
 	friend class MapleInventory;
+	friend class EquipmentInventory;
+
 public:
 
 	enum ItemInfo
 	{
-	
 		NONE,
 		BOW,
 		HAT,
@@ -21,13 +22,12 @@ public:
 	void Update();
 	void Render();
 
+	ItemInfo GetInfo() { return info; }
 	void SetItemInfo(ItemInfo Info) { info = Info; }
 	void SetQuad(wstring path);
-	
-	ItemInfo GetInfo() { return info; }
 
 	bool colision(Vector2 mouse, shared_ptr<RectCollider> rect);
-	bool equip = false;
+	bool used = false;
 	bool drag = false;
 
 	Vector2 GetOldPos() { return  oldPos; }
@@ -35,7 +35,7 @@ public:
 
 
 
-protected:
+public:
 	shared_ptr<Quad> _quad;
 	shared_ptr<RectCollider> _col;
 	shared_ptr<Transform> _trans;
@@ -44,7 +44,7 @@ protected:
 
 	ItemInfo info = NONE;
 
-	
+
 };
 
 

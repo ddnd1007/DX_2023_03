@@ -1,5 +1,5 @@
 #pragma once
-class Projectiles
+class Bossprojectiles
 {
 	enum State
 	{
@@ -8,8 +8,8 @@ class Projectiles
 	};
 
 public:
-	Projectiles();
-	~Projectiles();
+	Bossprojectiles();
+	~Bossprojectiles();
 
 	void Update();
 	void Render();
@@ -23,7 +23,7 @@ public:
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
 
-	void Shoot(shared_ptr<class PlayerManager> victim);
+	void Shoot(Vector2 startPos, Vector2 dir);
 
 	void SetLeft()
 	{
@@ -54,6 +54,9 @@ private:
 	float _speed = 100.0f;
 	int _damage = 40;
 
+	float _cooldownDuration = 1.0f; // 투사체 발사 쿨타임 지속 시간 (예: 1초)
+	float _cooldownTimer = 0.0f;
+	bool _canShoot = true;
 };
 
 

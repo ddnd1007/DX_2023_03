@@ -31,9 +31,6 @@ MapleMonster::MapleMonster()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	_hpBar = make_shared<MonsterHpBar>();
-	_hpBar->SetParent(_circleCol->GetTransform());
-	_hpBar->SetPosition(Vector2(0.0,-150.0f));
 }
 
 MapleMonster::~MapleMonster()
@@ -52,7 +49,6 @@ void MapleMonster::Update()
 	_rectTrans->Update();
 	_circleCol->Update();
 	_circleTrans->Update();
-	_hpBar->Update();
 
 	_actions[_curState]->Update();
 
@@ -74,7 +70,6 @@ void MapleMonster::Render()
 	if(_isActive == false)
 		return;
 	
-	_hpBar->PostRender();
 	_rectTrans->SetWorldBuffer(0);
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
@@ -108,7 +103,6 @@ void MapleMonster::TakeDamage(int damage)
 	if (!_isInvincible)	
 	{
 		_hp -= damage;
-		_hpBar->SetRatio(_hp / (float)_maxHp);
 		
 		_isInvincible = true;
 		_invincibleTimer = _invincibleDuration;

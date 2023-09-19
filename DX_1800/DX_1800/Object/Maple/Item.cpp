@@ -3,9 +3,9 @@
 
 Item::Item()
 {
-	_quad = make_shared<Quad>(L"", Vector2(20.0f, 20.0f));
+	_quad = make_shared<Quad>(L"", Vector2(36.0f, 35.0f));
 	_trans = make_shared<Transform>();
-	_col = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
+	_col = make_shared<RectCollider>(Vector2(36.0f, 35.0f));
 
 	_trans->SetParent(_col->GetTransform());
 }
@@ -13,9 +13,9 @@ Item::Item()
 Item::Item(wstring path, ItemInfo info)
 	:info(info)
 {
-	_quad = make_shared<Quad>(path, Vector2(20.0f, 20.0f));
+	_quad = make_shared<Quad>(path, Vector2(36.0f, 35.0f));
 	_trans = make_shared<Transform>();
-	_col = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
+	_col = make_shared<RectCollider>(Vector2(36.0f, 35.0f));
 
 	_trans->SetParent(_col->GetTransform());
 }
@@ -40,7 +40,7 @@ void Item::Render()
 
 void Item::SetQuad(wstring path)
 {
-	_quad = make_shared<Quad>(path, Vector2(20.0f, 20.0f));
+	_quad = make_shared<Quad>(path, Vector2(36.0f, 35.0f));
 }
 
 bool Item::colision(Vector2 mouse, shared_ptr<RectCollider> rect)

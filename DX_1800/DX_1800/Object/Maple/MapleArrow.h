@@ -3,7 +3,7 @@ class MapleArrow
 {
 public:
 	MapleArrow();
-    ~MapleArrow();
+	~MapleArrow();
 
 	void Update();
 	void Render();

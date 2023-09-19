@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -151,10 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Maple\Bossprojectiles.h" />
+    <ClInclude Include="Object\Maple\EquipmentInven.h" />
     <ClInclude Include="Framework\Utility\Font.h" />
     <ClInclude Include="Framework\Utility\Singleton.h" />
     <ClInclude Include="Object\UI\MonsterHpBar.h" />
-    <ClInclude Include="Object\Maple\BossSkill2.h" />
     <ClInclude Include="Object\Maple\Item.h" />
     <ClInclude Include="Object\Maple\MapleBoss.h" />
     <ClInclude Include="Object\Maple\MapleInventory.h" />
@@ -220,9 +221,10 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Maple\Bossprojectiles.cpp" />
+    <ClCompile Include="Object\Maple\EquipmentInven.cpp" />
     <ClCompile Include="Framework\Utility\Font.cpp" />
     <ClCompile Include="Object\UI\MonsterHpBar.cpp" />
-    <ClCompile Include="Object\Maple\BossSkill2.cpp" />
     <ClCompile Include="Object\Maple\Item.cpp" />
     <ClCompile Include="Object\Maple\MapleBoss.cpp" />
     <ClCompile Include="Object\Maple\MapleInventory.cpp" />
@@ -524,6 +526,7 @@
   <ItemGroup>
     <Media Include="Resource\Sound\attack.wav" />
     <Media Include="Resource\Sound\BGM.mp3" />
+    <Media Include="Resource\Sound\bossbgm.mp3" />
     <Media Include="Resource\Sound\drumloop.wav" />
     <Media Include="Resource\Sound\jump.wav" />
   </ItemGroup>
