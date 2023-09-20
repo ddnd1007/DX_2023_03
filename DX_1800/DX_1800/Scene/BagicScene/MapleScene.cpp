@@ -41,7 +41,7 @@ void MapleScene::Update()
 	_player->Update();
 	_map->Update();
 	_portar->Update();
-	
+
 	if (_map->GetCollider()->Block(_player->GetCollider()))
 		_player->Grounded();
 	else
@@ -114,7 +114,7 @@ void MapleScene::Update()
 	}
 
 	for (int i = 0; i < 5; i++)
-	{   
+	{
 
 		if (_monster[i]->IsActive() == true)
 		{
@@ -125,31 +125,31 @@ void MapleScene::Update()
 
 				if (arrow->GetCollider()->IsCollision(_monster[i]->GetCirCollider()))
 				{
-					_monster[i]->TakeDamage(10);
-					_monster[i]->Hit(_player);
+					_monster[i]->TakeDamage(20);
 					_monster[i]->_isDamaged = true;
+					_monster[i]->Hit(_player);
 					_monster[i]->GetCirCollider()->SetColorRed();
 					arrow->_isActive = false;
 				}
+			} 
+		}
+	}
+
+		for (int i = 0; i < 5; i++)
+		{
+			if (_monster[i]->IsActive() == false)
+				return;
+
+			if (_player->IsActive() == false)
+				return;
+
+			if (_monster[i]->GetRectCollider()->IsCollision(_player->GetCollider()))
+			{
+				_monster[i]->Move(_player);
 			}
 		}
 	}
 
-	for (int i = 0; i < 5; i++)
-	{
-		if (_monster[i]->IsActive() == false)
-			return;
-
-		if (_player->IsActive() == false)
-			return;
-		
-		if (_monster[i]->GetRectCollider()->IsCollision(_player->GetCollider()))
-		{
-			_monster[i]->Move(_player);
-		}
-	}
-
-}
 
 void MapleScene::Render()
 {

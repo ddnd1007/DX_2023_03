@@ -41,8 +41,8 @@ public:
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
 
-	int _hp = 30;
-	const int _maxHp = 30;
+	int _hp = 40;
+	const int _maxHp = 40;
 	bool _isDamaged = false;
 	bool IsDead();
 	bool IsActive() { return _hp > 0; }
@@ -70,7 +70,7 @@ private:
 	float _hitTime = 0.3f;
 	const float _deathAnimationDuration = 0.9f;
 	float _deathAnimationTimer = 0.0f;
-	const float _hitAnimationDuration = 1.5f;
+	const float _hitAnimationDuration = 1.0f;
 	float _hitAnimationTimer = 0.0f;
 	const float _speed = 50.0f;
 	const float _invincibleDuration = 1.0f;

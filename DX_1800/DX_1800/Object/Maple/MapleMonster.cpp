@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "MapleMonster.h"
 #include "MaplePlayer.h"
+#include "MapleArrow.h"
 #include "../UI/MonsterHpBar.h"
 
 MapleMonster::MapleMonster()
@@ -40,7 +41,7 @@ MapleMonster::~MapleMonster()
 void MapleMonster::Update()
 {
 	DeathAnimation();
-	
+	HitAnimation();
 	
 	IsDead();
 	HitEnd();
@@ -63,15 +64,6 @@ void MapleMonster::Update()
 			_isInvincible = false;
 		}
 	}
-
-	/*if (_isDamaged)
-	{
-		_hitAnimationTimer -= DELTA_TIME;
-		if (_hitAnimationTimer <= 0.0f)
-		{
-			_isDamaged = false;
-		}
-	}*/
 }
 
 void MapleMonster::Render()
@@ -107,23 +99,7 @@ void MapleMonster::TakeDamage(int damage)
 	if (_isDamaged == true)
 		return;
 
-	if (!_isInvincible)	
-	{
-		_hp -= damage;
-		
-		_isInvincible = true;
-		_invincibleTimer = _invincibleDuration;
-	}
-
-	/*if (_isDamaged)
-	{
-		_hitAnimationTimer -= DELTA_TIME;
-		if (_hitAnimationTimer <= 0.0f)
-		{
-			HitAnimation();
-			_isDamaged = false;
-		}
-	}*/
+	_hp -= damage;
 }
 
 bool MapleMonster::IsDead()
@@ -144,22 +120,23 @@ void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 		return;
 
 	if (_isDamaged == true && _curState != State::HIT)
-	
-
-	if (player->GetCollider()->IsCollision(_circleCol))
 	{
 		if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 		{
+			_isDamaged = true;
 			SetLeft();
 			HitAnimation();
 		}
 		else
 		{
+			_isDamaged = true;
 			SetRight();
 			HitAnimation();
 		}
+		HitEnd();
 	}
 }
+
 
 void MapleMonster::HitEnd()
 {
@@ -199,7 +176,6 @@ bool MapleMonster::HitAnimation()
 		{
 			SetAction(State::HIT);
 			_hitAnimationTimer = 0.0f;
-			_isDamaged = false;
 			_curState = (State::HIT);
 			return true;
 		}
