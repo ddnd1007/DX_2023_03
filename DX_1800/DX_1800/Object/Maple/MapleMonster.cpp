@@ -15,7 +15,7 @@ MapleMonster::MapleMonster()
 
 	CreateAction("snail stand");
 	CreateAction("snail work");
-	CreateAction("snail hit", 0.2);
+	CreateAction("snail hit", 1.0);
 	CreateAction("snail die", 0.12, Action::Type::END);
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
@@ -55,15 +55,6 @@ void MapleMonster::Update()
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
-
-	if (_isInvincible)
-	{
-		_invincibleTimer -= DELTA_TIME;
-		if (_invincibleTimer <= 0.0f)
-		{
-			_isInvincible = false;
-		}
-	}
 }
 
 void MapleMonster::Render()
@@ -123,18 +114,18 @@ void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 	{
 		if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 		{
-			_isDamaged = true;
+			
 			SetLeft();
 			HitAnimation();
 		}
 		else
 		{
-			_isDamaged = true;
+			
 			SetRight();
 			HitAnimation();
 		}
-		HitEnd();
 	}
+		HitEnd();
 }
 
 
@@ -179,7 +170,7 @@ bool MapleMonster::HitAnimation()
 			_curState = (State::HIT);
 			return true;
 		}
-		return false;
+		//return false;
 	}
 	return false;
 }

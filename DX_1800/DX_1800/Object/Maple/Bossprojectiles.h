@@ -4,7 +4,6 @@ class Bossprojectiles
 	enum State
 	{
 		BALL,
-		NONE
 	};
 
 public:
@@ -22,8 +21,8 @@ public:
 	void Attack(shared_ptr<class PlayerManager> victim);
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	Vector2 GetPosition() { return _col->GetTransform()->GetPos(); }
-
-	void Shoot(Vector2 startPos, Vector2 dir);
+	void SetDirtection(Vector2 dir) { _dir = dir.NorMalVector2(); _col->GetTransform()->SetAngle(dir.Angle()); }
+	void Shoot(shared_ptr<class PlayerManager> victim);
 	void ShootEnd();
 
 	void SetLeft()

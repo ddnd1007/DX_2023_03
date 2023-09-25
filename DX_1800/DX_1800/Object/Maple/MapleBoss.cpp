@@ -40,6 +40,12 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
+	for (int i = 0; i < 10; i++)
+	{
+		shared_ptr<Bossprojectiles> skill1 = make_shared<Bossprojectiles>();
+		_skill1.push_back(skill1);
+	}
+
 }
 
 MapleBoss::~MapleBoss()
@@ -61,6 +67,9 @@ void MapleBoss::Update()
 	_rectTrans->Update();
 
 	_hpBar->Update();
+
+	for (auto skill1 : _skill1)
+		skill1->Update();
 
 	_actions[_curState]->Update();
 
@@ -84,6 +93,9 @@ void MapleBoss::Render()
 	_circleCol->Render();
 	_ballCol->Render();
 	_rectCol->Render();
+
+	for (auto skill1 : _skill1)
+		skill1->Render();
 
 }
 
@@ -196,6 +208,50 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 			SetRight();
 		}
 	}
+}
+
+void MapleBoss::Skill()
+{
+	if (IsActive() == false)
+		return;
+
+	shared_ptr<Bossprojectiles> skill2 = SetSkill1();
+
+	if (_isAttack == false)
+
+	for (int i = 0; i < 10; i++)
+	{
+		_skill1[i]->_isActive = true;
+		_skill1[i]->SetPosition(_ballCol->GetWorldPos());
+
+		if (_circleCol->GetWorldPos().x > _ballCol->GetWorldPos().x)
+		{
+			_skill1[i]->SetPosition(_ballCol->GetWorldPos());
+			_skill1[i]->Shoot();
+			_skill1[i]->SetDirtection(-RIGHT_VECTOR);
+			_skill1[i]->ShootEnd();
+		}
+		else
+		{
+			_skill1[i]->SetPosition(_ballCol->GetWorldPos());
+			_skill1[i]->Shoot();
+			_skill1[i]->SetDirtection(RIGHT_VECTOR);
+			_skill1[i]->ShootEnd();
+		}
+		_isSkill = true;
+	}
+}
+
+shared_ptr<Bossprojectiles> MapleBoss::SetSkill1()
+{
+	for (auto skill1 : _skill1)
+	{
+		if (skill1->_isActive == true)
+			continue;
+		else
+			return skill1;
+	}
+	return nullptr;
 }
 
 bool MapleBoss::IsDead()

@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "BossProjectiles.h"
+#include "Bossprojectiles.h"
 //#include "PlayerManager.h"
 
 Bossprojectiles::Bossprojectiles()
@@ -77,16 +77,14 @@ void Bossprojectiles::Attack(shared_ptr<class PlayerManager> victim)
 	_isActive = false;
 }
 
-void Bossprojectiles::Shoot(Vector2 startPos, Vector2 dir)
+void Bossprojectiles::Shoot(shared_ptr<class PlayerManager> victim)
 {
 	if (!_isActive)
 	{
 		_isActive = true;
-		_col->GetTransform()->SetPosition(startPos);
-		_dir = dir.NorMalVector2();
-		_col->GetTransform()->SetAngle(dir.Angle());
+		_dir = _dir.NorMalVector2();
+		_col->GetTransform()->SetAngle(_dir.Angle());
 		SetAction(State::BALL);
-
 	}
 }
 

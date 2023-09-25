@@ -36,7 +36,9 @@ public:
 	void HitEnd();
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
-	void Skill(Vector2 startPos, Vector2 dir);
+	void Skill();
+
+	shared_ptr<Bossprojectiles> SetSkill1();
 	
 
 	//void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
@@ -50,6 +52,7 @@ public:
 	bool IsDead();
 	bool IsActive() { return _hp > 0; }
 	bool _move = true;
+	bool _isSkill = false;
 
 	//vector <shared_ptr<class BossSkill2>> _skill2;
 
@@ -66,6 +69,8 @@ private:
 	vector<shared_ptr<Action>> _actions;
 	shared_ptr<HpBar> _hpBar;
 	shared_ptr<PlayerManager> _player;
+
+	vector<shared_ptr<class Bossprojectiles>> _skill1;
 
 
 	State _curState = State::WORK;

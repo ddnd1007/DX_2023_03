@@ -70,7 +70,7 @@ private:
 	float _hitTime = 0.3f;
 	const float _deathAnimationDuration = 0.9f;
 	float _deathAnimationTimer = 0.0f;
-	const float _hitAnimationDuration = 1.0f;
+	const float _hitAnimationDuration = 0.3f;
 	float _hitAnimationTimer = 0.0f;
 	const float _speed = 50.0f;
 	const float _invincibleDuration = 1.0f;
