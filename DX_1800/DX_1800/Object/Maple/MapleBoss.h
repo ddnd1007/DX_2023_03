@@ -5,7 +5,7 @@ class MapleBoss
 	{
 		STAND,
 		WORK,
-		HIT,
+		BOSSHIT,
 		SKILL,
 		DEAD
 	};
@@ -13,7 +13,7 @@ public:
 	MapleBoss();
 	~MapleBoss();
 
-	void Update();
+	void Update(Vector2 target);
 	void Render();
 	void PostRender();
 
@@ -32,19 +32,18 @@ public:
 	void SetAction(State state);
 	void TakeDamage(int damage);
 	void Hit(shared_ptr<class PlayerManager> player);
+	bool HitAnimation();
 	void Attack(shared_ptr<class PlayerManager> victim);
 	void HitEnd();
 	bool DeathAnimation();
 	void Move(shared_ptr<class PlayerManager> player);
-	void Skill();
-
-	shared_ptr<Bossprojectiles> SetSkill1();
-	
-
-	//void SetBallCol(Vector2 pos) { return _ballCol->GetTransform()->SetPosition(pos); }
+	void Skill(Vector2 target);
+	void SetStateWork() { State::WORK; }
+	void DamagedEvent() { State::BOSSHIT; }
 
 	shared_ptr<CircleCollider> GetCirCollider() { return _circleCol; }
 	shared_ptr<RectCollider> GetRectCollider() { return _rectCol; }
+	vector<shared_ptr<class Bossprojectiles>>& GetSkill() { return _skill1; }
 
 	int _hp = 1000;
 	const int _maxHp = 1000;
@@ -68,6 +67,7 @@ private:
 	shared_ptr<Transform> _rectTrans;
 	vector<shared_ptr<Action>> _actions;
 	shared_ptr<HpBar> _hpBar;
+
 	shared_ptr<PlayerManager> _player;
 
 	vector<shared_ptr<class Bossprojectiles>> _skill1;
@@ -89,9 +89,12 @@ private:
 	const float _speed = 50.0f;
 	
 	const int _damage = 3;
-	const int _skill2Damage = 100;
+	//const int _skill2Damage = 100;
 
-	float _projectileCooldownDuration = 2.0f;
-	float _projectileCooldownTimer = 0.0f;
+	const float _hitAnimationDuration = 0.3f;
+	float _hitAnimationTimer = 0.0f;
+
+	float _CooldownDuration = 7.0f;
+	float _CooldownTimer = 0.0f;
 };
 

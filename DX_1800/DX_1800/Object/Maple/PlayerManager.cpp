@@ -2,7 +2,6 @@
 #include "PlayerManager.h"
 #include "MapleArrow.h"
 #include "MaplePortar.h"
-#include "EquipmentInven.h"
 #include "MapleInventory.h"
 #include "Item.h"
 #include "../UI/PlayerHpBar.h"
@@ -11,6 +10,12 @@ PlayerManager* PlayerManager::_instance = nullptr;
 
 PlayerManager::PlayerManager()
 {
+	SOUND->Add("work1", "Resource/Sound/work1.mp3", false);
+	SOUND->Add("work2", "Resource/Sound/work2.mp3", false);
+	SOUND->Add("jump", "Resource/Sound/jump.mp3", false);
+	SOUND->Add("bow", "Resource/Sound/BOw.mp3", false);
+	SOUND->Add("inventory", "Resource/Sound/inventoryOoen.mp3", false);
+
 	_circleCol = make_shared<CircleCollider>(30);
 	_circleCol->GetTransform()->SetPosition(Vector2(0, 0));
 	_transform = make_shared<Transform>();
@@ -46,7 +51,6 @@ PlayerManager::PlayerManager()
 	_hpBar->SetPosition(Vector2(-300.0f, -150.0f));
 
 	_inven = make_shared<class MapleInventory>();
-	_equip = make_shared<class EquipmentInven>();
 	_item = make_shared<class Item>();
 
 	_inven->_col->GetTransform()->AddVector2({ 100.0f,0.0f });
@@ -81,7 +85,6 @@ void PlayerManager::Update()
 
 	_item->Update();
 	_inven->Update();
-	_equip->Update();
 
 	_bowCol->Update();
 	_circleCol->Update();
@@ -118,11 +121,10 @@ void PlayerManager::Render()
 	_bowTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
-	_bowCol->Render();
-	_circleCol->Render();
+	//_bowCol->Render();
+	//_circleCol->Render();
 
 	_inven->Render();
-	_equip->Render();
 
 	for (auto arrow : _arrows)
 		arrow->Render();
@@ -148,6 +150,7 @@ void PlayerManager::Input()
 	if (KEY_PRESS(VK_LCONTROL) && _isFalling == false && _isAttack == false)
 	{
 		Attack();
+		SOUND->Play("bow", 0.1f);
 	}
 	else if (KEY_UP(VK_LCONTROL))
 	{
@@ -179,24 +182,14 @@ void PlayerManager::Input()
 	{
 		_inven->_col->GetTransform()->SetPosition(Vector2(_circleCol->GetWorldPos().x, _circleCol->GetWorldPos().y + 200.0f));
 		_inven->active = true;
+		SOUND->Play("inventory", 0.1f);
 
 
 	}
 	else if (KEY_DOWN('I') && _inven->active == true)
 	{
 		_inven->active = false;
-	}
-
-	if (KEY_DOWN('E') && _equip->active == false)
-	{
-		_equip->_col->GetTransform()->SetPosition(_circleCol->GetWorldPos());
-		_equip->active = true;
-
-
-	}
-	else if (KEY_DOWN('E') && _equip->active == true)
-	{
-		_equip->active = false;
+		SOUND->Play("inventory", 0.1f);
 	}
 }
 
@@ -218,6 +211,7 @@ void PlayerManager::Jump()
 	{
 		_jumpPower = 1200.0f;
 		_isFalling = true;
+		SOUND->Play("jump", 0.1f);
 	}
 }
 

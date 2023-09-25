@@ -29,7 +29,7 @@ void MapleBossMap::Render()
 	_transform->SetWorldBuffer(0);
 	_quad->Render();
 
-	_col->Render();
+	//_col->Render();
 }
 
 Vector2 MapleBossMap::leftBottom()

@@ -42,7 +42,7 @@ void MapleArrow::Render()
 		return;
 	_trans->SetWorldBuffer(0);
 	_quad->Render();
-	_col->Render();
+	//_col->Render();*/
 
 }
 

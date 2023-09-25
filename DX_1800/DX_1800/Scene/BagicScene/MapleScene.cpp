@@ -12,6 +12,7 @@
 
 MapleScene::MapleScene()
 {
+	SOUND->Add("potar", "Resource/Sound/potar.mp3", false);
 	_player = make_shared<PlayerManager>();
 	_player->GetCollider()->GetTransform()->SetPosition(Vector2(0.0f, 1000.0));
 	_map = make_shared<MapleMap>();
@@ -55,6 +56,8 @@ void MapleScene::Update()
 		if (KEY_PRESS('W'))
 		{
 			SCENE->NextScene();
+			SOUND->Play("potar", 0.1f);
+
 		}
 	}
 

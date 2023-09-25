@@ -6,6 +6,8 @@
 
 MapleMonster::MapleMonster()
 {
+	SOUND->Add("snailHit", "Resource/Sound/snailHit.mp3", false);
+	SOUND->Add("snailDie", "Resource/Sound/snailDie.mp3", false);
 	_circleCol = make_shared<CircleCollider>(15);
 	_circleTrans = make_shared<Transform>();
 
@@ -15,7 +17,7 @@ MapleMonster::MapleMonster()
 
 	CreateAction("snail stand");
 	CreateAction("snail work");
-	CreateAction("snail hit", 1.0);
+	CreateAction("snail hit", 0.5, Action::Type::LOOP);
 	CreateAction("snail die", 0.12, Action::Type::END);
 	
 	_circleCol->GetTransform()->SetPosition(Vector2(0,0));
@@ -40,7 +42,11 @@ MapleMonster::~MapleMonster()
 
 void MapleMonster::Update()
 {
+	if (_isActive == false)
+		return;
+
 	DeathAnimation();
+	
 	HitAnimation();
 	
 	IsDead();
@@ -66,8 +72,8 @@ void MapleMonster::Render()
 	_circleTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
-	_circleCol->Render();
-	_rectCol->Render();
+	//_circleCol->Render();
+	//_rectCol->Render();
 }
 
 void MapleMonster::SetAction(State state)
@@ -91,19 +97,35 @@ void MapleMonster::TakeDamage(int damage)
 		return;
 
 	_hp -= damage;
+	SOUND->Play("snailHit", 0.1f);
+	if (_isDamaged)
+	{
+		_hitAnimationTimer += DELTA_TIME;
+		if (_hitAnimationTimer > _hitAnimationDuration)
+		{
+			DamagedEvent();
+			
+			_hitAnimationTimer = 0.0f;
+			_isDamaged = false;
+		}
+		return;
+	}
+
 }
 
 bool MapleMonster::IsDead()
 {
-	if (IsActive() == true)
-		return IsActive() == true;
-
-	if (IsActive() == false)
+	if (_hp > 0)
+	{
+		return false;
+	}
+	else
 	{
 		SetAction(State::DEAD);
-		return IsActive() == false;
-	}
+		return true;
+	};
 }
+	
 
 void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 {
@@ -114,15 +136,14 @@ void MapleMonster::Hit(shared_ptr<class PlayerManager> player)
 	{
 		if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 		{
-			
 			SetLeft();
-			HitAnimation();
+			SetAction(State::HIT);
 		}
 		else
 		{
 			
 			SetRight();
-			HitAnimation();
+			SetAction(State::HIT);
 		}
 	}
 		HitEnd();
@@ -134,7 +155,7 @@ void MapleMonster::HitEnd()
 	if (IsActive() == false)
 		return;
 
-	if (_isDamaged == false && IsActive() == true)
+	if (_isDamaged == false && _curState == State::HIT)
 		SetAction(State::WORK);
 }
 
@@ -143,13 +164,14 @@ bool MapleMonster::DeathAnimation()
 	if (IsActive() == false)
 	{
 		_deathAnimationTimer += DELTA_TIME;
-
+		
 		if (_deathAnimationTimer >= _deathAnimationDuration)
 		{
 			SetAction(State::DEAD);
 			_deathAnimationTimer = 0.0f;
 			_isActive = false;
 			_curState = (State::DEAD);
+			SOUND->Play("snailDie", 0.1f);
 			return true;
 		}
 		return false;
@@ -163,14 +185,14 @@ bool MapleMonster::HitAnimation()
 	{
 		_hitAnimationTimer += DELTA_TIME;
 
-		if (_hitAnimationTimer >= _hitAnimationDuration)
+		if (_hitAnimationTimer > _hitAnimationDuration)
 		{
 			SetAction(State::HIT);
 			_hitAnimationTimer = 0.0f;
 			_curState = (State::HIT);
 			return true;
 		}
-		//return false;
+		return false;
 	}
 	return false;
 }

@@ -29,7 +29,7 @@ void MapleMap::Render()
 	_transform->SetWorldBuffer(0);
 	_quad->Render();
 	
-	_col->Render();
+	//_col->Render();
 }
 
 Vector2 MapleMap::leftBottom()

@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "MapleInventory.h"
-#include "EquipmentInven.h"
 #include "item.h"
 
 MapleInventory::MapleInventory()
@@ -9,6 +8,12 @@ MapleInventory::MapleInventory()
 	_trans = make_shared<Transform>();
 	_col = make_shared<RectCollider>(Vector2(_quad->GetImageSize().x, -30.0f));
 	_dragBar = make_shared<RectCollider>(Vector2(_quad->GetImageSize().x, 20.0f));
+
+	_quad2 = make_shared<Quad>(L"Resource/Maple/UI/equipment.png");
+	_trans2 = make_shared<Transform>();
+	_col2 = make_shared<RectCollider>(Vector2(_quad2->GetImageSize().x, -30.0f));
+	_dragBar2 = make_shared<RectCollider>(Vector2(_quad2->GetImageSize()));
+
 	oldpos = make_shared<Transform>();
 	oldpos->SetParent(_col->GetTransform());
 
@@ -18,15 +23,19 @@ MapleInventory::MapleInventory()
 	_dragBar->GetTransform()->SetParent(_col->GetTransform());
 	_dragBar->GetTransform()->SetPosition({ 0.0f, 200.0f });
 
+	_trans2->SetParent(_col2->GetTransform());
+
+	_col2->GetTransform()->SetParent(_col->GetTransform());
+	_col2->GetTransform()->SetPosition(Vector2(400.0f, 0.0f));
+
 	_items.resize(128);
 	_haven.resize(128);
 	_equipment.resize(4);
 	for (int i = 0; i < _equipment.size(); i++)
 	{
-		_equipment[i] = make_shared<EquipmentInven>();
-		_equipment[i]->_col->GetTransform()->SetParent(_col->GetTransform());
+		_equipment[i] = make_shared<Item>();
+		//_equipment[i]->_col->GetTransform()->SetParent(_equipment[i]->_col->GetTransform());
 	}
-
 
 	OpenInventory();
 }
@@ -36,13 +45,23 @@ MapleInventory::~MapleInventory()
 
 void MapleInventory::Update()
 {
+	Drag();
+	Equipment();
+	SetEquipment();
+	
+
 	_col->Update();
 	_quad->Update();
 	_trans->Update();
 	_dragBar->Update();
+	_col2->Update();
+	_quad2->Update();
+	_trans2->Update();
 
-	Drag();
-	SetEquipment();
+	for (int i = 0; i < _equipment.size(); i++)
+	{
+		_equipment[i]->Update();
+	}
 
 	for (auto itemarr : _items)
 	{
@@ -66,9 +85,19 @@ void MapleInventory::Render()
 	if (active == true)
 	{
 		_trans->SetWorldBuffer(0);
-		_col->Render();
+		//_col->Render();
 		_quad->Render();
-		_dragBar->Render();
+		//_dragBar->Render();
+
+		_trans2->SetWorldBuffer(0);
+		//_col2->Render();
+		_quad2->Render();
+		//_dragBar2->Render();
+
+		for (int i = 0; i < _equipment.size(); i++)
+		{
+			_equipment[i]->Render();
+		}
 
 
 		for (auto itemarr : _items)
@@ -101,8 +130,9 @@ void MapleInventory::OpenInventory()
 {
 	for (int i = 0; i < _equipment.size(); i++)
 	{
-		_equipment[i] = make_shared<EquipmentInven>();
-		_equipment[i]->_col->GetTransform()->SetParent(_col->GetTransform());
+		_equipment[i] = make_shared<Item>();
+		_equipment[i]->_col->GetTransform()->GetPos();
+	
 	}
 
 	for (int y = 0; y < slotY; y++)
@@ -137,12 +167,14 @@ void MapleInventory::OpenInventory()
 
 void MapleInventory::SetEquipment()
 {
-	for (auto havenarr : _haven)
-	{
-		for (auto haven : havenarr)
+	
+		for (auto havenarr : _haven)
 		{
-			if (haven->_col->IsCollision(W_MOUSE_POS) && KEY_PRESS(VK_RBUTTON))
+			for (auto haven : havenarr)
 			{
+				if (haven->_col->IsCollision(W_MOUSE_POS) && KEY_PRESS(VK_RBUTTON))
+				{
+
 				if (haven->GetInfo() == Item::HAT)
 				{
 					if (haven->used == false)
@@ -205,19 +237,16 @@ void MapleInventory::SetEquipment()
 	}
 }
 
-void MapleInventory::EquipItem(shared_ptr<Item> item, shared_ptr<EquipmentInven> slot)
+void MapleInventory::Equipment()
 {
-	if (item->used)
-	{
-		slot->_col->GetTransform()->SetPosition(item->GetOldPos());
-		item->used = false;
-	}
-	else
-	{
-		slot->_col->GetTransform()->SetPosition(item->_col->GetTransform()->GetPos());
-		item->used = true;
-	}
-
+	_equipment[0]->_col->GetTransform()->SetPosition(Vector2(370.0f, 102.0f));
+	_equipment[0]->SetItemInfo(Item::HAT);
+	_equipment[1]->_col->GetTransform()->SetPosition(Vector2(370.0f, 2.0f));
+	_equipment[1]->SetItemInfo(Item::TOP);
+	_equipment[2]->_col->GetTransform()->SetPosition(Vector2(370.0f, -32.0f));
+	_equipment[2]->SetItemInfo(Item::PANTS);
+	_equipment[3]->_col->GetTransform()->SetPosition(Vector2(470.0f, 2.0f));
+	_equipment[3]->SetItemInfo(Item::BOW);
 }
 
 void MapleInventory::GetItem()
@@ -230,7 +259,7 @@ void MapleInventory::GetItem()
 		{
 			for (auto equipment : _equipment)
 			{
-				if (haven->_col->GetTransform()->GetPos() == equipment->_col->GetTransform()->GetPos())
+				if (equipment->_col->GetTransform()->GetPos() == haven->_col->GetTransform()->GetPos())
 				{
 					haven->used = true;
 				}

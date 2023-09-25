@@ -11,6 +11,7 @@
 
 MapleBossScene::MapleBossScene()
 {
+	SOUND->Add("potar", "Resource/Sound/potar.mp3", false);
 	_player = make_shared<PlayerManager>();
 	_boss = make_shared<MapleBoss>();
 	_bossMap = make_shared<MapleBossMap>();
@@ -32,8 +33,10 @@ MapleBossScene::~MapleBossScene()
 
 void MapleBossScene::Update()
 {
+	Vector2 playerpos = _player->GetCollider()->GetTransform()->GetWorldPos();
+
 	_player->Update();
-	_boss->Update();
+	_boss->Update(playerpos);
 	_bossMap->Update();
 	_portar->Update();
 	
@@ -42,6 +45,8 @@ void MapleBossScene::Update()
 		if (KEY_PRESS('W'))
 		{
 			SCENE->PrevScene();
+			SOUND->Play("potar", 0.1f);
+			
 		}
 	}
 
@@ -52,7 +57,7 @@ void MapleBossScene::Update()
 
 	if (_bossMap->GetCollider()->Block(_boss->GetCirCollider()))
 
-		_boss->Hit(_player);
+		//_boss->Hit(_player);
 
 	if (_boss->IsActive() == true)
 	{
@@ -72,8 +77,10 @@ void MapleBossScene::Update()
 
 			if (arrow->GetCollider()->IsCollision(_boss->GetCirCollider()))
 			{
-				_boss->TakeDamage(1);
+				_boss->TakeDamage(20);
+				_boss->_isDamaged = true;
 				_boss->Hit(_player);
+				_boss->HitAnimation();
 				_boss->GetCirCollider()->SetColorRed();
 				arrow->_isActive = false;
 			}
@@ -91,21 +98,28 @@ void MapleBossScene::Update()
 		_boss->Move(_player);
 	}
 	
-	/*if (_boss->IsActive() == false || _player->IsActive() == false)
-		return;
-	for (int i = 0; i < 10; i++)
+	if (_boss->GetRectCollider()->IsCollision(_player->GetCollider()))
 	{
-		if (_boss->_hp == 140)
+		_boss->Skill(_player->GetPosition());
+
+		for (auto skill1 : _boss->GetSkill())
 		{
-			_boss->Skill(_player);
+			if (skill1->IsActive() == false)
+				continue;
+
+			if (skill1->GetCollider()->IsCollision(_player->GetCollider()))
+			{
+				_player->TakeDamage(20);
+				_player->_isDamaged = true;
+				skill1->IsActive() == false;
+			}
 		}
-	}*/
 
-	if (_boss->GetCirCollider()->IsCollision(_player->GetCollider()))
-	{
-		_player->TakeDamage(10);
+		if (_boss->GetCirCollider()->IsCollision(_player->GetCollider()))
+		{
+			_player->TakeDamage(10);
+		}
 	}
-
 }
 
 

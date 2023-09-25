@@ -35,7 +35,7 @@ void Item::Render()
 {
 	_trans->SetWorldBuffer(0);
 	_quad->Render();
-	_col->Render();
+	//_col->Render();
 }
 
 void Item::SetQuad(wstring path)

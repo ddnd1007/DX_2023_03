@@ -1,27 +1,27 @@
 #include "framework.h"
 #include "Bossprojectiles.h"
-//#include "PlayerManager.h"
 
 Bossprojectiles::Bossprojectiles()
 {
-	_col = make_shared<CircleCollider>(10);
+	_col = make_shared<CircleCollider>(20);
+	_col->GetTransform()->SetPosition(Vector2(-30.0f, 0.0f));
+	
+	CreateAction("ball");
+
 	_trans = make_shared<Transform>();
-
 	_trans->SetParent(_col->GetTransform());
-	_trans->SetPosition(Vector2(-80.0f, 0.0f));
-	_trans->SetAngle(-PI * 0.5);
+	//_trans->SetScale(Vector2(5.0f, 5.0f));
+	//_trans->SetAngle(-PI * 2.0f);
+	_trans->SetPosition(Vector2(-80.0f, -20.0f));
 
-	CreateAction("attack ball");
-
+	_actions[BALL]->SetEndEvent(std::bind(&Bossprojectiles::EndEvent, this));
 	_col->GetTransform()->SetPosition(Vector2(-WIN_WIDTH * 5, -WIN_HEIGHT * 5));
-
-	_actions[State::BALL]->Play();
-
-	_col->Update();
-	_trans->Update();
+	_isActive = false;
 
 	_sprites[0]->SetLeft();
-	_sprites[1]->SetLeft();
+	
+	_col->Update();
+	_trans->Update();
 }
 
 Bossprojectiles::~Bossprojectiles()
@@ -31,9 +31,7 @@ Bossprojectiles::~Bossprojectiles()
 void Bossprojectiles::Update()
 {
 	_col->GetTransform()->AddVector2(_dir * _speed * DELTA_TIME);
-
-	// 투사체가 활성 상태에서 움직일 때의 로직 추가
-
+	
 	_col->Update();
 	_trans->Update();
 
@@ -45,10 +43,21 @@ void Bossprojectiles::Update()
 
 void Bossprojectiles::Render()
 {
+	if (_isActive == false)
+		return;
+
 	_trans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
+	//_col->Render();
+}
 
-	_col->Render();
+void Bossprojectiles::Shoot(Vector2 startPos, Vector2 dir)
+{
+	_isActive = true;
+	_col->GetTransform()->SetPosition(startPos);
+	_dir = dir.NorMalVector2();
+	float angle = _dir.Angle();
+	_col->GetTransform()->SetAngle(angle);
 }
 
 void Bossprojectiles::SetAction(State state)
@@ -66,32 +75,10 @@ void Bossprojectiles::SetAction(State state)
 	_oldState = _curState;
 }
 
-void Bossprojectiles::Attack(shared_ptr<class PlayerManager> victim)
+void Bossprojectiles::EndEvent()
 {
-	if (_isActive == false)
-		return;
-	if (_col->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
-		return;
-
-	victim->TakeDamage(_damage);
-	_isActive = false;
-}
-
-void Bossprojectiles::Shoot(shared_ptr<class PlayerManager> victim)
-{
-	if (!_isActive)
-	{
-		_isActive = true;
-		_dir = _dir.NorMalVector2();
-		_col->GetTransform()->SetAngle(_dir.Angle());
-		SetAction(State::BALL);
-	}
-}
-
-void Bossprojectiles::ShootEnd()
-{
-	if (_isActive)
-		!_isActive;
+	_curState = BALL;
+	_actions[BALL]->Play();
 }
 
 void Bossprojectiles::CreateAction(string name, float speed, Action::Type type, CallBack callBack)
@@ -141,3 +128,5 @@ void Bossprojectiles::CreateAction(string name, float speed, Action::Type type, 
 	sprite->SetPS(ADD_PS(L"Shader/ActionPS.hlsl"));
 	_sprites.push_back(sprite);
 }
+
+

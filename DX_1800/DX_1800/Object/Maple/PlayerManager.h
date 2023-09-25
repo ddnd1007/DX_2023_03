@@ -110,7 +110,7 @@ private:
 	float _maxFalling = 800.0f;
 	float _speed = 200.0f;
 
-	int _hp = 100;
-	int _maxHp = 100;
+	int _hp = 300;
+	int _maxHp = 300;
 };
 

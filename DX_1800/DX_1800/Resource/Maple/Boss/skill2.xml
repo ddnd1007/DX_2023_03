@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="skill2.png" width="2048" height="4096" scale="1" format="RGBA8888">
+  <sprite n="Q16.png" x="10" y="10" w="286" h="555" pX="0.5" pY="0.5"/>
+  <sprite n="Q20.png" x="316" y="10" w="336" h="554" pX="0.5" pY="0.5" oX="18" oY="0" oW="354" oH="554"/>
+  <sprite n="Q22.png" x="10" y="585" w="264" h="554" pX="0.5" pY="0.5" oX="24" oY="0" oW="288" oH="554"/>
+  <sprite n="Q24.png" x="294" y="585" w="290" h="554" pX="0.5" pY="0.5"/>
+  <sprite n="Q26.png" x="672" y="10" w="290" h="554" pX="0.5" pY="0.5" oX="3" oY="0" oW="293" oH="554"/>
+  <sprite n="Q28.png" x="604" y="584" w="311" h="554" pX="0.5" pY="0.5" oX="8" oY="0" oW="355" oH="554"/>
+  <sprite n="Q6.png" x="982" y="10" w="291" h="554" pX="0.5" pY="0.5" oX="0" oY="0" oW="291" oH="557"/>
+  <sprite n="Q14.png" x="935" y="584" w="276" h="553" pX="0.5" pY="0.5" oX="11" oY="0" oW="287" oH="553"/>
+  <sprite n="Q15.png" x="10" y="1159" w="276" h="553" pX="0.5" pY="0.5" oX="10" oY="0" oW="286" oH="553"/>
+  <sprite n="Q18.png" x="306" y="1159" w="289" h="552" pX="0.5" pY="0.5"/>
+  <sprite n="Q25.png" x="615" y="1158" w="278" h="552" pX="0.5" pY="0.5" oX="15" oY="0" oW="293" oH="552"/>
+  <sprite n="Q30.png" x="913" y="1158" w="280" h="552" pX="0.5" pY="0.5" oX="12" oY="0" oW="292" oH="555"/>
+  <sprite n="Q32.png" x="1293" y="10" w="244" h="552" pX="0.5" pY="0.5" oX="15" oY="0" oW="291" oH="555"/>
+  <sprite n="Q12.png" x="1213" y="1157" w="240" h="551" pX="0.5" pY="0.5" oX="14" oY="0" oW="290" oH="554"/>
+  <sprite n="Q17.png" x="1231" y="584" w="289" h="551" pX="0.5" pY="0.5"/>
+  <sprite n="Q19.png" x="1557" y="10" w="354" h="551" pX="0.5" pY="0.5"/>
+  <sprite n="Q23.png" x="1473" y="1155" w="290" h="550" pX="0.5" pY="0.5"/>
+  <sprite n="Q34.png" x="1540" y="582" w="211" h="550" pX="0.5" pY="0.5" oX="26" oY="1" oW="291" oH="554"/>
+  <sprite n="Q13.png" x="10" y="1732" w="229" h="549" pX="0.5" pY="0.5" oX="12" oY="0" oW="287" oH="549"/>
+  <sprite n="Q21.png" x="259" y="1732" w="288" h="549" pX="0.5" pY="0.5"/>
+  <sprite n="Q27.png" x="567" y="1731" w="289" h="549" pX="0.5" pY="0.5" oX="12" oY="0" oW="355" oH="549"/>
+  <sprite n="Q36.png" x="876" y="1730" w="210" h="380" pX="0.5" pY="0.5" oX="23" oY="171" oW="287" oH="554"/>
+  <sprite n="Q11.png" x="876" y="2130" w="226" h="45" pX="0.5" pY="0.5" oX="15" oY="504" oW="290" oH="549"/>
+  <sprite n="Q9.png" x="876" y="2195" w="223" h="43" pX="0.5" pY="0.5" oX="18" oY="508" oW="293" oH="552"/>
+  <sprite n="Q7.png" x="1119" y="2195" w="216" h="38" pX="0.5" pY="0.5" oX="18" oY="511" oW="290" oH="549"/>
+  <sprite n="Q5.png" x="1473" y="1725" w="212" h="35" pX="0.5" pY="0.5" oX="20" oY="515" oW="291" oH="550"/>
+  <sprite n="Q10.png" x="1213" y="1728" w="211" h="77" pX="0.5" pY="0.5" oX="27" oY="471" oW="293" oH="551"/>
+  <sprite n="Q2.png" x="1106" y="1825" w="211" h="77" pX="0.5" pY="0.5" oX="29" oY="473" oW="297" oH="553"/>
+  <sprite n="Q29.png" x="1106" y="1922" w="211" h="77" pX="0.5" pY="0.5" oX="26" oY="472" oW="292" oH="549"/>
+  <sprite n="Q31.png" x="1106" y="2019" w="211" h="76" pX="0.5" pY="0.5" oX="28" oY="473" oW="291" oH="550"/>
+  <sprite n="Q33.png" x="1444" y="1780" w="211" h="77" pX="0.5" pY="0.5" oX="26" oY="472" oW="291" oH="550"/>
+  <sprite n="Q35.png" x="1675" y="1780" w="211" h="76" pX="0.5" pY="0.5" oX="23" oY="473" oW="287" oH="550"/>
+  <sprite n="Q37.png" x="1675" y="1876" w="211" h="77" pX="0.5" pY="0.5" oX="23" oY="472" oW="287" oH="550"/>
+  <sprite n="Q4.png" x="1355" y="1877" w="211" h="76" pX="0.5" pY="0.5" oX="25" oY="475" oW="291" oH="552"/>
+  <sprite n="Q8.png" x="1337" y="1973" w="211" h="76" pX="0.5" pY="0.5" oX="25" oY="473" oW="290" oH="552"/>
+  <sprite n="Q39.png" x="1337" y="2069" w="210" h="76" pX="0.5" pY="0.5" oX="28" oY="473" oW="280" oH="550"/>
+  <sprite n="Q38.png" x="1567" y="2069" w="209" h="121" pX="0.5" pY="0.5" oX="24" oY="427" oW="287" oH="552"/>
+  <sprite n="Q3.png" x="1119" y="2253" w="208" h="25" pX="0.5" pY="0.5" oX="22" oY="526" oW="291" oH="553"/>
+  <sprite n="Q1.png" x="1906" y="581" w="1" h="1" pX="0.5" pY="0.5" oX="134" oY="546" oW="297" oH="550"/>
+</TextureAtlas>

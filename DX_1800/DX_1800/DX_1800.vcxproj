@@ -151,10 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Object\Maple\Bossprojectiles.h" />
-    <ClInclude Include="Object\Maple\EquipmentInven.h" />
     <ClInclude Include="Framework\Utility\Font.h" />
     <ClInclude Include="Framework\Utility\Singleton.h" />
+    <ClInclude Include="Object\Maple\Bossprojectiles.h" />
     <ClInclude Include="Object\UI\MonsterHpBar.h" />
     <ClInclude Include="Object\Maple\Item.h" />
     <ClInclude Include="Object\Maple\MapleBoss.h" />
@@ -221,9 +220,8 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Object\Maple\Bossprojectiles.cpp" />
-    <ClCompile Include="Object\Maple\EquipmentInven.cpp" />
     <ClCompile Include="Framework\Utility\Font.cpp" />
+    <ClCompile Include="Object\Maple\Bossprojectiles.cpp" />
     <ClCompile Include="Object\UI\MonsterHpBar.cpp" />
     <ClCompile Include="Object\Maple\Item.cpp" />
     <ClCompile Include="Object\Maple\MapleBoss.cpp" />
@@ -296,6 +294,7 @@
     <Image Include="Resource\CupHead\Jump.png" />
     <Image Include="Resource\CupHead\Run.png" />
     <Image Include="Resource\CupHead\track.png" />
+    <Image Include="Resource\Maple\Boss\ball.png" />
     <Image Include="Resource\Maple\Boss\dead.png" />
     <Image Include="Resource\Maple\Character\arrow.png" />
     <Image Include="Resource\Maple\Character\dead.png" />
@@ -493,6 +492,7 @@
     <Xml Include="Resource\CupHead\Idle.xml" />
     <Xml Include="Resource\CupHead\Jump.xml" />
     <Xml Include="Resource\CupHead\Run.xml" />
+    <Xml Include="Resource\Maple\Boss\ball.xml" />
     <Xml Include="Resource\Maple\Boss\dead.xml" />
     <Xml Include="Resource\Maple\Character\dead.xml" />
     <Xml Include="Resource\Maple\Character\jump.xml" />
@@ -527,8 +527,17 @@
     <Media Include="Resource\Sound\attack.wav" />
     <Media Include="Resource\Sound\BGM.mp3" />
     <Media Include="Resource\Sound\bossbgm.mp3" />
+    <Media Include="Resource\Sound\BossSkill.mp3" />
+    <Media Include="Resource\Sound\BOw.mp3" />
     <Media Include="Resource\Sound\drumloop.wav" />
-    <Media Include="Resource\Sound\jump.wav" />
+    <Media Include="Resource\Sound\inventoryOoen.mp3" />
+    <Media Include="Resource\Sound\jump.mp3" />
+    <Media Include="Resource\Sound\loginbgm.mp3" />
+    <Media Include="Resource\Sound\potar.mp3" />
+    <Media Include="Resource\Sound\snailDie.mp3" />
+    <Media Include="Resource\Sound\snailHit.mp3" />
+    <Media Include="Resource\Sound\work1.mp3" />
+    <Media Include="Resource\Sound\work2.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

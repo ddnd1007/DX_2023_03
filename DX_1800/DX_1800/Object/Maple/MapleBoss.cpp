@@ -5,6 +5,7 @@
 
 MapleBoss::MapleBoss()
 {
+	SOUND->Add("skill", "Resource/Sound/BossSkill.mp3", false);
 	_circleCol = make_shared<CircleCollider>(80);
 	_circleTrans = make_shared<Transform>();
 
@@ -17,7 +18,7 @@ MapleBoss::MapleBoss()
 
 	CreateAction("stand", 0.1f, Action::LOOP);
 	CreateAction("work");
-	CreateAction("hit");
+	CreateAction("bosshit", 0.5f);
 	CreateAction("skil1");
 	CreateAction("dead", 0.1f, Action::END);
 
@@ -40,22 +41,26 @@ MapleBoss::MapleBoss()
 	_sprites[0]->SetLeft();
 	_sprites[1]->SetLeft();
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 30; i++)
 	{
-		shared_ptr<Bossprojectiles> skill1 = make_shared<Bossprojectiles>();
-		_skill1.push_back(skill1);
+		shared_ptr<Bossprojectiles> skill = make_shared<Bossprojectiles>();
+		_skill1.push_back(skill);
 	}
-
+	
 }
 
 MapleBoss::~MapleBoss()
 {
 }
 
-void MapleBoss::Update()
+void MapleBoss::Update(Vector2 target)
 {
 	DeathAnimation();
+	HitAnimation();
 	IsDead();
+
+	Skill(target);
+	HitEnd();
 	
 	_circleCol->Update();
 	_circleTrans->Update();
@@ -68,14 +73,13 @@ void MapleBoss::Update()
 
 	_hpBar->Update();
 
-	for (auto skill1 : _skill1)
-		skill1->Update();
-
 	_actions[_curState]->Update();
 
 	_sprites[_curState]->SetCurClip(_actions[_curState]->GetCurClip());
 	_sprites[_curState]->Update();
 
+	for (auto skill1 : _skill1)
+		skill1->Update();
 }
 
 void MapleBoss::Render()
@@ -90,13 +94,12 @@ void MapleBoss::Render()
 	_rectTrans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
 
-	_circleCol->Render();
+	/*_circleCol->Render();
 	_ballCol->Render();
-	_rectCol->Render();
+	_rectCol->Render();*/
 
 	for (auto skill1 : _skill1)
 		skill1->Render();
-
 }
 
 void MapleBoss::SetAction(State state)
@@ -118,9 +121,20 @@ void MapleBoss::TakeDamage(int damage)
 {
 	if (_isDamaged == true)
 		return;
-
+	
 	_hp -= damage;
 	_hpBar->SetRatio(_hp / (float)_maxHp);
+
+	if (!_isDamaged)
+	{
+		_hitAnimationTimer += DELTA_TIME;
+		if (_hitAnimationTimer > _hitAnimationDuration)
+		{
+			_hitAnimationTimer = 0.0f;
+			_isDamaged = false;
+		}
+		return;
+	}
 }
 
 void MapleBoss::Hit(shared_ptr<class PlayerManager> player)
@@ -128,42 +142,40 @@ void MapleBoss::Hit(shared_ptr<class PlayerManager> player)
 	if (IsActive() == false)
 		return;
 
-	if (_isDamaged == true && _curState != State::HIT)
-
-
-		if (player->GetCollider()->IsCollision(_circleCol))
+	if (_isDamaged == true && _curState != State::BOSSHIT)
+	{
+		if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
 		{
-			if (player->GetPosition().x > _circleCol->GetTransform()->GetWorldPos().x)
-			{
-				SetAction(State::HIT);
-				SetLeft();
+			SetLeft();
+			SetAction(State::BOSSHIT);
 
-			}
-			else
-			{
-				SetAction(State::HIT);
-				SetRight();
-			}
 		}
+		else
+		{
+			SetRight();
+			SetAction(State::BOSSHIT);
+		}
+	}
+		
 }
 
-void MapleBoss::Attack(shared_ptr<class PlayerManager> victim)
-{
-	if (IsActive() == false)
-		return;
-	if (_circleCol->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
-		return;
-
-	victim->TakeDamage(_damage);
-}
+//void MapleBoss::Attack(shared_ptr<class PlayerManager> victim)
+//{
+//	if (IsActive() == false)
+//		return;
+//	if (_circleCol->IsCollision(victim->GetCollider()) == false || victim->IsDead() == true)
+//		return;
+//
+//	victim->TakeDamage(_damage);
+//}
 
 void MapleBoss::HitEnd()
 {
 	if (IsActive() == false)
 		return;
 
-	if (_isDamaged == false && IsActive() == true)
-		SetAction(State::STAND);
+	if (_isDamaged == false && _curState == State::BOSSHIT)
+		SetAction(State::WORK);
 }
 
 bool MapleBoss::DeathAnimation()
@@ -184,17 +196,37 @@ bool MapleBoss::DeathAnimation()
 	return false;
 }
 
+bool MapleBoss::HitAnimation()
+{
+	if (_isDamaged == true)
+	{
+		_hitAnimationTimer += DELTA_TIME;
+
+		if (_hitAnimationTimer > _hitAnimationDuration)
+		{
+			_hitAnimationTimer = 0.0f;
+			DamagedEvent();
+			_isDamaged = false;
+			return true;
+		}
+		return false;
+	}
+	return false;
+}
+
 void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 {
 	if (!IsActive())
 		return;
 
-	if (player->GetCollider()->IsCollision(_circleCol) && _move == true)
+	if (_curState == State::BOSSHIT || _curState == State::DEAD || _isDamaged == true)
+		return;
+
+	if (player->GetCollider()->IsCollision(_circleCol))
 		SetAction(State::WORK);
 
-	if (player->GetCollider()->IsCollision(_rectCol) && _move == true)
+	if (player->GetCollider()->IsCollision(_rectCol))
 	{
-		_move = true;
 		if (player->GetPosition().x > _rectCol->GetTransform()->GetWorldPos().x)
 		{
 			_circleCol->GetTransform()->AddVector2(RIGHT_VECTOR * _speed * DELTA_TIME);
@@ -210,48 +242,36 @@ void MapleBoss::Move(shared_ptr<class PlayerManager> player)
 	}
 }
 
-void MapleBoss::Skill()
+void MapleBoss::Skill(Vector2 target)
 {
 	if (IsActive() == false)
 		return;
 
-	shared_ptr<Bossprojectiles> skill2 = SetSkill1();
-
-	if (_isAttack == false)
-
-	for (int i = 0; i < 10; i++)
+	if (_isSkill)
 	{
-		_skill1[i]->_isActive = true;
-		_skill1[i]->SetPosition(_ballCol->GetWorldPos());
-
-		if (_circleCol->GetWorldPos().x > _ballCol->GetWorldPos().x)
+		_CooldownTimer += DELTA_TIME;
+		if (_CooldownTimer > _CooldownDuration)
 		{
-			_skill1[i]->SetPosition(_ballCol->GetWorldPos());
-			_skill1[i]->Shoot();
-			_skill1[i]->SetDirtection(-RIGHT_VECTOR);
-			_skill1[i]->ShootEnd();
+			_CooldownTimer = 0.0f;
+			_isSkill = false;
 		}
-		else
-		{
-			_skill1[i]->SetPosition(_ballCol->GetWorldPos());
-			_skill1[i]->Shoot();
-			_skill1[i]->SetDirtection(RIGHT_VECTOR);
-			_skill1[i]->ShootEnd();
-		}
-		_isSkill = true;
+		return;
 	}
-}
 
-shared_ptr<Bossprojectiles> MapleBoss::SetSkill1()
-{
-	for (auto skill1 : _skill1)
-	{
-		if (skill1->_isActive == true)
-			continue;
-		else
-			return skill1;
-	}
-	return nullptr;
+	auto skillIter = std::find_if(_skill1.begin(), _skill1.end(),
+		[](shared_ptr<Bossprojectiles>& obj)-> bool { return !obj->IsActive(); });
+
+	if (skillIter == _skill1.end())
+		return;
+
+	// 타겟의 위치를 받아 발사 방향 정함
+	Vector2 dir = target - _ballCol->GetTransform()->GetPos();
+
+	(*skillIter)->Shoot(dir, _ballCol->GetTransform()->GetPos());
+	SOUND->Play("skill", 0.1f);
+
+
+	_isSkill = true;
 }
 
 bool MapleBoss::IsDead()

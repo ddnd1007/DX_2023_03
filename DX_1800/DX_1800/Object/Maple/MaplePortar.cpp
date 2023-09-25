@@ -33,7 +33,7 @@ void MaplePortar::Render()
 {
 	_trans->SetWorldBuffer(0);
 	_sprites[_curState]->Render();
-	_col->Render();
+	//_col->Render();
 }
 
 void MaplePortar::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

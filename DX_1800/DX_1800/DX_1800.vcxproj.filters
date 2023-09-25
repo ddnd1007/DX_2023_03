@@ -213,9 +213,6 @@
     <ClInclude Include="Framework\Utility\Singleton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Maple\EquipmentInven.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Maple\Bossprojectiles.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -377,9 +374,6 @@
     <ClCompile Include="Framework\Utility\Font.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Maple\EquipmentInven.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object\Maple\Bossprojectiles.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -531,6 +525,9 @@
     <Image Include="Resource\Maple\Ui\top.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\Maple\Boss\ball.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -570,6 +567,7 @@
     <Xml Include="Resource\Maple\snail\snail stand.xml" />
     <Xml Include="Resource\Maple\snail\snail work.xml" />
     <Xml Include="Resource\Maple\Boss\dead.xml" />
+    <Xml Include="Resource\Maple\Boss\ball.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fmod.dll" />
@@ -588,9 +586,16 @@
     <Media Include="Resource\Sound\drumloop.wav">
       <Filter>리소스 파일</Filter>
     </Media>
-    <Media Include="Resource\Sound\jump.wav">
-      <Filter>리소스 파일</Filter>
-    </Media>
     <Media Include="Resource\Sound\bossbgm.mp3" />
+    <Media Include="Resource\Sound\BossSkill.mp3" />
+    <Media Include="Resource\Sound\BOw.mp3" />
+    <Media Include="Resource\Sound\inventoryOoen.mp3" />
+    <Media Include="Resource\Sound\jump.mp3" />
+    <Media Include="Resource\Sound\loginbgm.mp3" />
+    <Media Include="Resource\Sound\potar.mp3" />
+    <Media Include="Resource\Sound\snailDie.mp3" />
+    <Media Include="Resource\Sound\snailHit.mp3" />
+    <Media Include="Resource\Sound\work1.mp3" />
+    <Media Include="Resource\Sound\work2.mp3" />
   </ItemGroup>
 </Project>
