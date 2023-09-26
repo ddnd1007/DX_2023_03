@@ -2,10 +2,12 @@
 #include "SceneManager.h"
 
 #include "../Object/Maple/PlayerManager.h"
+#include "BagicScene/LoginScene.h"
 #include "../Object/Maple/MapleMap.h"
 #include "../Object/Maple/MapleBossMap.h"
 #include "BagicScene/MapleBossScene.h"
 #include "BagicScene/MapleScene.h"
+
 
 SceneManager* SceneManager::_instance = nullptr;
 
@@ -15,6 +17,7 @@ SceneManager::SceneManager()
 	_map = make_shared<MapleMap>();
 	_bossMap = make_shared<MapleBossMap>();
 
+	_scenes.push_back(make_shared<LoginScene>());
 	_scenes.push_back(make_shared<MapleScene>());
 	_scenes.push_back(make_shared<MapleBossScene>());
 
@@ -23,9 +26,9 @@ SceneManager::SceneManager()
 	//CAMERA->SetLeftBottom(_map->leftBottom());
 	//CAMERA->SetRightTop(_map->rightTop());
 	//CAMERA->SetOffset(Vector2(0, -110));
-	SOUND->Add("BGM", "Resource/Sound/bossbgm.mp3", false);
+	
 	//SOUND->SetVolume("BGM", 0.01f);
-	SOUND->Play("BGM", 0.1f);
+	//SOUND->Play("BGM", 0.1f);
 }
 
 SceneManager::~SceneManager()

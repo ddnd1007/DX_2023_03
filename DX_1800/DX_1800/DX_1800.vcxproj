@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Framework\Utility\Font.h" />
     <ClInclude Include="Framework\Utility\Singleton.h" />
+    <ClInclude Include="Scene\BagicScene\LoginScene.h" />
     <ClInclude Include="Object\Maple\Bossprojectiles.h" />
     <ClInclude Include="Object\UI\MonsterHpBar.h" />
     <ClInclude Include="Object\Maple\Item.h" />
@@ -221,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Utility\Font.cpp" />
+    <ClCompile Include="Scene\BagicScene\LoginScene.cpp" />
     <ClCompile Include="Object\Maple\Bossprojectiles.cpp" />
     <ClCompile Include="Object\UI\MonsterHpBar.cpp" />
     <ClCompile Include="Object\Maple\Item.cpp" />

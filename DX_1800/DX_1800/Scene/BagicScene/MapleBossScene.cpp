@@ -12,6 +12,7 @@
 MapleBossScene::MapleBossScene()
 {
 	SOUND->Add("potar", "Resource/Sound/potar.mp3", false);
+	SOUND->Add("BGM", "Resource/Sound/bossbgm.mp3", false);
 	_player = make_shared<PlayerManager>();
 	_boss = make_shared<MapleBoss>();
 	_bossMap = make_shared<MapleBossMap>();
@@ -23,6 +24,8 @@ MapleBossScene::MapleBossScene()
 	
 	_player->_hpBar->SetPosition(Vector2(_player->GetPosition().x - 300.0f, _player->GetPosition().y - 250.0f));
 	_player->_hpBar->Update();
+
+	SOUND->Play("BGM", 0.2f);
 
 
 }

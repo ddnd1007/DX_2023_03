@@ -13,6 +13,7 @@
 MapleScene::MapleScene()
 {
 	SOUND->Add("potar", "Resource/Sound/potar.mp3", false);
+	SOUND->Add("BGM", "Resource/Sound/bossbgm.mp3", false);
 	_player = make_shared<PlayerManager>();
 	_player->GetCollider()->GetTransform()->SetPosition(Vector2(0.0f, 1000.0));
 	_map = make_shared<MapleMap>();
@@ -26,6 +27,8 @@ MapleScene::MapleScene()
 	_map->SetPosition(Vector2(0.0f, -350.0f));
 	_portar = make_shared<MaplePortar>();
 	_portar->SetPosition(Vector2(550.0f, -50.0f));
+
+	SOUND->Play("BGM", 0.2f);
 
 	CAMERA->SetTarget(_player->GetCollider()->GetTransform());
 	CAMERA->SetLeftBottom(_map->leftBottom());
